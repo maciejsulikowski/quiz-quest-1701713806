@@ -1,7 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
-
+import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({
@@ -11,34 +10,26 @@ class WelcomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-          stream: FirebaseFirestore.instance.collection('example').snapshots(),
-          builder: (context, snapshot) {
-            if (snapshot.hasError) {
-              return const Center(
-                child: Text('Something went wrong'),
-              );
-            }
-
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(
-                child: Text('Loading'),
-              );
-            }
-
-            final documents = snapshot.data!.docs;
-
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  for (final doc in documents) ...[
-                    Text(doc['example']),
-                  ],
-                ],
+      body: SafeArea(
+        child: Column(
+          children: [
+            const SizedBox(height: 30),
+            Center(
+              child: Text(
+                'Quizz Quest 👑',
+                style: GoogleFonts.aBeeZee(fontSize: 34, color: Colors.indigo),
               ),
-            );
-          }),
+            ),
+            const SizedBox(height: 30),
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 20),
+              width: double.infinity,
+              height: 250,
+              child: Lottie.asset('images/animation_1.json'),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

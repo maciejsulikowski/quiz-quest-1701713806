@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "332789344119",
+    "project_id": "quiz-quest-5882",
+    "storage_bucket": "quiz-quest-5882.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:332789344119:android:f94fe05aa0a12afdbee372",
+        "android_client_info": {
+          "package_name": "com.maciejsulikowski.quiz_quest"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDg3HgSjATxEKke4EKIBG6U3Ffg9iFwMGo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

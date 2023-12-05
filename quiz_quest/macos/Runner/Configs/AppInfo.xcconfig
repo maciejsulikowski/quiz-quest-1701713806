@@ -8,7 +8,7 @@
 PRODUCT_NAME = quiz_quest
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.example.quizQuest
+PRODUCT_BUNDLE_IDENTIFIER = com.maciejsulikowski.quizQuest
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2023 com.example. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2023 com.maciejsulikowski. All rights reserved.

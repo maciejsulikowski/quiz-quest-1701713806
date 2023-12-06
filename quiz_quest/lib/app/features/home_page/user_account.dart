@@ -32,7 +32,7 @@ class UserAccount extends StatelessWidget {
             ),
           ),
           const SizedBox(
-            height: 10,
+            height: 15,
           ),
           Center(
             child: Text(
@@ -43,37 +43,24 @@ class UserAccount extends StatelessWidget {
                   fontWeight: FontWeight.bold),
             ),
           ),
-          const SizedBox(height: 30),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 32.0),
-            child: Container(
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                  gradient: const LinearGradient(
-                    colors: [
-                      Color.fromARGB(255, 94, 128, 239),
-                      Color.fromARGB(255, 76, 75, 167),
-                    ],
-                    begin: Alignment.centerLeft,
-                    end: Alignment.centerRight,
-                  ),
-                  borderRadius: BorderRadius.circular(20),
-                  color: Colors.red),
-              child: Text(
-                'Points: 100💎',
-                style: GoogleFonts.aBeeZee(
-                    fontSize: 28,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold),
-                textAlign: TextAlign.center,
-              ),
-            ),
+          const TextFieldWidget(name: 'Name'),
+          const SizedBox(
+            height: 15,
           ),
-          SizedBox(
+          const TextFieldWidget(name: 'Surname'),
+          const SizedBox(
+            height: 15,
+          ),
+          const TextFieldWidget(name: 'E-mail'),
+          const SizedBox(
+            height: 15,
+          ),
+          const TextFieldWidget(name: 'Gender'),
+          const SizedBox(
             height: 20,
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 32.0),
+            padding: const EdgeInsets.symmetric(horizontal: 26),
             child: Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
@@ -98,10 +85,10 @@ class UserAccount extends StatelessWidget {
                       backgroundColor: Colors.transparent,
                       shadowColor: Colors.transparent),
                   label: Text('Logout',
-                  
                       style: GoogleFonts.aBeeZee(
                         fontSize: 28,
                         color: Colors.white,
+                        fontStyle: FontStyle.italic,
                       )),
                   icon: const Icon(
                     Icons.logout,
@@ -114,5 +101,30 @@ class UserAccount extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+class TextFieldWidget extends StatelessWidget {
+  const TextFieldWidget({
+    required this.name,
+    super.key,
+  });
+
+  final String name;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        padding: const EdgeInsets.symmetric(horizontal: 24),
+        child: TextField(
+          style: GoogleFonts.aBeeZee(
+              fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold),
+          decoration: InputDecoration(
+            border: const UnderlineInputBorder(),
+            hintStyle: const TextStyle(color: Colors.white),
+            labelStyle: const TextStyle(color: Colors.white54, fontSize: 18),
+            labelText: name,
+          ),
+        ));
   }
 }

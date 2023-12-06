@@ -10,7 +10,9 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: const Text('HomePage'),
+      ),
       body: SafeArea(
         child: Container(
           decoration: const BoxDecoration(
@@ -25,24 +27,69 @@ class HomePage extends StatelessWidget {
           ),
           child: Column(
             children: [
-              const SizedBox(height: 30),
-              Center(
-                child: Text(
-                  'Home Page',
-                  style: GoogleFonts.aBeeZee(
-                      fontSize: 34,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: 20),
-                width: double.infinity,
-                height: 250,
-                child: Lottie.asset('images/quiz_animation.json'),
-              ),
               const SizedBox(
                 height: 30,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Hi, user 👋',
+                      style: GoogleFonts.aBeeZee(
+                          fontSize: 24,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    const CircleAvatar(
+                      child: Icon(Icons.question_mark),
+                    )
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      '''Let's play''',
+                      style: GoogleFonts.aBeeZee(
+                          fontSize: 46,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 30),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 32.0),
+                child: Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                      gradient: const LinearGradient(
+                        colors: [
+                          Color.fromARGB(255, 94, 128, 239),
+                          Color.fromARGB(255, 76, 75, 167),
+                        ],
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                      ),
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.red),
+                  child: Text(
+                    'Points: 100💎',
+                    style: GoogleFonts.aBeeZee(
+                        fontSize: 28,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
               ),
             ],
           ),

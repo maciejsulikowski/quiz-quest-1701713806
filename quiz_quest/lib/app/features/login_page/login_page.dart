@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
+import 'package:quiz_quest/app/features/home_page/home_page.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({
@@ -44,8 +45,10 @@ class LoginPage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: TextField(
+                  style: GoogleFonts.aBeeZee(color: Colors.white),
                   decoration: InputDecoration(
                       hintText: 'Login',
+                      hintStyle: GoogleFonts.aBeeZee(color: Colors.white),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20))),
                 ),
@@ -56,8 +59,10 @@ class LoginPage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: TextField(
+                  style: GoogleFonts.aBeeZee(color: Colors.white),
                   decoration: InputDecoration(
                       hintText: 'Password',
+                      hintStyle: GoogleFonts.aBeeZee(color: Colors.white),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20))),
                 ),
@@ -90,7 +95,13 @@ class LoginPage extends StatelessWidget {
                 child: Directionality(
                   textDirection: TextDirection.rtl,
                   child: ElevatedButton.icon(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const HomePage(),
+                        ),
+                      );
+                    },
                     style: ElevatedButton.styleFrom(
                         minimumSize: const Size.fromHeight(50),
                         backgroundColor: Colors.transparent,

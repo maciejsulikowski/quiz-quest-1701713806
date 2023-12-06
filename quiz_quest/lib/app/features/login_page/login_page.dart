@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
-import 'package:quiz_quest/app/features/login_page/login_page.dart';
 
-class WelcomePage extends StatelessWidget {
-  const WelcomePage({
+class LoginPage extends StatelessWidget {
+  const LoginPage({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: SafeArea(
         child: Container(
           decoration: const BoxDecoration(
@@ -28,7 +28,7 @@ class WelcomePage extends StatelessWidget {
               const SizedBox(height: 30),
               Center(
                 child: Text(
-                  'Quizz Quest 👑',
+                  'Login Page',
                   style: GoogleFonts.aBeeZee(
                       fontSize: 34,
                       color: Colors.white,
@@ -41,23 +41,29 @@ class WelcomePage extends StatelessWidget {
                 height: 250,
                 child: Lottie.asset('images/quiz_animation.json'),
               ),
-              Center(
-                child: Text(
-                  'Try your skills 💪',
-                  style: GoogleFonts.aBeeZee(fontSize: 26, color: Colors.white),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: TextField(
+                  decoration: InputDecoration(
+                      hintText: 'Login',
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20))),
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: TextField(
+                  decoration: InputDecoration(
+                      hintText: 'Password',
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20))),
                 ),
               ),
               const SizedBox(
                 height: 30,
-              ),
-              Center(
-                child: Text(
-                  'Learn and have fun ⭐',
-                  style: GoogleFonts.aBeeZee(fontSize: 26, color: Colors.white),
-                ),
-              ),
-              const SizedBox(
-                height: 90,
               ),
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 20),
@@ -84,14 +90,12 @@ class WelcomePage extends StatelessWidget {
                 child: Directionality(
                   textDirection: TextDirection.rtl,
                   child: ElevatedButton.icon(
-                    onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => const LoginPage()));
-                    },
+                    onPressed: () {},
                     style: ElevatedButton.styleFrom(
                         minimumSize: const Size.fromHeight(50),
                         backgroundColor: Colors.transparent,
                         shadowColor: Colors.transparent),
-                    label: Text('Get Started',
+                    label: Text('Login',
                         style: GoogleFonts.aBeeZee(
                           fontSize: 24,
                           color: Colors.white,

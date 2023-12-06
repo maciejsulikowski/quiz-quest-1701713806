@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lottie/lottie.dart';
+import 'package:quiz_quest/app/features/categories/first_quiz_page.dart';
 import 'package:quiz_quest/app/features/home_page/user_account.dart';
 
 class HomePage extends StatefulWidget {
@@ -158,17 +158,23 @@ class CategoryQuizz extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          DetailsQuizzWidget(),
-          SizedBox(
-            width: 10,
-          ),
-          DetailsQuizzWidget(),
-        ],
+    return InkWell(
+      onTap: () {
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => const FirstQuizPage()));
+      },
+      child: const Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            DetailsQuizzWidget(),
+            SizedBox(
+              width: 10,
+            ),
+            DetailsQuizzWidget(),
+          ],
+        ),
       ),
     );
   }

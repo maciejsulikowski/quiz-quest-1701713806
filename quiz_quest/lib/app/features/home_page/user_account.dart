@@ -62,7 +62,6 @@ class UserAccount extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 26),
             child: Container(
-              padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
                   gradient: const LinearGradient(
                     colors: [

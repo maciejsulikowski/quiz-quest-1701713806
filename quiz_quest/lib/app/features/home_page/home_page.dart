@@ -25,7 +25,7 @@ class HomePage extends StatelessWidget {
               end: Alignment.centerRight,
             ),
           ),
-          child: Column(
+          child: ListView(
             children: [
               const SizedBox(
                 height: 30,
@@ -88,12 +88,83 @@ class HomePage extends StatelessWidget {
                         fontSize: 28,
                         color: Colors.white,
                         fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
                   ),
                 ),
               ),
+              const SizedBox(height: 30),
+              const CategoryQuizz(),
+              const SizedBox(height: 30),
+              const CategoryQuizz(),
+              const SizedBox(height: 30),
+              const CategoryQuizz(),
+              const SizedBox(height: 30),
+              const CategoryQuizz(),
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class CategoryQuizz extends StatelessWidget {
+  const CategoryQuizz({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return const Padding(
+      padding: EdgeInsets.symmetric(horizontal: 16.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          DetailsQuizzWidget(),
+          SizedBox(
+            width: 10,
+          ),
+          DetailsQuizzWidget(),
+        ],
+      ),
+    );
+  }
+}
+
+class DetailsQuizzWidget extends StatelessWidget {
+  const DetailsQuizzWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 150,
+      height: 150,
+      padding: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        gradient: const LinearGradient(
+          colors: [
+            Color.fromARGB(255, 94, 128, 239),
+            Color.fromARGB(255, 76, 75, 167),
+          ],
+          begin: Alignment.centerLeft,
+          end: Alignment.centerRight,
+        ),
+      ),
+      child: Row(
+        children: [
+          Text(
+            'Animals',
+            style: GoogleFonts.aBeeZee(
+                fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(
+            width: 5,
+          ),
+          const CircleAvatar()
+        ],
       ),
     );
   }

@@ -31,20 +31,20 @@ class _HomePageState extends State<HomePage> {
           items: const [
             BottomNavigationBarItem(
                 icon: Icon(
-                  Icons.person,
+                  Icons.quiz,
                 ),
-                label: 'My Account'),
+                label: 'Quizz'),
             BottomNavigationBarItem(
-              icon: Icon(Icons.quiz),
-              label: 'Quizz',
+              icon: Icon(Icons.person),
+              label: 'My Account',
             ),
           ]),
       body: SafeArea(
         child: Builder(builder: (context) {
           if (currentIndex == 0) {
-            return const UserAccount();
+            return const QuizzPage();
           }
-          return const QuizzPage();
+          return const UserAccount();
         }),
       ),
     );
@@ -160,8 +160,8 @@ class CategoryQuizz extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => const FirstQuizPage()));
+        Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => const FirstQuizPage()));
       },
       child: const Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.0),

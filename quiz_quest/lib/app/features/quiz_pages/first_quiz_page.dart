@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:quiz_quest/app/features/categories/question_quiz_page.dart';
+import 'package:quiz_quest/app/features/quiz_pages/question_quiz_page.dart';
 
 class FirstQuizPage extends StatefulWidget {
   const FirstQuizPage({

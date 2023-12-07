@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:quiz_quest/app/features/categories/first_quiz_page.dart';
-import 'package:quiz_quest/app/features/home_page/user_account.dart';
+import 'package:quiz_quest/app/features/quiz_pages/first_quiz_page.dart';
+import 'package:quiz_quest/app/features/user_page/user_account.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({

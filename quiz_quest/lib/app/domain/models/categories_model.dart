@@ -1,5 +1,5 @@
-class CategoryModel {
-  CategoryModel({
+class CategoriesModel {
+  CategoriesModel({
     required this.id,
     required this.difficult,
     required this.category,

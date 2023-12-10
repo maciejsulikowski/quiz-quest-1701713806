@@ -6,9 +6,12 @@ class CategoriesRepository {
   final CategoriesDataSource categoryDataSource;
 
   Future<CategoriesModel?> getCategoryModel() async {
-    final json = categoryDataSource.categoryData();
+    final json = categoryDataSource.getSportCategory();
 
-    
+    if (json == null) {
+      return null;
+    }
+
 
   }
 }

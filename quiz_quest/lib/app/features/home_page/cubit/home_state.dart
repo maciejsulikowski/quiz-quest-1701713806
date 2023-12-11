@@ -2,12 +2,12 @@ part of 'home_cubit.dart';
 
 class HomeState {
   HomeState({
-    this.cateogriesModel = const [],
-    this.isLoading = false,
+    this.cateogriesModel,
+    this.status = Status.initial,
     this.errorMessage,
   });
 
-  final List<CategoriesModel> cateogriesModel;
-  final bool isLoading;
+  final CategoriesModel? cateogriesModel;
+  final Status status;
   final String? errorMessage;
 }

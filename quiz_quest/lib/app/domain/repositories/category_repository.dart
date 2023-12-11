@@ -5,13 +5,13 @@ class CategoriesRepository {
   CategoriesRepository({required this.categoryDataSource});
   final CategoriesDataSource categoryDataSource;
 
-  Future<CategoriesModel?> getCategoryModel() async {
-    final json = categoryDataSource.getSportCategory();
+  Future<CategoriesModel?> getSportsModel() async {
+    final json = await  categoryDataSource.getSportCategory();
 
     if (json == null) {
       return null;
     }
 
-
+    return CategoriesModel.fromJson(json);
   }
 }

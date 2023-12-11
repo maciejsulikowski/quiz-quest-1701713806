@@ -1,21 +1,25 @@
-class CategoriesModel {
-  CategoriesModel({
-    required this.id,
-    required this.results,
-    required this.difficult,
-    required this.category,
-    required this.question,
-    required this.correctAnswer,
-    required this.inCorrectAnswer,
-  });
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  final int id;
-  final List results;
-  final String difficult;
-  final String category;
-  final String question;
-  final String correctAnswer;
-  final String inCorrectAnswer;
+part 'categories_model.g.dart';
+part 'categories_model.freezed.dart';
 
+@freezed
+class CategoriesModel with _$CategoriesModel {
+  factory CategoriesModel(
+    @JsonKey(name: "results") List<Results> results,
+  ) = _CategoriesModel;
 
+  factory CategoriesModel.fromJson(Map<String, dynamic> json) =>
+      _$CategoriesModelFromJson(json);
+}
+
+@freezed
+class Results with _$Results {
+  factory Results(
+    @JsonKey(name: "category") category,
+    @JsonKey(name: "question") question,
+  ) = _Results;
+
+  factory Results.fromJson(Map<String, dynamic> json) =>
+      _$ResultsFromJson(json);
 }

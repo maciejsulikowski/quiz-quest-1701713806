@@ -7,7 +7,7 @@ class HomeState {
     this.errorMessage,
   });
 
-  final CategoriesModel? cateogriesModel;
+  final QuizModel? cateogriesModel;
   final Status status;
   final String? errorMessage;
 }

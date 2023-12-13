@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:quiz_quest/app/data/data_sources/category_data_source.dart';
+import 'package:quiz_quest/app/data/data_sources/sport_category/sport_category_data_source.dart';
 import 'package:quiz_quest/app/domain/models/quiz_model.dart';
 import 'package:quiz_quest/app/domain/repositories/category_repository.dart';
 import 'package:quiz_quest/app/features/home_page/cubit/home_cubit.dart';
@@ -66,7 +66,7 @@ class QuizzPage extends StatelessWidget {
     return BlocProvider(
       create: (context) => HomeCubit(
         CategoriesRepository(
-          categoryDataSource: CategoriesDataSource(),
+          sportCategoryDataSource: SportCategoryDataSource(),
         ),
       )..getCategoryModel(),
       child: BlocBuilder<HomeCubit, HomeState>(

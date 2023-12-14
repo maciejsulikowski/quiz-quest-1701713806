@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 class AnimalsCategoryDataSource {
   Future<Map<String, dynamic>?> getAnimalsCategory() async {
     final response = await Dio().get(
-        'https://opentdb.com/api.php?amount=10&category=21&difficulty=easy&type=multiple');
+        'https://opentdb.com/api.php?amount=10&category=27&difficulty=easy&type=multiple');
 
     final responseData = response.data;
 

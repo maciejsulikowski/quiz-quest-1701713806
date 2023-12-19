@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quiz_quest/app/data/data_sources/animals_category/animals_category_data_source.dart';
 import 'package:quiz_quest/app/data/data_sources/sport_category/sport_category_data_source.dart';
+import 'package:quiz_quest/app/domain/models/animals_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/sports_quiz_model.dart';
 import 'package:quiz_quest/app/domain/repositories/category_repository.dart';
 import 'package:quiz_quest/app/features/home_page/cubit/home_cubit.dart';
@@ -70,9 +71,7 @@ class QuizzPage extends StatelessWidget {
           AnimalsCategoryDataSource(),
           SportCategoryDataSource(),
         ),
-      )
-        ..getSportsModel('21')
-        ..getAnimalModel(),
+      )..getSportsModel('21'),
       child: BlocBuilder<HomeCubit, HomeState>(
         builder: (context, state) {
           final sportsModel = state.sportsModel;
@@ -157,16 +156,57 @@ class QuizzPage extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 30),
-                if (sportsModel != null)
-                  CategoryQuizz(
-                    categoriesModel: sportsModel,
-                  ),
+                // if (animalsModel != null && sportsModel != null)
+                //   CategoryQuizz(
+                //     animalsModel: animalsModel,
+                //     sportsModel: sportsModel,
+                //   ),
 
-                const SizedBox(height: 30),
-                if (animalsModel != null)
-                  CategoryQuizz(
-                    categoriesModel: animalsModel,
+                if (sportsModel != null && animalsModel != null) ...[
+                  InkWell(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const FirstQuizPage()));
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          DetailsQuizzWidget(
+                            sportsModel: sportsModel,
+                            results: sportsModel.results,
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
+                  InkWell(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const FirstQuizPage()));
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          DetailsQuizzWidget2(
+                            animalsModel: animalsModel,
+                            results: animalsModel.results,
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+
                 // const SizedBox(height: 30),
                 // CategoryQuizz(
                 //   categoriesModel: categoriesModel,
@@ -185,54 +225,102 @@ class QuizzPage extends StatelessWidget {
   }
 }
 
-class CategoryQuizz extends StatelessWidget {
-  const CategoryQuizz({
-    required this.categoriesModel,
+// class CategoryQuizz extends StatelessWidget {
+//   const CategoryQuizz({
+//     required this.sportsModel,
+//     required this.animalsModel,
+//     super.key,
+//   });
+
+//   final SportsQuizModel sportsModel;
+//   final AnimalsQuizModel animalsModel;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return InkWell(
+//       onTap: () {
+//         Navigator.of(context).push(
+//             MaterialPageRoute(builder: (context) => const FirstQuizPage()));
+//       },
+//       child: Padding(
+//         padding: const EdgeInsets.symmetric(horizontal: 16.0),
+//         child: Row(
+//           mainAxisAlignment: MainAxisAlignment.spaceAround,
+//           children: [
+//             DetailsQuizzWidget(
+//               sportsModel: sportsModel,
+//               animalsModel: animalsModel,
+//               results: sportsModel.results,
+//               results2: animalsModel.results,
+//             ),
+//             const SizedBox(
+//               width: 10,
+//             ),
+//             DetailsQuizzWidget(
+//               animalsModel: animalsModel,
+//               sportsModel: sportsModel,
+//               results: sportsModel.results,
+//               results2: animalsModel.results,
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+class DetailsQuizzWidget extends StatelessWidget {
+  const DetailsQuizzWidget({
+    required this.sportsModel,
+    required this.results,
     super.key,
   });
 
-  final SportsQuizModel categoriesModel;
-
+  final SportsQuizModel sportsModel;
+  final List<Results1> results;
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => const FirstQuizPage()));
-      },
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            DetailsQuizzWidget(
-              categoriesModel: categoriesModel,
-              results: categoriesModel.results,
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            DetailsQuizzWidget(
-              categoriesModel: categoriesModel,
-              results: categoriesModel.results,
-            ),
+    return Container(
+      width: 150,
+      height: 150,
+      padding: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        gradient: const LinearGradient(
+          colors: [
+            Color.fromARGB(255, 94, 128, 239),
+            Color.fromARGB(255, 76, 75, 167),
           ],
+          begin: Alignment.centerLeft,
+          end: Alignment.centerRight,
         ),
+      ),
+      child: Row(
+        children: [
+          Text(
+            results.first.category,
+            style: GoogleFonts.aBeeZee(
+                fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(
+            width: 5,
+          ),
+          const CircleAvatar()
+        ],
       ),
     );
   }
 }
 
-class DetailsQuizzWidget extends StatelessWidget {
-  const DetailsQuizzWidget({
-    required this.categoriesModel,
+class DetailsQuizzWidget2 extends StatelessWidget {
+  const DetailsQuizzWidget2({
+    required this.animalsModel,
     required this.results,
     super.key,
   });
 
-  final SportsQuizModel categoriesModel;
-  final List<Results> results;
-
+  final AnimalsQuizModel animalsModel;
+  final List<Results2> results;
   @override
   Widget build(BuildContext context) {
     return Container(

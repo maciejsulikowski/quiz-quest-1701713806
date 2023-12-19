@@ -10,7 +10,7 @@ _$SportsQuizModelImpl _$$SportsQuizModelImplFromJson(
         Map<String, dynamic> json) =>
     _$SportsQuizModelImpl(
       (json['results'] as List<dynamic>)
-          .map((e) => Results.fromJson(e as Map<String, dynamic>))
+          .map((e) => Results1.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
@@ -20,13 +20,13 @@ Map<String, dynamic> _$$SportsQuizModelImplToJson(
       'results': instance.results,
     };
 
-_$ResultsImpl _$$ResultsImplFromJson(Map<String, dynamic> json) =>
-    _$ResultsImpl(
+_$Results1Impl _$$Results1ImplFromJson(Map<String, dynamic> json) =>
+    _$Results1Impl(
       json['category'] as String,
       json['question'] as String,
     );
 
-Map<String, dynamic> _$$ResultsImplToJson(_$ResultsImpl instance) =>
+Map<String, dynamic> _$$Results1ImplToJson(_$Results1Impl instance) =>
     <String, dynamic>{
       'category': instance.category,
       'question': instance.question,

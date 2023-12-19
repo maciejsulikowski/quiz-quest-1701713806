@@ -1,5 +1,6 @@
 import 'package:quiz_quest/app/data/data_sources/animals_category/animals_category_data_source.dart';
 import 'package:quiz_quest/app/data/data_sources/sport_category/sport_category_data_source.dart';
+import 'package:quiz_quest/app/domain/models/animals_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/sports_quiz_model.dart';
 
 class CategoriesRepository {
@@ -19,13 +20,13 @@ class CategoriesRepository {
     return SportsQuizModel.fromJson(json);
   }
 
-  Future<SportsQuizModel?> getAnimalsData() async {
+  Future<AnimalsQuizModel?> getAnimalsData() async {
     final json = await animalsCategoryDataSource.getAnimalsCategory();
 
     if (json == null) {
       return null;
     }
 
-    return SportsQuizModel.fromJson(json);
+    return AnimalsQuizModel.fromJson(json);
   }
 }

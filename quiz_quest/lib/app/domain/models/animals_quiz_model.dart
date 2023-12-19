@@ -6,7 +6,7 @@ part 'animals_quiz_model.freezed.dart';
 @freezed
 class AnimalsQuizModel with _$AnimalsQuizModel {
   factory AnimalsQuizModel(
-    @JsonKey(name: "results") List<Results> results,
+    @JsonKey(name: "results") List<Results2> results,
   ) = _AnimalsQuizModel;
 
   factory AnimalsQuizModel.fromJson(Map<String, dynamic> json) =>
@@ -14,13 +14,13 @@ class AnimalsQuizModel with _$AnimalsQuizModel {
 }
 
 @freezed
-class Results with _$Results {
-  const Results._();
-  factory Results(
+class Results2 with _$Results2 {
+  const Results2._();
+  factory Results2(
     @JsonKey(name: "category") String category,
     @JsonKey(name: "question") String question,
-  ) = _Results;
+  ) = _Results2;
 
-  factory Results.fromJson(Map<String, dynamic> json) =>
-      _$ResultsFromJson(json);
+  factory Results2.fromJson(Map<String, dynamic> json) =>
+      _$Results2FromJson(json);
 }

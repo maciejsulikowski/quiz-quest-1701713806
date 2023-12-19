@@ -10,7 +10,7 @@ _$AnimalsQuizModelImpl _$$AnimalsQuizModelImplFromJson(
         Map<String, dynamic> json) =>
     _$AnimalsQuizModelImpl(
       (json['results'] as List<dynamic>)
-          .map((e) => Results.fromJson(e as Map<String, dynamic>))
+          .map((e) => Results2.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
@@ -20,13 +20,13 @@ Map<String, dynamic> _$$AnimalsQuizModelImplToJson(
       'results': instance.results,
     };
 
-_$ResultsImpl _$$ResultsImplFromJson(Map<String, dynamic> json) =>
-    _$ResultsImpl(
+_$Results2Impl _$$Results2ImplFromJson(Map<String, dynamic> json) =>
+    _$Results2Impl(
       json['category'] as String,
       json['question'] as String,
     );
 
-Map<String, dynamic> _$$ResultsImplToJson(_$ResultsImpl instance) =>
+Map<String, dynamic> _$$Results2ImplToJson(_$Results2Impl instance) =>
     <String, dynamic>{
       'category': instance.category,
       'question': instance.question,

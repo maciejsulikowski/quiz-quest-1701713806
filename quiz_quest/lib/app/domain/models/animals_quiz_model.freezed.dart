@@ -21,7 +21,7 @@ AnimalsQuizModel _$AnimalsQuizModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$AnimalsQuizModel {
   @JsonKey(name: "results")
-  List<Results> get results => throw _privateConstructorUsedError;
+  List<Results2> get results => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +35,7 @@ abstract class $AnimalsQuizModelCopyWith<$Res> {
           AnimalsQuizModel value, $Res Function(AnimalsQuizModel) then) =
       _$AnimalsQuizModelCopyWithImpl<$Res, AnimalsQuizModel>;
   @useResult
-  $Res call({@JsonKey(name: "results") List<Results> results});
+  $Res call({@JsonKey(name: "results") List<Results2> results});
 }
 
 /// @nodoc
@@ -57,7 +57,7 @@ class _$AnimalsQuizModelCopyWithImpl<$Res, $Val extends AnimalsQuizModel>
       results: null == results
           ? _value.results
           : results // ignore: cast_nullable_to_non_nullable
-              as List<Results>,
+              as List<Results2>,
     ) as $Val);
   }
 }
@@ -70,7 +70,7 @@ abstract class _$$AnimalsQuizModelImplCopyWith<$Res>
       __$$AnimalsQuizModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({@JsonKey(name: "results") List<Results> results});
+  $Res call({@JsonKey(name: "results") List<Results2> results});
 }
 
 /// @nodoc
@@ -90,7 +90,7 @@ class __$$AnimalsQuizModelImplCopyWithImpl<$Res>
       null == results
           ? _value._results
           : results // ignore: cast_nullable_to_non_nullable
-              as List<Results>,
+              as List<Results2>,
     ));
   }
 }
@@ -98,16 +98,16 @@ class __$$AnimalsQuizModelImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$AnimalsQuizModelImpl implements _AnimalsQuizModel {
-  _$AnimalsQuizModelImpl(@JsonKey(name: "results") final List<Results> results)
+  _$AnimalsQuizModelImpl(@JsonKey(name: "results") final List<Results2> results)
       : _results = results;
 
   factory _$AnimalsQuizModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$AnimalsQuizModelImplFromJson(json);
 
-  final List<Results> _results;
+  final List<Results2> _results;
   @override
   @JsonKey(name: "results")
-  List<Results> get results {
+  List<Results2> get results {
     if (_results is EqualUnmodifiableListView) return _results;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_results);
@@ -148,7 +148,7 @@ class _$AnimalsQuizModelImpl implements _AnimalsQuizModel {
 
 abstract class _AnimalsQuizModel implements AnimalsQuizModel {
   factory _AnimalsQuizModel(
-          @JsonKey(name: "results") final List<Results> results) =
+          @JsonKey(name: "results") final List<Results2> results) =
       _$AnimalsQuizModelImpl;
 
   factory _AnimalsQuizModel.fromJson(Map<String, dynamic> json) =
@@ -156,19 +156,19 @@ abstract class _AnimalsQuizModel implements AnimalsQuizModel {
 
   @override
   @JsonKey(name: "results")
-  List<Results> get results;
+  List<Results2> get results;
   @override
   @JsonKey(ignore: true)
   _$$AnimalsQuizModelImplCopyWith<_$AnimalsQuizModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
-Results _$ResultsFromJson(Map<String, dynamic> json) {
-  return _Results.fromJson(json);
+Results2 _$Results2FromJson(Map<String, dynamic> json) {
+  return _Results2.fromJson(json);
 }
 
 /// @nodoc
-mixin _$Results {
+mixin _$Results2 {
   @JsonKey(name: "category")
   String get category => throw _privateConstructorUsedError;
   @JsonKey(name: "question")
@@ -176,13 +176,14 @@ mixin _$Results {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $ResultsCopyWith<Results> get copyWith => throw _privateConstructorUsedError;
+  $Results2CopyWith<Results2> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ResultsCopyWith<$Res> {
-  factory $ResultsCopyWith(Results value, $Res Function(Results) then) =
-      _$ResultsCopyWithImpl<$Res, Results>;
+abstract class $Results2CopyWith<$Res> {
+  factory $Results2CopyWith(Results2 value, $Res Function(Results2) then) =
+      _$Results2CopyWithImpl<$Res, Results2>;
   @useResult
   $Res call(
       {@JsonKey(name: "category") String category,
@@ -190,9 +191,9 @@ abstract class $ResultsCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ResultsCopyWithImpl<$Res, $Val extends Results>
-    implements $ResultsCopyWith<$Res> {
-  _$ResultsCopyWithImpl(this._value, this._then);
+class _$Results2CopyWithImpl<$Res, $Val extends Results2>
+    implements $Results2CopyWith<$Res> {
+  _$Results2CopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -219,10 +220,11 @@ class _$ResultsCopyWithImpl<$Res, $Val extends Results>
 }
 
 /// @nodoc
-abstract class _$$ResultsImplCopyWith<$Res> implements $ResultsCopyWith<$Res> {
-  factory _$$ResultsImplCopyWith(
-          _$ResultsImpl value, $Res Function(_$ResultsImpl) then) =
-      __$$ResultsImplCopyWithImpl<$Res>;
+abstract class _$$Results2ImplCopyWith<$Res>
+    implements $Results2CopyWith<$Res> {
+  factory _$$Results2ImplCopyWith(
+          _$Results2Impl value, $Res Function(_$Results2Impl) then) =
+      __$$Results2ImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -231,11 +233,11 @@ abstract class _$$ResultsImplCopyWith<$Res> implements $ResultsCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$ResultsImplCopyWithImpl<$Res>
-    extends _$ResultsCopyWithImpl<$Res, _$ResultsImpl>
-    implements _$$ResultsImplCopyWith<$Res> {
-  __$$ResultsImplCopyWithImpl(
-      _$ResultsImpl _value, $Res Function(_$ResultsImpl) _then)
+class __$$Results2ImplCopyWithImpl<$Res>
+    extends _$Results2CopyWithImpl<$Res, _$Results2Impl>
+    implements _$$Results2ImplCopyWith<$Res> {
+  __$$Results2ImplCopyWithImpl(
+      _$Results2Impl _value, $Res Function(_$Results2Impl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -244,7 +246,7 @@ class __$$ResultsImplCopyWithImpl<$Res>
     Object? category = null,
     Object? question = null,
   }) {
-    return _then(_$ResultsImpl(
+    return _then(_$Results2Impl(
       null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
@@ -259,13 +261,13 @@ class __$$ResultsImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$ResultsImpl extends _Results {
-  _$ResultsImpl(@JsonKey(name: "category") this.category,
+class _$Results2Impl extends _Results2 {
+  _$Results2Impl(@JsonKey(name: "category") this.category,
       @JsonKey(name: "question") this.question)
       : super._();
 
-  factory _$ResultsImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ResultsImplFromJson(json);
+  factory _$Results2Impl.fromJson(Map<String, dynamic> json) =>
+      _$$Results2ImplFromJson(json);
 
   @override
   @JsonKey(name: "category")
@@ -276,14 +278,14 @@ class _$ResultsImpl extends _Results {
 
   @override
   String toString() {
-    return 'Results(category: $category, question: $question)';
+    return 'Results2(category: $category, question: $question)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ResultsImpl &&
+            other is _$Results2Impl &&
             (identical(other.category, category) ||
                 other.category == category) &&
             (identical(other.question, question) ||
@@ -297,23 +299,24 @@ class _$ResultsImpl extends _Results {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ResultsImplCopyWith<_$ResultsImpl> get copyWith =>
-      __$$ResultsImplCopyWithImpl<_$ResultsImpl>(this, _$identity);
+  _$$Results2ImplCopyWith<_$Results2Impl> get copyWith =>
+      __$$Results2ImplCopyWithImpl<_$Results2Impl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ResultsImplToJson(
+    return _$$Results2ImplToJson(
       this,
     );
   }
 }
 
-abstract class _Results extends Results {
-  factory _Results(@JsonKey(name: "category") final String category,
-      @JsonKey(name: "question") final String question) = _$ResultsImpl;
-  _Results._() : super._();
+abstract class _Results2 extends Results2 {
+  factory _Results2(@JsonKey(name: "category") final String category,
+      @JsonKey(name: "question") final String question) = _$Results2Impl;
+  _Results2._() : super._();
 
-  factory _Results.fromJson(Map<String, dynamic> json) = _$ResultsImpl.fromJson;
+  factory _Results2.fromJson(Map<String, dynamic> json) =
+      _$Results2Impl.fromJson;
 
   @override
   @JsonKey(name: "category")
@@ -323,6 +326,6 @@ abstract class _Results extends Results {
   String get question;
   @override
   @JsonKey(ignore: true)
-  _$$ResultsImplCopyWith<_$ResultsImpl> get copyWith =>
+  _$$Results2ImplCopyWith<_$Results2Impl> get copyWith =>
       throw _privateConstructorUsedError;
 }

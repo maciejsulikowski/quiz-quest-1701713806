@@ -9,7 +9,7 @@ class HomeState {
   });
 
   final SportsQuizModel? sportsModel;
-  final SportsQuizModel? animalsModel;
+  final AnimalsQuizModel? animalsModel;
   final Status status;
   final String? errorMessage;
 }

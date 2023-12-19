@@ -2,12 +2,14 @@ part of 'home_cubit.dart';
 
 class HomeState {
   HomeState({
-    this.cateogriesModel,
+    this.sportsModel,
+    this.animalsModel,
     this.status = Status.initial,
     this.errorMessage,
   });
 
-  final QuizModel? cateogriesModel;
+  final SportsQuizModel? sportsModel;
+  final SportsQuizModel? animalsModel;
   final Status status;
   final String? errorMessage;
 }

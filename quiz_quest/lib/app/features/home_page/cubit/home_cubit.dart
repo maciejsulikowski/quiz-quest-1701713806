@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:quiz_quest/app/core/enums.dart';
-import 'package:quiz_quest/app/domain/models/quiz_model.dart';
+import 'package:quiz_quest/app/domain/models/sports_quiz_model.dart';
 import 'package:quiz_quest/app/domain/repositories/category_repository.dart';
 
 part 'home_state.dart';
@@ -11,15 +11,36 @@ class HomeCubit extends Cubit<HomeState> {
 
   final CategoriesRepository categoriesRepository;
 
-  Future<void> getCategoryModel() async {
+  Future<void> getSportsModel(String category) async {
     emit(HomeState(
       status: Status.loading,
     ));
-    final categories = await categoriesRepository.getSportsModel();
+    final categories = await categoriesRepository.getSportsData(category);
+   
+    try {
+      emit(HomeState(
+        sportsModel: categories,
+        status: Status.success,
+      ));
+    } catch (error) {
+      emit(
+        HomeState(
+          status: Status.error,
+          errorMessage: error.toString(),
+        ),
+      );
+    }
+  }
+
+  Future<void> getAnimalModel() async {
+    emit(HomeState(
+      status: Status.loading,
+    ));
+    final categories = await categoriesRepository.getAnimalsData();
     
     try {
       emit(HomeState(
-        cateogriesModel: categories,
+        animalsModel: categories,
         status: Status.success,
       ));
     } catch (error) {

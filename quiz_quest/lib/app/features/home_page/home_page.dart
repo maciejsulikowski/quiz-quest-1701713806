@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:quiz_quest/app/data/data_sources/animals_category/animals_category_data_source.dart';
 import 'package:quiz_quest/app/data/data_sources/sport_category/sport_category_data_source.dart';
-import 'package:quiz_quest/app/domain/models/quiz_model.dart';
+import 'package:quiz_quest/app/domain/models/sports_quiz_model.dart';
 import 'package:quiz_quest/app/domain/repositories/category_repository.dart';
 import 'package:quiz_quest/app/features/home_page/cubit/home_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/first_quiz_page.dart';
@@ -66,12 +67,16 @@ class QuizzPage extends StatelessWidget {
     return BlocProvider(
       create: (context) => HomeCubit(
         CategoriesRepository(
-          sportCategoryDataSource: SportCategoryDataSource(),
+          AnimalsCategoryDataSource(),
+          SportCategoryDataSource(),
         ),
-      )..getCategoryModel(),
+      )
+        ..getSportsModel('21')
+        ..getAnimalModel(),
       child: BlocBuilder<HomeCubit, HomeState>(
         builder: (context, state) {
-          final categoriesModel = state.cateogriesModel;
+          final sportsModel = state.sportsModel;
+          final animalsModel = state.animalsModel;
 
           return Container(
             decoration: const BoxDecoration(
@@ -152,24 +157,25 @@ class QuizzPage extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 30),
-                if (categoriesModel != null) ...[
+                if (sportsModel != null)
                   CategoryQuizz(
-                    categoriesModel: categoriesModel,
+                    categoriesModel: sportsModel,
                   ),
-                  const SizedBox(height: 30),
+
+                const SizedBox(height: 30),
+                if (animalsModel != null)
                   CategoryQuizz(
-                    categoriesModel: categoriesModel,
+                    categoriesModel: animalsModel,
                   ),
-                  const SizedBox(height: 30),
-                  CategoryQuizz(
-                    categoriesModel: categoriesModel,
-                  ),
-                  const SizedBox(height: 30),
-                  CategoryQuizz(
-                    categoriesModel: categoriesModel,
-                  ),
-                  const SizedBox(height: 30),
-                ],
+                // const SizedBox(height: 30),
+                // CategoryQuizz(
+                //   categoriesModel: categoriesModel,
+                // ),
+                // const SizedBox(height: 30),
+                // CategoryQuizz(
+                //   categoriesModel: categoriesModel,
+                // ),
+                // const SizedBox(height: 30),
               ],
             ),
           );
@@ -185,7 +191,7 @@ class CategoryQuizz extends StatelessWidget {
     super.key,
   });
 
-  final QuizModel categoriesModel;
+  final SportsQuizModel categoriesModel;
 
   @override
   Widget build(BuildContext context) {
@@ -224,7 +230,7 @@ class DetailsQuizzWidget extends StatelessWidget {
     super.key,
   });
 
-  final QuizModel categoriesModel;
+  final SportsQuizModel categoriesModel;
   final List<Results> results;
 
   @override

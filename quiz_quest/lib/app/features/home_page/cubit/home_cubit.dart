@@ -16,10 +16,10 @@ class HomeCubit extends Cubit<HomeState> {
     emit(HomeState(
       status: Status.loading,
     ));
-    final categories = await categoriesRepository.getSportsData(category);
-    final animal = await categoriesRepository.getAnimalsData();
-   
+
     try {
+      final categories = await categoriesRepository.getSportsData(category);
+      final animal = await categoriesRepository.getAnimalsData();
       emit(HomeState(
         sportsModel: categories,
         animalsModel: animal,
@@ -39,7 +39,7 @@ class HomeCubit extends Cubit<HomeState> {
   //     status: Status.loading,
   //   ));
   //   final categories = await categoriesRepository.getAnimalsData();
-    
+
   //   try {
   //     emit(HomeState(
   //       animalsModel: categories,

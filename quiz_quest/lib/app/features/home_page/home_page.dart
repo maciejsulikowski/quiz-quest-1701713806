@@ -3,8 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quiz_quest/app/data/data_sources/animals_category/animals_category_data_source.dart';
 import 'package:quiz_quest/app/data/data_sources/sport_category/sport_category_data_source.dart';
-import 'package:quiz_quest/app/domain/models/animals_quiz_model.dart';
-import 'package:quiz_quest/app/domain/models/sports_quiz_model.dart';
 import 'package:quiz_quest/app/domain/repositories/category_repository.dart';
 import 'package:quiz_quest/app/features/home_page/cubit/home_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/first_quiz_page.dart';
@@ -156,66 +154,107 @@ class QuizzPage extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 30),
-                // if (animalsModel != null && sportsModel != null)
-                //   CategoryQuizz(
-                //     animalsModel: animalsModel,
-                //     sportsModel: sportsModel,
-                //   ),
-
-                if (sportsModel != null && animalsModel != null) ...[
-                  InkWell(
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const FirstQuizPage()));
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          DetailsQuizzWidget(
-                            sportsModel: sportsModel,
-                            results: sportsModel.results,
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                        ],
-                      ),
+                InkWell(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const FirstQuizPage()));
+                  },
+                  child: const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        DetailsQuizzWidget(
+                          name: 'Animals',
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        DetailsQuizzWidget(
+                          name: 'Art',
+                        ),
+                      ],
                     ),
                   ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const FirstQuizPage()));
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          DetailsQuizzWidget2(
-                            animalsModel: animalsModel,
-                            results: animalsModel.results,
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                        ],
-                      ),
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                InkWell(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const FirstQuizPage()));
+                  },
+                  child: const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        DetailsQuizzWidget(
+                          name: 'Computer Science',
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        DetailsQuizzWidget(
+                          name: 'Geography',
+                        ),
+                      ],
                     ),
                   ),
-                ],
-
-                // const SizedBox(height: 30),
-                // CategoryQuizz(
-                //   categoriesModel: categoriesModel,
-                // ),
-                // const SizedBox(height: 30),
-                // CategoryQuizz(
-                //   categoriesModel: categoriesModel,
-                // ),
-                // const SizedBox(height: 30),
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                InkWell(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const FirstQuizPage()));
+                  },
+                  child: const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        DetailsQuizzWidget(
+                          name: 'History',
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        DetailsQuizzWidget(
+                          name: 'Politics',
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                InkWell(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const FirstQuizPage()));
+                  },
+                  child: const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        DetailsQuizzWidget(
+                          name: 'Sport',
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        DetailsQuizzWidget(
+                          name: 'Vehicles',
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ],
             ),
           );
@@ -225,59 +264,14 @@ class QuizzPage extends StatelessWidget {
   }
 }
 
-// class CategoryQuizz extends StatelessWidget {
-//   const CategoryQuizz({
-//     required this.sportsModel,
-//     required this.animalsModel,
-//     super.key,
-//   });
-
-//   final SportsQuizModel sportsModel;
-//   final AnimalsQuizModel animalsModel;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return InkWell(
-//       onTap: () {
-//         Navigator.of(context).push(
-//             MaterialPageRoute(builder: (context) => const FirstQuizPage()));
-//       },
-//       child: Padding(
-//         padding: const EdgeInsets.symmetric(horizontal: 16.0),
-//         child: Row(
-//           mainAxisAlignment: MainAxisAlignment.spaceAround,
-//           children: [
-//             DetailsQuizzWidget(
-//               sportsModel: sportsModel,
-//               animalsModel: animalsModel,
-//               results: sportsModel.results,
-//               results2: animalsModel.results,
-//             ),
-//             const SizedBox(
-//               width: 10,
-//             ),
-//             DetailsQuizzWidget(
-//               animalsModel: animalsModel,
-//               sportsModel: sportsModel,
-//               results: sportsModel.results,
-//               results2: animalsModel.results,
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
-
 class DetailsQuizzWidget extends StatelessWidget {
   const DetailsQuizzWidget({
-    required this.sportsModel,
-    required this.results,
+    required this.name,
     super.key,
   });
 
-  final SportsQuizModel sportsModel;
-  final List<Results1> results;
+  final String name;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -295,60 +289,21 @@ class DetailsQuizzWidget extends StatelessWidget {
           end: Alignment.centerRight,
         ),
       ),
-      child: Row(
+      child: Column(
         children: [
-          Text(
-            results.first.category,
-            style: GoogleFonts.aBeeZee(
-                fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
+          Expanded(
+            child: Text(
+              name,
+              style: GoogleFonts.aBeeZee(
+                  fontSize: 20,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold),
+              textAlign: TextAlign.center,
+            ),
           ),
-          const SizedBox(
-            width: 5,
-          ),
-          const CircleAvatar()
-        ],
-      ),
-    );
-  }
-}
-
-class DetailsQuizzWidget2 extends StatelessWidget {
-  const DetailsQuizzWidget2({
-    required this.animalsModel,
-    required this.results,
-    super.key,
-  });
-
-  final AnimalsQuizModel animalsModel;
-  final List<Results2> results;
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 150,
-      height: 150,
-      padding: const EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        gradient: const LinearGradient(
-          colors: [
-            Color.fromARGB(255, 94, 128, 239),
-            Color.fromARGB(255, 76, 75, 167),
-          ],
-          begin: Alignment.centerLeft,
-          end: Alignment.centerRight,
-        ),
-      ),
-      child: Row(
-        children: [
-          Text(
-            results.first.category,
-            style: GoogleFonts.aBeeZee(
-                fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(
-            width: 5,
-          ),
-          const CircleAvatar()
+          const CircleAvatar(
+            radius: 35,
+          )
         ],
       ),
     );

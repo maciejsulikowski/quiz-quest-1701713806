@@ -166,12 +166,14 @@ class QuizzPage extends StatelessWidget {
                       children: [
                         DetailsQuizzWidget(
                           name: 'Animals',
+                          image: 'images/animal.png',
                         ),
                         SizedBox(
                           width: 10,
                         ),
                         DetailsQuizzWidget(
                           name: 'Art',
+                          image: 'images/art.png',
                         ),
                       ],
                     ),
@@ -192,12 +194,14 @@ class QuizzPage extends StatelessWidget {
                       children: [
                         DetailsQuizzWidget(
                           name: 'Computer Science',
+                          image: 'images/computer.png',
                         ),
                         SizedBox(
                           width: 10,
                         ),
                         DetailsQuizzWidget(
                           name: 'Geography',
+                          image: 'images/geography.png',
                         ),
                       ],
                     ),
@@ -218,12 +222,14 @@ class QuizzPage extends StatelessWidget {
                       children: [
                         DetailsQuizzWidget(
                           name: 'History',
+                          image: 'images/history.png',
                         ),
                         SizedBox(
                           width: 10,
                         ),
                         DetailsQuizzWidget(
                           name: 'Politics',
+                          image: 'images/politics.png',
                         ),
                       ],
                     ),
@@ -244,16 +250,21 @@ class QuizzPage extends StatelessWidget {
                       children: [
                         DetailsQuizzWidget(
                           name: 'Sport',
+                          image: 'images/ball.png',
                         ),
                         SizedBox(
                           width: 10,
                         ),
                         DetailsQuizzWidget(
                           name: 'Vehicles',
+                          image: 'images/vehicle.png',
                         ),
                       ],
                     ),
                   ),
+                ),
+                const SizedBox(
+                  height: 30,
                 ),
               ],
             ),
@@ -267,10 +278,12 @@ class QuizzPage extends StatelessWidget {
 class DetailsQuizzWidget extends StatelessWidget {
   const DetailsQuizzWidget({
     required this.name,
+    required this.image,
     super.key,
   });
 
   final String name;
+  final String image;
 
   @override
   Widget build(BuildContext context) {
@@ -301,7 +314,8 @@ class DetailsQuizzWidget extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
           ),
-          const CircleAvatar(
+          CircleAvatar(
+            backgroundImage: AssetImage(image),
             radius: 35,
           )
         ],

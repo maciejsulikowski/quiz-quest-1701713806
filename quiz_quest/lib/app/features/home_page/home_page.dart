@@ -154,114 +154,38 @@ class QuizzPage extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 30),
-                InkWell(
-                  onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const FirstQuizPage()));
-                  },
-                  child: const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        DetailsQuizzWidget(
-                          name: 'Animals',
-                          image: 'images/animal.png',
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        DetailsQuizzWidget(
-                          name: 'Art',
-                          image: 'images/art.png',
-                        ),
-                      ],
-                    ),
-                  ),
+                const QuizzCategoryWidget(
+                  firstName: 'Animals',
+                  firstImage: 'images/animal.png',
+                  secondName: 'Art',
+                  secondImage: 'images/art.png',
                 ),
                 const SizedBox(
                   height: 30,
                 ),
-                InkWell(
-                  onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const FirstQuizPage()));
-                  },
-                  child: const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        DetailsQuizzWidget(
-                          name: 'Computer Science',
-                          image: 'images/computer.png',
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        DetailsQuizzWidget(
-                          name: 'Geography',
-                          image: 'images/geography.png',
-                        ),
-                      ],
-                    ),
-                  ),
+                const QuizzCategoryWidget(
+                  firstName: 'Computer Science',
+                  firstImage: 'images/computer.png',
+                  secondName: 'Geography',
+                  secondImage: 'images/geography.png',
                 ),
                 const SizedBox(
                   height: 30,
                 ),
-                InkWell(
-                  onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const FirstQuizPage()));
-                  },
-                  child: const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        DetailsQuizzWidget(
-                          name: 'History',
-                          image: 'images/history.png',
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        DetailsQuizzWidget(
-                          name: 'Politics',
-                          image: 'images/politics.png',
-                        ),
-                      ],
-                    ),
-                  ),
+                const QuizzCategoryWidget(
+                  firstName: 'History',
+                  firstImage: 'images/history.png',
+                  secondName: 'Politics',
+                  secondImage: 'images/politics.png',
                 ),
                 const SizedBox(
                   height: 30,
                 ),
-                InkWell(
-                  onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const FirstQuizPage()));
-                  },
-                  child: const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        DetailsQuizzWidget(
-                          name: 'Sport',
-                          image: 'images/ball.png',
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        DetailsQuizzWidget(
-                          name: 'Vehicles',
-                          image: 'images/vehicle.png',
-                        ),
-                      ],
-                    ),
-                  ),
+                const QuizzCategoryWidget(
+                  firstName: 'Sport',
+                  firstImage: 'images/ball.png',
+                  secondName: 'Vehicles',
+                  secondImage: 'images/vehicle.png',
                 ),
                 const SizedBox(
                   height: 30,
@@ -270,6 +194,50 @@ class QuizzPage extends StatelessWidget {
             ),
           );
         },
+      ),
+    );
+  }
+}
+
+class QuizzCategoryWidget extends StatelessWidget {
+  const QuizzCategoryWidget({
+    required this.firstName,
+    required this.firstImage,
+    required this.secondName,
+    required this.secondImage,
+    super.key,
+  });
+
+  final String firstName;
+  final String firstImage;
+  final String secondName;
+  final String secondImage;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => const FirstQuizPage()));
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            DetailsQuizzWidget(
+              name: firstName,
+              image: firstImage,
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+            DetailsQuizzWidget(
+              name: secondName,
+              image: secondImage,
+            ),
+          ],
+        ),
       ),
     );
   }

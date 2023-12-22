@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:quiz_quest/app/domain/models/animals_quiz_model.dart';
 
 class QuestionQuizPage extends StatefulWidget {
   const QuestionQuizPage({
+    required this.model,
     super.key,
   });
+
+  final AnimalsQuizModel? model;
 
   @override
   State<QuestionQuizPage> createState() => _QuestionQuizPageState();
@@ -17,8 +21,10 @@ class _QuestionQuizPageState extends State<QuestionQuizPage> {
       appBar: AppBar(
         title: const Text('Quest'),
       ),
-      body: const SafeArea(
-        child: QuizzPage(),
+      body: SafeArea(
+        child: QuizzPage(
+          model: widget.model,
+        ),
       ),
     );
   }
@@ -26,8 +32,11 @@ class _QuestionQuizPageState extends State<QuestionQuizPage> {
 
 class QuizzPage extends StatelessWidget {
   const QuizzPage({
+    required this.model,
     super.key,
   });
+
+  final AnimalsQuizModel? model;
 
   @override
   Widget build(BuildContext context) {
@@ -43,45 +52,47 @@ class QuizzPage extends StatelessWidget {
         ),
       ),
       child: ListView(
-        children: const [
-          SizedBox(
+        children: [
+          const SizedBox(
             height: 30,
           ),
-          CircleAvatar(
+          const CircleAvatar(
             radius: 50,
             child: Icon(
               Icons.question_mark,
               size: 50,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 15,
           ),
-          QuestionWidget(
-            question: 'How much cost your pussy?',
-          ),
-          SizedBox(
+          if (model != null)
+            for (final quest in model!.results)
+              QuestionWidget(
+                question: quest.question,
+              ),
+          const SizedBox(
             height: 30,
           ),
-          AnswerWidget(
+          const AnswerWidget(
             answer: '100',
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
-          AnswerWidget(
+          const AnswerWidget(
             answer: '200',
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
-          AnswerWidget(
+          const AnswerWidget(
             answer: '300',
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
-          AnswerWidget(
+          const AnswerWidget(
             answer: '400',
           ),
         ],

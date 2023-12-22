@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:quiz_quest/app/domain/models/animals_quiz_model.dart';
 import 'package:quiz_quest/app/features/quiz_pages/question_quiz_page.dart';
 
 class FirstQuizPage extends StatefulWidget {
   const FirstQuizPage({
+    required this.image,
+    required this.model,
+  
     super.key,
   });
+
+  final String image;
+  final AnimalsQuizModel? model;
+ 
 
   @override
   State<FirstQuizPage> createState() => _FirstQuizPageState();
@@ -18,8 +26,12 @@ class _FirstQuizPageState extends State<FirstQuizPage> {
       appBar: AppBar(
         title: const Text('Quizz'),
       ),
-      body: const SafeArea(
-        child: QuizzPage(),
+      body: SafeArea(
+        child: QuizzPage(
+          image: widget.image,
+          model: widget.model,
+         
+        ),
       ),
     );
   }
@@ -27,8 +39,15 @@ class _FirstQuizPageState extends State<FirstQuizPage> {
 
 class QuizzPage extends StatelessWidget {
   const QuizzPage({
+    required this.image,
+    required this.model,
+
     super.key,
   });
+
+  final String image;
+  final AnimalsQuizModel? model;
+
 
   @override
   Widget build(BuildContext context) {
@@ -48,11 +67,10 @@ class QuizzPage extends StatelessWidget {
           const SizedBox(
             height: 30,
           ),
-          const CircleAvatar(
-            radius: 50,
-            child: Icon(
-              Icons.question_mark,
-              size: 50,
+          Center(
+            child: CircleAvatar(
+              radius: 35,
+              backgroundImage: AssetImage(image),
             ),
           ),
           const SizedBox(
@@ -112,7 +130,10 @@ class QuizzPage extends StatelessWidget {
             child: ElevatedButton(
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const QuestionQuizPage()));
+                    builder: (context) => QuestionQuizPage(
+                          model: model,
+                       
+                        )));
               },
               style: ElevatedButton.styleFrom(
                   minimumSize: const Size.fromHeight(50),

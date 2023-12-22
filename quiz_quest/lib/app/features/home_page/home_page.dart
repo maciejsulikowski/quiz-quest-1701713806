@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quiz_quest/app/data/data_sources/animals_category/animals_category_data_source.dart';
 import 'package:quiz_quest/app/data/data_sources/sport_category/sport_category_data_source.dart';
+import 'package:quiz_quest/app/domain/models/animals_quiz_model.dart';
 import 'package:quiz_quest/app/domain/repositories/category_repository.dart';
 import 'package:quiz_quest/app/features/home_page/cubit/home_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/first_quiz_page.dart';
@@ -154,39 +155,87 @@ class QuizzPage extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 30),
-                const QuizzCategoryWidget(
-                  firstName: 'Animals',
-                  firstImage: 'images/animal.png',
-                  secondName: 'Art',
-                  secondImage: 'images/art.png',
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      QuizzCategoryWidget(
+                        model: state.animalsModel,
+                        name: 'Animals',
+                        image: 'images/animal.png',
+                      ),
+                      // QuizzCategoryWidget(
+                      //   model: animalsModel,
+                      //   name: 'Art',
+                      //   image: 'images/art.png',
+                      // ),
+                    ],
+                  ),
                 ),
                 const SizedBox(
                   height: 30,
                 ),
-                const QuizzCategoryWidget(
-                  firstName: 'Computer Science',
-                  firstImage: 'images/computer.png',
-                  secondName: 'Geography',
-                  secondImage: 'images/geography.png',
-                ),
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.spaceAround,
+                //     children: [
+                //       QuizzCategoryWidget(
+                //         model: sportsModel,
+                //         name: 'Computer Science',
+                //         image: 'images/computer.png',
+                //       ),
+                //       QuizzCategoryWidget(
+                //         model: sportsModel,
+                //         name: 'Geography',
+                //         image: 'images/geography.png',
+                //       ),
+                //     ],
+                //   ),
+                // ),
                 const SizedBox(
                   height: 30,
                 ),
-                const QuizzCategoryWidget(
-                  firstName: 'History',
-                  firstImage: 'images/history.png',
-                  secondName: 'Politics',
-                  secondImage: 'images/politics.png',
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                const QuizzCategoryWidget(
-                  firstName: 'Sport',
-                  firstImage: 'images/ball.png',
-                  secondName: 'Vehicles',
-                  secondImage: 'images/vehicle.png',
-                ),
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.spaceAround,
+                //     children: [
+                //       QuizzCategoryWidget(
+                //         model: sportsModel,
+                //         name: 'History',
+                //         image: 'images/history.png',
+                //       ),
+                //       QuizzCategoryWidget(
+                //         model: sportsModel,
+                //         name: 'Politics',
+                //         image: 'images/politics.png',
+                //       ),
+                //     ],
+                //   ),
+                // ),
+                // const SizedBox(
+                //   height: 30,
+                // ),
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.spaceAround,
+                //     children: [
+                //       QuizzCategoryWidget(
+                //         model: sportsModel,
+                //         name: 'Sport',
+                //         image: 'images/ball.png',
+                //       ),
+                //       QuizzCategoryWidget(
+                //         model: sportsModel,
+                //         name: 'Vehicles',
+                //         image: 'images/vehicle.png',
+                //       ),
+                //     ],
+                //   ),
+                // ),
                 const SizedBox(
                   height: 30,
                 ),
@@ -201,43 +250,29 @@ class QuizzPage extends StatelessWidget {
 
 class QuizzCategoryWidget extends StatelessWidget {
   const QuizzCategoryWidget({
-    required this.firstName,
-    required this.firstImage,
-    required this.secondName,
-    required this.secondImage,
+    required this.name,
+    required this.image,
+    required this.model,
     super.key,
   });
 
-  final String firstName;
-  final String firstImage;
-  final String secondName;
-  final String secondImage;
+  final String name;
+  final String image;
+  final AnimalsQuizModel? model;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => const FirstQuizPage()));
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => FirstQuizPage(
+                  model: model,
+                  image: image,
+                )));
       },
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            DetailsQuizzWidget(
-              name: firstName,
-              image: firstImage,
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            DetailsQuizzWidget(
-              name: secondName,
-              image: secondImage,
-            ),
-          ],
-        ),
+      child: DetailsQuizzWidget(
+        name: name,
+        image: image,
       ),
     );
   }

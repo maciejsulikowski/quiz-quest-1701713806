@@ -15,12 +15,23 @@ class AnimalsQuizModel with _$AnimalsQuizModel {
 
 @freezed
 class Results2 with _$Results2 {
-  const Results2._();
   factory Results2(
     @JsonKey(name: "category") String category,
     @JsonKey(name: "question") String question,
+    @JsonKey(name: "correct_answer") String correctAnswer,
+    @JsonKey(name: "incorrect_answers") List incorrectAnswers,
   ) = _Results2;
 
   factory Results2.fromJson(Map<String, dynamic> json) =>
       _$Results2FromJson(json);
 }
+
+// @freezed
+// class IncorrectAnswers with _$IncorrectAnswers {
+//   factory IncorrectAnswers(
+//     String incorrectAnswer,
+//   ) = _IncorrectAnswers;
+
+//   factory IncorrectAnswers.fromJson(Map<String, dynamic> json) =>
+//       _$IncorrectAnswersFromJson(json);
+// }

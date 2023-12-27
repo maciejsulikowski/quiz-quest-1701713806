@@ -24,10 +24,14 @@ _$Results2Impl _$$Results2ImplFromJson(Map<String, dynamic> json) =>
     _$Results2Impl(
       json['category'] as String,
       json['question'] as String,
+      json['correct_answer'] as String,
+      json['incorrect_answers'] as List<dynamic>,
     );
 
 Map<String, dynamic> _$$Results2ImplToJson(_$Results2Impl instance) =>
     <String, dynamic>{
       'category': instance.category,
       'question': instance.question,
+      'correct_answer': instance.correctAnswer,
+      'incorrect_answers': instance.incorrectAnswers,
     };

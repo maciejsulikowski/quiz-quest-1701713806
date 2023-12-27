@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:quiz_quest/app/data/data_sources/animals_category/animals_category_data_source.dart';
+import 'package:quiz_quest/app/data/data_sources/sport_category/sport_category_data_source.dart';
 import 'package:quiz_quest/app/domain/models/animals_quiz_model.dart';
+import 'package:quiz_quest/app/domain/repositories/category_repository.dart';
+import 'package:quiz_quest/app/features/home_page/cubit/home_cubit.dart';
 
 class QuestionQuizPage extends StatefulWidget {
   const QuestionQuizPage({
@@ -67,33 +72,33 @@ class QuizzPage extends StatelessWidget {
             height: 15,
           ),
           if (model != null)
-            for (final quest in model!.results)
-              QuestionWidget(
-                question: quest.question,
-              ),
+            QuestionWidget(
+              question: model!.results[1].question,
+            ),
           const SizedBox(
             height: 30,
           ),
-          const AnswerWidget(
-            answer: '100',
-          ),
+          if (model != null)
+            AnswerWidget(
+              answer: model!.results[1].correctAnswer,
+            ),
           const SizedBox(
             height: 30,
           ),
-          const AnswerWidget(
-            answer: '200',
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          const AnswerWidget(
-            answer: '300',
+          AnswerWidget(
+            answer: model!.results[1].incorrectAnswers[0],
           ),
           const SizedBox(
             height: 30,
           ),
-          const AnswerWidget(
-            answer: '400',
+          AnswerWidget(
+            answer: model!.results[1].incorrectAnswers[1],
+          ),
+          const SizedBox(
+            height: 30,
+          ),
+          AnswerWidget(
+            answer: model!.results[1].incorrectAnswers[2],
           ),
         ],
       ),
@@ -132,63 +137,44 @@ class AnswerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 20),
-      decoration: BoxDecoration(
-          gradient: const LinearGradient(
-            colors: [
-              Color.fromRGBO(143, 165, 255, 1),
-              Color.fromRGBO(10, 53, 132, 1),
-            ],
-            begin: Alignment.centerLeft,
-            end: Alignment.centerRight,
+    return Column(
+      children: [
+        Container(
+          margin: const EdgeInsets.symmetric(horizontal: 20),
+          decoration: BoxDecoration(
+              gradient: const LinearGradient(
+                colors: [
+                  Color.fromRGBO(143, 165, 255, 1),
+                  Color.fromRGBO(10, 53, 132, 1),
+                ],
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+              ),
+              borderRadius: const BorderRadius.all(
+                Radius.circular(6.0),
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.1),
+                  spreadRadius: 4,
+                  blurRadius: 10,
+                  offset: const Offset(0, 3),
+                )
+              ]),
+          child: ElevatedButton(
+            onPressed: () {},
+            style: ElevatedButton.styleFrom(
+                minimumSize: const Size.fromHeight(50),
+                backgroundColor: Colors.transparent,
+                shadowColor: Colors.transparent),
+            child: Text(answer,
+                style: GoogleFonts.aBeeZee(
+                  fontSize: 24,
+                  color: Colors.white,
+                )),
           ),
-          borderRadius: const BorderRadius.all(
-            Radius.circular(6.0),
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.1),
-              spreadRadius: 4,
-              blurRadius: 10,
-              offset: const Offset(0, 3),
-            )
-          ]),
-      child: ElevatedButton(
-        onPressed: () {},
-        style: ElevatedButton.styleFrom(
-            minimumSize: const Size.fromHeight(50),
-            backgroundColor: Colors.transparent,
-            shadowColor: Colors.transparent),
-        child: Text(answer,
-            style: GoogleFonts.aBeeZee(
-              fontSize: 24,
-              color: Colors.white,
-            )),
-      ),
-    );
-  }
-}
-
-class TextWidget extends StatelessWidget {
-  const TextWidget({
-    required this.text,
-    super.key,
-  });
-
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.only(left: 16),
-      child: Text(
-        text,
-        style: GoogleFonts.aBeeZee(
-          fontSize: 24,
-          color: Colors.white,
         ),
-      ),
+      ],
     );
   }
 }

@@ -173,6 +173,10 @@ mixin _$Results2 {
   String get category => throw _privateConstructorUsedError;
   @JsonKey(name: "question")
   String get question => throw _privateConstructorUsedError;
+  @JsonKey(name: "correct_answer")
+  String get correctAnswer => throw _privateConstructorUsedError;
+  @JsonKey(name: "incorrect_answers")
+  List<dynamic> get incorrectAnswers => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -187,7 +191,9 @@ abstract class $Results2CopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: "category") String category,
-      @JsonKey(name: "question") String question});
+      @JsonKey(name: "question") String question,
+      @JsonKey(name: "correct_answer") String correctAnswer,
+      @JsonKey(name: "incorrect_answers") List<dynamic> incorrectAnswers});
 }
 
 /// @nodoc
@@ -205,6 +211,8 @@ class _$Results2CopyWithImpl<$Res, $Val extends Results2>
   $Res call({
     Object? category = null,
     Object? question = null,
+    Object? correctAnswer = null,
+    Object? incorrectAnswers = null,
   }) {
     return _then(_value.copyWith(
       category: null == category
@@ -215,6 +223,14 @@ class _$Results2CopyWithImpl<$Res, $Val extends Results2>
           ? _value.question
           : question // ignore: cast_nullable_to_non_nullable
               as String,
+      correctAnswer: null == correctAnswer
+          ? _value.correctAnswer
+          : correctAnswer // ignore: cast_nullable_to_non_nullable
+              as String,
+      incorrectAnswers: null == incorrectAnswers
+          ? _value.incorrectAnswers
+          : incorrectAnswers // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
     ) as $Val);
   }
 }
@@ -229,7 +245,9 @@ abstract class _$$Results2ImplCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: "category") String category,
-      @JsonKey(name: "question") String question});
+      @JsonKey(name: "question") String question,
+      @JsonKey(name: "correct_answer") String correctAnswer,
+      @JsonKey(name: "incorrect_answers") List<dynamic> incorrectAnswers});
 }
 
 /// @nodoc
@@ -245,6 +263,8 @@ class __$$Results2ImplCopyWithImpl<$Res>
   $Res call({
     Object? category = null,
     Object? question = null,
+    Object? correctAnswer = null,
+    Object? incorrectAnswers = null,
   }) {
     return _then(_$Results2Impl(
       null == category
@@ -255,16 +275,27 @@ class __$$Results2ImplCopyWithImpl<$Res>
           ? _value.question
           : question // ignore: cast_nullable_to_non_nullable
               as String,
+      null == correctAnswer
+          ? _value.correctAnswer
+          : correctAnswer // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == incorrectAnswers
+          ? _value._incorrectAnswers
+          : incorrectAnswers // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$Results2Impl extends _Results2 {
-  _$Results2Impl(@JsonKey(name: "category") this.category,
-      @JsonKey(name: "question") this.question)
-      : super._();
+class _$Results2Impl implements _Results2 {
+  _$Results2Impl(
+      @JsonKey(name: "category") this.category,
+      @JsonKey(name: "question") this.question,
+      @JsonKey(name: "correct_answer") this.correctAnswer,
+      @JsonKey(name: "incorrect_answers") final List<dynamic> incorrectAnswers)
+      : _incorrectAnswers = incorrectAnswers;
 
   factory _$Results2Impl.fromJson(Map<String, dynamic> json) =>
       _$$Results2ImplFromJson(json);
@@ -275,10 +306,22 @@ class _$Results2Impl extends _Results2 {
   @override
   @JsonKey(name: "question")
   final String question;
+  @override
+  @JsonKey(name: "correct_answer")
+  final String correctAnswer;
+  final List<dynamic> _incorrectAnswers;
+  @override
+  @JsonKey(name: "incorrect_answers")
+  List<dynamic> get incorrectAnswers {
+    if (_incorrectAnswers is EqualUnmodifiableListView)
+      return _incorrectAnswers;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_incorrectAnswers);
+  }
 
   @override
   String toString() {
-    return 'Results2(category: $category, question: $question)';
+    return 'Results2(category: $category, question: $question, correctAnswer: $correctAnswer, incorrectAnswers: $incorrectAnswers)';
   }
 
   @override
@@ -289,12 +332,17 @@ class _$Results2Impl extends _Results2 {
             (identical(other.category, category) ||
                 other.category == category) &&
             (identical(other.question, question) ||
-                other.question == question));
+                other.question == question) &&
+            (identical(other.correctAnswer, correctAnswer) ||
+                other.correctAnswer == correctAnswer) &&
+            const DeepCollectionEquality()
+                .equals(other._incorrectAnswers, _incorrectAnswers));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, category, question);
+  int get hashCode => Object.hash(runtimeType, category, question,
+      correctAnswer, const DeepCollectionEquality().hash(_incorrectAnswers));
 
   @JsonKey(ignore: true)
   @override
@@ -310,10 +358,13 @@ class _$Results2Impl extends _Results2 {
   }
 }
 
-abstract class _Results2 extends Results2 {
-  factory _Results2(@JsonKey(name: "category") final String category,
-      @JsonKey(name: "question") final String question) = _$Results2Impl;
-  _Results2._() : super._();
+abstract class _Results2 implements Results2 {
+  factory _Results2(
+      @JsonKey(name: "category") final String category,
+      @JsonKey(name: "question") final String question,
+      @JsonKey(name: "correct_answer") final String correctAnswer,
+      @JsonKey(name: "incorrect_answers")
+      final List<dynamic> incorrectAnswers) = _$Results2Impl;
 
   factory _Results2.fromJson(Map<String, dynamic> json) =
       _$Results2Impl.fromJson;
@@ -324,6 +375,12 @@ abstract class _Results2 extends Results2 {
   @override
   @JsonKey(name: "question")
   String get question;
+  @override
+  @JsonKey(name: "correct_answer")
+  String get correctAnswer;
+  @override
+  @JsonKey(name: "incorrect_answers")
+  List<dynamic> get incorrectAnswers;
   @override
   @JsonKey(ignore: true)
   _$$Results2ImplCopyWith<_$Results2Impl> get copyWith =>

@@ -18,11 +18,11 @@ class HomeCubit extends Cubit<HomeState> {
     ));
 
     try {
-      final categories = await categoriesRepository.getSportsData(category);
+      final sports = await categoriesRepository.getSportsData(category);
       final animal = await categoriesRepository.getAnimalsData();
       print(animal);
       emit(HomeState(
-        sportsModel: categories,
+        sportsModel: sports,
         animalsModel: animal,
         status: Status.success,
       ));

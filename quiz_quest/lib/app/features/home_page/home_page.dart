@@ -73,7 +73,6 @@ class QuizzPage extends StatelessWidget {
       )..getSportsModel('21'),
       child: BlocBuilder<HomeCubit, HomeState>(
         builder: (context, state) {
-          final sportsModel = state.sportsModel;
           final animalsModel = state.animalsModel;
 
           return Container(
@@ -161,81 +160,81 @@ class QuizzPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       QuizzCategoryWidget(
-                        model: state.animalsModel,
+                        model: animalsModel,
                         name: 'Animals',
                         image: 'images/animal.png',
                       ),
-                      // QuizzCategoryWidget(
-                      //   model: animalsModel,
-                      //   name: 'Art',
-                      //   image: 'images/art.png',
-                      // ),
+                      QuizzCategoryWidget(
+                        model: animalsModel,
+                        name: 'Art',
+                        image: 'images/art.png',
+                      ),
                     ],
                   ),
                 ),
                 const SizedBox(
                   height: 30,
                 ),
-                // Padding(
-                //   padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                //   child: Row(
-                //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-                //     children: [
-                //       QuizzCategoryWidget(
-                //         model: sportsModel,
-                //         name: 'Computer Science',
-                //         image: 'images/computer.png',
-                //       ),
-                //       QuizzCategoryWidget(
-                //         model: sportsModel,
-                //         name: 'Geography',
-                //         image: 'images/geography.png',
-                //       ),
-                //     ],
-                //   ),
-                // ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      QuizzCategoryWidget(
+                        model: animalsModel,
+                        name: 'Computer Science',
+                        image: 'images/computer.png',
+                      ),
+                      QuizzCategoryWidget(
+                        model: animalsModel,
+                        name: 'Geography',
+                        image: 'images/geography.png',
+                      ),
+                    ],
+                  ),
+                ),
                 const SizedBox(
                   height: 30,
                 ),
-                // Padding(
-                //   padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                //   child: Row(
-                //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-                //     children: [
-                //       QuizzCategoryWidget(
-                //         model: sportsModel,
-                //         name: 'History',
-                //         image: 'images/history.png',
-                //       ),
-                //       QuizzCategoryWidget(
-                //         model: sportsModel,
-                //         name: 'Politics',
-                //         image: 'images/politics.png',
-                //       ),
-                //     ],
-                //   ),
-                // ),
-                // const SizedBox(
-                //   height: 30,
-                // ),
-                // Padding(
-                //   padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                //   child: Row(
-                //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-                //     children: [
-                //       QuizzCategoryWidget(
-                //         model: sportsModel,
-                //         name: 'Sport',
-                //         image: 'images/ball.png',
-                //       ),
-                //       QuizzCategoryWidget(
-                //         model: sportsModel,
-                //         name: 'Vehicles',
-                //         image: 'images/vehicle.png',
-                //       ),
-                //     ],
-                //   ),
-                // ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      QuizzCategoryWidget(
+                        model: animalsModel,
+                        name: 'History',
+                        image: 'images/history.png',
+                      ),
+                      QuizzCategoryWidget(
+                        model: animalsModel,
+                        name: 'Politics',
+                        image: 'images/politics.png',
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      QuizzCategoryWidget(
+                        model: animalsModel,
+                        name: 'Sport',
+                        image: 'images/ball.png',
+                      ),
+                      QuizzCategoryWidget(
+                        model: animalsModel,
+                        name: 'Vehicles',
+                        image: 'images/vehicle.png',
+                      ),
+                    ],
+                  ),
+                ),
                 const SizedBox(
                   height: 30,
                 ),

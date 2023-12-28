@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quiz_quest/app/domain/models/animals_quiz_model.dart';
-import 'package:quiz_quest/app/features/quiz_pages/question_quiz_page.dart';
+import 'package:quiz_quest/app/domain/models/sports_quiz_model.dart';
+import 'package:quiz_quest/app/features/quiz_pages/question_quiz_page_animals.dart';
+import 'package:quiz_quest/app/features/quiz_pages/question_quiz_page_sport.dart';
 
-class FirstQuizPage extends StatefulWidget {
-  const FirstQuizPage({
+class FirstQuizPageSport extends StatefulWidget {
+  const FirstQuizPageSport({
     required this.image,
     required this.model,
-  
     super.key,
   });
 
   final String image;
-  final AnimalsQuizModel? model;
- 
+  final SportsQuizModel? model;
 
   @override
-  State<FirstQuizPage> createState() => _FirstQuizPageState();
+  State<FirstQuizPageSport> createState() => _FirstQuizPageSportState();
 }
 
-class _FirstQuizPageState extends State<FirstQuizPage> {
+class _FirstQuizPageSportState extends State<FirstQuizPageSport> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +30,6 @@ class _FirstQuizPageState extends State<FirstQuizPage> {
         child: QuizzPage(
           image: widget.image,
           model: widget.model,
-         
         ),
       ),
     );
@@ -41,13 +40,11 @@ class QuizzPage extends StatelessWidget {
   const QuizzPage({
     required this.image,
     required this.model,
-
     super.key,
   });
 
   final String image;
-  final AnimalsQuizModel? model;
-
+  final SportsQuizModel? model;
 
   @override
   Widget build(BuildContext context) {
@@ -130,9 +127,8 @@ class QuizzPage extends StatelessWidget {
             child: ElevatedButton(
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => QuestionQuizPage(
+                    builder: (context) => QuestionQuizPageSport(
                           model: model,
-                       
                         )));
               },
               style: ElevatedButton.styleFrom(

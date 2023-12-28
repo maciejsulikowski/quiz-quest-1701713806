@@ -4,9 +4,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:quiz_quest/app/data/data_sources/animals_category/animals_category_data_source.dart';
 import 'package:quiz_quest/app/data/data_sources/sport_category/sport_category_data_source.dart';
 import 'package:quiz_quest/app/domain/models/animals_quiz_model.dart';
+import 'package:quiz_quest/app/domain/models/sports_quiz_model.dart';
 import 'package:quiz_quest/app/domain/repositories/category_repository.dart';
 import 'package:quiz_quest/app/features/home_page/cubit/home_cubit.dart';
-import 'package:quiz_quest/app/features/quiz_pages/first_quiz_page.dart';
+import 'package:quiz_quest/app/features/quiz_pages/first_quiz_page_animals.dart';
+import 'package:quiz_quest/app/features/quiz_pages/first_quiz_page_sport.dart';
 import 'package:quiz_quest/app/features/user_page/user_account.dart';
 
 class HomePage extends StatefulWidget {
@@ -74,6 +76,7 @@ class QuizzPage extends StatelessWidget {
       child: BlocBuilder<HomeCubit, HomeState>(
         builder: (context, state) {
           final animalsModel = state.animalsModel;
+          final sportsModel = state.sportsModel;
 
           return Container(
             decoration: const BoxDecoration(
@@ -164,8 +167,8 @@ class QuizzPage extends StatelessWidget {
                         name: 'Animals',
                         image: 'images/animal.png',
                       ),
-                      QuizzCategoryWidget(
-                        model: animalsModel,
+                      QuizzCategoryWidget2(
+                        model: sportsModel,
                         name: 'Art',
                         image: 'images/art.png',
                       ),
@@ -265,6 +268,36 @@ class QuizzCategoryWidget extends StatelessWidget {
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => FirstQuizPage(
+                  model: model,
+                  image: image,
+                )));
+      },
+      child: DetailsQuizzWidget(
+        name: name,
+        image: image,
+      ),
+    );
+  }
+}
+
+class QuizzCategoryWidget2 extends StatelessWidget {
+  const QuizzCategoryWidget2({
+    required this.name,
+    required this.image,
+    required this.model,
+    super.key,
+  });
+
+  final String name;
+  final String image;
+  final SportsQuizModel? model;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => FirstQuizPageSport(
                   model: model,
                   image: image,
                 )));

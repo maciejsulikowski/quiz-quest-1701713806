@@ -85,21 +85,24 @@ class QuizzPage extends StatelessWidget {
           const SizedBox(
             height: 30,
           ),
-          AnswerWidget(
-            answer: model!.results[1].incorrectAnswers[0],
-          ),
+          if (model != null)
+            AnswerWidget(
+              answer: model!.results[1].incorrectAnswers[0],
+            ),
           const SizedBox(
             height: 30,
           ),
-          AnswerWidget(
-            answer: model!.results[1].incorrectAnswers[1],
-          ),
+          if (model != null)
+            AnswerWidget(
+              answer: model!.results[1].incorrectAnswers[1],
+            ),
           const SizedBox(
             height: 30,
           ),
-          AnswerWidget(
-            answer: model!.results[1].incorrectAnswers[2],
-          ),
+          if (model != null)
+            AnswerWidget(
+              answer: model!.results[1].incorrectAnswers[2],
+            ),
         ],
       ),
     );

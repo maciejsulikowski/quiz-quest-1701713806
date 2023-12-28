@@ -3,7 +3,9 @@ import 'package:dio/dio.dart';
 class HistoryCategoryDataSource {
   Future<Map<String, dynamic>?> getHistoryCategory() async {
     final response = await Dio().get(
-        'https://opentdb.com/api.php?amount=10&category=23&difficulty=easy&type=multiple');
+        'https://opentdb.com/api.php?amount=10&category=23&difficulty=easy&type=multiple', options: Options(
+          validateStatus: (_) => true,
+        ));
 
     final responseData = response.data;
 

@@ -5,6 +5,7 @@ class HomeState {
     this.sportsModel,
     this.animalsModel,
     this.artModel,
+    this.computerScienceModel,
     this.status = Status.initial,
     this.errorMessage,
   });
@@ -12,6 +13,7 @@ class HomeState {
   final SportsQuizModel? sportsModel;
   final AnimalsQuizModel? animalsModel;
   final ArtQuizModel? artModel;
+  final ComputerScienceQuizModel? computerScienceModel;
   final Status status;
   final String? errorMessage;
 }

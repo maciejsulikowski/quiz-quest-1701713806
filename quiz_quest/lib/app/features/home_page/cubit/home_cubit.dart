@@ -3,6 +3,7 @@ import 'package:meta/meta.dart';
 import 'package:quiz_quest/app/core/enums.dart';
 import 'package:quiz_quest/app/domain/models/animals_model/animals_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/art_model/art_quiz_model.dart';
+import 'package:quiz_quest/app/domain/models/computer_science_model/computer_science_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/sports_model/sports_quiz_model.dart';
 import 'package:quiz_quest/app/domain/repositories/category_repository.dart';
 
@@ -22,11 +23,13 @@ class HomeCubit extends Cubit<HomeState> {
       final sports = await categoriesRepository.getSportsData(category);
       final animal = await categoriesRepository.getAnimalsData();
       final art = await categoriesRepository.getArtData();
+      final computer = await categoriesRepository.getComputerScienceData();
 
       emit(HomeState(
         sportsModel: sports,
         animalsModel: animal,
         artModel: art,
+        computerScienceModel: computer,
         status: Status.success,
       ));
     } catch (error) {

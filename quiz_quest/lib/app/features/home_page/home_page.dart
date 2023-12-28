@@ -3,14 +3,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quiz_quest/app/data/data_sources/animals_category/animals_category_data_source.dart';
 import 'package:quiz_quest/app/data/data_sources/art_category/art_category_data_source.dart';
+import 'package:quiz_quest/app/data/data_sources/computer_science_category/computer_science_category_data_source.dart';
 import 'package:quiz_quest/app/data/data_sources/sport_category/sport_category_data_source.dart';
 import 'package:quiz_quest/app/domain/models/animals_model/animals_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/art_model/art_quiz_model.dart';
+import 'package:quiz_quest/app/domain/models/computer_science_model/computer_science_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/sports_model/sports_quiz_model.dart';
 import 'package:quiz_quest/app/domain/repositories/category_repository.dart';
 import 'package:quiz_quest/app/features/home_page/cubit/home_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/animals_quiz_pages/first_quiz_page_animals.dart';
 import 'package:quiz_quest/app/features/quiz_pages/art_quiz_pages/first_quiz_page_art.dart';
+import 'package:quiz_quest/app/features/quiz_pages/computer_science_pages/first_quiz_page_computer_science.dart';
 import 'package:quiz_quest/app/features/quiz_pages/sports_quiz_pages/first_quiz_page_sport.dart';
 import 'package:quiz_quest/app/features/user_page/user_account.dart';
 
@@ -75,6 +78,7 @@ class QuizzPage extends StatelessWidget {
           AnimalsCategoryDataSource(),
           SportCategoryDataSource(),
           ArtCategoryDataSource(),
+          ComputerScienceCategoryDataSource(),
         ),
       )..getSportsModel('21'),
       child: BlocBuilder<HomeCubit, HomeState>(
@@ -82,7 +86,7 @@ class QuizzPage extends StatelessWidget {
           final animalsModel = state.animalsModel;
           final sportsModel = state.sportsModel;
           final artsModel = state.artModel;
-
+          final computerScienceModel = state.computerScienceModel;
           return Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
@@ -188,8 +192,8 @@ class QuizzPage extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      QuizzCategoryWidget(
-                        model: animalsModel,
+                      QuizzCategoryWidget4(
+                        model: computerScienceModel,
                         name: 'Computer Science',
                         image: 'images/computer.png',
                       ),
@@ -333,6 +337,36 @@ class QuizzCategoryWidget3 extends StatelessWidget {
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => FirstQuizPageArt(
+                  model: model,
+                  image: image,
+                )));
+      },
+      child: DetailsQuizzWidget(
+        name: name,
+        image: image,
+      ),
+    );
+  }
+}
+
+class QuizzCategoryWidget4 extends StatelessWidget {
+  const QuizzCategoryWidget4({
+    required this.name,
+    required this.image,
+    required this.model,
+    super.key,
+  });
+
+  final String name;
+  final String image;
+  final ComputerScienceQuizModel? model;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => FirstQuizPageComputerScience(
                   model: model,
                   image: image,
                 )));

@@ -4,23 +4,24 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:quiz_quest/app/data/data_sources/animals_category/animals_category_data_source.dart';
 import 'package:quiz_quest/app/data/data_sources/sport_category/sport_category_data_source.dart';
 import 'package:quiz_quest/app/domain/models/animals_model/animals_quiz_model.dart';
-import 'package:quiz_quest/app/domain/models/sports_model/sports_quiz_model.dart';
+import 'package:quiz_quest/app/domain/models/art_model/art_quiz_model.dart';
+import 'package:quiz_quest/app/domain/models/computer_science_model/computer_science_quiz_model.dart';
 import 'package:quiz_quest/app/domain/repositories/category_repository.dart';
 import 'package:quiz_quest/app/features/home_page/cubit/home_cubit.dart';
 
-class QuestionQuizPageSport extends StatefulWidget {
-  const QuestionQuizPageSport({
+class QuestionQuizPageComputerScience extends StatefulWidget {
+  const QuestionQuizPageComputerScience({
     required this.model,
     super.key,
   });
 
-  final SportsQuizModel? model;
+  final ComputerScienceQuizModel? model;
 
   @override
-  State<QuestionQuizPageSport> createState() => _QuestionQuizPageSportState();
+  State<QuestionQuizPageComputerScience> createState() => _QuestionQuizPageComputerScienceState();
 }
 
-class _QuestionQuizPageSportState extends State<QuestionQuizPageSport> {
+class _QuestionQuizPageComputerScienceState extends State<QuestionQuizPageComputerScience> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +43,7 @@ class QuizzPage extends StatelessWidget {
     super.key,
   });
 
-  final SportsQuizModel? model;
+  final ComputerScienceQuizModel? model;
 
   @override
   Widget build(BuildContext context) {

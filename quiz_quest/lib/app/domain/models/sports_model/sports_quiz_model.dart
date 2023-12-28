@@ -19,6 +19,8 @@ class Results1 with _$Results1 {
   factory Results1(
     @JsonKey(name: "category") String category,
     @JsonKey(name: "question") String question,
+    @JsonKey(name: "correct_answer") String correctAnswer,
+    @JsonKey(name: "incorrect_answers") List incorrectAnswers,
   ) = _Results1;
 
   factory Results1.fromJson(Map<String, dynamic> json) =>

@@ -1,34 +1,34 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'sports_quiz_model.dart';
+part of 'computer_science_quiz_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$SportsQuizModelImpl _$$SportsQuizModelImplFromJson(
+_$ComputerScienceQuizModelImpl _$$ComputerScienceQuizModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$SportsQuizModelImpl(
+    _$ComputerScienceQuizModelImpl(
       (json['results'] as List<dynamic>)
-          .map((e) => Results1.fromJson(e as Map<String, dynamic>))
+          .map((e) => Results4.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
-Map<String, dynamic> _$$SportsQuizModelImplToJson(
-        _$SportsQuizModelImpl instance) =>
+Map<String, dynamic> _$$ComputerScienceQuizModelImplToJson(
+        _$ComputerScienceQuizModelImpl instance) =>
     <String, dynamic>{
       'results': instance.results,
     };
 
-_$Results1Impl _$$Results1ImplFromJson(Map<String, dynamic> json) =>
-    _$Results1Impl(
+_$Results4Impl _$$Results4ImplFromJson(Map<String, dynamic> json) =>
+    _$Results4Impl(
       json['category'] as String,
       json['question'] as String,
       json['correct_answer'] as String,
       json['incorrect_answers'] as List<dynamic>,
     );
 
-Map<String, dynamic> _$$Results1ImplToJson(_$Results1Impl instance) =>
+Map<String, dynamic> _$$Results4ImplToJson(_$Results4Impl instance) =>
     <String, dynamic>{
       'category': instance.category,
       'question': instance.question,

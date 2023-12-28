@@ -3,23 +3,24 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quiz_quest/app/data/data_sources/animals_category/animals_category_data_source.dart';
 import 'package:quiz_quest/app/data/data_sources/sport_category/sport_category_data_source.dart';
-import 'package:quiz_quest/app/domain/models/animals_quiz_model.dart';
+import 'package:quiz_quest/app/domain/models/animals_model/animals_quiz_model.dart';
+import 'package:quiz_quest/app/domain/models/art_model/art_quiz_model.dart';
 import 'package:quiz_quest/app/domain/repositories/category_repository.dart';
 import 'package:quiz_quest/app/features/home_page/cubit/home_cubit.dart';
 
-class QuestionQuizPage extends StatefulWidget {
-  const QuestionQuizPage({
+class QuestionQuizPageArt extends StatefulWidget {
+  const QuestionQuizPageArt({
     required this.model,
     super.key,
   });
 
-  final AnimalsQuizModel? model;
+  final ArtQuizModel? model;
 
   @override
-  State<QuestionQuizPage> createState() => _QuestionQuizPageState();
+  State<QuestionQuizPageArt> createState() => _QuestionQuizPageArtState();
 }
 
-class _QuestionQuizPageState extends State<QuestionQuizPage> {
+class _QuestionQuizPageArtState extends State<QuestionQuizPageArt> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,7 +42,7 @@ class QuizzPage extends StatelessWidget {
     super.key,
   });
 
-  final AnimalsQuizModel? model;
+  final ArtQuizModel? model;
 
   @override
   Widget build(BuildContext context) {

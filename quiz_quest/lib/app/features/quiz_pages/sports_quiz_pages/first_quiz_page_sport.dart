@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:quiz_quest/app/domain/models/animals_quiz_model.dart';
-import 'package:quiz_quest/app/domain/models/sports_quiz_model.dart';
-import 'package:quiz_quest/app/features/quiz_pages/question_quiz_page_animals.dart';
-import 'package:quiz_quest/app/features/quiz_pages/question_quiz_page_sport.dart';
+import 'package:quiz_quest/app/domain/models/animals_model/animals_quiz_model.dart';
+import 'package:quiz_quest/app/domain/models/sports_model/sports_quiz_model.dart';
+import 'package:quiz_quest/app/features/quiz_pages/animals_quiz_pages/question_quiz_page_animals.dart';
+import 'package:quiz_quest/app/features/quiz_pages/sports_quiz_pages/question_quiz_page_sport.dart';
 
 class FirstQuizPageSport extends StatefulWidget {
   const FirstQuizPageSport({

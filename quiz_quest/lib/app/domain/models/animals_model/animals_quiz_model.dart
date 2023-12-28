@@ -25,13 +25,3 @@ class Results2 with _$Results2 {
   factory Results2.fromJson(Map<String, dynamic> json) =>
       _$Results2FromJson(json);
 }
-
-// @freezed
-// class IncorrectAnswers with _$IncorrectAnswers {
-//   factory IncorrectAnswers(
-//     String incorrectAnswer,
-//   ) = _IncorrectAnswers;
-
-//   factory IncorrectAnswers.fromJson(Map<String, dynamic> json) =>
-//       _$IncorrectAnswersFromJson(json);
-// }

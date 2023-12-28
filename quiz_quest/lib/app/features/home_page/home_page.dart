@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quiz_quest/app/data/data_sources/animals_category/animals_category_data_source.dart';
+import 'package:quiz_quest/app/data/data_sources/art_category/art_category_data_source.dart';
 import 'package:quiz_quest/app/data/data_sources/sport_category/sport_category_data_source.dart';
-import 'package:quiz_quest/app/domain/models/animals_quiz_model.dart';
-import 'package:quiz_quest/app/domain/models/sports_quiz_model.dart';
+import 'package:quiz_quest/app/domain/models/animals_model/animals_quiz_model.dart';
+import 'package:quiz_quest/app/domain/models/art_model/art_quiz_model.dart';
+import 'package:quiz_quest/app/domain/models/sports_model/sports_quiz_model.dart';
 import 'package:quiz_quest/app/domain/repositories/category_repository.dart';
 import 'package:quiz_quest/app/features/home_page/cubit/home_cubit.dart';
-import 'package:quiz_quest/app/features/quiz_pages/first_quiz_page_animals.dart';
-import 'package:quiz_quest/app/features/quiz_pages/first_quiz_page_sport.dart';
+import 'package:quiz_quest/app/features/quiz_pages/animals_quiz_pages/first_quiz_page_animals.dart';
+import 'package:quiz_quest/app/features/quiz_pages/art_quiz_pages/first_quiz_page_art.dart';
+import 'package:quiz_quest/app/features/quiz_pages/sports_quiz_pages/first_quiz_page_sport.dart';
 import 'package:quiz_quest/app/features/user_page/user_account.dart';
 
 class HomePage extends StatefulWidget {
@@ -71,12 +74,14 @@ class QuizzPage extends StatelessWidget {
         CategoriesRepository(
           AnimalsCategoryDataSource(),
           SportCategoryDataSource(),
+          ArtCategoryDataSource(),
         ),
       )..getSportsModel('21'),
       child: BlocBuilder<HomeCubit, HomeState>(
         builder: (context, state) {
           final animalsModel = state.animalsModel;
           final sportsModel = state.sportsModel;
+          final artsModel = state.artModel;
 
           return Container(
             decoration: const BoxDecoration(
@@ -167,8 +172,8 @@ class QuizzPage extends StatelessWidget {
                         name: 'Animals',
                         image: 'images/animal.png',
                       ),
-                      QuizzCategoryWidget2(
-                        model: sportsModel,
+                      QuizzCategoryWidget3(
+                        model: artsModel,
                         name: 'Art',
                         image: 'images/art.png',
                       ),
@@ -225,8 +230,8 @@ class QuizzPage extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      QuizzCategoryWidget(
-                        model: animalsModel,
+                      QuizzCategoryWidget2(
+                        model: sportsModel,
                         name: 'Sport',
                         image: 'images/ball.png',
                       ),
@@ -267,7 +272,7 @@ class QuizzCategoryWidget extends StatelessWidget {
     return InkWell(
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => FirstQuizPage(
+            builder: (context) => FirstQuizPageAnimals(
                   model: model,
                   image: image,
                 )));
@@ -298,6 +303,36 @@ class QuizzCategoryWidget2 extends StatelessWidget {
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => FirstQuizPageSport(
+                  model: model,
+                  image: image,
+                )));
+      },
+      child: DetailsQuizzWidget(
+        name: name,
+        image: image,
+      ),
+    );
+  }
+}
+
+class QuizzCategoryWidget3 extends StatelessWidget {
+  const QuizzCategoryWidget3({
+    required this.name,
+    required this.image,
+    required this.model,
+    super.key,
+  });
+
+  final String name;
+  final String image;
+  final ArtQuizModel? model;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => FirstQuizPageArt(
                   model: model,
                   image: image,
                 )));

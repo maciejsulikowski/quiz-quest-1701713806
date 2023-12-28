@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:quiz_quest/app/domain/models/animals_quiz_model.dart';
-import 'package:quiz_quest/app/features/quiz_pages/question_quiz_page_animals.dart';
+import 'package:quiz_quest/app/domain/models/animals_model/animals_quiz_model.dart';
+import 'package:quiz_quest/app/features/quiz_pages/animals_quiz_pages/question_quiz_page_animals.dart';
 
-class FirstQuizPage extends StatefulWidget {
-  const FirstQuizPage({
+class FirstQuizPageAnimals extends StatefulWidget {
+  const FirstQuizPageAnimals({
     required this.image,
     required this.model,
   
@@ -16,10 +16,10 @@ class FirstQuizPage extends StatefulWidget {
  
 
   @override
-  State<FirstQuizPage> createState() => _FirstQuizPageState();
+  State<FirstQuizPageAnimals> createState() => _FirstQuizPageAnimalsState();
 }
 
-class _FirstQuizPageState extends State<FirstQuizPage> {
+class _FirstQuizPageAnimalsState extends State<FirstQuizPageAnimals> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

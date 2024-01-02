@@ -5,14 +5,26 @@ import 'package:quiz_quest/app/domain/models/animals_model/animals_quiz_model.da
 import 'package:quiz_quest/app/domain/models/art_model/art_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/computer_science_model/computer_science_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/sports_model/sports_quiz_model.dart';
+import 'package:quiz_quest/app/domain/repositories/animals_repository/animals_repository.dart';
+import 'package:quiz_quest/app/domain/repositories/art_repostitory/art_repository.dart';
 import 'package:quiz_quest/app/domain/repositories/category_repository.dart';
+import 'package:quiz_quest/app/domain/repositories/computer_science_repository/computer_science_repository.dart';
+import 'package:quiz_quest/app/domain/repositories/sports_repository/sports_repository.dart';
 
 part 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
-  HomeCubit(this.categoriesRepository) : super(HomeState());
+  HomeCubit(
+    this.sportsRepository,
+    this.animalsRepository,
+    this.artRepository,
+    this.computerScienceRepository,
+  ) : super(HomeState());
 
-  final CategoriesRepository categoriesRepository;
+  final SportsRepository sportsRepository;
+  final AnimalsRepository animalsRepository;
+  final ArtRepository artRepository;
+  final ComputerScienceRepository computerScienceRepository;
 
   Future<void> getSportsModel(String category) async {
     emit(HomeState(
@@ -20,10 +32,10 @@ class HomeCubit extends Cubit<HomeState> {
     ));
 
     try {
-      final sports = await categoriesRepository.getSportsData(category);
-      final animal = await categoriesRepository.getAnimalsData();
-      final art = await categoriesRepository.getArtData();
-      final computer = await categoriesRepository.getComputerScienceData();
+      final sports = await sportsRepository.getSportsData(category);
+      final animal = await animalsRepository.getAnimalsData();
+      final art = await artRepository.getArtData();
+      final computer = await computerScienceRepository.getComputerScienceData();
 
       emit(HomeState(
         sportsModel: sports,

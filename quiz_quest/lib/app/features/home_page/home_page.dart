@@ -9,7 +9,11 @@ import 'package:quiz_quest/app/domain/models/animals_model/animals_quiz_model.da
 import 'package:quiz_quest/app/domain/models/art_model/art_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/computer_science_model/computer_science_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/sports_model/sports_quiz_model.dart';
+import 'package:quiz_quest/app/domain/repositories/animals_repository/animals_repository.dart';
+import 'package:quiz_quest/app/domain/repositories/art_repostitory/art_repository.dart';
 import 'package:quiz_quest/app/domain/repositories/category_repository.dart';
+import 'package:quiz_quest/app/domain/repositories/computer_science_repository/computer_science_repository.dart';
+import 'package:quiz_quest/app/domain/repositories/sports_repository/sports_repository.dart';
 import 'package:quiz_quest/app/features/home_page/cubit/home_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/animals_quiz_pages/first_quiz_page_animals.dart';
 import 'package:quiz_quest/app/features/quiz_pages/art_quiz_pages/first_quiz_page_art.dart';
@@ -74,13 +78,11 @@ class QuizzPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => HomeCubit(
-        CategoriesRepository(
-          AnimalsCategoryDataSource(),
-          SportCategoryDataSource(),
-          ArtCategoryDataSource(),
-          ComputerScienceCategoryDataSource(),
-        ),
-      )..getSportsModel('21'),
+          SportsRepository(SportCategoryDataSource()),
+          AnimalsRepository(AnimalsCategoryDataSource()),
+          ArtRepository(ArtCategoryDataSource()),
+          ComputerScienceRepository(ComputerScienceCategoryDataSource()))
+        ..getSportsModel('21'),
       child: BlocBuilder<HomeCubit, HomeState>(
         builder: (context, state) {
           final animalsModel = state.animalsModel;

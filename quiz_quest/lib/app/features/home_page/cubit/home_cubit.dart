@@ -8,6 +8,7 @@ import 'package:quiz_quest/app/domain/models/geography_model/geography_quiz_mode
 import 'package:quiz_quest/app/domain/models/history_model/history_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/politics_model/politics_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/sports_model/sports_quiz_model.dart';
+import 'package:quiz_quest/app/domain/models/vehicles_model/vehicles_quiz_model.dart';
 import 'package:quiz_quest/app/domain/repositories/animals_repository/animals_repository.dart';
 import 'package:quiz_quest/app/domain/repositories/art_repostitory/art_repository.dart';
 import 'package:quiz_quest/app/domain/repositories/category_repository.dart';
@@ -16,6 +17,7 @@ import 'package:quiz_quest/app/domain/repositories/geography_repository/geograph
 import 'package:quiz_quest/app/domain/repositories/history_repository/history_repository.dart';
 import 'package:quiz_quest/app/domain/repositories/politics_repository/politics_repository.dart';
 import 'package:quiz_quest/app/domain/repositories/sports_repository/sports_repository.dart';
+import 'package:quiz_quest/app/domain/repositories/vehicles_repository/vehicles_repository.dart';
 
 part 'home_state.dart';
 
@@ -28,6 +30,7 @@ class HomeCubit extends Cubit<HomeState> {
     this.geographyRepository,
     this.historyRepository,
     this.politicsRepository,
+    this.vehiclesRepository,
   ) : super(HomeState());
 
   final SportsRepository sportsRepository;
@@ -37,6 +40,7 @@ class HomeCubit extends Cubit<HomeState> {
   final GeographyRepository geographyRepository;
   final HistoryRepository historyRepository;
   final PoliticsRepository politicsRepository;
+  final VehiclesRepository vehiclesRepository;
 
   Future<void> getSportsModel(String category) async {
     emit(HomeState(
@@ -51,6 +55,7 @@ class HomeCubit extends Cubit<HomeState> {
       final geography = await geographyRepository.getGeographyData();
       final history = await historyRepository.getHistoryData();
       final politics = await politicsRepository.getHistoryData();
+      final vehicles = await vehiclesRepository.getVehiclesData();
 
       emit(HomeState(
         sportsModel: sports,
@@ -60,6 +65,7 @@ class HomeCubit extends Cubit<HomeState> {
         geographyModel: geography,
         historyModel: history,
         politicsModel: politics,
+        vehiclesModel: vehicles,
         status: Status.success,
       ));
     } catch (error) {

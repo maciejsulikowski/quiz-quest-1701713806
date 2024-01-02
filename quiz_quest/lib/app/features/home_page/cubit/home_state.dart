@@ -9,6 +9,7 @@ class HomeState {
     this.geographyModel,
     this.historyModel,
     this.politicsModel,
+    this.vehiclesModel,
     this.status = Status.initial,
     this.errorMessage,
   });
@@ -20,6 +21,7 @@ class HomeState {
   final GeographyQuizModel? geographyModel;
   final HistoryQuizModel? historyModel;
   final PoliticsQuizModel? politicsModel;
+  final VehiclesQuizModel? vehiclesModel;
   final Status status;
   final String? errorMessage;
 }

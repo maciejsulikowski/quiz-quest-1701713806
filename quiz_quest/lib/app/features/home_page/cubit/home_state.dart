@@ -8,6 +8,7 @@ class HomeState {
     this.computerScienceModel,
     this.geographyModel,
     this.historyModel,
+    this.politicsModel,
     this.status = Status.initial,
     this.errorMessage,
   });
@@ -18,6 +19,7 @@ class HomeState {
   final ComputerScienceQuizModel? computerScienceModel;
   final GeographyQuizModel? geographyModel;
   final HistoryQuizModel? historyModel;
+  final PoliticsQuizModel? politicsModel;
   final Status status;
   final String? errorMessage;
 }

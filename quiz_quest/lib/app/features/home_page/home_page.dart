@@ -6,6 +6,7 @@ import 'package:quiz_quest/app/data/data_sources/art_category/art_category_data_
 import 'package:quiz_quest/app/data/data_sources/computer_science_category/computer_science_category_data_source.dart';
 import 'package:quiz_quest/app/data/data_sources/geography_category/geography_category_data_source.dart';
 import 'package:quiz_quest/app/data/data_sources/history_category/history_category_data_source.dart';
+import 'package:quiz_quest/app/data/data_sources/politics_category/politics_category_data_source.dart';
 import 'package:quiz_quest/app/data/data_sources/sport_category/sport_category_data_source.dart';
 import 'package:quiz_quest/app/domain/models/animals_model/animals_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/art_model/art_quiz_model.dart';
@@ -17,6 +18,7 @@ import 'package:quiz_quest/app/domain/repositories/category_repository.dart';
 import 'package:quiz_quest/app/domain/repositories/computer_science_repository/computer_science_repository.dart';
 import 'package:quiz_quest/app/domain/repositories/geography_repository/geography_repository.dart';
 import 'package:quiz_quest/app/domain/repositories/history_repository/history_repository.dart';
+import 'package:quiz_quest/app/domain/repositories/politics_repository/politics_repository.dart';
 import 'package:quiz_quest/app/domain/repositories/sports_repository/sports_repository.dart';
 import 'package:quiz_quest/app/features/home_page/cubit/home_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/animals_quiz_pages/first_quiz_page_animals.dart';
@@ -88,6 +90,7 @@ class QuizzPage extends StatelessWidget {
         ComputerScienceRepository(ComputerScienceCategoryDataSource()),
         GeographyRepository(GeographyCategoryDataSource()),
         HistoryRepository(HistoryCategoryDataSource()),
+        PoliticsRepository(PoliticsCategoryDataSource()),
       )..getSportsModel('21'),
       child: BlocBuilder<HomeCubit, HomeState>(
         builder: (context, state) {

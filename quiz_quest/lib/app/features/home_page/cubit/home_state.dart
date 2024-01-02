@@ -6,6 +6,7 @@ class HomeState {
     this.animalsModel,
     this.artModel,
     this.computerScienceModel,
+    this.geographyModel,
     this.status = Status.initial,
     this.errorMessage,
   });
@@ -14,6 +15,7 @@ class HomeState {
   final AnimalsQuizModel? animalsModel;
   final ArtQuizModel? artModel;
   final ComputerScienceQuizModel? computerScienceModel;
+  final GeographyQuizModel? geographyModel;
   final Status status;
   final String? errorMessage;
 }

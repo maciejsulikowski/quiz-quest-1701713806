@@ -1,0 +1,26 @@
+import 'package:quiz_quest/app/data/data_sources/animals_category/animals_category_data_source.dart';
+import 'package:quiz_quest/app/data/data_sources/art_category/art_category_data_source.dart';
+import 'package:quiz_quest/app/data/data_sources/computer_science_category/computer_science_category_data_source.dart';
+import 'package:quiz_quest/app/data/data_sources/geography_category/geography_category_data_source.dart';
+import 'package:quiz_quest/app/data/data_sources/sport_category/sport_category_data_source.dart';
+import 'package:quiz_quest/app/domain/models/animals_model/animals_quiz_model.dart';
+import 'package:quiz_quest/app/domain/models/art_model/art_quiz_model.dart';
+import 'package:quiz_quest/app/domain/models/computer_science_model/computer_science_quiz_model.dart';
+import 'package:quiz_quest/app/domain/models/geography_model/geography_quiz_model.dart';
+import 'package:quiz_quest/app/domain/models/sports_model/sports_quiz_model.dart';
+
+class GeographyRepository {
+  GeographyRepository(this.geographyCategoryDataSource);
+
+  final GeographyCategoryDataSource geographyCategoryDataSource;
+
+  Future<GeographyQuizModel?> getGeographyData() async {
+    final json = await geographyCategoryDataSource.getGeographyCategory();
+
+    if (json == null) {
+      return null;
+    }
+
+    return GeographyQuizModel.fromJson(json);
+  }
+}

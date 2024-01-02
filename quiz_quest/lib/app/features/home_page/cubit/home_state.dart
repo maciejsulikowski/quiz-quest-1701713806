@@ -7,6 +7,7 @@ class HomeState {
     this.artModel,
     this.computerScienceModel,
     this.geographyModel,
+    this.historyModel,
     this.status = Status.initial,
     this.errorMessage,
   });
@@ -16,6 +17,7 @@ class HomeState {
   final ArtQuizModel? artModel;
   final ComputerScienceQuizModel? computerScienceModel;
   final GeographyQuizModel? geographyModel;
+  final HistoryQuizModel? historyModel;
   final Status status;
   final String? errorMessage;
 }

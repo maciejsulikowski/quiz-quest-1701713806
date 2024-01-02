@@ -42,13 +42,13 @@ class HomeCubit extends Cubit<HomeState> {
   final PoliticsRepository politicsRepository;
   final VehiclesRepository vehiclesRepository;
 
-  Future<void> getSportsModel(String category) async {
+  Future<void> getSportsModel() async {
     emit(HomeState(
       status: Status.loading,
     ));
 
     try {
-      final sports = await sportsRepository.getSportsData(category);
+      final sports = await sportsRepository.getSportsData();
       final animal = await animalsRepository.getAnimalsData();
       final art = await artRepository.getArtData();
       final computer = await computerScienceRepository.getComputerScienceData();

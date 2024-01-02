@@ -13,8 +13,8 @@ class SportsRepository {
 
   final SportCategoryDataSource sportCategoryDataSource;
 
-  Future<SportsQuizModel?> getSportsData(String category) async {
-    final json = await sportCategoryDataSource.getSportCategory(category);
+  Future<SportsQuizModel?> getSportsData() async {
+    final json = await sportCategoryDataSource.getSportCategory();
 
     if (json == null) {
       return null;

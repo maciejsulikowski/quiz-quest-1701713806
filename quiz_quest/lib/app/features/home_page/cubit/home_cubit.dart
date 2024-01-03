@@ -42,7 +42,7 @@ class HomeCubit extends Cubit<HomeState> {
   final PoliticsRepository politicsRepository;
   final VehiclesRepository vehiclesRepository;
 
-  Future<void> getSportsModel() async {
+  Future<void> getCategoryModel() async {
     emit(HomeState(
       status: Status.loading,
     ));

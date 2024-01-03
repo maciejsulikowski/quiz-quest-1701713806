@@ -94,7 +94,7 @@ class QuizzPage extends StatelessWidget {
         HistoryRepository(HistoryCategoryDataSource()),
         PoliticsRepository(PoliticsCategoryDataSource()),
         VehiclesRepository(VehiclesCategoryDataSource()),
-      )..getSportsModel(),
+      )..getCategoryModel(),
       child: BlocBuilder<HomeCubit, HomeState>(
         builder: (context, state) {
           final animalsModel = state.animalsModel;

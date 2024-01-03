@@ -12,7 +12,11 @@ import 'package:quiz_quest/app/data/data_sources/vehicles_category/vehicles_cate
 import 'package:quiz_quest/app/domain/models/animals_model/animals_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/art_model/art_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/computer_science_model/computer_science_quiz_model.dart';
+import 'package:quiz_quest/app/domain/models/geography_model/geography_quiz_model.dart';
+import 'package:quiz_quest/app/domain/models/history_model/history_quiz_model.dart';
+import 'package:quiz_quest/app/domain/models/politics_model/politics_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/sports_model/sports_quiz_model.dart';
+import 'package:quiz_quest/app/domain/models/vehicles_model/vehicles_quiz_model.dart';
 import 'package:quiz_quest/app/domain/repositories/animals_repository/animals_repository.dart';
 import 'package:quiz_quest/app/domain/repositories/art_repostitory/art_repository.dart';
 import 'package:quiz_quest/app/domain/repositories/category_repository.dart';
@@ -26,7 +30,11 @@ import 'package:quiz_quest/app/features/home_page/cubit/home_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/animals_quiz_pages/first_quiz_page_animals.dart';
 import 'package:quiz_quest/app/features/quiz_pages/art_quiz_pages/first_quiz_page_art.dart';
 import 'package:quiz_quest/app/features/quiz_pages/computer_science_pages/first_quiz_page_computer_science.dart';
+import 'package:quiz_quest/app/features/quiz_pages/geography_quiz_pages/first_quiz_page_geography.dart';
+import 'package:quiz_quest/app/features/quiz_pages/history_quiz_pages/first_quiz_page_history.dart';
+import 'package:quiz_quest/app/features/quiz_pages/politics_quiz_pages/first_quiz_page_politics.dart';
 import 'package:quiz_quest/app/features/quiz_pages/sports_quiz_pages/first_quiz_page_sport.dart';
+import 'package:quiz_quest/app/features/quiz_pages/vehicles_quiz_pages/first_quiz_page_vehicles.dart';
 import 'package:quiz_quest/app/features/user_page/user_account.dart';
 
 class HomePage extends StatefulWidget {
@@ -101,6 +109,10 @@ class QuizzPage extends StatelessWidget {
           final sportsModel = state.sportsModel;
           final artsModel = state.artModel;
           final computerScienceModel = state.computerScienceModel;
+          final geographyModel = state.geographyModel;
+          final historyModel = state.historyModel;
+          final politicsModel = state.politicsModel;
+          final vehiclesModel = state.vehiclesModel;
           return Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
@@ -211,8 +223,8 @@ class QuizzPage extends StatelessWidget {
                         name: 'Computer Science',
                         image: 'images/computer.png',
                       ),
-                      QuizzCategoryWidget(
-                        model: animalsModel,
+                      QuizzCategoryWidget5(
+                        model: geographyModel,
                         name: 'Geography',
                         image: 'images/geography.png',
                       ),
@@ -227,13 +239,13 @@ class QuizzPage extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      QuizzCategoryWidget(
-                        model: animalsModel,
+                      QuizzCategoryWidget6(
+                        model: historyModel,
                         name: 'History',
                         image: 'images/history.png',
                       ),
-                      QuizzCategoryWidget(
-                        model: animalsModel,
+                      QuizzCategoryWidget7(
+                        model: politicsModel,
                         name: 'Politics',
                         image: 'images/politics.png',
                       ),
@@ -253,8 +265,8 @@ class QuizzPage extends StatelessWidget {
                         name: 'Sport',
                         image: 'images/ball.png',
                       ),
-                      QuizzCategoryWidget(
-                        model: animalsModel,
+                      QuizzCategoryWidget8(
+                        model: vehiclesModel,
                         name: 'Vehicles',
                         image: 'images/vehicle.png',
                       ),
@@ -381,6 +393,126 @@ class QuizzCategoryWidget4 extends StatelessWidget {
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => FirstQuizPageComputerScience(
+                  model: model,
+                  image: image,
+                )));
+      },
+      child: DetailsQuizzWidget(
+        name: name,
+        image: image,
+      ),
+    );
+  }
+}
+
+class QuizzCategoryWidget5 extends StatelessWidget {
+  const QuizzCategoryWidget5({
+    required this.name,
+    required this.image,
+    required this.model,
+    super.key,
+  });
+
+  final String name;
+  final String image;
+  final GeographyQuizModel? model;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => FirstQuizPageGeography(
+                  model: model,
+                  image: image,
+                )));
+      },
+      child: DetailsQuizzWidget(
+        name: name,
+        image: image,
+      ),
+    );
+  }
+}
+
+class QuizzCategoryWidget6 extends StatelessWidget {
+  const QuizzCategoryWidget6({
+    required this.name,
+    required this.image,
+    required this.model,
+    super.key,
+  });
+
+  final String name;
+  final String image;
+  final HistoryQuizModel? model;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => FirstQuizPageHistory(
+                  model: model,
+                  image: image,
+                )));
+      },
+      child: DetailsQuizzWidget(
+        name: name,
+        image: image,
+      ),
+    );
+  }
+}
+
+class QuizzCategoryWidget7 extends StatelessWidget {
+  const QuizzCategoryWidget7({
+    required this.name,
+    required this.image,
+    required this.model,
+    super.key,
+  });
+
+  final String name;
+  final String image;
+  final PoliticsQuizModel? model;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => FirstQuizPagePolitics(
+                  model: model,
+                  image: image,
+                )));
+      },
+      child: DetailsQuizzWidget(
+        name: name,
+        image: image,
+      ),
+    );
+  }
+}
+
+class QuizzCategoryWidget8 extends StatelessWidget {
+  const QuizzCategoryWidget8({
+    required this.name,
+    required this.image,
+    required this.model,
+    super.key,
+  });
+
+  final String name;
+  final String image;
+  final VehiclesQuizModel? model;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => FirstQuizPageVehicles(
                   model: model,
                   image: image,
                 )));

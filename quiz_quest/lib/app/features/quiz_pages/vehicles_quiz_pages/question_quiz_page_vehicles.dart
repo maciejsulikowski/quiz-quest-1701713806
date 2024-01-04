@@ -1,3 +1,4 @@
+import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -8,6 +9,7 @@ import 'package:quiz_quest/app/domain/models/sports_model/sports_quiz_model.dart
 import 'package:quiz_quest/app/domain/models/vehicles_model/vehicles_quiz_model.dart';
 import 'package:quiz_quest/app/domain/repositories/category_repository.dart';
 import 'package:quiz_quest/app/features/home_page/cubit/home_cubit.dart';
+import 'package:quiz_quest/app/features/quiz_pages/quiz_countdown_timer/quiz_countdown_timer.dart';
 
 class QuestionQuizPageVehicles extends StatefulWidget {
   const QuestionQuizPageVehicles({
@@ -18,7 +20,8 @@ class QuestionQuizPageVehicles extends StatefulWidget {
   final VehiclesQuizModel? model;
 
   @override
-  State<QuestionQuizPageVehicles> createState() => _QuestionQuizPageVehiclesState();
+  State<QuestionQuizPageVehicles> createState() =>
+      _QuestionQuizPageVehiclesState();
 }
 
 class _QuestionQuizPageVehiclesState extends State<QuestionQuizPageVehicles> {
@@ -47,6 +50,9 @@ class QuizzPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const int duration = 21;
+    final CountDownController controller = CountDownController();
+
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
@@ -63,12 +69,9 @@ class QuizzPage extends StatelessWidget {
           const SizedBox(
             height: 30,
           ),
-          const CircleAvatar(
-            radius: 50,
-            child: Icon(
-              Icons.question_mark,
-              size: 50,
-            ),
+          CountDownTimer(
+            duration: duration,
+            controller: controller,
           ),
           const SizedBox(
             height: 15,

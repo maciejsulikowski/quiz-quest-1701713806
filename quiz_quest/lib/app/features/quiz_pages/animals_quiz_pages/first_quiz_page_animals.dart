@@ -7,13 +7,11 @@ class FirstQuizPageAnimals extends StatefulWidget {
   const FirstQuizPageAnimals({
     required this.image,
     required this.model,
-  
     super.key,
   });
 
   final String image;
   final AnimalsQuizModel? model;
- 
 
   @override
   State<FirstQuizPageAnimals> createState() => _FirstQuizPageAnimalsState();
@@ -30,7 +28,6 @@ class _FirstQuizPageAnimalsState extends State<FirstQuizPageAnimals> {
         child: QuizzPage(
           image: widget.image,
           model: widget.model,
-         
         ),
       ),
     );
@@ -41,13 +38,11 @@ class QuizzPage extends StatelessWidget {
   const QuizzPage({
     required this.image,
     required this.model,
-
     super.key,
   });
 
   final String image;
   final AnimalsQuizModel? model;
-
 
   @override
   Widget build(BuildContext context) {
@@ -132,7 +127,6 @@ class QuizzPage extends StatelessWidget {
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => QuestionQuizPage(
                           model: model,
-                       
                         )));
               },
               style: ElevatedButton.styleFrom(

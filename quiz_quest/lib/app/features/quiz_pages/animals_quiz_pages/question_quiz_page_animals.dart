@@ -1,3 +1,4 @@
+import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -6,6 +7,7 @@ import 'package:quiz_quest/app/data/data_sources/sport_category/sport_category_d
 import 'package:quiz_quest/app/domain/models/animals_model/animals_quiz_model.dart';
 import 'package:quiz_quest/app/domain/repositories/category_repository.dart';
 import 'package:quiz_quest/app/features/home_page/cubit/home_cubit.dart';
+import 'package:quiz_quest/app/features/quiz_pages/quiz_countdown_timer/quiz_countdown_timer.dart';
 
 class QuestionQuizPage extends StatefulWidget {
   const QuestionQuizPage({
@@ -35,7 +37,7 @@ class _QuestionQuizPageState extends State<QuestionQuizPage> {
   }
 }
 
-class QuizzPage extends StatelessWidget {
+class QuizzPage extends StatefulWidget {
   const QuizzPage({
     required this.model,
     super.key,
@@ -44,7 +46,16 @@ class QuizzPage extends StatelessWidget {
   final AnimalsQuizModel? model;
 
   @override
+  State<QuizzPage> createState() => _QuizzPageState();
+}
+
+class _QuizzPageState extends State<QuizzPage> {
+  @override
   Widget build(BuildContext context) {
+    const int duration = 21;
+    final CountDownController controller = CountDownController();
+    List list = widget.model!.results;
+
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
@@ -61,47 +72,41 @@ class QuizzPage extends StatelessWidget {
           const SizedBox(
             height: 30,
           ),
-          const CircleAvatar(
-            radius: 50,
-            child: Icon(
-              Icons.question_mark,
-              size: 50,
-            ),
-          ),
+          CountDownTimer(duration: duration, controller: controller),
           const SizedBox(
             height: 15,
           ),
-          if (model != null)
+          if (widget.model != null)
             QuestionWidget(
-              question: model!.results[1].question,
+              question: widget.model!.results[1].question,
             ),
           const SizedBox(
             height: 30,
           ),
-          if (model != null)
+          if (widget.model != null)
             AnswerWidget(
-              answer: model!.results[1].correctAnswer,
+              answer: widget.model!.results[1].correctAnswer,
             ),
           const SizedBox(
             height: 30,
           ),
-          if (model != null)
+          if (widget.model != null)
             AnswerWidget(
-              answer: model!.results[1].incorrectAnswers[0],
+              answer: widget.model!.results[1].incorrectAnswers[0],
             ),
           const SizedBox(
             height: 30,
           ),
-          if (model != null)
+          if (widget.model != null)
             AnswerWidget(
-              answer: model!.results[1].incorrectAnswers[1],
+              answer: widget.model!.results[1].incorrectAnswers[1],
             ),
           const SizedBox(
             height: 30,
           ),
-          if (model != null)
+          if (widget.model != null)
             AnswerWidget(
-              answer: model!.results[1].incorrectAnswers[2],
+              answer: widget.model!.results[1].incorrectAnswers[2],
             ),
         ],
       ),

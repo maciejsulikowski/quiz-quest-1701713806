@@ -54,7 +54,14 @@ class _QuizzPageState extends State<QuizzPage> {
   Widget build(BuildContext context) {
     const int duration = 21;
     final CountDownController controller = CountDownController();
-    List list = widget.model!.results;
+    var currentIndex = 0;
+    var question = widget.model!.results[currentIndex].question;
+    List list = [];
+    List incorrectAnswers =
+        widget.model!.results[currentIndex].incorrectAnswers;
+    String correctAnswer = widget.model!.results[currentIndex].correctAnswer;
+    list = incorrectAnswers + [correctAnswer];
+    list.shuffle();
 
     return Container(
       decoration: const BoxDecoration(
@@ -78,36 +85,21 @@ class _QuizzPageState extends State<QuizzPage> {
           ),
           if (widget.model != null)
             QuestionWidget(
-              question: widget.model!.results[1].question,
+              question: question,
             ),
           const SizedBox(
             height: 30,
           ),
           if (widget.model != null)
-            AnswerWidget(
-              answer: widget.model!.results[1].correctAnswer,
-            ),
-          const SizedBox(
-            height: 30,
-          ),
-          if (widget.model != null)
-            AnswerWidget(
-              answer: widget.model!.results[1].incorrectAnswers[0],
-            ),
-          const SizedBox(
-            height: 30,
-          ),
-          if (widget.model != null)
-            AnswerWidget(
-              answer: widget.model!.results[1].incorrectAnswers[1],
-            ),
-          const SizedBox(
-            height: 30,
-          ),
-          if (widget.model != null)
-            AnswerWidget(
-              answer: widget.model!.results[1].incorrectAnswers[2],
-            ),
+            for (final answer in list) ...[
+              AnswerWidget(
+                answer: answer,
+                isCorrectAnswer: answer == correctAnswer ? true : false,
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+            ],
         ],
       ),
     );
@@ -135,54 +127,69 @@ class QuestionWidget extends StatelessWidget {
   }
 }
 
-class AnswerWidget extends StatelessWidget {
+class AnswerWidget extends StatefulWidget {
   const AnswerWidget({
     required this.answer,
+    required this.isCorrectAnswer,
     super.key,
   });
 
   final String answer;
+  final bool isCorrectAnswer;
+
+  @override
+  State<AnswerWidget> createState() => _AnswerWidgetState();
+}
+
+class _AnswerWidgetState extends State<AnswerWidget> {
+  Color color = Colors.white;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          margin: const EdgeInsets.symmetric(horizontal: 20),
-          decoration: BoxDecoration(
-              gradient: const LinearGradient(
-                colors: [
-                  Color.fromRGBO(143, 165, 255, 1),
-                  Color.fromRGBO(10, 53, 132, 1),
-                ],
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-              ),
-              borderRadius: const BorderRadius.all(
-                Radius.circular(6.0),
-              ),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
-                  spreadRadius: 4,
-                  blurRadius: 10,
-                  offset: const Offset(0, 3),
-                )
-              ]),
-          child: ElevatedButton(
-            onPressed: () {},
-            style: ElevatedButton.styleFrom(
-                minimumSize: const Size.fromHeight(50),
-                backgroundColor: Colors.transparent,
-                shadowColor: Colors.transparent),
-            child: Text(answer,
-                style: GoogleFonts.aBeeZee(
-                  fontSize: 24,
-                  color: Colors.white,
-                )),
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 20),
+      decoration: BoxDecoration(
+          gradient: const LinearGradient(
+            colors: [
+              Color.fromRGBO(143, 165, 255, 1),
+              Color.fromRGBO(10, 53, 132, 1),
+            ],
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
           ),
-        ),
-      ],
+          borderRadius: const BorderRadius.all(
+            Radius.circular(6.0),
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              spreadRadius: 4,
+              blurRadius: 10,
+              offset: const Offset(0, 3),
+            )
+          ]),
+      child: ElevatedButton(
+        onPressed: () {
+          if (widget.isCorrectAnswer) {
+            setState(() {
+              color = Colors.green;
+            });
+          } else {
+            setState(() {
+              color = Colors.red;
+            });
+          }
+        },
+        style: ElevatedButton.styleFrom(
+            minimumSize: const Size.fromHeight(50),
+            backgroundColor: Colors.transparent,
+            shadowColor: Colors.transparent),
+        child: Text(widget.answer,
+            style: GoogleFonts.aBeeZee(
+              fontSize: 24,
+              color: color,
+            )),
+      ),
     );
   }
 }

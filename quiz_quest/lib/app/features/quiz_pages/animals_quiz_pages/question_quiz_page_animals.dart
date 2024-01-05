@@ -50,18 +50,37 @@ class QuizzPage extends StatefulWidget {
 }
 
 class _QuizzPageState extends State<QuizzPage> {
+  int currentIndex = 0;
+  late String question;
+  late List<String> list;
+  late String correctAnswer;
+
+  void updateAnswers() {
+    question = widget.model!.results[currentIndex].question;
+    List incorrectAnswers =
+        widget.model!.results[currentIndex].incorrectAnswers;
+    correctAnswer = widget.model!.results[currentIndex].correctAnswer;
+    list = List.from(incorrectAnswers)..add(correctAnswer);
+    list.shuffle();
+  }
+
+  void initState() {
+    super.initState();
+    updateAnswers();
+  }
+
   @override
   Widget build(BuildContext context) {
     const int duration = 21;
     final CountDownController controller = CountDownController();
-    var currentIndex = 0;
-    var question = widget.model!.results[currentIndex].question;
-    List list = [];
-    List incorrectAnswers =
-        widget.model!.results[currentIndex].incorrectAnswers;
-    String correctAnswer = widget.model!.results[currentIndex].correctAnswer;
-    list = incorrectAnswers + [correctAnswer];
-    list.shuffle();
+    // var currentIndex = 0;
+    // var question = widget.model!.results[currentIndex].question;
+    // List list = [];
+    // List incorrectAnswers =
+    //     widget.model!.results[currentIndex].incorrectAnswers;
+    // String correctAnswer = widget.model!.results[currentIndex].correctAnswer;
+    // list = incorrectAnswers + [correctAnswer];
+    // list.shuffle();
 
     return Container(
       decoration: const BoxDecoration(
@@ -93,6 +112,7 @@ class _QuizzPageState extends State<QuizzPage> {
           if (widget.model != null)
             for (final answer in list) ...[
               AnswerWidget(
+                controller: controller,
                 answer: answer,
                 isCorrectAnswer: answer == correctAnswer ? true : false,
               ),
@@ -100,6 +120,30 @@ class _QuizzPageState extends State<QuizzPage> {
                 height: 30,
               ),
             ],
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Container(
+                    color: Colors.black,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        controller.start();
+                        setState(() {
+                          currentIndex = currentIndex + 1;
+                          updateAnswers();
+                        });
+                      },
+                      child: const Text('Next Question ➔'),
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.black,
+                        onPrimary: Colors.white,
+                      ),
+                    )),
+              ],
+            ),
+          )
         ],
       ),
     );
@@ -131,11 +175,13 @@ class AnswerWidget extends StatefulWidget {
   const AnswerWidget({
     required this.answer,
     required this.isCorrectAnswer,
+    required this.controller,
     super.key,
   });
 
   final String answer;
   final bool isCorrectAnswer;
+  final CountDownController controller;
 
   @override
   State<AnswerWidget> createState() => _AnswerWidgetState();
@@ -173,10 +219,12 @@ class _AnswerWidgetState extends State<AnswerWidget> {
           if (widget.isCorrectAnswer) {
             setState(() {
               color = Colors.green;
+              widget.controller.pause();
             });
           } else {
             setState(() {
               color = Colors.red;
+              widget.controller.pause();
             });
           }
         },

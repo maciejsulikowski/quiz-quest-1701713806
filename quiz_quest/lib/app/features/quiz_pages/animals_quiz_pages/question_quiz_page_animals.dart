@@ -2,10 +2,7 @@ import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:quiz_quest/app/data/data_sources/animals_category/animals_category_data_source.dart';
-import 'package:quiz_quest/app/data/data_sources/sport_category/sport_category_data_source.dart';
 import 'package:quiz_quest/app/domain/models/animals_model/animals_quiz_model.dart';
-import 'package:quiz_quest/app/domain/repositories/category_repository.dart';
 import 'package:quiz_quest/app/features/home_page/cubit/home_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/quiz_countdown_timer/quiz_countdown_timer.dart';
 
@@ -52,18 +49,21 @@ class QuizzPage extends StatefulWidget {
 class _QuizzPageState extends State<QuizzPage> {
   int currentIndex = 0;
   late String question;
-  late List<String> list;
+  late List<dynamic> list;
   late String correctAnswer;
+  final controller = CountDownController();
+  bool isButtonBlocked = true;
 
   void updateAnswers() {
     question = widget.model!.results[currentIndex].question;
     List incorrectAnswers =
         widget.model!.results[currentIndex].incorrectAnswers;
     correctAnswer = widget.model!.results[currentIndex].correctAnswer;
-    list = List.from(incorrectAnswers)..add(correctAnswer);
+    list = incorrectAnswers + [correctAnswer];
     list.shuffle();
   }
 
+  @override
   void initState() {
     super.initState();
     updateAnswers();
@@ -72,15 +72,7 @@ class _QuizzPageState extends State<QuizzPage> {
   @override
   Widget build(BuildContext context) {
     const int duration = 21;
-    final CountDownController controller = CountDownController();
-    // var currentIndex = 0;
-    // var question = widget.model!.results[currentIndex].question;
-    // List list = [];
-    // List incorrectAnswers =
-    //     widget.model!.results[currentIndex].incorrectAnswers;
-    // String correctAnswer = widget.model!.results[currentIndex].correctAnswer;
-    // list = incorrectAnswers + [correctAnswer];
-    // list.shuffle();
+    Color color = Colors.white;
 
     return Container(
       decoration: const BoxDecoration(
@@ -112,6 +104,8 @@ class _QuizzPageState extends State<QuizzPage> {
           if (widget.model != null)
             for (final answer in list) ...[
               AnswerWidget(
+                isButtonBlocked: isButtonBlocked,
+                color: color,
                 controller: controller,
                 answer: answer,
                 isCorrectAnswer: answer == correctAnswer ? true : false,
@@ -128,18 +122,20 @@ class _QuizzPageState extends State<QuizzPage> {
                 Container(
                     color: Colors.black,
                     child: ElevatedButton(
-                      onPressed: () {
-                        controller.start();
-                        setState(() {
-                          currentIndex = currentIndex + 1;
-                          updateAnswers();
-                        });
-                      },
-                      child: const Text('Next Question ➔'),
+                      onPressed: isButtonBlocked
+                          ? null
+                          : () {
+                              controller.start();
+                              setState(() {
+                                currentIndex = currentIndex + 1;
+                                updateAnswers();
+                              });
+                            },
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.black,
-                        onPrimary: Colors.white,
+                        foregroundColor: Colors.white,
+                        backgroundColor: Colors.black,
                       ),
+                      child: const Text('Next Question ➔'),
                     )),
               ],
             ),
@@ -172,24 +168,26 @@ class QuestionWidget extends StatelessWidget {
 }
 
 class AnswerWidget extends StatefulWidget {
-  const AnswerWidget({
+  AnswerWidget({
     required this.answer,
     required this.isCorrectAnswer,
     required this.controller,
+    required this.color,
+    required this.isButtonBlocked,
     super.key,
   });
 
   final String answer;
   final bool isCorrectAnswer;
   final CountDownController controller;
+  Color color;
+  final bool isButtonBlocked;
 
   @override
   State<AnswerWidget> createState() => _AnswerWidgetState();
 }
 
 class _AnswerWidgetState extends State<AnswerWidget> {
-  Color color = Colors.white;
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -218,12 +216,12 @@ class _AnswerWidgetState extends State<AnswerWidget> {
         onPressed: () {
           if (widget.isCorrectAnswer) {
             setState(() {
-              color = Colors.green;
+              widget.color = Colors.green;
               widget.controller.pause();
             });
           } else {
             setState(() {
-              color = Colors.red;
+              widget.color = Colors.red;
               widget.controller.pause();
             });
           }
@@ -235,9 +233,28 @@ class _AnswerWidgetState extends State<AnswerWidget> {
         child: Text(widget.answer,
             style: GoogleFonts.aBeeZee(
               fontSize: 24,
-              color: color,
+              color: widget.color,
             )),
       ),
     );
   }
 }
+
+
+// cubit
+// state
+// selectedAnswer null/int -> int?
+// List<QuestionModel> 
+// if selectedAnswer == null -> isButtonDisabled
+// event
+// selectAnswer(QuestioModel)
+// emit (selectedAnswer: questionModel)
+
+
+// BlocProvider
+  // cubit..fetchData();
+// Scafold
+
+// GetStartedButton
+  // await Navigator.push();
+  // context.read<TwojCubit>()..fetchQuestions();

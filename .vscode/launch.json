@@ -1,0 +1,29 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "justMyCode": false,
+    "configurations": [
+        {
+            "name": "quiz_quest",
+            "cwd": "quiz_quest",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "quiz_quest (profile mode)",
+            "cwd": "quiz_quest",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "quiz_quest (release mode)",
+            "cwd": "quiz_quest",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
+}

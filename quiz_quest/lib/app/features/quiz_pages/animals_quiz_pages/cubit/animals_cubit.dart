@@ -15,10 +15,8 @@ class AnimalsCubit extends Cubit<AnimalsState> {
     emit(AnimalsState(
       status: Status.loading,
     ));
-
-    final animalsModel = await quizRepository.getAnimalsData();
-   
     try {
+      final animalsModel = await quizRepository.getAnimalsData();
       emit(AnimalsState(
         status: Status.success,
         animalsQuizModel: animalsModel,

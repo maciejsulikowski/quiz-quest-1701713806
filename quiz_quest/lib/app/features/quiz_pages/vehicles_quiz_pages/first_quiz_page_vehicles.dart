@@ -15,12 +15,10 @@ import 'package:quiz_quest/app/features/quiz_pages/vehicles_quiz_pages/question_
 class FirstQuizPageVehicles extends StatefulWidget {
   const FirstQuizPageVehicles({
     required this.image,
-    required this.model,
     super.key,
   });
 
   final String image;
-  final VehiclesQuizModel? model;
 
   @override
   State<FirstQuizPageVehicles> createState() => _FirstQuizPageVehiclesState();
@@ -35,7 +33,6 @@ class _FirstQuizPageVehiclesState extends State<FirstQuizPageVehicles> {
       ),
       body: QuizzPage(
         image: widget.image,
-        model: widget.model,
       ),
     );
   }
@@ -44,12 +41,10 @@ class _FirstQuizPageVehiclesState extends State<FirstQuizPageVehicles> {
 class QuizzPage extends StatelessWidget {
   const QuizzPage({
     required this.image,
-    required this.model,
     super.key,
   });
 
   final String image;
-  final VehiclesQuizModel? model;
 
   @override
   Widget build(BuildContext context) {

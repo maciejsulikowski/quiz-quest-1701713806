@@ -17,12 +17,10 @@ import 'package:quiz_quest/app/features/quiz_pages/geography_quiz_pages/question
 class FirstQuizPageGeography extends StatefulWidget {
   const FirstQuizPageGeography({
     required this.image,
-    required this.model,
     super.key,
   });
 
   final String image;
-  final GeographyQuizModel? model;
 
   @override
   State<FirstQuizPageGeography> createState() => _FirstQuizPageGeographyState();
@@ -37,7 +35,6 @@ class _FirstQuizPageGeographyState extends State<FirstQuizPageGeography> {
       ),
       body: QuizzPage(
         image: widget.image,
-        model: widget.model,
       ),
     );
   }
@@ -46,12 +43,10 @@ class _FirstQuizPageGeographyState extends State<FirstQuizPageGeography> {
 class QuizzPage extends StatelessWidget {
   const QuizzPage({
     required this.image,
-    required this.model,
     super.key,
   });
 
   final String image;
-  final GeographyQuizModel? model;
 
   @override
   Widget build(BuildContext context) {

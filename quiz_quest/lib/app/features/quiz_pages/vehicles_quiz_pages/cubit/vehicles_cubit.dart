@@ -16,9 +16,8 @@ class VehiclesCubit extends Cubit<VehiclesState> {
       status: Status.loading,
     ));
 
-    final vehiclesModel = await quizRepository.getVehiclesData();
-
     try {
+      final vehiclesModel = await quizRepository.getVehiclesData();
       emit(VehiclesState(
         status: Status.success,
         vehiclesQuizModel: vehiclesModel,

@@ -13,12 +13,10 @@ import 'package:quiz_quest/app/features/quiz_pages/sports_quiz_pages/question_qu
 class FirstQuizPageSport extends StatefulWidget {
   const FirstQuizPageSport({
     required this.image,
-    required this.model,
     super.key,
   });
 
   final String image;
-  final SportsQuizModel? model;
 
   @override
   State<FirstQuizPageSport> createState() => _FirstQuizPageSportState();
@@ -33,7 +31,6 @@ class _FirstQuizPageSportState extends State<FirstQuizPageSport> {
       ),
       body: QuizzPage(
         image: widget.image,
-        model: widget.model,
       ),
     );
   }
@@ -42,12 +39,10 @@ class _FirstQuizPageSportState extends State<FirstQuizPageSport> {
 class QuizzPage extends StatelessWidget {
   const QuizzPage({
     required this.image,
-    required this.model,
     super.key,
   });
 
   final String image;
-  final SportsQuizModel? model;
 
   @override
   Widget build(BuildContext context) {

@@ -79,14 +79,6 @@ class QuizzPage extends StatelessWidget {
       create: (context) => HomeCubit(),
       child: BlocBuilder<HomeCubit, HomeState>(
         builder: (context, state) {
-          final animalsModel = state.animalsModel;
-          final sportsModel = state.sportsModel;
-          final artsModel = state.artModel;
-          final computerScienceModel = state.computerScienceModel;
-          final geographyModel = state.geographyModel;
-          final historyModel = state.historyModel;
-          final politicsModel = state.politicsModel;
-          final vehiclesModel = state.vehiclesModel;
           return Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
@@ -172,12 +164,10 @@ class QuizzPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       QuizzCategoryWidget(
-                        model: animalsModel,
                         name: 'Animals',
                         image: 'images/animal.png',
                       ),
                       QuizzCategoryWidget3(
-                        model: artsModel,
                         name: 'Art',
                         image: 'images/art.png',
                       ),
@@ -193,12 +183,10 @@ class QuizzPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       QuizzCategoryWidget4(
-                        model: computerScienceModel,
                         name: 'Computer Science',
                         image: 'images/computer.png',
                       ),
                       QuizzCategoryWidget5(
-                        model: geographyModel,
                         name: 'Geography',
                         image: 'images/geography.png',
                       ),
@@ -214,12 +202,10 @@ class QuizzPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       QuizzCategoryWidget6(
-                        model: historyModel,
                         name: 'History',
                         image: 'images/history.png',
                       ),
                       QuizzCategoryWidget7(
-                        model: politicsModel,
                         name: 'Politics',
                         image: 'images/politics.png',
                       ),
@@ -235,12 +221,10 @@ class QuizzPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       QuizzCategoryWidget2(
-                        model: sportsModel,
                         name: 'Sport',
                         image: 'images/ball.png',
                       ),
                       QuizzCategoryWidget8(
-                        model: vehiclesModel,
                         name: 'Vehicles',
                         image: 'images/vehicle.png',
                       ),
@@ -263,13 +247,11 @@ class QuizzCategoryWidget extends StatelessWidget {
   const QuizzCategoryWidget({
     required this.name,
     required this.image,
-    required this.model,
     super.key,
   });
 
   final String name;
   final String image;
-  final AnimalsQuizModel? model;
 
   @override
   Widget build(BuildContext context) {
@@ -277,7 +259,6 @@ class QuizzCategoryWidget extends StatelessWidget {
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => FirstQuizPageAnimals(
-                  model: model,
                   image: image,
                 )));
       },
@@ -293,13 +274,11 @@ class QuizzCategoryWidget2 extends StatelessWidget {
   const QuizzCategoryWidget2({
     required this.name,
     required this.image,
-    required this.model,
     super.key,
   });
 
   final String name;
   final String image;
-  final SportsQuizModel? model;
 
   @override
   Widget build(BuildContext context) {
@@ -307,7 +286,6 @@ class QuizzCategoryWidget2 extends StatelessWidget {
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => FirstQuizPageSport(
-                  model: model,
                   image: image,
                 )));
       },
@@ -323,13 +301,11 @@ class QuizzCategoryWidget3 extends StatelessWidget {
   const QuizzCategoryWidget3({
     required this.name,
     required this.image,
-    required this.model,
     super.key,
   });
 
   final String name;
   final String image;
-  final ArtQuizModel? model;
 
   @override
   Widget build(BuildContext context) {
@@ -337,7 +313,6 @@ class QuizzCategoryWidget3 extends StatelessWidget {
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => FirstQuizPageArt(
-                  model: model,
                   image: image,
                 )));
       },
@@ -353,13 +328,11 @@ class QuizzCategoryWidget4 extends StatelessWidget {
   const QuizzCategoryWidget4({
     required this.name,
     required this.image,
-    required this.model,
     super.key,
   });
 
   final String name;
   final String image;
-  final ComputerScienceQuizModel? model;
 
   @override
   Widget build(BuildContext context) {
@@ -367,7 +340,6 @@ class QuizzCategoryWidget4 extends StatelessWidget {
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => FirstQuizPageComputerScience(
-                  model: model,
                   image: image,
                 )));
       },
@@ -383,13 +355,11 @@ class QuizzCategoryWidget5 extends StatelessWidget {
   const QuizzCategoryWidget5({
     required this.name,
     required this.image,
-    required this.model,
     super.key,
   });
 
   final String name;
   final String image;
-  final GeographyQuizModel? model;
 
   @override
   Widget build(BuildContext context) {
@@ -397,7 +367,6 @@ class QuizzCategoryWidget5 extends StatelessWidget {
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => FirstQuizPageGeography(
-                  model: model,
                   image: image,
                 )));
       },
@@ -413,13 +382,11 @@ class QuizzCategoryWidget6 extends StatelessWidget {
   const QuizzCategoryWidget6({
     required this.name,
     required this.image,
-    required this.model,
     super.key,
   });
 
   final String name;
   final String image;
-  final HistoryQuizModel? model;
 
   @override
   Widget build(BuildContext context) {
@@ -427,7 +394,6 @@ class QuizzCategoryWidget6 extends StatelessWidget {
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => FirstQuizPageHistory(
-                  model: model,
                   image: image,
                 )));
       },
@@ -443,13 +409,11 @@ class QuizzCategoryWidget7 extends StatelessWidget {
   const QuizzCategoryWidget7({
     required this.name,
     required this.image,
-    required this.model,
     super.key,
   });
 
   final String name;
   final String image;
-  final PoliticsQuizModel? model;
 
   @override
   Widget build(BuildContext context) {
@@ -457,7 +421,6 @@ class QuizzCategoryWidget7 extends StatelessWidget {
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => FirstQuizPagePolitics(
-                  model: model,
                   image: image,
                 )));
       },
@@ -473,13 +436,11 @@ class QuizzCategoryWidget8 extends StatelessWidget {
   const QuizzCategoryWidget8({
     required this.name,
     required this.image,
-    required this.model,
     super.key,
   });
 
   final String name;
   final String image;
-  final VehiclesQuizModel? model;
 
   @override
   Widget build(BuildContext context) {
@@ -487,7 +448,6 @@ class QuizzCategoryWidget8 extends StatelessWidget {
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => FirstQuizPageVehicles(
-                  model: model,
                   image: image,
                 )));
       },

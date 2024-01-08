@@ -19,12 +19,10 @@ import 'package:quiz_quest/app/features/quiz_pages/history_quiz_pages/question_q
 class FirstQuizPageHistory extends StatefulWidget {
   const FirstQuizPageHistory({
     required this.image,
-    required this.model,
     super.key,
   });
 
   final String image;
-  final HistoryQuizModel? model;
 
   @override
   State<FirstQuizPageHistory> createState() => _FirstQuizPageHistoryState();
@@ -39,7 +37,6 @@ class _FirstQuizPageHistoryState extends State<FirstQuizPageHistory> {
       ),
       body: QuizzPage(
         image: widget.image,
-        model: widget.model,
       ),
     );
   }
@@ -48,12 +45,10 @@ class _FirstQuizPageHistoryState extends State<FirstQuizPageHistory> {
 class QuizzPage extends StatelessWidget {
   const QuizzPage({
     required this.image,
-    required this.model,
     super.key,
   });
 
   final String image;
-  final HistoryQuizModel? model;
 
   @override
   Widget build(BuildContext context) {

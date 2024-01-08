@@ -11,12 +11,10 @@ import 'package:quiz_quest/app/features/quiz_pages/animals_quiz_pages/question_q
 class FirstQuizPageAnimals extends StatefulWidget {
   const FirstQuizPageAnimals({
     required this.image,
-    required this.model,
     super.key,
   });
 
   final String image;
-  final AnimalsQuizModel? model;
 
   @override
   State<FirstQuizPageAnimals> createState() => _FirstQuizPageAnimalsState();
@@ -31,7 +29,6 @@ class _FirstQuizPageAnimalsState extends State<FirstQuizPageAnimals> {
       ),
       body: QuizzPage(
         image: widget.image,
-        model: widget.model,
       ),
     );
   }
@@ -40,12 +37,10 @@ class _FirstQuizPageAnimalsState extends State<FirstQuizPageAnimals> {
 class QuizzPage extends StatelessWidget {
   const QuizzPage({
     required this.image,
-    required this.model,
     super.key,
   });
 
   final String image;
-  final AnimalsQuizModel? model;
 
   @override
   Widget build(BuildContext context) {
@@ -58,6 +53,7 @@ class QuizzPage extends StatelessWidget {
           final animalsModel = state.animalsQuizModel;
 
           if (state.status == Status.loading) {
+            Future.delayed(Duration(seconds: 3));
             return const Center(child: CircularProgressIndicator());
           }
 

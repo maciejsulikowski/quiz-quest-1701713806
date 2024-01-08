@@ -21,12 +21,10 @@ import 'package:quiz_quest/app/features/quiz_pages/politics_quiz_pages/question_
 class FirstQuizPagePolitics extends StatefulWidget {
   const FirstQuizPagePolitics({
     required this.image,
-    required this.model,
     super.key,
   });
 
   final String image;
-  final PoliticsQuizModel? model;
 
   @override
   State<FirstQuizPagePolitics> createState() => _FirstQuizPagePoliticsState();
@@ -41,7 +39,6 @@ class _FirstQuizPagePoliticsState extends State<FirstQuizPagePolitics> {
       ),
       body: QuizzPage(
         image: widget.image,
-        model: widget.model,
       ),
     );
   }
@@ -50,12 +47,10 @@ class _FirstQuizPagePoliticsState extends State<FirstQuizPagePolitics> {
 class QuizzPage extends StatelessWidget {
   const QuizzPage({
     required this.image,
-    required this.model,
     super.key,
   });
 
   final String image;
-  final PoliticsQuizModel? model;
 
   @override
   Widget build(BuildContext context) {

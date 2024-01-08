@@ -85,7 +85,11 @@ class WelcomePage extends StatelessWidget {
                   textDirection: TextDirection.rtl,
                   child: ElevatedButton.icon(
                     onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => const LoginPage()));
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const LoginPage(),
+                        ),
+                      );
                     },
                     style: ElevatedButton.styleFrom(
                         minimumSize: const Size.fromHeight(50),

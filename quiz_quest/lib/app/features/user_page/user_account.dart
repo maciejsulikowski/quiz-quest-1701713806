@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
@@ -77,7 +79,7 @@ class UserAccount extends StatelessWidget {
                 textDirection: TextDirection.rtl,
                 child: ElevatedButton.icon(
                   onPressed: () {
-                    // Navigator.of(context).push(createRoute());
+                    FirebaseAuth.instance.signOut();
                   },
                   style: ElevatedButton.styleFrom(
                       minimumSize: const Size.fromHeight(50),

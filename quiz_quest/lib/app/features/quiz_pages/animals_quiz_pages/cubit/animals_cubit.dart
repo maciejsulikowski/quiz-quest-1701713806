@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:meta/meta.dart';
 import 'package:quiz_quest/app/core/enums.dart';
 import 'package:quiz_quest/app/domain/models/animals_model/animals_quiz_model.dart';
@@ -10,6 +11,12 @@ class AnimalsCubit extends Cubit<AnimalsState> {
   AnimalsCubit(this.quizRepository) : super(AnimalsState());
 
   final QuizRepository quizRepository;
+  int currentIndex = 0;
+  String question = '';
+  List<dynamic> list = [];
+  String correctAnswer = '';
+  bool isButtonBlocked = true;
+  AnimalsQuizModel? animalsQuizModel;
 
   Future<void> getAnimalsCategory() async {
     emit(AnimalsState(
@@ -17,6 +24,7 @@ class AnimalsCubit extends Cubit<AnimalsState> {
     ));
     try {
       final animalsModel = await quizRepository.getAnimalsData();
+
       emit(AnimalsState(
         status: Status.success,
         animalsQuizModel: animalsModel,

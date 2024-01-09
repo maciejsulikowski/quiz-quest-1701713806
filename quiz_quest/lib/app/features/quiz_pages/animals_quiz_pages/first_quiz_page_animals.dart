@@ -24,9 +24,6 @@ class _FirstQuizPageAnimalsState extends State<FirstQuizPageAnimals> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Quizz'),
-      ),
       body: QuizzPage(
         image: widget.image,
       ),
@@ -51,11 +48,6 @@ class QuizzPage extends StatelessWidget {
       child: BlocBuilder<AnimalsCubit, AnimalsState>(
         builder: (context, state) {
           final animalsModel = state.animalsQuizModel;
-
-          if (state.status == Status.loading) {
-            Future.delayed(Duration(seconds: 3));
-            return const Center(child: CircularProgressIndicator());
-          }
 
           return Container(
             decoration: const BoxDecoration(
@@ -138,7 +130,7 @@ class QuizzPage extends StatelessWidget {
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => QuestionQuizPage(
-                                model: animalsModel,
+                                animalsQuizModel: animalsModel,
                               )));
                     },
                     style: ElevatedButton.styleFrom(

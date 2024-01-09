@@ -2,17 +2,21 @@ import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:quiz_quest/app/data/data_sources/quiz_data_source/quiz_categories_data_source.dart';
 import 'package:quiz_quest/app/domain/models/animals_model/animals_quiz_model.dart';
+import 'package:quiz_quest/app/domain/repositories/quiz_repository/quiz_repository.dart';
 import 'package:quiz_quest/app/features/home_page/cubit/home_cubit.dart';
+import 'package:quiz_quest/app/features/home_page/home_page.dart';
+import 'package:quiz_quest/app/features/quiz_pages/animals_quiz_pages/cubit/animals_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/quiz_countdown_timer/quiz_countdown_timer.dart';
 
 class QuestionQuizPage extends StatefulWidget {
   const QuestionQuizPage({
-    required this.model,
+    required this.animalsQuizModel,
     super.key,
   });
 
-  final AnimalsQuizModel? model;
+  final AnimalsQuizModel? animalsQuizModel;
 
   @override
   State<QuestionQuizPage> createState() => _QuestionQuizPageState();
@@ -22,12 +26,9 @@ class _QuestionQuizPageState extends State<QuestionQuizPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Quest'),
-      ),
       body: SafeArea(
         child: QuizzPage(
-          model: widget.model,
+          animalsQuizModel: widget.animalsQuizModel,
         ),
       ),
     );
@@ -36,11 +37,11 @@ class _QuestionQuizPageState extends State<QuestionQuizPage> {
 
 class QuizzPage extends StatefulWidget {
   const QuizzPage({
-    required this.model,
+    required this.animalsQuizModel,
     super.key,
   });
 
-  final AnimalsQuizModel? model;
+  final AnimalsQuizModel? animalsQuizModel;
 
   @override
   State<QuizzPage> createState() => _QuizzPageState();
@@ -55,10 +56,11 @@ class _QuizzPageState extends State<QuizzPage> {
   bool isButtonBlocked = true;
 
   void updateAnswers() {
-    question = widget.model!.results[currentIndex].question;
+    question = widget.animalsQuizModel!.results[currentIndex].question;
     List incorrectAnswers =
-        widget.model!.results[currentIndex].incorrectAnswers;
-    correctAnswer = widget.model!.results[currentIndex].correctAnswer;
+        widget.animalsQuizModel!.results[currentIndex].incorrectAnswers;
+    correctAnswer =
+        widget.animalsQuizModel!.results[currentIndex].correctAnswer;
     list = incorrectAnswers + [correctAnswer];
     list.shuffle();
   }
@@ -88,20 +90,47 @@ class _QuizzPageState extends State<QuizzPage> {
       child: ListView(
         children: [
           const SizedBox(
-            height: 30,
+            height: 15,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const HomePage()));
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(color: Colors.white, width: 2.0),
+                    ),
+                    padding: const EdgeInsets.all(10.0),
+                    child: const Icon(Icons.close, color: Colors.white),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 10,
           ),
           CountDownTimer(duration: duration, controller: controller),
           const SizedBox(
             height: 15,
           ),
-          if (widget.model != null)
+          if (widget.animalsQuizModel != null)
             QuestionWidget(
               question: question,
             ),
           const SizedBox(
             height: 30,
           ),
-          if (widget.model != null)
+          if (widget.animalsQuizModel != null)
             for (final answer in list) ...[
               AnswerWidget(
                 isButtonBlocked: isButtonBlocked,
@@ -128,7 +157,6 @@ class _QuizzPageState extends State<QuizzPage> {
                               controller.start();
                               setState(() {
                                 currentIndex = currentIndex + 1;
-                                updateAnswers();
                               });
                             },
                       style: ElevatedButton.styleFrom(

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -22,8 +23,11 @@ import 'package:quiz_quest/app/features/user_page/user_account.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
+    this.user,
     super.key,
   });
+
+  final User? user;
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -59,7 +63,9 @@ class _HomePageState extends State<HomePage> {
       body: SafeArea(
         child: Builder(builder: (context) {
           if (currentIndex == 0) {
-            return const QuizzPage();
+            return QuizzPage(
+              user: widget.user,
+            );
           }
           return const UserAccount();
         }),
@@ -69,9 +75,12 @@ class _HomePageState extends State<HomePage> {
 }
 
 class QuizzPage extends StatelessWidget {
-  const QuizzPage({
+  QuizzPage({
+    this.user,
     super.key,
   });
+
+  final User? user;
 
   @override
   Widget build(BuildContext context) {
@@ -101,7 +110,7 @@ class QuizzPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Hi, user 👋',
+                        'Hi ${user!.email} 👋',
                         style: GoogleFonts.aBeeZee(
                             fontSize: 24,
                             color: Colors.white,

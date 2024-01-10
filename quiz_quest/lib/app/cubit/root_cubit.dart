@@ -138,4 +138,8 @@ class RootCubit extends Cubit<RootState> {
       ));
     }
   }
+
+  Future<void> signOut() async {
+    await FirebaseAuth.instance.signOut();
+  }
 }

@@ -1,8 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
+import 'package:quiz_quest/app/cubit/root_cubit.dart';
+import 'package:quiz_quest/app/features/login_page/login_page.dart';
 
 class UserAccount extends StatelessWidget {
   const UserAccount({
@@ -79,7 +82,11 @@ class UserAccount extends StatelessWidget {
                 textDirection: TextDirection.rtl,
                 child: ElevatedButton.icon(
                   onPressed: () {
-                    FirebaseAuth.instance.signOut();
+                    context.read<RootCubit>().signOut();
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => LoginPage()),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                       minimumSize: const Size.fromHeight(50),

@@ -1,6 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quiz_quest/app/cubit/root_cubit.dart';
 import 'package:quiz_quest/app/features/home_page/home_page.dart';
+import 'package:quiz_quest/app/features/login_page/login_page.dart';
 import 'package:quiz_quest/app/features/welcome_page/welcome_page.dart';
 
 class MyApp extends StatelessWidget {
@@ -8,13 +11,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+    return BlocProvider(
+      create: (context) => RootCubit()..start(),
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+        ),
+        home: const RootPage(),
       ),
-      home: RootPage(),
     );
   }
 }
@@ -26,17 +32,14 @@ class RootPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<User?>(
-        stream: FirebaseAuth.instance.authStateChanges(),
-        builder: (context, snapshot) {
-          final user = snapshot.data;
-          if (user == null) {
-            return const WelcomePage();
-          }
+    final state = context.watch<RootCubit>().state;
 
-          return HomePage(
-            user: user,
-          );
-        });
+    if (state.user == null) {
+      return LoginPage();
+    }
+
+    return HomePage(
+      user: state.user!,
+    );
   }
 }

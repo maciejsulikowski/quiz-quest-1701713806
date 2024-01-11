@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -109,6 +108,7 @@ class _LoginPageState extends State<LoginPage> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: TextField(
+                  obscureText: true,
                   controller: widget.passwordController,
                   style: GoogleFonts.aBeeZee(color: Colors.white),
                   decoration: InputDecoration(
@@ -117,17 +117,6 @@ class _LoginPageState extends State<LoginPage> {
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20))),
                 ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Text(errorMessage,
-                    style: GoogleFonts.aBeeZee(
-                      fontSize: 14,
-                      color: Colors.white,
-                    )),
               ),
               const SizedBox(
                 height: 20,

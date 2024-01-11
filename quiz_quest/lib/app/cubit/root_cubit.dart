@@ -72,22 +72,22 @@ class RootCubit extends Cubit<RootState> {
       String errorMessage = '';
       switch (e.code) {
         case "invalid-email":
-          errorMessage = 'Niepoprawny format adresu email.';
+          errorMessage = 'Invalid email format.';
           break;
         case "user-not-found":
-          errorMessage = 'Brak użytkownika o podanym adresie email.';
+          errorMessage = 'No user found with the provided email address.';
           break;
         case "wrong-password":
-          errorMessage = 'Niepoprawne hasło.';
+          errorMessage = 'Incorrect password.';
           break;
         case "account-exists-with-different-credential":
-          errorMessage = 'Konto już istnieje.';
+          errorMessage = 'Account already exists with a different credential.';
           break;
         case "user-disabled":
-          errorMessage = 'Użytkownik jest wyłączony.';
+          errorMessage = 'User is disabled.';
           break;
         default:
-          errorMessage = 'Wystąpił błąd logowania.';
+          errorMessage = 'Login error occurred. Try again.';
           break;
       }
       emit(RootState(
@@ -116,19 +116,20 @@ class RootCubit extends Cubit<RootState> {
       String errorMessage = '';
       switch (e.code) {
         case "invalid-email":
-          errorMessage = 'Niepoprawny format adresu email.';
+          errorMessage = 'Invalid email format.';
           break;
         case "email-already-in-use":
-          errorMessage = 'Konto z tym adresem email już istnieje.';
+          errorMessage = 'An account with this email address already exists.';
           break;
         case "operation-not-allowed":
-          errorMessage = 'Rejestracja z tym adresem email jest wyłączona.';
+          errorMessage = 'Registration with this email address is not allowed.';
           break;
         case "weak-password":
-          errorMessage = 'Hasło jest zbyt słabe.';
+          errorMessage =
+              'The password is too weak and should be at least 6 characters.';
           break;
         default:
-          errorMessage = 'Wystąpił błąd podczas rejestracji.';
+          errorMessage = 'An error occurred during registration. Try again.';
           break;
       }
 

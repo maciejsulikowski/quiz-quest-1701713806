@@ -143,4 +143,33 @@ class RootCubit extends Cubit<RootState> {
   Future<void> signOut() async {
     await FirebaseAuth.instance.signOut();
   }
+
+  Future<void> forgotPassword(String email) async {
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+      emit(const RootState(
+          status: Status.error, errorMessage: 'Password has been sent'));
+    } on FirebaseAuthException catch (e) {
+      String errorMessage = '';
+      switch (e.code) {
+        case "invalid-email":
+          errorMessage = 'Invalid email format.';
+          break;
+        case "user-not-found":
+          errorMessage = 'No user found with the provided email address.';
+          break;
+        case "operation-not-allowed":
+          errorMessage = 'Registration with this email address is not allowed.';
+          break;
+        default:
+          errorMessage = 'An error occurred during sending email. Try again.';
+          break;
+      }
+
+      emit(RootState(
+        status: Status.error,
+        errorMessage: errorMessage,
+      ));
+    }
+  }
 }

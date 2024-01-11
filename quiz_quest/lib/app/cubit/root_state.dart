@@ -6,9 +6,11 @@ class RootState {
     this.user,
     required this.status,
     this.errorMessage,
+    this.passwordMessage,
   });
 
   final User? user;
   final Status status;
   final String? errorMessage;
+  final String? passwordMessage;
 }

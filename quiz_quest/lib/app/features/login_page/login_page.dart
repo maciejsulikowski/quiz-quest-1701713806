@@ -4,7 +4,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:quiz_quest/app/core/enums.dart';
 import 'package:quiz_quest/app/cubit/root_cubit.dart';
+import 'package:quiz_quest/app/features/home_page/cubit/home_cubit.dart';
 import 'package:quiz_quest/app/features/home_page/home_page.dart';
+import 'package:quiz_quest/app/features/login_page/forgot_password_page.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({
@@ -60,7 +62,6 @@ class _LoginPageState extends State<LoginPage> {
         }
       },
       child: Scaffold(
-        appBar: AppBar(),
         body: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
@@ -160,19 +161,12 @@ class _LoginPageState extends State<LoginPage> {
                               widget.passwordController.text,
                             );
                       }
-
-                      // Navigator.of(context).push(
-                      //   MaterialPageRoute(
-                      //     builder: (context) => const HomePage(),
-                      //   ),
-                      // );
                     },
                     style: ElevatedButton.styleFrom(
                         minimumSize: const Size.fromHeight(50),
                         backgroundColor: Colors.transparent,
                         shadowColor: Colors.transparent),
-                    label: Text(
-                        isCreatingAccount ? 'Zarejestruj sie' : 'Zaloguj sie',
+                    label: Text(isCreatingAccount ? 'Sign up' : 'Sign in',
                         style: GoogleFonts.aBeeZee(
                           fontSize: 24,
                           color: Colors.white,
@@ -189,12 +183,22 @@ class _LoginPageState extends State<LoginPage> {
               ),
               if (isCreatingAccount == false) ...[
                 TextButton(
+                    onPressed: () async {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => ForgotPasswordPage()));
+                    },
+                    child: Text('Forgot password?',
+                        style: GoogleFonts.aBeeZee(
+                          fontSize: 18,
+                          color: Colors.white,
+                        ))),
+                TextButton(
                     onPressed: () {
                       setState(() {
                         isCreatingAccount = true;
                       });
                     },
-                    child: Text('Utwórz konto',
+                    child: Text('No account? Sign up',
                         style: GoogleFonts.aBeeZee(
                           fontSize: 18,
                           color: Colors.white,
@@ -207,7 +211,7 @@ class _LoginPageState extends State<LoginPage> {
                         isCreatingAccount = false;
                       });
                     },
-                    child: Text('Masz konto? Zaloguj sie',
+                    child: Text('You have account? Sign in',
                         style: GoogleFonts.aBeeZee(
                           fontSize: 18,
                           color: Colors.white,

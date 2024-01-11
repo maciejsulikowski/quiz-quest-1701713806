@@ -11,12 +11,10 @@ import 'package:quiz_quest/app/features/quiz_pages/animals_quiz_pages/question_q
 class FirstQuizPageAnimals extends StatefulWidget {
   const FirstQuizPageAnimals({
     required this.image,
-    required this.model,
     super.key,
   });
 
   final String image;
-  final AnimalsQuizModel? model;
 
   @override
   State<FirstQuizPageAnimals> createState() => _FirstQuizPageAnimalsState();
@@ -26,12 +24,8 @@ class _FirstQuizPageAnimalsState extends State<FirstQuizPageAnimals> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Quizz'),
-      ),
       body: QuizzPage(
         image: widget.image,
-        model: widget.model,
       ),
     );
   }
@@ -40,12 +34,10 @@ class _FirstQuizPageAnimalsState extends State<FirstQuizPageAnimals> {
 class QuizzPage extends StatelessWidget {
   const QuizzPage({
     required this.image,
-    required this.model,
     super.key,
   });
 
   final String image;
-  final AnimalsQuizModel? model;
 
   @override
   Widget build(BuildContext context) {
@@ -56,10 +48,6 @@ class QuizzPage extends StatelessWidget {
       child: BlocBuilder<AnimalsCubit, AnimalsState>(
         builder: (context, state) {
           final animalsModel = state.animalsQuizModel;
-
-          if (state.status == Status.loading) {
-            return const Center(child: CircularProgressIndicator());
-          }
 
           return Container(
             decoration: const BoxDecoration(
@@ -142,7 +130,7 @@ class QuizzPage extends StatelessWidget {
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => QuestionQuizPage(
-                                model: animalsModel,
+                                animalsQuizModel: animalsModel,
                               )));
                     },
                     style: ElevatedButton.styleFrom(

@@ -15,12 +15,10 @@ import 'package:quiz_quest/app/features/quiz_pages/computer_science_pages/questi
 class FirstQuizPageComputerScience extends StatefulWidget {
   const FirstQuizPageComputerScience({
     required this.image,
-    required this.model,
     super.key,
   });
 
   final String image;
-  final ComputerScienceQuizModel? model;
 
   @override
   State<FirstQuizPageComputerScience> createState() =>
@@ -37,7 +35,6 @@ class _FirstQuizPageComputerScienceState
       ),
       body: QuizzPage(
         image: widget.image,
-        model: widget.model,
       ),
     );
   }
@@ -46,12 +43,10 @@ class _FirstQuizPageComputerScienceState
 class QuizzPage extends StatelessWidget {
   const QuizzPage({
     required this.image,
-    required this.model,
     super.key,
   });
 
   final String image;
-  final ComputerScienceQuizModel? model;
 
   @override
   Widget build(BuildContext context) {

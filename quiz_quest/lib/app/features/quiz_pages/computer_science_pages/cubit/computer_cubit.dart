@@ -16,9 +16,8 @@ class ComputerScienceCubit extends Cubit<ComputerScienceState> {
       status: Status.loading,
     ));
 
-    final computerModel = await quizRepository.getComputerScienceData();
-
     try {
+      final computerModel = await quizRepository.getComputerScienceData();
       emit(ComputerScienceState(
         status: Status.success,
         computerScienceQuizModel: computerModel,

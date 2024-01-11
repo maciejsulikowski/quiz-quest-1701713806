@@ -16,9 +16,10 @@ class ArtCubit extends Cubit<ArtState> {
       status: Status.loading,
     ));
 
-    final artModel = await quizRepository.getArtData();
+    
 
     try {
+      final artModel = await quizRepository.getArtData();
       emit(ArtState(
         status: Status.success,
         artQuizModel: artModel,

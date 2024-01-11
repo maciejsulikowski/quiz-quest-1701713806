@@ -16,9 +16,8 @@ class PoliticsCubit extends Cubit<PoliticsState> {
       status: Status.loading,
     ));
 
-    final politicsModel = await quizRepository.getPoliticsData();
-
     try {
+      final politicsModel = await quizRepository.getPoliticsData();
       emit(PoliticsState(
         status: Status.success,
         politicsQuizModel: politicsModel,

@@ -1,19 +1,67 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
+import 'package:quiz_quest/app/core/enums.dart';
+import 'package:quiz_quest/app/cubit/root_cubit.dart';
 import 'package:quiz_quest/app/features/home_page/home_page.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({
+class LoginPage extends StatefulWidget {
+  LoginPage({
     super.key,
   });
 
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  var errorMessage = '';
+  var isCreatingAccount = false;
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: SafeArea(
-        child: Container(
+    return BlocListener<RootCubit, RootState>(
+      listener: (context, state) {
+        if (state.status == Status.error) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              behavior: SnackBarBehavior.floating,
+              backgroundColor: Colors.red,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              content: Padding(
+                padding: const EdgeInsets.all(8),
+                child: Row(
+                  children: [
+                    const Icon(Icons.error, color: Colors.white),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        state.errorMessage ?? '',
+                        style: const TextStyle(color: Colors.white),
+                        softWrap: true,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+
+          return;
+        } else if (state.user != null) {
+          Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (_) => HomePage(user: state.user!)));
+        }
+      },
+      child: Scaffold(
+        appBar: AppBar(),
+        body: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: [
@@ -24,9 +72,9 @@ class LoginPage extends StatelessWidget {
               end: Alignment.centerRight,
             ),
           ),
-          child: Column(
+          child: ListView(
             children: [
-              const SizedBox(height: 30),
+              const SizedBox(height: 20),
               Center(
                 child: Text(
                   'Login Page',
@@ -45,6 +93,7 @@ class LoginPage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: TextField(
+                  controller: widget.emailController,
                   style: GoogleFonts.aBeeZee(color: Colors.white),
                   decoration: InputDecoration(
                       hintText: 'Login',
@@ -59,6 +108,8 @@ class LoginPage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: TextField(
+                  obscureText: true,
+                  controller: widget.passwordController,
                   style: GoogleFonts.aBeeZee(color: Colors.white),
                   decoration: InputDecoration(
                       hintText: 'Password',
@@ -68,7 +119,7 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                height: 30,
+                height: 20,
               ),
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 20),
@@ -95,18 +146,33 @@ class LoginPage extends StatelessWidget {
                 child: Directionality(
                   textDirection: TextDirection.rtl,
                   child: ElevatedButton.icon(
-                    onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => const HomePage(),
-                        ),
-                      );
+                    onPressed: () async {
+                      if (isCreatingAccount == false) {
+                        context.read<RootCubit>().signInAccount(
+                              widget.emailController.text,
+                              widget.passwordController.text,
+                            );
+                      }
+
+                      if (isCreatingAccount == true) {
+                        context.read<RootCubit>().createAccount(
+                              widget.emailController.text,
+                              widget.passwordController.text,
+                            );
+                      }
+
+                      // Navigator.of(context).push(
+                      //   MaterialPageRoute(
+                      //     builder: (context) => const HomePage(),
+                      //   ),
+                      // );
                     },
                     style: ElevatedButton.styleFrom(
                         minimumSize: const Size.fromHeight(50),
                         backgroundColor: Colors.transparent,
                         shadowColor: Colors.transparent),
-                    label: Text('Login',
+                    label: Text(
+                        isCreatingAccount ? 'Zarejestruj sie' : 'Zaloguj sie',
                         style: GoogleFonts.aBeeZee(
                           fontSize: 24,
                           color: Colors.white,
@@ -118,6 +184,35 @@ class LoginPage extends StatelessWidget {
                   ),
                 ),
               ),
+              const SizedBox(
+                height: 10,
+              ),
+              if (isCreatingAccount == false) ...[
+                TextButton(
+                    onPressed: () {
+                      setState(() {
+                        isCreatingAccount = true;
+                      });
+                    },
+                    child: Text('Utwórz konto',
+                        style: GoogleFonts.aBeeZee(
+                          fontSize: 18,
+                          color: Colors.white,
+                        )))
+              ],
+              if (isCreatingAccount == true) ...[
+                TextButton(
+                    onPressed: () {
+                      setState(() {
+                        isCreatingAccount = false;
+                      });
+                    },
+                    child: Text('Masz konto? Zaloguj sie',
+                        style: GoogleFonts.aBeeZee(
+                          fontSize: 18,
+                          color: Colors.white,
+                        )))
+              ],
             ],
           ),
         ),

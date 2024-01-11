@@ -148,9 +148,7 @@ class RootCubit extends Cubit<RootState> {
     try {
       await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
       emit(const RootState(
-        status: Status.success,
-        passwordMessage: 'Password has sent',
-      ));
+          status: Status.error, errorMessage: 'Password has been sent'));
     } on FirebaseAuthException catch (e) {
       String errorMessage = '';
       switch (e.code) {

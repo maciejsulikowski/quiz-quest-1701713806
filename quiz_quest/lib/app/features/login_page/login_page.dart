@@ -28,7 +28,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return BlocListener<RootCubit, RootState>(
       listener: (context, state) {
-        if (state.status == Status.error || state.status == Status.success) {
+        if (state.status == Status.error) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               behavior: SnackBarBehavior.floating,
@@ -44,9 +44,7 @@ class _LoginPageState extends State<LoginPage> {
                     const SizedBox(width: 8),
                     Expanded(
                       child: Text(
-                        state.status == Status.error
-                            ? state.errorMessage ?? ''
-                            : state.passwordMessage ?? '',
+                        state.errorMessage ?? '',
                         style: const TextStyle(color: Colors.white),
                         softWrap: true,
                       ),

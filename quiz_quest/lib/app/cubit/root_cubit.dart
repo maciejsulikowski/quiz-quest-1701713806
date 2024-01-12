@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'dart:html';
 
 import 'package:bloc/bloc.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meta/meta.dart';
 import 'package:quiz_quest/app/core/enums.dart';
@@ -106,6 +108,14 @@ class RootCubit extends Cubit<RootState> {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: email,
         password: password,
+      );
+      await FirebaseFirestore.instance.collection('users').doc().set(
+        {
+          'email': email,
+        },
+        SetOptions(
+          merge: true,
+        ),
       );
       emit(
         const RootState(

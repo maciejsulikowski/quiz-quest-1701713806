@@ -11,13 +11,14 @@ class UserRepository {
   Stream<UserModel> getUserModel() {
     final data = userDataSource.getUserData();
 
-    return data!.map((doc) {
+    return data.map((doc) {
       return UserModel(
         name: doc['name'],
         surname: doc['surname'],
         imageURL: doc['image_url'],
         gender: doc['gender'],
-        favouriteCategory: doc['favourite_category'],
+        favouriteCategory: doc['favourite_categories'],
+        
       );
     });
   }

@@ -79,28 +79,195 @@ class _UserAccountState extends State<UserAccount> {
                         fontWeight: FontWeight.bold),
                   ),
                 ),
-                TextFieldWidget(
-                  name: 'Name',
-                  controller: nameController,
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: TextField(
+                          controller: nameController,
+                          style: GoogleFonts.aBeeZee(
+                            fontSize: 18,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          decoration: const InputDecoration(
+                            border: UnderlineInputBorder(),
+                            hintStyle: TextStyle(color: Colors.white),
+                            labelStyle:
+                                TextStyle(color: Colors.white54, fontSize: 18),
+                            labelText: 'Name',
+                          ),
+                        ),
+                      ),
+                      IconButton(
+                        icon: Icon(
+                          nameController.text.isNotEmpty
+                              ? Icons.check
+                              : Icons.clear,
+                          color: Colors.white,
+                        ),
+                        onPressed: nameController.text.isEmpty
+                            ? null
+                            : () {
+                                context
+                                    .read<UserCubit>()
+                                    .updateName(name: nameController.text);
+                              },
+                      ),
+                    ],
+                  ),
                 ),
-                TextFieldWidget(
-                  name: 'Surname',
-                  controller: surnameController,
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: TextField(
+                          controller: surnameController,
+                          style: GoogleFonts.aBeeZee(
+                            fontSize: 18,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          decoration: const InputDecoration(
+                            border: UnderlineInputBorder(),
+                            hintStyle: TextStyle(color: Colors.white),
+                            labelStyle:
+                                TextStyle(color: Colors.white54, fontSize: 18),
+                            labelText: 'Surname',
+                          ),
+                        ),
+                      ),
+                      IconButton(
+                        icon: Icon(
+                          surnameController.text.isNotEmpty
+                              ? Icons.check
+                              : Icons.clear,
+                          color: Colors.white,
+                        ),
+                        onPressed: surnameController.text.isEmpty
+                            ? null
+                            : () {
+                                context
+                                    .read<UserCubit>()
+                                    .updateName(name: surnameController.text);
+                              },
+                      ),
+                    ],
+                  ),
                 ),
-                TextFieldWidget(
-                  name: 'E-mail',
-                  controller: emailController,
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: TextField(
+                          controller: genderController,
+                          style: GoogleFonts.aBeeZee(
+                            fontSize: 18,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          decoration: const InputDecoration(
+                            border: UnderlineInputBorder(),
+                            hintStyle: TextStyle(color: Colors.white),
+                            labelStyle:
+                                TextStyle(color: Colors.white54, fontSize: 18),
+                            labelText: 'Gender',
+                          ),
+                        ),
+                      ),
+                      IconButton(
+                        icon: Icon(
+                          genderController.text.isNotEmpty
+                              ? Icons.check
+                              : Icons.clear,
+                          color: Colors.white,
+                        ),
+                        onPressed: genderController.text.isEmpty
+                            ? null
+                            : () {
+                                context
+                                    .read<UserCubit>()
+                                    .updateName(name: genderController.text);
+                              },
+                      ),
+                    ],
+                  ),
                 ),
-                TextFieldWidget(
-                  name: 'Gender',
-                  controller: genderController,
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: TextField(
+                          controller: emailController,
+                          style: GoogleFonts.aBeeZee(
+                            fontSize: 18,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          decoration: const InputDecoration(
+                            border: UnderlineInputBorder(),
+                            hintStyle: TextStyle(color: Colors.white),
+                            labelStyle:
+                                TextStyle(color: Colors.white54, fontSize: 18),
+                            labelText: 'Email',
+                          ),
+                        ),
+                      ),
+                      IconButton(
+                        icon: const Icon(
+                          Icons.check,
+                          color: Colors.white,
+                        ),
+                        onPressed: () {},
+                      ),
+                    ],
+                  ),
                 ),
                 const SizedBox(
                   height: 15,
                 ),
-                TextFieldWidget(
-                  name: 'Favourite category',
-                  controller: categoryController,
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: TextField(
+                          controller: categoryController,
+                          style: GoogleFonts.aBeeZee(
+                            fontSize: 18,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          decoration: const InputDecoration(
+                            border: UnderlineInputBorder(),
+                            hintStyle: TextStyle(color: Colors.white),
+                            labelStyle:
+                                TextStyle(color: Colors.white54, fontSize: 18),
+                            labelText: 'Favourite category',
+                          ),
+                        ),
+                      ),
+                      IconButton(
+                        icon: Icon(
+                          categoryController.text.isNotEmpty
+                              ? Icons.check
+                              : Icons.clear,
+                          color: Colors.white,
+                        ),
+                        onPressed: categoryController.text.isEmpty
+                            ? null
+                            : () {
+                                context
+                                    .read<UserCubit>()
+                                    .updateName(name: categoryController.text);
+                              },
+                      ),
+                    ],
+                  ),
                 ),
                 const SizedBox(
                   height: 15,
@@ -157,48 +324,52 @@ class _UserAccountState extends State<UserAccount> {
   }
 }
 
-class TextFieldWidget extends StatelessWidget {
-  const TextFieldWidget({
-    required this.name,
-    required this.controller,
-    super.key,
-  });
+// class TextFieldWidget extends StatelessWidget {
+//   const TextFieldWidget({
+//     required this.name,
+//     required this.controller,
+//     super.key,
+//   });
 
-  final String name;
-  final TextEditingController? controller;
+//   final String name;
+//   final TextEditingController? controller;
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 24),
-      child: Row(
-        children: [
-          Expanded(
-            child: TextField(
-              controller: controller,
-              style: GoogleFonts.aBeeZee(
-                fontSize: 18,
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
-              decoration: InputDecoration(
-                border: const UnderlineInputBorder(),
-                hintStyle: const TextStyle(color: Colors.white),
-                labelStyle:
-                    const TextStyle(color: Colors.white54, fontSize: 18),
-                labelText: name,
-              ),
-            ),
-          ),
-          IconButton(
-            icon: Icon(
-              controller!.text.isNotEmpty ? Icons.check : Icons.clear,
-              color: Colors.white,
-            ),
-            onPressed: () {},
-          ),
-        ],
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       padding: const EdgeInsets.symmetric(horizontal: 24),
+//       child: Row(
+//         children: [
+//           Expanded(
+//             child: TextField(
+//               controller: controller,
+//               style: GoogleFonts.aBeeZee(
+//                 fontSize: 18,
+//                 color: Colors.white,
+//                 fontWeight: FontWeight.bold,
+//               ),
+//               decoration: InputDecoration(
+//                 border: const UnderlineInputBorder(),
+//                 hintStyle: const TextStyle(color: Colors.white),
+//                 labelStyle:
+//                     const TextStyle(color: Colors.white54, fontSize: 18),
+//                 labelText: name,
+//               ),
+//             ),
+//           ),
+//           IconButton(
+//             icon: Icon(
+//               controller!.text.isNotEmpty ? Icons.check : Icons.clear,
+//               color: Colors.white,
+//             ),
+//             onPressed: controller!.text.isEmpty
+//                 ? null
+//                 : () {
+//                     context.read<UserCubit>().updateData();
+//                   },
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }

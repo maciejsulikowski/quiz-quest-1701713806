@@ -41,6 +41,122 @@ class UserCubit extends Cubit<UserState> {
       });
   }
 
+  Future<void> updateName({
+    required String? name,
+  }) async {
+    emit(UserState(
+      status: Status.loading,
+    ));
+
+    try {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc()
+          .collection('user_profile')
+          .doc()
+          .set(
+        {
+          'name': name,
+        },
+        SetOptions(merge: true),
+      );
+    } catch (error) {
+      emit(
+        UserState(
+          status: Status.error,
+          errorMessage: error.toString(),
+        ),
+      );
+    }
+  }
+
+  Future<void> updateSurname({
+    required String? surname,
+  }) async {
+    emit(UserState(
+      status: Status.loading,
+    ));
+
+    try {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc()
+          .collection('user_profile')
+          .doc()
+          .set(
+        {
+          'surname': surname,
+        },
+        SetOptions(merge: true),
+      );
+    } catch (error) {
+      emit(
+        UserState(
+          status: Status.error,
+          errorMessage: error.toString(),
+        ),
+      );
+    }
+  }
+
+  Future<void> updateGender({
+    required String? gender,
+  }) async {
+    emit(UserState(
+      status: Status.loading,
+    ));
+
+    try {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc()
+          .collection('user_profile')
+          .doc()
+          .set(
+        {
+          'gender': gender,
+        },
+        SetOptions(merge: true),
+      );
+    } catch (error) {
+      emit(
+        UserState(
+          status: Status.error,
+          errorMessage: error.toString(),
+        ),
+      );
+    }
+  }
+
+  Future<void> updateCategory({
+    required String? category,
+  }) async {
+    emit(UserState(
+      status: Status.loading,
+    ));
+
+    try {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc()
+          .collection('user_profile')
+          .doc()
+          .set(
+        {
+          'name': category,
+        },
+        SetOptions(merge: true),
+      );
+    } catch (error) {
+      emit(
+        UserState(
+          status: Status.error,
+          errorMessage: error.toString(),
+        ),
+      );
+    }
+  }
+
   @override
   Future<void> close() {
     streamSubscription?.cancel();

@@ -108,14 +108,18 @@ class RootCubit extends Cubit<RootState> {
         email: email,
         password: password,
       );
-      await FirebaseFirestore.instance.collection('users').doc().set(
-        {
-          'email': email,
-        },
-        SetOptions(
-          merge: true,
-        ),
-      );
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc()
+          .collection('user_profile')
+          .doc()
+          .set({
+        'name': '',
+        'surname': '',
+        'email': email,
+        'favourite_category': '',
+        'gender': '',
+      });
       emit(
         const RootState(
           status: Status.success,

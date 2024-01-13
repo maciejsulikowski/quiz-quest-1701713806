@@ -6,14 +6,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meta/meta.dart';
 import 'package:quiz_quest/app/core/enums.dart';
 import 'package:quiz_quest/app/domain/models/user_model/user_model.dart';
+import 'package:quiz_quest/app/domain/repositories/user_repository/user_repository.dart';
 
 part 'user_state.dart';
 
 class UserCubit extends Cubit<UserState> {
-  UserCubit()
+  UserCubit(this.userRepository)
       : super(
           UserState(),
         );
+
+  final UserRepository userRepository;
 
   StreamSubscription? streamSubscription;
 
@@ -22,25 +25,7 @@ class UserCubit extends Cubit<UserState> {
       status: Status.loading,
     ));
 
-    final userID = FirebaseAuth.instance.currentUser?.uid;
-    if (userID == null) {
-      throw Exception('User is not logged in');
-    }
-
-    streamSubscription = FirebaseFirestore.instance
-        .collection('users')
-        .doc('GpK87jk9z79ktZ9m0r64')
-        .snapshots()
-        .map(
-          (data) => UserModel(
-            name: data['name'] ?? '',
-            surname: data['surname'] ?? '',
-            imageURL: data['image_url'] ?? '',
-            gender: data['gender'] ?? '',
-            favouriteCategory: data['favourite_category'] ?? '',
-          ),
-        )
-        .listen((user) {
+    streamSubscription = userRepository.getUserModel().listen((user) {
       emit(UserState(
         userModel: user,
         status: Status.success,

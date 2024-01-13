@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:quiz_quest/app/cubit/root_cubit.dart';
+import 'package:quiz_quest/app/data/data_sources/user_data_source/user_data_source.dart';
+import 'package:quiz_quest/app/domain/repositories/user_repository/user_repository.dart';
 import 'package:quiz_quest/app/features/login_page/login_page.dart';
 import 'package:quiz_quest/app/features/user_page/cubit/user_cubit.dart';
 
@@ -29,7 +31,7 @@ class _UserAccountState extends State<UserAccount> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => UserCubit()..start(),
+      create: (context) => UserCubit(UserRepository(UserDataSource()))..start(),
       child: BlocBuilder<UserCubit, UserState>(
         builder: (context, state) {
           final userModel = state.userModel;
@@ -77,8 +79,10 @@ class _UserAccountState extends State<UserAccount> {
                         fontWeight: FontWeight.bold),
                   ),
                 ),
-                if (userModel != null)
-                  TextFieldWidget(name: 'Name', controller: nameController),
+                TextFieldWidget(
+                  name: 'Name',
+                  controller: nameController,
+                ),
                 TextFieldWidget(
                   name: 'Surname',
                   controller: surnameController,
@@ -166,17 +170,35 @@ class TextFieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
-        child: TextField(
-          controller: controller,
-          style: GoogleFonts.aBeeZee(
-              fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold),
-          decoration: InputDecoration(
-            border: const UnderlineInputBorder(),
-            hintStyle: const TextStyle(color: Colors.white),
-            labelStyle: const TextStyle(color: Colors.white54, fontSize: 18),
-            labelText: name,
+      padding: const EdgeInsets.symmetric(horizontal: 24),
+      child: Row(
+        children: [
+          Expanded(
+            child: TextField(
+              controller: controller,
+              style: GoogleFonts.aBeeZee(
+                fontSize: 18,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+              decoration: InputDecoration(
+                border: const UnderlineInputBorder(),
+                hintStyle: const TextStyle(color: Colors.white),
+                labelStyle:
+                    const TextStyle(color: Colors.white54, fontSize: 18),
+                labelText: name,
+              ),
+            ),
           ),
-        ));
+          IconButton(
+            icon: Icon(
+              controller!.text.isNotEmpty ? Icons.check : Icons.clear,
+              color: Colors.white,
+            ),
+            onPressed: () {},
+          ),
+        ],
+      ),
+    );
   }
 }

@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quiz_quest/app/cubit/root_cubit.dart';
+import 'package:quiz_quest/app/data/data_sources/user_data_source/user_data_source.dart';
+import 'package:quiz_quest/app/domain/repositories/user_repository/user_repository.dart';
 import 'package:quiz_quest/app/features/home_page/home_page.dart';
 import 'package:quiz_quest/app/features/login_page/login_page.dart';
 import 'package:quiz_quest/app/features/welcome_page/welcome_page.dart';
@@ -12,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => RootCubit()..start(),
+      create: (context) => RootCubit(UserRepository(UserDataSource()))..start(),
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(

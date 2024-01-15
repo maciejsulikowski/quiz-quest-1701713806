@@ -18,8 +18,27 @@ class UserRepository {
         imageURL: doc['image_url'],
         gender: doc['gender'],
         favouriteCategory: doc['favourite_categories'],
-        
       );
     });
+  }
+
+  Future<void> setEmptyAccount() async {
+    return userDataSource.setEmptyAccount();
+  }
+
+  Future<void> updateName(String name) async {
+    return userDataSource.updateName(name: name);
+  }
+
+  Future<void> updateSurname(String surname) async {
+    return userDataSource.updateSurname(surname: surname);
+  }
+
+  Future<void> updateGender(String gender) async {
+    return userDataSource.updateGender(gender: gender);
+  }
+
+  Future<void> updateCategory(String category) async {
+    return userDataSource.updateCategory(category: category);
   }
 }

@@ -185,7 +185,7 @@ class _LoginPageState extends State<LoginPage> {
                 TextButton(
                     onPressed: () async {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => ForgotPasswordPage()));
+                          builder: (context) => const ForgotPasswordPage()));
                     },
                     child: Text('Forgot password?',
                         style: GoogleFonts.aBeeZee(

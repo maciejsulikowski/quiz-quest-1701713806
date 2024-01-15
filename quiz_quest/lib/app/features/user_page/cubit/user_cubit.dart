@@ -41,24 +41,20 @@ class UserCubit extends Cubit<UserState> {
       });
   }
 
-  Future<void> updateName({
-    required String? name,
-  }) async {
+  Future<void> updateName(
+    String name,
+  ) async {
     emit(UserState(
       status: Status.loading,
     ));
 
     try {
-      await FirebaseFirestore.instance
-          .collection('users')
-          .doc()
-          .collection('user_profile')
-          .doc()
-          .set(
-        {
-          'name': name,
-        },
-        SetOptions(merge: true),
+      await userRepository.updateName(name);
+      emit(
+        UserState(
+          status: Status.success,
+          isSaved: true,
+        ),
       );
     } catch (error) {
       emit(
@@ -70,24 +66,20 @@ class UserCubit extends Cubit<UserState> {
     }
   }
 
-  Future<void> updateSurname({
-    required String? surname,
-  }) async {
+  Future<void> updateSurname(
+    String surname,
+  ) async {
     emit(UserState(
       status: Status.loading,
     ));
 
     try {
-      await FirebaseFirestore.instance
-          .collection('users')
-          .doc()
-          .collection('user_profile')
-          .doc()
-          .set(
-        {
-          'surname': surname,
-        },
-        SetOptions(merge: true),
+      await userRepository.updateSurname(surname);
+      emit(
+        UserState(
+          status: Status.success,
+          isSaved: true,
+        ),
       );
     } catch (error) {
       emit(
@@ -99,24 +91,20 @@ class UserCubit extends Cubit<UserState> {
     }
   }
 
-  Future<void> updateGender({
-    required String? gender,
-  }) async {
+  Future<void> updateGender(
+    String gender,
+  ) async {
     emit(UserState(
       status: Status.loading,
     ));
 
     try {
-      await FirebaseFirestore.instance
-          .collection('users')
-          .doc()
-          .collection('user_profile')
-          .doc()
-          .set(
-        {
-          'gender': gender,
-        },
-        SetOptions(merge: true),
+      await userRepository.updateGender(gender);
+      emit(
+        UserState(
+          status: Status.success,
+          isSaved: true,
+        ),
       );
     } catch (error) {
       emit(
@@ -128,24 +116,20 @@ class UserCubit extends Cubit<UserState> {
     }
   }
 
-  Future<void> updateCategory({
-    required String? category,
-  }) async {
+  Future<void> updateCategory(
+    String category,
+  ) async {
     emit(UserState(
       status: Status.loading,
     ));
 
     try {
-      await FirebaseFirestore.instance
-          .collection('users')
-          .doc()
-          .collection('user_profile')
-          .doc()
-          .set(
-        {
-          'name': category,
-        },
-        SetOptions(merge: true),
+      await userRepository.updateCategory(category);
+      emit(
+        UserState(
+          status: Status.success,
+          isSaved: true,
+        ),
       );
     } catch (error) {
       emit(

@@ -5,11 +5,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meta/meta.dart';
 import 'package:quiz_quest/app/core/enums.dart';
+import 'package:quiz_quest/app/domain/repositories/user_repository/user_repository.dart';
 
 part 'root_state.dart';
 
 class RootCubit extends Cubit<RootState> {
-  RootCubit()
+  RootCubit(this.userRepository)
       : super(const RootState(
           user: null,
           status: Status.loading,
@@ -17,6 +18,7 @@ class RootCubit extends Cubit<RootState> {
         ));
 
   StreamSubscription? streamSubscription;
+  UserRepository? userRepository;
 
   Future<void> start() async {
     emit(
@@ -108,18 +110,7 @@ class RootCubit extends Cubit<RootState> {
         email: email,
         password: password,
       );
-      await FirebaseFirestore.instance
-          .collection('users')
-          .doc()
-          .collection('user_profile')
-          .doc()
-          .set({
-        'name': '',
-        'surname': '',
-        'email': email,
-        'favourite_category': '',
-        'gender': '',
-      });
+      await userRepository!.setEmptyAccount();
       emit(
         const RootState(
           status: Status.success,

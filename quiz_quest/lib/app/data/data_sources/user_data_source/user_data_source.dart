@@ -31,7 +31,8 @@ class UserDataSource {
         .collection('users')
         .doc(userID)
         .collection('user_profile')
-        .add(
+        .doc(userID)
+        .set(
       {
         'name': '',
         'surname': '',

@@ -18,7 +18,7 @@ class RootCubit extends Cubit<RootState> {
         ));
 
   StreamSubscription? streamSubscription;
-  UserRepository? userRepository;
+  UserRepository userRepository;
 
   Future<void> start() async {
     emit(
@@ -110,7 +110,7 @@ class RootCubit extends Cubit<RootState> {
         email: email,
         password: password,
       );
-      await userRepository!.setEmptyAccount();
+       await userRepository.setEmptyAccount();
       emit(
         const RootState(
           status: Status.success,

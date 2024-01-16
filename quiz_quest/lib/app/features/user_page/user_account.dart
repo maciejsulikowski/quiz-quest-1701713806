@@ -100,9 +100,8 @@ class _UserAccountState extends State<UserAccount> {
                                   color: Colors.white54, fontSize: 18),
                               labelText: 'Name',
                             ),
-                            onChanged: (text) {
-                             
-                            },
+                            onChanged: (text) =>
+                                context.read<UserCubit>().updateName(text),
                           ),
                         ),
                         IconButton(

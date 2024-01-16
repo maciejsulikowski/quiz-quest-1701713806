@@ -12,10 +12,12 @@ class UserDataSource {
         .collection('users')
         .doc(userID)
         .collection('user_profile')
+        .doc(userID)
         .snapshots()
-        .map((querySnapshot) {
-      if (querySnapshot.docs.isNotEmpty) {
-        return querySnapshot.docs.first.data();
+        .map((docSnapshot) {
+      if (docSnapshot.exists) {
+        final data = docSnapshot.data() ?? {};
+        return data;
       } else {
         return {};
       }
@@ -52,9 +54,9 @@ class UserDataSource {
     }
     await FirebaseFirestore.instance
         .collection('users')
-        .doc()
+        .doc(userID)
         .collection('user_profile')
-        .doc()
+        .doc(userID)
         .set(
       {
         'name': name,
@@ -72,9 +74,9 @@ class UserDataSource {
     }
     await FirebaseFirestore.instance
         .collection('users')
-        .doc()
+        .doc(userID)
         .collection('user_profile')
-        .doc()
+        .doc(userID)
         .set(
       {
         'surname': surname,
@@ -92,9 +94,9 @@ class UserDataSource {
     }
     await FirebaseFirestore.instance
         .collection('users')
-        .doc()
+        .doc(userID)
         .collection('user_profile')
-        .doc()
+        .doc(userID)
         .set(
       {
         'gender': gender,
@@ -112,12 +114,12 @@ class UserDataSource {
     }
     await FirebaseFirestore.instance
         .collection('users')
-        .doc()
+        .doc(userID)
         .collection('user_profile')
-        .doc()
+        .doc(userID)
         .set(
       {
-        'name': category,
+        'favourite_categories': category,
       },
       SetOptions(merge: true),
     );

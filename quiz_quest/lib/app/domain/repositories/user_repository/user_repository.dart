@@ -38,6 +38,10 @@ class UserRepository {
     return userDataSource.updateGender(gender: gender);
   }
 
+  Future<void> updateImage(String imageURL) async {
+    return userDataSource.updateImage(imageURL: imageURL);
+  }
+
   Future<void> updateCategory(String category) async {
     return userDataSource.updateCategory(category: category);
   }

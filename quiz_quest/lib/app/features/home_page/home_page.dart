@@ -39,9 +39,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('HomePage'),
-      ),
       bottomNavigationBar: BottomNavigationBar(
           currentIndex: currentIndex,
           onTap: (newIndex) {
@@ -67,7 +64,7 @@ class _HomePageState extends State<HomePage> {
               user: widget.user,
             );
           }
-          return const UserAccount();
+          return  UserAccount(user: widget.user,);
         }),
       ),
     );
@@ -110,7 +107,7 @@ class QuizzPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Hi ${user!.email} 👋',
+                        'Hi user 👋',
                         style: GoogleFonts.aBeeZee(
                             fontSize: 24,
                             color: Colors.white,

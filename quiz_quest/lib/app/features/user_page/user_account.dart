@@ -1,7 +1,11 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
 
 import 'package:quiz_quest/app/cubit/root_cubit.dart';
 import 'package:quiz_quest/app/data/data_sources/user_data_source/user_data_source.dart';
@@ -68,6 +72,8 @@ class _UserWidgetState extends State<UserWidget> {
   late TextEditingController emailController;
   late IconData icon;
   late Color iconColor;
+  bool isLoading = false;
+  static String imageURL = '';
 
   @override
   void initState() {
@@ -152,11 +158,61 @@ class _UserWidgetState extends State<UserWidget> {
           const SizedBox(
             height: 30,
           ),
-          const CircleAvatar(
-            radius: 50,
-            child: Icon(
-              Icons.photo_camera,
-              size: 40,
+          InkWell(
+            onTap: () async {
+              ImagePicker imagePicker = ImagePicker();
+              XFile? file =
+                  await imagePicker.pickImage(source: ImageSource.gallery);
+
+              if (file == null) return;
+
+              String uniqueFileName =
+                  DateTime.now().millisecondsSinceEpoch.toString();
+
+              Reference referenceRoot = FirebaseStorage.instance.ref();
+              Reference referenceDirImages = referenceRoot.child('images');
+
+              Reference referenceImageToUpload =
+                  referenceDirImages.child(uniqueFileName);
+
+              try {
+                setState(() {
+                  isLoading = true;
+                });
+                await referenceImageToUpload.putFile(File(file.path));
+                imageURL = await referenceImageToUpload.getDownloadURL();
+                setState(() {
+                  isLoading = false;
+                });
+                context.read<UserCubit>().updateImage(imageURL);
+              } catch (error) {
+                setState(() {
+                  isLoading = false;
+                });
+              }
+            },
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                CircleAvatar(
+                  radius: 60,
+                  backgroundColor: Colors.black,
+                  backgroundImage:
+                      imageURL.isNotEmpty ? NetworkImage(imageURL) : null,
+                  child: imageURL.isEmpty
+                      ? const Icon(
+                          Icons.photo_camera,
+                          size: 40,
+                        )
+                      : null,
+                ),
+                if (isLoading)
+                  const CircleAvatar(
+                    radius: 60,
+                    backgroundColor: Colors.black,
+                    child: CircularProgressIndicator(),
+                  ),
+              ],
             ),
           ),
           const SizedBox(

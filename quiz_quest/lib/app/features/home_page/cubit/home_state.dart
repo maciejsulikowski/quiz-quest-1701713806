@@ -12,6 +12,17 @@ class HomeState {
     this.vehiclesModel,
     this.status = Status.initial,
     this.errorMessage,
+    this.searchedList = const [
+      'Animals',
+      'Art',
+      'Computer Science',
+      'Geography',
+      'History',
+      'Politics',
+      'Sport',
+      'Vehicles'
+    ],
+    this.list = const [],
   });
 
   final SportsQuizModel? sportsModel;
@@ -24,4 +35,6 @@ class HomeState {
   final VehiclesQuizModel? vehiclesModel;
   final Status status;
   final String? errorMessage;
+  final List searchedList;
+  final List list;
 }

@@ -14,4 +14,20 @@ part 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit() : super(HomeState());
+
+  List list = [];
+
+  Future<void> updateList(String value) async {
+    emit(HomeState(status: Status.loading));
+    final filteredCategory = list
+        .where(
+            (category) => category.toLowerCase().contains(value.toLowerCase()))
+        .toList();
+    emit(
+      HomeState(
+        status: Status.success,
+        searchedList: filteredCategory,
+      ),
+    );
+  }
 }

@@ -64,14 +64,16 @@ class _HomePageState extends State<HomePage> {
               user: widget.user,
             );
           }
-          return  UserAccount(user: widget.user,);
+          return UserAccount(
+            user: widget.user,
+          );
         }),
       ),
     );
   }
 }
 
-class QuizzPage extends StatelessWidget {
+class QuizzPage extends StatefulWidget {
   QuizzPage({
     this.user,
     super.key,
@@ -80,7 +82,82 @@ class QuizzPage extends StatelessWidget {
   final User? user;
 
   @override
+  State<QuizzPage> createState() => _QuizzPageState();
+}
+
+class _QuizzPageState extends State<QuizzPage> {
+  @override
   Widget build(BuildContext context) {
+    List categoriesList = [
+      {'name': 'Animals', 'image': 'images/animal.png'},
+      {'name': 'Art', 'image': 'images/art.png'},
+      {'name': 'Computer Science', 'image': 'images/computer.png'},
+      {'name': 'Geography', 'image': 'images/geography.png'},
+      {'name': 'History', 'image': 'images/history.png'},
+      {'name': 'Politics', 'image': 'images/politics.png'},
+      {'name': 'Sport', 'image': 'images/ball.png'},
+      {'name': 'Vehicles', 'image': 'images/vehicle.png'},
+    ];
+
+    List list = <Widget>[
+      QuizzCategoryWidget(
+        name: categoriesList[0]['name'],
+        image: categoriesList[0]['image'],
+      ),
+      QuizzCategoryWidget3(
+        name: categoriesList[1]['name'],
+        image: categoriesList[1]['image'],
+      ),
+      QuizzCategoryWidget4(
+        name: categoriesList[2]['name'],
+        image: categoriesList[2]['image'],
+      ),
+      QuizzCategoryWidget5(
+        name: categoriesList[3]['name'],
+        image: categoriesList[3]['image'],
+      ),
+      QuizzCategoryWidget6(
+        name: categoriesList[4]['name'],
+        image: categoriesList[4]['image'],
+      ),
+      QuizzCategoryWidget7(
+        name: categoriesList[5]['name'],
+        image: categoriesList[5]['image'],
+      ),
+      QuizzCategoryWidget2(
+        name: categoriesList[6]['name'],
+        image: categoriesList[6]['image'],
+      ),
+      QuizzCategoryWidget8(
+        name: categoriesList[7]['name'],
+        image: categoriesList[7]['image'],
+      ),
+    ];
+    final controller = TextEditingController();
+    List categoryList = [];
+
+    @override
+    void initState() {
+      categoryList = list;
+      super.initState();
+    }
+
+    void filter(categoryWord) {
+      List results = [];
+      if (categoryWord.isEmpty) {
+        results = list;
+      } else {
+        results = list
+            .where((name) =>
+                name['name'].toLowerCase().contains(categoryWord.toLowerCase))
+            .toList();
+      }
+
+      setState(() {
+        categoryList = results;
+      });
+    }
+
     return BlocProvider(
       create: (context) => HomeCubit(),
       child: BlocBuilder<HomeCubit, HomeState>(
@@ -165,18 +242,57 @@ class QuizzPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 30),
                 Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        gradient: const LinearGradient(
+                          colors: [
+                            Color.fromARGB(255, 94, 128, 239),
+                            Color.fromARGB(255, 76, 75, 167),
+                          ],
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight,
+                        ),
+                        borderRadius: BorderRadius.circular(20),
+                        color: Colors.red),
+                    child: TextField(
+                      onChanged: (value) => filter(value),
+                      controller: controller,
+                      style: GoogleFonts.aBeeZee(
+                          fontSize: 16, color: Colors.white),
+                      decoration: InputDecoration(
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                            color: Colors.white54,
+                          ),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        contentPadding: const EdgeInsets.all(10),
+                        hintText: 'Search category',
+                        hintStyle: GoogleFonts.aBeeZee(
+                            fontSize: 16,
+                            color: Colors.white54,
+                            fontWeight: FontWeight.bold),
+                        suffixIcon: const Icon(
+                          Icons.search,
+                          color: Colors.white54,
+                        ),
+                        hintMaxLines: 1,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 30),
+                Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      QuizzCategoryWidget(
-                        name: 'Animals',
-                        image: 'images/animal.png',
-                      ),
-                      QuizzCategoryWidget3(
-                        name: 'Art',
-                        image: 'images/art.png',
-                      ),
+                      list[0],
+                      list[1],
                     ],
                   ),
                 ),
@@ -188,14 +304,8 @@ class QuizzPage extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      QuizzCategoryWidget4(
-                        name: 'Computer Science',
-                        image: 'images/computer.png',
-                      ),
-                      QuizzCategoryWidget5(
-                        name: 'Geography',
-                        image: 'images/geography.png',
-                      ),
+                      list[2],
+                      list[3],
                     ],
                   ),
                 ),
@@ -207,14 +317,8 @@ class QuizzPage extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      QuizzCategoryWidget6(
-                        name: 'History',
-                        image: 'images/history.png',
-                      ),
-                      QuizzCategoryWidget7(
-                        name: 'Politics',
-                        image: 'images/politics.png',
-                      ),
+                      list[4],
+                      list[5],
                     ],
                   ),
                 ),
@@ -226,14 +330,8 @@ class QuizzPage extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      QuizzCategoryWidget2(
-                        name: 'Sport',
-                        image: 'images/ball.png',
-                      ),
-                      QuizzCategoryWidget8(
-                        name: 'Vehicles',
-                        image: 'images/vehicle.png',
-                      ),
+                      list[6],
+                      list[7],
                     ],
                   ),
                 ),

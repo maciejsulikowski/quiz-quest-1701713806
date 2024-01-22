@@ -86,262 +86,325 @@ class QuizzPage extends StatefulWidget {
 }
 
 class _QuizzPageState extends State<QuizzPage> {
+  List list = [
+    {
+      'id': 1,
+      'widget': const QuizzCategoryWidget(
+        name: 'Animals',
+        image: 'images/animal.png',
+      ),
+      'name': 'Animals',
+      'image': 'images/animal.png'
+    },
+    {
+      'id': 2,
+      'widget': const QuizzCategoryWidget3(
+        name: 'Art',
+        image: 'images/art.png',
+      ),
+      'name': 'Art',
+      'image': 'images/art.png'
+    },
+    {
+      'id': 3,
+      'widget': const QuizzCategoryWidget4(
+        name: 'Computer Science',
+        image: 'images/computer.png',
+      ),
+      'name': 'Computer Science',
+      'image': 'images/computer.png'
+    },
+    {
+      'id': 4,
+      'widget': const QuizzCategoryWidget5(
+        name: 'Geography',
+        image: 'images/geography.png',
+      ),
+      'name': 'Geography',
+      'image': 'images/geography.png'
+    },
+    {
+      'id': 5,
+      'widget': const QuizzCategoryWidget6(
+        name: 'History',
+        image: 'images/history.png',
+      ),
+      'name': 'History',
+      'image': 'images/history.png'
+    },
+    {
+      'id': 6,
+      'widget': const QuizzCategoryWidget7(
+        name: 'Politics',
+        image: 'images/politics.png',
+      ),
+      'name': 'Politics',
+      'image': 'images/politics.png'
+    },
+    {
+      'id': 7,
+      'widget': const QuizzCategoryWidget2(
+        name: 'Sport',
+        image: 'images/ball.png',
+      ),
+      'name': 'Sport',
+      'image': 'images/ball.png'
+    },
+    {
+      'id': 8,
+      'widget': const QuizzCategoryWidget8(
+        name: 'Vehicles',
+        image: 'images/vehicle.png',
+      ),
+      'name': 'Vehicles',
+      'image': 'images/vehicle.png'
+    },
+  ];
+
+  final controller = TextEditingController();
+  List categoryList = [];
+
+  @override
+  void initState() {
+    categoryList = list;
+    super.initState();
+  }
+
+  void filter(String categoryWord) {
+    List results = [];
+
+    if (categoryWord.isNotEmpty) {
+      results = list
+          .where((category) => category['name']
+              .toLowerCase()
+              .contains(categoryWord.toLowerCase()))
+          .toList();
+    } else {
+      results = list;
+    }
+
+    setState(() {
+      categoryList = results;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    List categoriesList = [
-      {'name': 'Animals', 'image': 'images/animal.png'},
-      {'name': 'Art', 'image': 'images/art.png'},
-      {'name': 'Computer Science', 'image': 'images/computer.png'},
-      {'name': 'Geography', 'image': 'images/geography.png'},
-      {'name': 'History', 'image': 'images/history.png'},
-      {'name': 'Politics', 'image': 'images/politics.png'},
-      {'name': 'Sport', 'image': 'images/ball.png'},
-      {'name': 'Vehicles', 'image': 'images/vehicle.png'},
-    ];
-
-    List list = <Widget>[
-      QuizzCategoryWidget(
-        name: categoriesList[0]['name'],
-        image: categoriesList[0]['image'],
+    return Container(
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            Color.fromARGB(255, 10, 58, 214),
+            Color.fromARGB(255, 22, 20, 129),
+          ],
+          begin: Alignment.centerLeft,
+          end: Alignment.centerRight,
+        ),
       ),
-      QuizzCategoryWidget3(
-        name: categoriesList[1]['name'],
-        image: categoriesList[1]['image'],
-      ),
-      QuizzCategoryWidget4(
-        name: categoriesList[2]['name'],
-        image: categoriesList[2]['image'],
-      ),
-      QuizzCategoryWidget5(
-        name: categoriesList[3]['name'],
-        image: categoriesList[3]['image'],
-      ),
-      QuizzCategoryWidget6(
-        name: categoriesList[4]['name'],
-        image: categoriesList[4]['image'],
-      ),
-      QuizzCategoryWidget7(
-        name: categoriesList[5]['name'],
-        image: categoriesList[5]['image'],
-      ),
-      QuizzCategoryWidget2(
-        name: categoriesList[6]['name'],
-        image: categoriesList[6]['image'],
-      ),
-      QuizzCategoryWidget8(
-        name: categoriesList[7]['name'],
-        image: categoriesList[7]['image'],
-      ),
-    ];
-    final controller = TextEditingController();
-    List categoryList = [];
-
-    @override
-    void initState() {
-      categoryList = list;
-      super.initState();
-    }
-
-    void filter(categoryWord) {
-      List results = [];
-      if (categoryWord.isEmpty) {
-        results = list;
-      } else {
-        results = list
-            .where((name) =>
-                name['name'].toLowerCase().contains(categoryWord.toLowerCase))
-            .toList();
-      }
-
-      setState(() {
-        categoryList = results;
-      });
-    }
-
-    return BlocProvider(
-      create: (context) => HomeCubit(),
-      child: BlocBuilder<HomeCubit, HomeState>(
-        builder: (context, state) {
-          return Container(
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  Color.fromARGB(255, 10, 58, 214),
-                  Color.fromARGB(255, 22, 20, 129),
-                ],
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-              ),
-            ),
-            child: ListView(
+      child: ListView(
+        children: [
+          const SizedBox(
+            height: 30,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const SizedBox(
-                  height: 30,
+                Text(
+                  'Hi user 👋',
+                  style: GoogleFonts.aBeeZee(
+                      fontSize: 24,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Hi user 👋',
-                        style: GoogleFonts.aBeeZee(
-                            fontSize: 24,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      const CircleAvatar(
-                        child: Icon(Icons.question_mark),
-                      )
-                    ],
-                  ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        '''Let's play''',
-                        style: GoogleFonts.aBeeZee(
-                            fontSize: 46,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 30),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 32.0),
-                  child: Container(
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                        gradient: const LinearGradient(
-                          colors: [
-                            Color.fromARGB(255, 94, 128, 239),
-                            Color.fromARGB(255, 76, 75, 167),
-                          ],
-                          begin: Alignment.centerLeft,
-                          end: Alignment.centerRight,
-                        ),
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.red),
-                    child: Text(
-                      'Points: 100💎',
-                      style: GoogleFonts.aBeeZee(
-                          fontSize: 28,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 30),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 30),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        gradient: const LinearGradient(
-                          colors: [
-                            Color.fromARGB(255, 94, 128, 239),
-                            Color.fromARGB(255, 76, 75, 167),
-                          ],
-                          begin: Alignment.centerLeft,
-                          end: Alignment.centerRight,
-                        ),
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.red),
-                    child: TextField(
-                      onChanged: (value) => filter(value),
-                      controller: controller,
-                      style: GoogleFonts.aBeeZee(
-                          fontSize: 16, color: Colors.white),
-                      decoration: InputDecoration(
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                            color: Colors.white54,
-                          ),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        contentPadding: const EdgeInsets.all(10),
-                        hintText: 'Search category',
-                        hintStyle: GoogleFonts.aBeeZee(
-                            fontSize: 16,
-                            color: Colors.white54,
-                            fontWeight: FontWeight.bold),
-                        suffixIcon: const Icon(
-                          Icons.search,
-                          color: Colors.white54,
-                        ),
-                        hintMaxLines: 1,
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 30),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      list[0],
-                      list[1],
-                    ],
-                  ),
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      list[2],
-                      list[3],
-                    ],
-                  ),
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      list[4],
-                      list[5],
-                    ],
-                  ),
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      list[6],
-                      list[7],
-                    ],
-                  ),
-                ),
-                const SizedBox(
-                  height: 30,
+                const CircleAvatar(
+                  child: Icon(Icons.question_mark),
+                )
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  '''Let's play''',
+                  style: GoogleFonts.aBeeZee(
+                      fontSize: 46,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold),
                 ),
               ],
             ),
-          );
-        },
+          ),
+          const SizedBox(height: 30),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 32.0),
+            child: Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                  gradient: const LinearGradient(
+                    colors: [
+                      Color.fromARGB(255, 94, 128, 239),
+                      Color.fromARGB(255, 76, 75, 167),
+                    ],
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                  ),
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.red),
+              child: Text(
+                'Points: 100💎',
+                style: GoogleFonts.aBeeZee(
+                    fontSize: 28,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+          const SizedBox(height: 30),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30),
+            child: Container(
+              decoration: BoxDecoration(
+                  gradient: const LinearGradient(
+                    colors: [
+                      Color.fromARGB(255, 94, 128, 239),
+                      Color.fromARGB(255, 76, 75, 167),
+                    ],
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                  ),
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.red),
+              child: TextField(
+                onChanged: (value) => filter(value),
+                controller: controller,
+                style: GoogleFonts.aBeeZee(fontSize: 16, color: Colors.white),
+                decoration: InputDecoration(
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(
+                      color: Colors.white54,
+                    ),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  contentPadding: const EdgeInsets.all(10),
+                  hintText: 'Search category',
+                  hintStyle: GoogleFonts.aBeeZee(
+                      fontSize: 16,
+                      color: Colors.white54,
+                      fontWeight: FontWeight.bold),
+                  suffixIcon: const Icon(
+                    Icons.search,
+                    color: Colors.white54,
+                  ),
+                  hintMaxLines: 1,
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 30),
+
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: ListView.builder(
+              itemCount: categoryList.length,
+              shrinkWrap: true,
+              physics: const ClampingScrollPhysics(),
+              itemBuilder: (context, index) {
+                final firstIndex = index * 2;
+                final secondIndex = firstIndex + 1;
+                if (firstIndex < categoryList.length &&
+                    secondIndex < categoryList.length)
+                  // ignore: curly_braces_in_flow_control_structures
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Column(
+                        children: [
+                          categoryList[firstIndex]['widget'],
+                          const SizedBox(
+                            height: 30,
+                          ),
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          categoryList[secondIndex]['widget'],
+                          const SizedBox(
+                            height: 30,
+                          ),
+                        ],
+                      ),
+                    ],
+                  );
+                return null;
+              },
+            ),
+          ),
+
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.spaceAround,
+          //     children: [
+          //       list[0],
+          //       list[1],
+          //     ],
+          //   ),
+          // ),
+          // const SizedBox(
+          //   height: 30,
+          // ),
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.spaceAround,
+          //     children: [
+          //       list[2],
+          //       list[3],
+          //     ],
+          //   ),
+          // ),
+          // const SizedBox(
+          //   height: 30,
+          // ),
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.spaceAround,
+          //     children: [
+          //       list[4],
+          //       list[5],
+          //     ],
+          //   ),
+          // ),
+          // const SizedBox(
+          //   height: 30,
+          // ),
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.spaceAround,
+          //     children: [
+          //       list[6],
+          //       list[7],
+          //     ],
+          //   ),
+          // ),
+          // const SizedBox(
+          //   height: 30,
+          // ),
+        ],
       ),
     );
   }

@@ -70,6 +70,7 @@ class _UserWidgetState extends State<UserWidget> {
   late TextEditingController genderController;
   late TextEditingController categoryController;
   late TextEditingController emailController;
+  late TextEditingController imageController;
   late IconData icon;
   late Color iconColor;
   bool isLoading = false;
@@ -82,6 +83,7 @@ class _UserWidgetState extends State<UserWidget> {
     surnameController = TextEditingController();
     genderController = TextEditingController();
     categoryController = TextEditingController();
+    imageController = TextEditingController();
     icon = Icons.edit;
     iconColor = Colors.yellow[400]!;
     nameController.addListener(onTextChanged);
@@ -137,6 +139,7 @@ class _UserWidgetState extends State<UserWidget> {
       surnameController.text = widget.userModel?.surname ?? '';
       genderController.text = widget.userModel?.gender ?? '';
       categoryController.text = widget.userModel?.favouriteCategory ?? '';
+      imageController.text = widget.userModel?.imageURL ?? '';
     }
   }
 
@@ -180,6 +183,7 @@ class _UserWidgetState extends State<UserWidget> {
                   isLoading = true;
                 });
                 await referenceImageToUpload.putFile(File(file.path));
+                imageController.text = imageURL;
                 imageURL = await referenceImageToUpload.getDownloadURL();
                 setState(() {
                   isLoading = false;
@@ -197,11 +201,13 @@ class _UserWidgetState extends State<UserWidget> {
                 CircleAvatar(
                   radius: 60,
                   backgroundColor: Colors.black,
-                  backgroundImage:
-                      imageURL.isNotEmpty ? NetworkImage(imageURL) : null,
-                  child: imageURL.isEmpty
+                  backgroundImage: imageController.text.isNotEmpty
+                      ? NetworkImage(imageController.text)
+                      : null,
+                  child: imageController.text.isEmpty
                       ? const Icon(
                           Icons.photo_camera,
+                          color: Colors.black,
                           size: 40,
                         )
                       : null,
@@ -381,6 +387,7 @@ class _UserWidgetState extends State<UserWidget> {
                   onPressed: enableEditing
                       ? () async {
                           await onPressed(controller.text, onUpdate);
+                          _showSnackbar('Changes are saved succesfully');
                         }
                       : null,
                 ),

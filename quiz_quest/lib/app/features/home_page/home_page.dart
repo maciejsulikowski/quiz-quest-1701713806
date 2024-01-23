@@ -323,12 +323,12 @@ class _QuizzPageState extends State<QuizzPage> {
               itemBuilder: (context, index) {
                 final firstIndex = index * 2;
                 final secondIndex = firstIndex + 1;
-                if (firstIndex < categoryList.length &&
-                    secondIndex < categoryList.length)
-                  // ignore: curly_braces_in_flow_control_structures
-                  return Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
+                // if (firstIndex != null && secondIndex != null)
+                // ignore: curly_braces_in_flow_control_structures
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    if (firstIndex < categoryList.length)
                       Column(
                         children: [
                           categoryList[firstIndex]['widget'],
@@ -337,6 +337,7 @@ class _QuizzPageState extends State<QuizzPage> {
                           ),
                         ],
                       ),
+                    if (secondIndex < categoryList.length)
                       Column(
                         children: [
                           categoryList[secondIndex]['widget'],
@@ -345,9 +346,8 @@ class _QuizzPageState extends State<QuizzPage> {
                           ),
                         ],
                       ),
-                    ],
-                  );
-                return null;
+                  ],
+                );
               },
             ),
           ),

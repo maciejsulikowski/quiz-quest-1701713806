@@ -27,8 +27,8 @@ class _QuestionQuizPageState extends State<QuestionQuizPage> {
   @override
   Widget build(BuildContext context) {
     const int duration = 21;
-    Color color = Colors.white;
-
+    bool isCorrectAnswer = false;
+    Color textColor = Colors.white;
     // late String question;
     // late List<dynamic> list;
     // late String correctAnswer;
@@ -71,7 +71,7 @@ class _QuestionQuizPageState extends State<QuestionQuizPage> {
                         padding: const EdgeInsets.symmetric(horizontal: 20.0),
                         child: InkWell(
                           onTap: () {
-                            Navigator.push(
+                            Navigator.pop(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => const HomePage()));
@@ -120,12 +120,22 @@ class _QuestionQuizPageState extends State<QuestionQuizPage> {
                               const SizedBox(
                                 height: 30,
                               ),
-                              AnswerWidget(
-                                // isButtonBlocked: isButtonBlocked,
-                                // color: color,
-                                controller: controller,
-                                answers: list,
-                                // isCorrectAnswer: answer == correctAnswer ? true : false,
+                              Column(
+                                children: [
+                                  for (final answer in list) ...[
+                                    AnswerButton(
+                                      textColor: textColor,
+                                      isCorrectAnswer: answer == correctAnswer
+                                          ? true
+                                          : false,
+                                      answer: answer,
+                                      controller: controller,
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    )
+                                  ]
+                                ],
                               ),
                               const SizedBox(
                                 height: 15,
@@ -193,124 +203,142 @@ class QuestionWidget extends StatelessWidget {
   }
 }
 
-class AnswerWidget extends StatefulWidget {
-  AnswerWidget({
-    required this.answers,
-    // required this.isCorrectAnswer,
-    required this.controller,
-    // required this.color,
-    // required this.isButtonBlocked,
-    super.key,
-  });
+// class AnswerWidget extends StatefulWidget {
+//   AnswerWidget({
+//     required this.answers,
+//     required this.isCorrectAnswer,
+//     required this.controller,
+//     // required this.color,
+//     // required this.isButtonBlocked,
+//     super.key,
+//   });
 
-  final List answers;
-  // final bool isCorrectAnswer;
-  final CountDownController controller;
-  // Color color;
-  // final bool isButtonBlocked;
+//   final List answers;
+//   final bool isCorrectAnswer;
+//   final CountDownController controller;
+//   // Color color;
+//   // final bool isButtonBlocked;
 
-  @override
-  State<AnswerWidget> createState() => _AnswerWidgetState();
-}
+//   @override
+//   State<AnswerWidget> createState() => _AnswerWidgetState();
+// }
 
-class _AnswerWidgetState extends State<AnswerWidget> {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        for (final answer in widget.answers) ...[
-          AnswerButton(
-            answer: answer,
-            controller: widget.controller,
-          ),
-          const SizedBox(
-            height: 10,
-          )
-        ]
+// class _AnswerWidgetState extends State<AnswerWidget> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Column(
+//       children: [
+//         for (final answer in widget.answers) ...[
+//           AnswerButton(
+//             // isCorrectAnswer: widget.isCorrectAnswer,
+//             answer: answer,
+//             controller: widget.controller,
+//           ),
+//           const SizedBox(
+//             height: 10,
+//           )
+//         ]
 
-        // Container(
-        //   margin: const EdgeInsets.symmetric(horizontal: 20),
-        //   decoration: BoxDecoration(
-        //       gradient: const LinearGradient(
-        //         colors: [
-        //           Color.fromRGBO(143, 165, 255, 1),
-        //           Color.fromRGBO(10, 53, 132, 1),
-        //         ],
-        //         begin: Alignment.centerLeft,
-        //         end: Alignment.centerRight,
-        //       ),
-        //       borderRadius: const BorderRadius.all(
-        //         Radius.circular(6.0),
-        //       ),
-        //       boxShadow: [
-        //         BoxShadow(
-        //           color: Colors.black.withOpacity(0.1),
-        //           spreadRadius: 4,
-        //           blurRadius: 10,
-        //           offset: const Offset(0, 3),
-        //         )
-        //       ]),
-        //   child: ElevatedButton(
-        //     onPressed: () {},
-        //     style: ElevatedButton.styleFrom(
-        //         minimumSize: const Size.fromHeight(50),
-        //         backgroundColor: Colors.transparent,
-        //         shadowColor: Colors.transparent),
-        //     child: Text(widget.firstBadAnswer,
-        //         style: GoogleFonts.aBeeZee(
-        //           fontSize: 24,
-        //           color: Colors.white,
-        //         )),
-        //   ),
-        // ),
-      ],
-    );
-  }
-}
+//         // Container(
+//         //   margin: const EdgeInsets.symmetric(horizontal: 20),
+//         //   decoration: BoxDecoration(
+//         //       gradient: const LinearGradient(
+//         //         colors: [
+//         //           Color.fromRGBO(143, 165, 255, 1),
+//         //           Color.fromRGBO(10, 53, 132, 1),
+//         //         ],
+//         //         begin: Alignment.centerLeft,
+//         //         end: Alignment.centerRight,
+//         //       ),
+//         //       borderRadius: const BorderRadius.all(
+//         //         Radius.circular(6.0),
+//         //       ),
+//         //       boxShadow: [
+//         //         BoxShadow(
+//         //           color: Colors.black.withOpacity(0.1),
+//         //           spreadRadius: 4,
+//         //           blurRadius: 10,
+//         //           offset: const Offset(0, 3),
+//         //         )
+//         //       ]),
+//         //   child: ElevatedButton(
+//         //     onPressed: () {},
+//         //     style: ElevatedButton.styleFrom(
+//         //         minimumSize: const Size.fromHeight(50),
+//         //         backgroundColor: Colors.transparent,
+//         //         shadowColor: Colors.transparent),
+//         //     child: Text(widget.firstBadAnswer,
+//         //         style: GoogleFonts.aBeeZee(
+//         //           fontSize: 24,
+//         //           color: Colors.white,
+//         //         )),
+//         //   ),
+//         // ),
+//       ],
+//     );
+//   }
+// }
 
 class AnswerButton extends StatefulWidget {
-  const AnswerButton({
+  AnswerButton({
     super.key,
     required this.answer,
     required this.controller,
+    required this.isCorrectAnswer,
+    required this.textColor,
   });
 
   final String answer;
   final CountDownController controller;
+  final bool isCorrectAnswer;
+  Color textColor;
 
   @override
   State<AnswerButton> createState() => _AnswerButtonState();
 }
 
 class _AnswerButtonState extends State<AnswerButton> {
+  Color buttonColor = Colors.blue;
+
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20),
       decoration: BoxDecoration(
-          gradient: const LinearGradient(
-            colors: [
-              Color.fromRGBO(143, 165, 255, 1),
-              Color.fromRGBO(10, 53, 132, 1),
-            ],
-            begin: Alignment.centerLeft,
-            end: Alignment.centerRight,
-          ),
-          borderRadius: const BorderRadius.all(
-            Radius.circular(6.0),
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.1),
-              spreadRadius: 4,
-              blurRadius: 10,
-              offset: const Offset(0, 3),
-            )
-          ]),
+        gradient: const LinearGradient(
+          colors: [
+            Color.fromRGBO(143, 165, 255, 1),
+            Color.fromRGBO(10, 53, 132, 1),
+          ],
+          begin: Alignment.centerLeft,
+          end: Alignment.centerRight,
+        ),
+        borderRadius: const BorderRadius.all(
+          Radius.circular(6.0),
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            spreadRadius: 4,
+            blurRadius: 10,
+            offset: const Offset(0, 3),
+          )
+        ],
+        color: buttonColor,
+      ),
       child: ElevatedButton(
         onPressed: () {
           setState(() {
             widget.controller.pause();
+            if (widget.isCorrectAnswer) {
+              setState(() {
+                widget.textColor = Colors.green;
+              });
+            } else {
+              setState(() {
+                widget.textColor = Colors.red;
+              });
+            }
           });
         },
         style: ElevatedButton.styleFrom(
@@ -320,7 +348,7 @@ class _AnswerButtonState extends State<AnswerButton> {
         child: Text(widget.answer,
             style: GoogleFonts.aBeeZee(
               fontSize: 24,
-              color: Colors.white,
+              color: widget.textColor,
             )),
       ),
     );

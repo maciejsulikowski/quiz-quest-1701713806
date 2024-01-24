@@ -7,7 +7,6 @@ class AnimalsState {
     this.isLoading = false,
     this.status = Status.initial,
     this.error,
-    this.index = 0,
   });
 
   final bool isLoading;
@@ -15,5 +14,4 @@ class AnimalsState {
   final String? error;
   final AnimalsQuizModel? animalsQuizModel;
   final List<dynamic>? list;
-  final int index;
 }

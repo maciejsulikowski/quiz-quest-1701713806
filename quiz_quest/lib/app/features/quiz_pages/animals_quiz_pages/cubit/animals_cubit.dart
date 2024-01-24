@@ -18,6 +18,12 @@ class AnimalsCubit extends Cubit<AnimalsState> {
   bool isButtonBlocked = true;
   AnimalsQuizModel? animalsQuizModel;
 
+  Future<void> nextQuestion() async {
+    final currentIndex = state.index;
+    print('Current Index before update: $currentIndex');
+    emit(AnimalsState(index: currentIndex + 1));
+  }
+
   Future<void> getAnimalsCategory() async {
     emit(AnimalsState(
       status: Status.loading,
@@ -28,6 +34,7 @@ class AnimalsCubit extends Cubit<AnimalsState> {
       emit(AnimalsState(
         status: Status.success,
         animalsQuizModel: animalsModel,
+        index: 0,
       ));
     } catch (error) {
       emit(AnimalsState(

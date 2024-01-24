@@ -20,16 +20,19 @@ class QuestionQuizPage extends StatefulWidget {
   State<QuestionQuizPage> createState() => _QuestionQuizPageState();
 }
 
+final controller = CountDownController();
+
 class _QuestionQuizPageState extends State<QuestionQuizPage> {
+  int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
     const int duration = 21;
     Color color = Colors.white;
-    // int currentIndex = 0;
+
     // late String question;
     // late List<dynamic> list;
     // late String correctAnswer;
-    final controller = CountDownController();
+
     bool isButtonBlocked = true;
 
     return BlocProvider(
@@ -99,12 +102,11 @@ class _QuestionQuizPageState extends State<QuestionQuizPage> {
                       child: ListView.builder(
                         itemCount: 1,
                         shrinkWrap: true,
-                        physics: const ClampingScrollPhysics(),
-                        itemBuilder: (context, index) {
+                        itemBuilder: (context, _) {
                           final correctAnswer =
-                              animalsModel.results[index].correctAnswer;
-                          final incorrectAnswers =
-                              animalsModel.results[index].incorrectAnswers;
+                              animalsModel.results[currentIndex].correctAnswer;
+                          final incorrectAnswers = animalsModel
+                              .results[currentIndex].incorrectAnswers;
                           final list = incorrectAnswers + [correctAnswer];
                           list.shuffle();
 
@@ -112,7 +114,8 @@ class _QuestionQuizPageState extends State<QuestionQuizPage> {
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               QuestionWidget(
-                                question: animalsModel.results[index].question,
+                                question:
+                                    animalsModel.results[currentIndex].question,
                               ),
                               const SizedBox(
                                 height: 30,
@@ -120,8 +123,8 @@ class _QuestionQuizPageState extends State<QuestionQuizPage> {
                               AnswerWidget(
                                 // isButtonBlocked: isButtonBlocked,
                                 // color: color,
-                                // controller: controller,
-                                answer: list,
+                                controller: controller,
+                                answers: list,
                                 // isCorrectAnswer: answer == correctAnswer ? true : false,
                               ),
                               const SizedBox(
@@ -139,16 +142,12 @@ class _QuestionQuizPageState extends State<QuestionQuizPage> {
                                     Container(
                                         color: Colors.black,
                                         child: ElevatedButton(
-                                          onPressed: () {},
-                                          //isButtonBlocked
-                                          //     ? null
-                                          //     : () {
-                                          //         controller.start();
-                                          //         setState(() {
-                                          //           currentIndex =
-                                          //               currentIndex + 1;
-                                          //         });
-                                          //       },
+                                          onPressed: () {
+                                            setState(() {
+                                              currentIndex += 1;
+                                            });
+                                            controller.start();
+                                          },
                                           style: ElevatedButton.styleFrom(
                                             foregroundColor: Colors.white,
                                             backgroundColor: Colors.black,
@@ -173,40 +172,6 @@ class _QuestionQuizPageState extends State<QuestionQuizPage> {
   }
 }
 
-// class QuizzPage extends StatefulWidget {
-//   const QuizzPage({
-//     super.key,
-//   });
-
-//   @override
-//   State<QuizzPage> createState() => _QuizzPageState();
-// }
-
-// class _QuizzPageState extends State<QuizzPage> {
-//   int currentIndex = 0;
-//   late String question;
-//   late List<dynamic> list;
-//   late String correctAnswer;
-//   final controller = CountDownController();
-//   bool isButtonBlocked = true;
-
-//   // void updateAnswers() {
-//   //   question = widget.animalsQuizModel!.results[currentIndex].question;
-//   //   List incorrectAnswers =
-//   //       widget.animalsQuizModel!.results[currentIndex].incorrectAnswers;
-//   //   correctAnswer =
-//   //       widget.animalsQuizModel!.results[currentIndex].correctAnswer;
-//   //   list = incorrectAnswers + [correctAnswer];
-//   //   list.shuffle();
-//   // }
-
-//   // @override
-//   // void initState() {
-//   //   super.initState();
-//   //   updateAnswers();
-//   // }
-// }
-
 class QuestionWidget extends StatelessWidget {
   const QuestionWidget({
     required this.question,
@@ -230,17 +195,17 @@ class QuestionWidget extends StatelessWidget {
 
 class AnswerWidget extends StatefulWidget {
   AnswerWidget({
-    required this.answer,
+    required this.answers,
     // required this.isCorrectAnswer,
-    // required this.controller,
+    required this.controller,
     // required this.color,
     // required this.isButtonBlocked,
     super.key,
   });
 
-  final List answer;
+  final List answers;
   // final bool isCorrectAnswer;
-  // final CountDownController controller;
+  final CountDownController controller;
   // Color color;
   // final bool isButtonBlocked;
 
@@ -253,27 +218,15 @@ class _AnswerWidgetState extends State<AnswerWidget> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        AnswerButton(
-          answer: widget.answer[0],
-        ),
-        SizedBox(
-          height: 10,
-        ),
-        AnswerButton(
-          answer: widget.answer[1],
-        ),
-        SizedBox(
-          height: 10,
-        ),
-        AnswerButton(
-          answer: widget.answer[2],
-        ),
-        SizedBox(
-          height: 10,
-        ),
-        AnswerButton(
-          answer: widget.answer[3],
-        ),
+        for (final answer in widget.answers) ...[
+          AnswerButton(
+            answer: answer,
+            controller: widget.controller,
+          ),
+          const SizedBox(
+            height: 10,
+          )
+        ]
 
         // Container(
         //   margin: const EdgeInsets.symmetric(horizontal: 20),
@@ -315,14 +268,21 @@ class _AnswerWidgetState extends State<AnswerWidget> {
   }
 }
 
-class AnswerButton extends StatelessWidget {
+class AnswerButton extends StatefulWidget {
   const AnswerButton({
     super.key,
     required this.answer,
+    required this.controller,
   });
 
   final String answer;
+  final CountDownController controller;
 
+  @override
+  State<AnswerButton> createState() => _AnswerButtonState();
+}
+
+class _AnswerButtonState extends State<AnswerButton> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -348,12 +308,16 @@ class AnswerButton extends StatelessWidget {
             )
           ]),
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          setState(() {
+            widget.controller.pause();
+          });
+        },
         style: ElevatedButton.styleFrom(
             minimumSize: const Size.fromHeight(50),
             backgroundColor: Colors.transparent,
             shadowColor: Colors.transparent),
-        child: Text(answer,
+        child: Text(widget.answer,
             style: GoogleFonts.aBeeZee(
               fontSize: 24,
               color: Colors.white,

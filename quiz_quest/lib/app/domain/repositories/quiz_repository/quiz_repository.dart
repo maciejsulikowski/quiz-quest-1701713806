@@ -9,7 +9,6 @@ import 'package:quiz_quest/app/domain/models/sports_model/sports_quiz_model.dart
 import 'package:quiz_quest/app/domain/models/vehicles_model/vehicles_quiz_model.dart';
 
 class QuizRepository {
-
   QuizRepository(this.quizCategoriesDataSource);
 
   final QuizCategoriesDataSource quizCategoriesDataSource;
@@ -24,6 +23,15 @@ class QuizRepository {
     return AnimalsQuizModel.fromJson(json);
   }
 
+  Future<AnimalsQuizModel?> getFakeAnimal() async {
+    final json = await quizCategoriesDataSource.fakeAnimal();
+
+    if (json == null) {
+      return null;
+    }
+
+    return AnimalsQuizModel.fromJson(json);
+  }
 
   Future<ArtQuizModel?> getArtData() async {
     final json = await quizCategoriesDataSource.getArtCategory();
@@ -36,8 +44,7 @@ class QuizRepository {
   }
 
   Future<ComputerScienceQuizModel?> getComputerScienceData() async {
-    final json =
-        await quizCategoriesDataSource.getComputerScienceCategory();
+    final json = await quizCategoriesDataSource.getComputerScienceCategory();
 
     if (json == null) {
       return null;
@@ -65,7 +72,6 @@ class QuizRepository {
 
     return HistoryQuizModel.fromJson(json);
   }
-
 
   Future<PoliticsQuizModel?> getPoliticsData() async {
     final json = await quizCategoriesDataSource.getPoliticsCategory();
@@ -96,5 +102,4 @@ class QuizRepository {
 
     return VehiclesQuizModel.fromJson(json);
   }
-
 }

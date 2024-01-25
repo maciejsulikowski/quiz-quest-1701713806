@@ -17,6 +17,22 @@ class QuizCategoriesDataSource {
     return responseData;
   }
 
+  Future<Map<String, dynamic>?> fakeAnimal() async {
+    final response = await Dio().get(
+        'https://quizapi.io/api/v1/questions?apiKey=jvc9pciDMQMpfhJ1EGjnbOPp4BMbqDTLBJ9pDfNM&difficulty=easy',
+        options: Options(
+          validateStatus: (_) => true,
+        ));
+
+    final responseData = response.data;
+
+    if (responseData == null) {
+      return null;
+    }
+
+    return responseData;
+  }
+
   Future<Map<String, dynamic>?> getArtCategory() async {
     final response = await Dio().get(
         'https://opentdb.com/api.php?amount=10&category=25&difficulty=easy&type=multiple',

@@ -18,7 +18,6 @@ class AnimalsCubit extends Cubit<AnimalsState> {
   bool isButtonBlocked = true;
   AnimalsQuizModel? animalsQuizModel;
 
- 
   Future<void> getAnimalsCategory() async {
     emit(AnimalsState(
       status: Status.loading,
@@ -29,7 +28,6 @@ class AnimalsCubit extends Cubit<AnimalsState> {
       emit(AnimalsState(
         status: Status.success,
         animalsQuizModel: animalsModel,
-        
       ));
     } catch (error) {
       emit(AnimalsState(
@@ -38,4 +36,23 @@ class AnimalsCubit extends Cubit<AnimalsState> {
       ));
     }
   }
+
+  // Future<void> fakeAnimal() async {
+  //   emit(AnimalsState(
+  //     status: Status.loading,
+  //   ));
+  //   try {
+  //     final animalsModel = [];
+
+  //     emit(AnimalsState(
+  //       status: Status.success,
+  //       animalsQuizModel: animalsModel,
+  //     ));
+  //   } catch (error) {
+  //     emit(AnimalsState(
+  //       status: Status.error,
+  //       error: error.toString(),
+  //     ));
+  //   }
+  // }
 }

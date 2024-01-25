@@ -21,17 +21,33 @@ class QuestionQuizPage extends StatefulWidget {
 }
 
 final controller = CountDownController();
+bool isButtonClicked = false;
+
+Color textColor = Colors.white;
 
 class _QuestionQuizPageState extends State<QuestionQuizPage> {
   int currentIndex = 0;
+  late List currentAnswers;
+
+  @override
+  void initState() {
+    currentAnswers = [];
+
+    super.initState();
+  }
+
+  void generateAnswers(AnimalsQuizModel animalsModel) {
+    final correctAnswer = animalsModel.results[currentIndex].correctAnswer;
+    final incorrectAnswers =
+        animalsModel.results[currentIndex].incorrectAnswers;
+    currentAnswers = incorrectAnswers + [correctAnswer];
+    currentAnswers.shuffle(); // Mieszamy odpowiedzi
+  }
+
   @override
   Widget build(BuildContext context) {
     const int duration = 21;
     bool isCorrectAnswer = false;
-    Color textColor = Colors.white;
-    // late String question;
-    // late List<dynamic> list;
-    // late String correctAnswer;
 
     bool isButtonBlocked = true;
 
@@ -103,12 +119,13 @@ class _QuestionQuizPageState extends State<QuestionQuizPage> {
                         itemCount: 1,
                         shrinkWrap: true,
                         itemBuilder: (context, _) {
-                          final correctAnswer =
-                              animalsModel.results[currentIndex].correctAnswer;
-                          final incorrectAnswers = animalsModel
-                              .results[currentIndex].incorrectAnswers;
-                          final list = incorrectAnswers + [correctAnswer];
-                          list.shuffle();
+                          // final correctAnswer =
+                          //     animalsModel.results[currentIndex].correctAnswer;
+                          // final incorrectAnswers = animalsModel
+                          //     .results[currentIndex].incorrectAnswers;
+                          // final list = incorrectAnswers + [correctAnswer];
+                          // list.shuffle();
+                          generateAnswers(animalsModel);
 
                           return Column(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -122,10 +139,22 @@ class _QuestionQuizPageState extends State<QuestionQuizPage> {
                               ),
                               Column(
                                 children: [
-                                  for (final answer in list) ...[
+                                  for (final answer in currentAnswers) ...[
                                     AnswerButton(
-                                      textColor: textColor,
-                                      isCorrectAnswer: answer == correctAnswer
+                                      isButtonClicked: (value) {
+                                        setState(() {
+                                          isButtonClicked = value;
+                                        });
+                                      },
+                                      textcolor: textColor,
+                                      colorFunction: (value) {
+                                        setState(() {
+                                          textColor = value;
+                                        });
+                                      },
+                                      isCorrectAnswer: answer ==
+                                              animalsModel.results[currentIndex]
+                                                  .correctAnswer
                                           ? true
                                           : false,
                                       answer: answer,
@@ -152,12 +181,15 @@ class _QuestionQuizPageState extends State<QuestionQuizPage> {
                                     Container(
                                         color: Colors.black,
                                         child: ElevatedButton(
-                                          onPressed: () {
-                                            setState(() {
-                                              currentIndex += 1;
-                                            });
-                                            controller.start();
-                                          },
+                                          onPressed: isButtonClicked == false
+                                              ? null
+                                              : () {
+                                                  setState(() {
+                                                    currentIndex += 1;
+                                                    isButtonClicked = false;
+                                                  });
+                                                  controller.start();
+                                                },
                                           style: ElevatedButton.styleFrom(
                                             foregroundColor: Colors.white,
                                             backgroundColor: Colors.black,
@@ -281,24 +313,27 @@ class QuestionWidget extends StatelessWidget {
 
 class AnswerButton extends StatefulWidget {
   AnswerButton({
-    super.key,
     required this.answer,
     required this.controller,
     required this.isCorrectAnswer,
-    required this.textColor,
+    required this.colorFunction,
+    required this.isButtonClicked,
+    required this.textcolor,
   });
 
   final String answer;
   final CountDownController controller;
   final bool isCorrectAnswer;
-  Color textColor;
+  Function(Color) colorFunction;
+  final Function(bool) isButtonClicked;
+  Color textcolor;
 
   @override
   State<AnswerButton> createState() => _AnswerButtonState();
 }
 
 class _AnswerButtonState extends State<AnswerButton> {
-  Color buttonColor = Colors.blue;
+  Color color = Colors.white;
 
   @override
   Widget build(BuildContext context) {
@@ -324,37 +359,30 @@ class _AnswerButtonState extends State<AnswerButton> {
             offset: const Offset(0, 3),
           )
         ],
-        color: buttonColor,
       ),
       child: ElevatedButton(
         onPressed: () {
-          setState(() {
-            widget.controller.pause();
-            if (widget.isCorrectAnswer) {
-              setState(() {
-                widget.textColor = Colors.green;
-              });
-            } else {
-              setState(() {
-                widget.textColor = Colors.red;
-              });
-            }
-          });
+          widget.controller.pause();
+          final color = widget.isCorrectAnswer ? Colors.green : Colors.red;
+          widget.colorFunction(color);
+          widget.isButtonClicked(true);
         },
         style: ElevatedButton.styleFrom(
-            minimumSize: const Size.fromHeight(50),
-            backgroundColor: Colors.transparent,
-            shadowColor: Colors.transparent),
-        child: Text(widget.answer,
-            style: GoogleFonts.aBeeZee(
-              fontSize: 24,
-              color: widget.textColor,
-            )),
+          minimumSize: const Size.fromHeight(50),
+          backgroundColor: Colors.transparent,
+          shadowColor: Colors.transparent,
+        ),
+        child: Text(
+          widget.answer,
+          style: GoogleFonts.aBeeZee(
+            fontSize: 24,
+            color: textColor,
+          ),
+        ),
       ),
     );
   }
 }
-
 
 // cubit
 // state

@@ -36,12 +36,14 @@ class _QuestionQuizPageState extends State<QuestionQuizPage> {
   ];
 
   bool answerGenerated = false;
+  bool isTimeUp = false;
 
   @override
   void initState() {
     currentAnswers = [];
     answerColors;
     answerGenerated = false;
+    isTimeUp = false;
     resetQuizState();
     super.initState();
   }
@@ -75,174 +77,205 @@ class _QuestionQuizPageState extends State<QuestionQuizPage> {
     ];
   }
 
+  void setTimeUp() {
+    setState(() {
+      isTimeUp = true;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     const int duration = 21;
 
-    return BlocProvider(
-      create: (context) =>
-          AnimalsCubit(QuizRepository(QuizCategoriesDataSource()))
-            ..getAnimalsCategory(),
-      child: BlocBuilder<AnimalsCubit, AnimalsState>(
-        builder: (context, state) {
-          if (state.status == Status.loading) {
-            return const Center(child: CircularProgressIndicator());
-          }
-
-          final animalsModel = state.animalsQuizModel;
-          generateAnswers(animalsModel);
-
-          return Scaffold(
-            body: Container(
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    Color.fromARGB(255, 10, 58, 214),
-                    Color.fromARGB(255, 22, 20, 129),
-                  ],
-                  begin: Alignment.centerLeft,
-                  end: Alignment.centerRight,
+    return Scaffold(
+      body: BlocProvider(
+        create: (context) =>
+            AnimalsCubit(QuizRepository(QuizCategoriesDataSource()))
+              ..getAnimalsCategory(),
+        child: BlocListener<AnimalsCubit, AnimalsState>(
+          listener: (context, state) async {
+            if (state.status == Status.error) {
+              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                  content: Text(
+                'Loading is a little bit longer please wait',
+              )));
+              await Future.delayed(
+                const Duration(
+                  seconds: 5,
                 ),
-              ),
-              child: ListView(
-                children: [
-                  const SizedBox(
-                    height: 15,
+              );
+              context.read<AnimalsCubit>().getAnimalsCategory();
+            }
+          },
+          child: BlocBuilder<AnimalsCubit, AnimalsState>(
+            builder: (context, state) {
+              if (state.status == Status.loading) {
+                return const Center(child: CircularProgressIndicator());
+              }
+              if (state.status == Status.error) {
+                return const Center(child: CircularProgressIndicator());
+              }
+
+              final animalsModel = state.animalsQuizModel;
+              generateAnswers(animalsModel);
+
+              return Container(
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Color.fromARGB(255, 10, 58, 214),
+                      Color.fromARGB(255, 22, 20, 129),
+                    ],
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                        child: InkWell(
-                          onTap: () {
-                            Navigator.pop(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const HomePage()));
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              border:
-                                  Border.all(color: Colors.white, width: 2.0),
+                ),
+                child: ListView(
+                  children: [
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.pop(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const HomePage()));
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border:
+                                    Border.all(color: Colors.white, width: 2.0),
+                              ),
+                              padding: const EdgeInsets.all(10.0),
+                              child:
+                                  const Icon(Icons.close, color: Colors.white),
                             ),
-                            padding: const EdgeInsets.all(10.0),
-                            child: const Icon(Icons.close, color: Colors.white),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  CountDownTimer(duration: duration, controller: controller),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  if (animalsModel != null)
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                      child: ListView.builder(
-                        itemCount: 1,
-                        shrinkWrap: true,
-                        itemBuilder: (context, _) {
-                          return Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              QuestionWidget(
-                                question:
-                                    animalsModel.results[currentIndex].question,
-                              ),
-                              const SizedBox(
-                                height: 30,
-                              ),
-                              Column(
-                                children: [
-                                  for (int index = 0;
-                                      index < currentAnswers.length;
-                                      index++) ...[
-                                    AnswerButton(
-                                      isButtonDisabled: (value) {
-                                        setState(() {
-                                          isButtonDisabled = value;
-                                        });
-                                      },
-                                      isButtonClicked: (value) {
-                                        setState(() {
-                                          isButtonClicked = value;
-                                        });
-                                      },
-                                      textcolor: answerColors[index],
-                                      colorFunction: (value, index) {
-                                        setState(() {
-                                          answerColors[index] = value;
-                                        });
-                                      },
-                                      isCorrectAnswer: currentAnswers[index] ==
-                                              animalsModel.results[currentIndex]
-                                                  .correctAnswer
-                                          ? true
-                                          : false,
-                                      answer: currentAnswers[index],
-                                      controller: controller,
-                                      index: index,
-                                    ),
-                                    const SizedBox(
-                                      height: 10,
-                                    )
-                                  ]
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 15,
-                              ),
-                              const SizedBox(
-                                height: 30,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 20.0),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    CountDownTimer(duration: duration, controller: controller),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    if (animalsModel != null)
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        child: ListView.builder(
+                          itemCount: 1,
+                          shrinkWrap: true,
+                          itemBuilder: (context, _) {
+                            return Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                QuestionWidget(
+                                  question: animalsModel
+                                      .results[currentIndex].question,
+                                ),
+                                const SizedBox(
+                                  height: 30,
+                                ),
+                                Column(
                                   children: [
-                                    Container(
-                                        color: Colors.black,
-                                        child: ElevatedButton(
-                                          onPressed: isButtonClicked == false
-                                              ? null
-                                              : () {
-                                                  setState(() {
-                                                    currentIndex += 1;
-                                                    isButtonClicked = false;
-                                                    isButtonDisabled = false;
-                                                    answerGenerated = false;
-                                                    answerColors = List.filled(
-                                                        currentAnswers.length,
-                                                        Colors.white);
-                                                  });
-                                                  controller.start();
-                                                },
-                                          style: ElevatedButton.styleFrom(
-                                            foregroundColor: Colors.white,
-                                            backgroundColor: Colors.black,
-                                          ),
-                                          child: const Text('Next Question ➔'),
-                                        )),
+                                    for (int index = 0;
+                                        index < currentAnswers.length;
+                                        index++) ...[
+                                      AnswerButton(
+                                        isButtonDisabled: (value) {
+                                          setState(() {
+                                            isButtonDisabled = value;
+                                          });
+                                        },
+                                        isButtonClicked: (value) {
+                                          setState(() {
+                                            isButtonClicked = value;
+                                          });
+                                        },
+                                        textcolor: answerColors[index],
+                                        colorFunction: (value, index) {
+                                          setState(() {
+                                            answerColors[index] = value;
+                                          });
+                                        },
+                                        isCorrectAnswer:
+                                            currentAnswers[index] ==
+                                                    animalsModel
+                                                        .results[currentIndex]
+                                                        .correctAnswer
+                                                ? true
+                                                : false,
+                                        answer: currentAnswers[index],
+                                        controller: controller,
+                                        index: index,
+                                      ),
+                                      const SizedBox(
+                                        height: 10,
+                                      )
+                                    ]
                                   ],
                                 ),
-                              )
-                            ],
-                          );
-                        },
-                      ),
-                    )
-                ],
-              ),
-            ),
-          );
-        },
+                                const SizedBox(
+                                  height: 15,
+                                ),
+                                const SizedBox(
+                                  height: 30,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Container(
+                                          color: Colors.black,
+                                          child: ElevatedButton(
+                                            onPressed: isButtonClicked == false
+                                                ? null
+                                                : () {
+                                                    setState(() {
+                                                      currentIndex += 1;
+                                                      isButtonClicked = false;
+                                                      isButtonDisabled = false;
+                                                      answerGenerated = false;
+                                                      answerColors =
+                                                          List.filled(
+                                                              currentAnswers
+                                                                  .length,
+                                                              Colors.white);
+                                                    });
+                                                    controller.start();
+                                                  },
+                                            style: ElevatedButton.styleFrom(
+                                              foregroundColor: Colors.white,
+                                              backgroundColor: Colors.black,
+                                            ),
+                                            child:
+                                                const Text('Next Question ➔'),
+                                          )),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            );
+                          },
+                        ),
+                      )
+                  ],
+                ),
+              );
+            },
+          ),
+        ),
       ),
     );
   }

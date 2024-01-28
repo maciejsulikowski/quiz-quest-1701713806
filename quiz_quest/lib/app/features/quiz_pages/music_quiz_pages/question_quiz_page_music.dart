@@ -8,8 +8,8 @@ import 'package:quiz_quest/app/domain/models/computer_science_model/computer_sci
 import 'package:quiz_quest/app/features/home_page/cubit/home_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/quiz_countdown_timer/quiz_countdown_timer.dart';
 
-class QuestionQuizPageComputerScience extends StatefulWidget {
-  const QuestionQuizPageComputerScience({
+class QuestionQuizPageMusic extends StatefulWidget {
+  const QuestionQuizPageMusic({
     required this.model,
     super.key,
   });
@@ -17,10 +17,10 @@ class QuestionQuizPageComputerScience extends StatefulWidget {
   final ComputerScienceQuizModel? model;
 
   @override
-  State<QuestionQuizPageComputerScience> createState() => _QuestionQuizPageComputerScienceState();
+  State<QuestionQuizPageMusic> createState() => _QuestionQuizPageMusicState();
 }
 
-class _QuestionQuizPageComputerScienceState extends State<QuestionQuizPageComputerScience> {
+class _QuestionQuizPageMusicState extends State<QuestionQuizPageMusic> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

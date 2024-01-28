@@ -5,21 +5,12 @@ import 'package:quiz_quest/app/core/enums.dart';
 import 'package:quiz_quest/app/data/data_sources/quiz_data_source/quiz_categories_data_source.dart';
 import 'package:quiz_quest/app/domain/models/animals_model/animals_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/art_model/art_quiz_model.dart';
-import 'package:quiz_quest/app/domain/models/computer_science_model/computer_science_quiz_model.dart';
-import 'package:quiz_quest/app/domain/models/geography_model/geography_quiz_model.dart';
-import 'package:quiz_quest/app/domain/models/history_model/history_quiz_model.dart';
-import 'package:quiz_quest/app/domain/models/politics_model/politics_quiz_model.dart';
 import 'package:quiz_quest/app/domain/repositories/quiz_repository/quiz_repository.dart';
-import 'package:quiz_quest/app/features/quiz_pages/animals_quiz_pages/question_quiz_page_animals.dart';
-import 'package:quiz_quest/app/features/quiz_pages/art_quiz_pages/question_quiz_page_art.dart';
-import 'package:quiz_quest/app/features/quiz_pages/computer_science_pages/question_quiz_page_computer_science.dart';
-import 'package:quiz_quest/app/features/quiz_pages/geography_quiz_pages/question_quiz_page_geography.dart';
-import 'package:quiz_quest/app/features/quiz_pages/history_quiz_pages/question_quiz_page_history.dart';
-import 'package:quiz_quest/app/features/quiz_pages/politics_quiz_pages/cubit/politics_cubit.dart';
-import 'package:quiz_quest/app/features/quiz_pages/politics_quiz_pages/question_quiz_page_politics.dart';
+import 'package:quiz_quest/app/features/quiz_pages/games_quiz_pages/cubit/games_cubit.dart';
+import 'package:quiz_quest/app/features/quiz_pages/games_quiz_pages/question_quiz_page_games.dart';
 
-class FirstQuizPagePolitics extends StatefulWidget {
-  const FirstQuizPagePolitics({
+class FirstQuizPageGames extends StatefulWidget {
+  const FirstQuizPageGames({
     required this.image,
     super.key,
   });
@@ -27,10 +18,10 @@ class FirstQuizPagePolitics extends StatefulWidget {
   final String image;
 
   @override
-  State<FirstQuizPagePolitics> createState() => _FirstQuizPagePoliticsState();
+  State<FirstQuizPageGames> createState() => _FirstQuizPageGamesState();
 }
 
-class _FirstQuizPagePoliticsState extends State<FirstQuizPagePolitics> {
+class _FirstQuizPageGamesState extends State<FirstQuizPageGames> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,18 +46,15 @@ class QuizzPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          PoliticsCubit(QuizRepository(QuizCategoriesDataSource()))
-            ..getPoliticsCategory(),
-      child: BlocBuilder<PoliticsCubit, PoliticsState>(
+      create: (context) => GamesCubit(QuizRepository(QuizCategoriesDataSource()))
+        ..getArtCategory(),
+      child: BlocBuilder<GamesCubit, GamesState>(
         builder: (context, state) {
-
-          final politicsModel = state.politicsQuizModel;
+          final artModel = state.artQuizModel;
 
           if (state.status == Status.loading) {
             return const Center(child: CircularProgressIndicator());
           }
-
           return Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
@@ -147,8 +135,8 @@ class QuizzPage extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => QuestionQuizPagePolitics(
-                                model: politicsModel,
+                          builder: (context) => QuestionQuizPageGames(
+                                model: artModel,
                               )));
                     },
                     style: ElevatedButton.styleFrom(

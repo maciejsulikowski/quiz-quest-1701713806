@@ -4,26 +4,26 @@ import 'package:quiz_quest/app/core/enums.dart';
 import 'package:quiz_quest/app/domain/models/politics_model/politics_quiz_model.dart';
 import 'package:quiz_quest/app/domain/repositories/quiz_repository/quiz_repository.dart';
 
-part 'politics_state.dart';
+part 'nature_state.dart';
 
-class PoliticsCubit extends Cubit<PoliticsState> {
-  PoliticsCubit(this.quizRepository) : super(PoliticsState());
+class NatureCubit extends Cubit<NatureState> {
+  NatureCubit(this.quizRepository) : super(NatureState());
 
   final QuizRepository quizRepository;
 
   Future<void> getPoliticsCategory() async {
-    emit(PoliticsState(
+    emit(NatureState(
       status: Status.loading,
     ));
 
     try {
       final politicsModel = await quizRepository.getPoliticsData();
-      emit(PoliticsState(
+      emit(NatureState(
         status: Status.success,
         politicsQuizModel: politicsModel,
       ));
     } catch (error) {
-      emit(PoliticsState(
+      emit(NatureState(
         status: Status.error,
         error: error.toString(),
       ));

@@ -5,10 +5,10 @@ import 'package:quiz_quest/app/core/enums.dart';
 import 'package:quiz_quest/app/domain/models/animals_model/animals_quiz_model.dart';
 import 'package:quiz_quest/app/domain/repositories/quiz_repository/quiz_repository.dart';
 
-part 'animals_state.dart';
+part 'films_state.dart';
 
-class AnimalsCubit extends Cubit<AnimalsState> {
-  AnimalsCubit(this.quizRepository) : super(AnimalsState());
+class FilmsCubit extends Cubit<FilmsState> {
+  FilmsCubit(this.quizRepository) : super(FilmsState());
 
   final QuizRepository quizRepository;
   int currentIndex = 0;
@@ -19,18 +19,18 @@ class AnimalsCubit extends Cubit<AnimalsState> {
   AnimalsQuizModel? animalsQuizModel;
 
   Future<void> getAnimalsCategory() async {
-    emit(AnimalsState(
+    emit(FilmsState(
       status: Status.loading,
     ));
     try {
       final animalsModel = await quizRepository.getAnimalsData();
 
-      emit(AnimalsState(
+      emit(FilmsState(
         status: Status.success,
         animalsQuizModel: animalsModel,
       ));
     } catch (error) {
-      emit(AnimalsState(
+      emit(FilmsState(
         status: Status.error,
         error: error.toString(),
       ));

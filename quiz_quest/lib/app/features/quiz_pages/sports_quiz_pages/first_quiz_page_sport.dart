@@ -6,7 +6,6 @@ import 'package:quiz_quest/app/data/data_sources/quiz_data_source/quiz_categorie
 import 'package:quiz_quest/app/domain/models/animals_model/animals_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/sports_model/sports_quiz_model.dart';
 import 'package:quiz_quest/app/domain/repositories/quiz_repository/quiz_repository.dart';
-import 'package:quiz_quest/app/features/quiz_pages/animals_quiz_pages/question_quiz_page_animals.dart';
 import 'package:quiz_quest/app/features/quiz_pages/sports_quiz_pages/cubit/sport_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/sports_quiz_pages/question_quiz_page_sport.dart';
 

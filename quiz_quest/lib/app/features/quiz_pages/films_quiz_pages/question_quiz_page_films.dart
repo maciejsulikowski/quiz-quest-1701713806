@@ -8,7 +8,8 @@ import 'package:quiz_quest/app/domain/models/animals_model/animals_quiz_model.da
 import 'package:quiz_quest/app/domain/repositories/quiz_repository/quiz_repository.dart';
 import 'package:quiz_quest/app/features/home_page/cubit/home_cubit.dart';
 import 'package:quiz_quest/app/features/home_page/home_page.dart';
-import 'package:quiz_quest/app/features/quiz_pages/animals_quiz_pages/cubit/animals_cubit.dart';
+
+import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/cubit/films_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/quiz_countdown_timer/quiz_countdown_timer.dart';
 
 class QuestionQuizPage extends StatefulWidget {
@@ -90,9 +91,9 @@ class _QuestionQuizPageState extends State<QuestionQuizPage> {
     return Scaffold(
       body: BlocProvider(
         create: (context) =>
-            AnimalsCubit(QuizRepository(QuizCategoriesDataSource()))
+            FilmsCubit(QuizRepository(QuizCategoriesDataSource()))
               ..getAnimalsCategory(),
-        child: BlocListener<AnimalsCubit, AnimalsState>(
+        child: BlocListener<FilmsCubit, FilmsState>(
           listener: (context, state) async {
             if (state.status == Status.error) {
               ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
@@ -104,10 +105,10 @@ class _QuestionQuizPageState extends State<QuestionQuizPage> {
                   seconds: 5,
                 ),
               );
-              context.read<AnimalsCubit>().getAnimalsCategory();
+              context.read<FilmsCubit>().getAnimalsCategory();
             }
           },
-          child: BlocBuilder<AnimalsCubit, AnimalsState>(
+          child: BlocBuilder<FilmsCubit, FilmsState>(
             builder: (context, state) {
               if (state.status == Status.loading) {
                 return const Center(child: CircularProgressIndicator());

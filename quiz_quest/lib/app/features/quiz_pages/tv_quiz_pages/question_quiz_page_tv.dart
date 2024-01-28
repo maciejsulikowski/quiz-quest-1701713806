@@ -8,8 +8,8 @@ import 'package:quiz_quest/app/domain/models/vehicles_model/vehicles_quiz_model.
 import 'package:quiz_quest/app/features/home_page/cubit/home_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/quiz_countdown_timer/quiz_countdown_timer.dart';
 
-class QuestionQuizPageVehicles extends StatefulWidget {
-  const QuestionQuizPageVehicles({
+class QuestionQuizPageTV extends StatefulWidget {
+  const QuestionQuizPageTV({
     required this.model,
     super.key,
   });
@@ -17,11 +17,11 @@ class QuestionQuizPageVehicles extends StatefulWidget {
   final VehiclesQuizModel? model;
 
   @override
-  State<QuestionQuizPageVehicles> createState() =>
-      _QuestionQuizPageVehiclesState();
+  State<QuestionQuizPageTV> createState() =>
+      _QuestionQuizPageTVState();
 }
 
-class _QuestionQuizPageVehiclesState extends State<QuestionQuizPageVehicles> {
+class _QuestionQuizPageTVState extends State<QuestionQuizPageTV> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

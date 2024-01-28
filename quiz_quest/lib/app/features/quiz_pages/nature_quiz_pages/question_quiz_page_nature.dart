@@ -4,22 +4,27 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quiz_quest/app/domain/models/animals_model/animals_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/art_model/art_quiz_model.dart';
+import 'package:quiz_quest/app/domain/models/computer_science_model/computer_science_quiz_model.dart';
+import 'package:quiz_quest/app/domain/models/geography_model/geography_quiz_model.dart';
+import 'package:quiz_quest/app/domain/models/history_model/history_quiz_model.dart';
+import 'package:quiz_quest/app/domain/models/politics_model/politics_quiz_model.dart';
 import 'package:quiz_quest/app/features/home_page/cubit/home_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/quiz_countdown_timer/quiz_countdown_timer.dart';
 
-class QuestionQuizPageArt extends StatefulWidget {
-  const QuestionQuizPageArt({
+class QuestionQuizPageNature extends StatefulWidget {
+  const QuestionQuizPageNature({
     required this.model,
     super.key,
   });
 
-  final ArtQuizModel? model;
+  final PoliticsQuizModel? model;
 
   @override
-  State<QuestionQuizPageArt> createState() => _QuestionQuizPageArtState();
+  State<QuestionQuizPageNature> createState() =>
+      _QuestionQuizPageNatureState();
 }
 
-class _QuestionQuizPageArtState extends State<QuestionQuizPageArt> {
+class _QuestionQuizPageNatureState extends State<QuestionQuizPageNature> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,7 +46,7 @@ class QuizzPage extends StatelessWidget {
     super.key,
   });
 
-  final ArtQuizModel? model;
+  final PoliticsQuizModel? model;
 
   @override
   Widget build(BuildContext context) {

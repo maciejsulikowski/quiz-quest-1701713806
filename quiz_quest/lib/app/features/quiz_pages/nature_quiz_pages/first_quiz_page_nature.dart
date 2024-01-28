@@ -3,17 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quiz_quest/app/core/enums.dart';
 import 'package:quiz_quest/app/data/data_sources/quiz_data_source/quiz_categories_data_source.dart';
-import 'package:quiz_quest/app/domain/models/animals_model/animals_quiz_model.dart';
-import 'package:quiz_quest/app/domain/models/art_model/art_quiz_model.dart';
-import 'package:quiz_quest/app/domain/models/computer_science_model/computer_science_quiz_model.dart';
 import 'package:quiz_quest/app/domain/repositories/quiz_repository/quiz_repository.dart';
-import 'package:quiz_quest/app/features/quiz_pages/animals_quiz_pages/question_quiz_page_animals.dart';
-import 'package:quiz_quest/app/features/quiz_pages/art_quiz_pages/question_quiz_page_art.dart';
-import 'package:quiz_quest/app/features/quiz_pages/computer_science_pages/cubit/computer_cubit.dart';
-import 'package:quiz_quest/app/features/quiz_pages/computer_science_pages/question_quiz_page_computer_science.dart';
+import 'package:quiz_quest/app/features/quiz_pages/nature_quiz_pages/cubit/nature_cubit.dart';
+import 'package:quiz_quest/app/features/quiz_pages/nature_quiz_pages/question_quiz_page_nature.dart';
 
-class FirstQuizPageComputerScience extends StatefulWidget {
-  const FirstQuizPageComputerScience({
+class FirstQuizPageNature extends StatefulWidget {
+  const FirstQuizPageNature({
     required this.image,
     super.key,
   });
@@ -21,12 +16,10 @@ class FirstQuizPageComputerScience extends StatefulWidget {
   final String image;
 
   @override
-  State<FirstQuizPageComputerScience> createState() =>
-      _FirstQuizPageComputerScienceState();
+  State<FirstQuizPageNature> createState() => _FirstQuizPageNatureState();
 }
 
-class _FirstQuizPageComputerScienceState
-    extends State<FirstQuizPageComputerScience> {
+class _FirstQuizPageNatureState extends State<FirstQuizPageNature> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,11 +45,12 @@ class QuizzPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-          ComputerScienceCubit(QuizRepository(QuizCategoriesDataSource()))
-            ..getComputerCategory(),
-      child: BlocBuilder<ComputerScienceCubit, ComputerScienceState>(
+          NatureCubit(QuizRepository(QuizCategoriesDataSource()))
+            ..getPoliticsCategory(),
+      child: BlocBuilder<NatureCubit, NatureState>(
         builder: (context, state) {
-          final computerModel = state.computerScienceQuizModel;
+
+          final politicsModel = state.politicsQuizModel;
 
           if (state.status == Status.loading) {
             return const Center(child: CircularProgressIndicator());
@@ -142,8 +136,8 @@ class QuizzPage extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => QuestionQuizPageComputerScience(
-                                model: computerModel,
+                          builder: (context) => QuestionQuizPageNature(
+                                model: politicsModel,
                               )));
                     },
                     style: ElevatedButton.styleFrom(

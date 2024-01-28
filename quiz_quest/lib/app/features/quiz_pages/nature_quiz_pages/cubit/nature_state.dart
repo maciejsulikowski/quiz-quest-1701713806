@@ -1,7 +1,7 @@
-part of 'politics_cubit.dart';
+part of 'nature_cubit.dart';
 
-class PoliticsState {
-  PoliticsState({
+class NatureState {
+  NatureState({
     this.politicsQuizModel,
     this.isLoading = false,
     this.status = Status.initial,

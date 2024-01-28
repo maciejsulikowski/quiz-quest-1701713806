@@ -4,16 +4,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:quiz_quest/app/core/enums.dart';
 import 'package:quiz_quest/app/data/data_sources/quiz_data_source/quiz_categories_data_source.dart';
 import 'package:quiz_quest/app/domain/models/animals_model/animals_quiz_model.dart';
-import 'package:quiz_quest/app/domain/models/sports_model/sports_quiz_model.dart';
-import 'package:quiz_quest/app/domain/models/vehicles_model/vehicles_quiz_model.dart';
+import 'package:quiz_quest/app/domain/models/art_model/art_quiz_model.dart';
+import 'package:quiz_quest/app/domain/models/computer_science_model/computer_science_quiz_model.dart';
 import 'package:quiz_quest/app/domain/repositories/quiz_repository/quiz_repository.dart';
-import 'package:quiz_quest/app/features/quiz_pages/animals_quiz_pages/question_quiz_page_animals.dart';
-import 'package:quiz_quest/app/features/quiz_pages/sports_quiz_pages/question_quiz_page_sport.dart';
-import 'package:quiz_quest/app/features/quiz_pages/vehicles_quiz_pages/cubit/vehicles_cubit.dart';
-import 'package:quiz_quest/app/features/quiz_pages/vehicles_quiz_pages/question_quiz_page_vehicles.dart';
+import 'package:quiz_quest/app/features/quiz_pages/music_quiz_pages/cubit/music_cubit.dart';
+import 'package:quiz_quest/app/features/quiz_pages/music_quiz_pages/question_quiz_page_music.dart';
 
-class FirstQuizPageVehicles extends StatefulWidget {
-  const FirstQuizPageVehicles({
+class FirstQuizPageMusic extends StatefulWidget {
+  const FirstQuizPageMusic({
     required this.image,
     super.key,
   });
@@ -21,10 +19,12 @@ class FirstQuizPageVehicles extends StatefulWidget {
   final String image;
 
   @override
-  State<FirstQuizPageVehicles> createState() => _FirstQuizPageVehiclesState();
+  State<FirstQuizPageMusic> createState() =>
+      _FirstQuizPageMusicState();
 }
 
-class _FirstQuizPageVehiclesState extends State<FirstQuizPageVehicles> {
+class _FirstQuizPageMusicState
+    extends State<FirstQuizPageMusic> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,11 +50,11 @@ class QuizzPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-          VehiclesCubit(QuizRepository(QuizCategoriesDataSource()))
-            ..getVehiclesCategory(),
-      child: BlocBuilder<VehiclesCubit, VehiclesState>(
+          MusicCubit(QuizRepository(QuizCategoriesDataSource()))
+            ..getComputerCategory(),
+      child: BlocBuilder<MusicCubit, MusicState>(
         builder: (context, state) {
-          final vehiclesModel = state.vehiclesQuizModel;
+          final computerModel = state.computerScienceQuizModel;
 
           if (state.status == Status.loading) {
             return const Center(child: CircularProgressIndicator());
@@ -140,8 +140,8 @@ class QuizzPage extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => QuestionQuizPageVehicles(
-                                model: vehiclesModel,
+                          builder: (context) => QuestionQuizPageMusic(
+                                model: computerModel,
                               )));
                     },
                     style: ElevatedButton.styleFrom(

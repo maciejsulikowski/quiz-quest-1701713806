@@ -1,7 +1,7 @@
-part of 'animals_cubit.dart';
+part of 'films_cubit.dart';
 
-class AnimalsState {
-  AnimalsState({
+class FilmsState {
+  FilmsState({
     this.animalsQuizModel,
     this.list,
     this.isLoading = false,

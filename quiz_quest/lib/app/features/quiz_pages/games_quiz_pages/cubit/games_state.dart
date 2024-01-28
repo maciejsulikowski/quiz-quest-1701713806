@@ -1,8 +1,9 @@
-part of 'vehicles_cubit.dart';
+part of 'games_cubit.dart';
 
-class VehiclesState {
-  VehiclesState({
-    this.vehiclesQuizModel,
+
+class GamesState {
+  GamesState({
+    this.artQuizModel,
     this.isLoading = false,
     this.status = Status.initial,
     this.error,
@@ -11,5 +12,5 @@ class VehiclesState {
   final bool isLoading;
   final Status status;
   final String? error;
-  final VehiclesQuizModel? vehiclesQuizModel;
+  final ArtQuizModel? artQuizModel;
 }

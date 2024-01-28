@@ -4,14 +4,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:quiz_quest/app/core/enums.dart';
 import 'package:quiz_quest/app/data/data_sources/quiz_data_source/quiz_categories_data_source.dart';
 import 'package:quiz_quest/app/domain/models/animals_model/animals_quiz_model.dart';
-import 'package:quiz_quest/app/domain/models/art_model/art_quiz_model.dart';
+import 'package:quiz_quest/app/domain/models/sports_model/sports_quiz_model.dart';
+import 'package:quiz_quest/app/domain/models/vehicles_model/vehicles_quiz_model.dart';
 import 'package:quiz_quest/app/domain/repositories/quiz_repository/quiz_repository.dart';
-import 'package:quiz_quest/app/features/quiz_pages/animals_quiz_pages/question_quiz_page_animals.dart';
-import 'package:quiz_quest/app/features/quiz_pages/art_quiz_pages/cubit/art_cubit.dart';
-import 'package:quiz_quest/app/features/quiz_pages/art_quiz_pages/question_quiz_page_art.dart';
+import 'package:quiz_quest/app/features/quiz_pages/tv_quiz_pages/cubit/tv_cubit.dart';
+import 'package:quiz_quest/app/features/quiz_pages/tv_quiz_pages/question_quiz_page_tv.dart';
 
-class FirstQuizPageArt extends StatefulWidget {
-  const FirstQuizPageArt({
+class FirstQuizPageTV extends StatefulWidget {
+  const FirstQuizPageTV({
     required this.image,
     super.key,
   });
@@ -19,10 +19,10 @@ class FirstQuizPageArt extends StatefulWidget {
   final String image;
 
   @override
-  State<FirstQuizPageArt> createState() => _FirstQuizPageArtState();
+  State<FirstQuizPageTV> createState() => _FirstQuizPageTVState();
 }
 
-class _FirstQuizPageArtState extends State<FirstQuizPageArt> {
+class _FirstQuizPageTVState extends State<FirstQuizPageTV> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,15 +47,17 @@ class QuizzPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ArtCubit(QuizRepository(QuizCategoriesDataSource()))
-        ..getArtCategory(),
-      child: BlocBuilder<ArtCubit, ArtState>(
+      create: (context) =>
+          TVCubit(QuizRepository(QuizCategoriesDataSource()))
+            ..getVehiclesCategory(),
+      child: BlocBuilder<TVCubit, TVState>(
         builder: (context, state) {
-          final artModel = state.artQuizModel;
+          final vehiclesModel = state.vehiclesQuizModel;
 
           if (state.status == Status.loading) {
             return const Center(child: CircularProgressIndicator());
           }
+
           return Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
@@ -136,8 +138,8 @@ class QuizzPage extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => QuestionQuizPageArt(
-                                model: artModel,
+                          builder: (context) => QuestionQuizPageTV(
+                                model: vehiclesModel,
                               )));
                     },
                     style: ElevatedButton.styleFrom(

@@ -1,7 +1,7 @@
-part of 'computer_cubit.dart';
+part of 'music_cubit.dart';
 
-class ComputerScienceState {
-  ComputerScienceState({
+class MusicState {
+  MusicState({
     this.computerScienceQuizModel,
     this.isLoading = false,
     this.status = Status.initial,

@@ -1,9 +1,8 @@
-part of 'art_cubit.dart';
+part of 'tv_cubit.dart';
 
-
-class ArtState {
-  ArtState({
-    this.artQuizModel,
+class TVState {
+  TVState({
+    this.vehiclesQuizModel,
     this.isLoading = false,
     this.status = Status.initial,
     this.error,
@@ -12,5 +11,5 @@ class ArtState {
   final bool isLoading;
   final Status status;
   final String? error;
-  final ArtQuizModel? artQuizModel;
+  final VehiclesQuizModel? vehiclesQuizModel;
 }

@@ -1,21 +1,20 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'animals_quiz_model.dart';
+part of 'films_quiz_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$AnimalsQuizModelImpl _$$AnimalsQuizModelImplFromJson(
-        Map<String, dynamic> json) =>
-    _$AnimalsQuizModelImpl(
+_$FilmsQuizModelImpl _$$FilmsQuizModelImplFromJson(Map<String, dynamic> json) =>
+    _$FilmsQuizModelImpl(
       (json['results'] as List<dynamic>)
           .map((e) => Results2.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
-Map<String, dynamic> _$$AnimalsQuizModelImplToJson(
-        _$AnimalsQuizModelImpl instance) =>
+Map<String, dynamic> _$$FilmsQuizModelImplToJson(
+        _$FilmsQuizModelImpl instance) =>
     <String, dynamic>{
       'results': instance.results,
     };

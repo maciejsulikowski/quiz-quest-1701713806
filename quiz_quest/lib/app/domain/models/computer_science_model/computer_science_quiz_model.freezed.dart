@@ -125,7 +125,7 @@ class _$ComputerScienceQuizModelImpl implements _ComputerScienceQuizModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ComputerScienceQuizModelImpl &&
@@ -331,7 +331,7 @@ class _$Results4Impl implements _Results4 {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$Results4Impl &&

@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'art_quiz_model.dart';
+part of 'games_quiz_model.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,34 +14,34 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-ArtQuizModel _$ArtQuizModelFromJson(Map<String, dynamic> json) {
-  return _ArtQuizModel.fromJson(json);
+GamesQuizModel _$GamesQuizModelFromJson(Map<String, dynamic> json) {
+  return _GamesQuizModel.fromJson(json);
 }
 
 /// @nodoc
-mixin _$ArtQuizModel {
+mixin _$GamesQuizModel {
   @JsonKey(name: "results")
   List<Results3> get results => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $ArtQuizModelCopyWith<ArtQuizModel> get copyWith =>
+  $GamesQuizModelCopyWith<GamesQuizModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ArtQuizModelCopyWith<$Res> {
-  factory $ArtQuizModelCopyWith(
-          ArtQuizModel value, $Res Function(ArtQuizModel) then) =
-      _$ArtQuizModelCopyWithImpl<$Res, ArtQuizModel>;
+abstract class $GamesQuizModelCopyWith<$Res> {
+  factory $GamesQuizModelCopyWith(
+          GamesQuizModel value, $Res Function(GamesQuizModel) then) =
+      _$GamesQuizModelCopyWithImpl<$Res, GamesQuizModel>;
   @useResult
   $Res call({@JsonKey(name: "results") List<Results3> results});
 }
 
 /// @nodoc
-class _$ArtQuizModelCopyWithImpl<$Res, $Val extends ArtQuizModel>
-    implements $ArtQuizModelCopyWith<$Res> {
-  _$ArtQuizModelCopyWithImpl(this._value, this._then);
+class _$GamesQuizModelCopyWithImpl<$Res, $Val extends GamesQuizModel>
+    implements $GamesQuizModelCopyWith<$Res> {
+  _$GamesQuizModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -63,22 +63,22 @@ class _$ArtQuizModelCopyWithImpl<$Res, $Val extends ArtQuizModel>
 }
 
 /// @nodoc
-abstract class _$$ArtQuizModelImplCopyWith<$Res>
-    implements $ArtQuizModelCopyWith<$Res> {
-  factory _$$ArtQuizModelImplCopyWith(
-          _$ArtQuizModelImpl value, $Res Function(_$ArtQuizModelImpl) then) =
-      __$$ArtQuizModelImplCopyWithImpl<$Res>;
+abstract class _$$GamesQuizModelImplCopyWith<$Res>
+    implements $GamesQuizModelCopyWith<$Res> {
+  factory _$$GamesQuizModelImplCopyWith(_$GamesQuizModelImpl value,
+          $Res Function(_$GamesQuizModelImpl) then) =
+      __$$GamesQuizModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({@JsonKey(name: "results") List<Results3> results});
 }
 
 /// @nodoc
-class __$$ArtQuizModelImplCopyWithImpl<$Res>
-    extends _$ArtQuizModelCopyWithImpl<$Res, _$ArtQuizModelImpl>
-    implements _$$ArtQuizModelImplCopyWith<$Res> {
-  __$$ArtQuizModelImplCopyWithImpl(
-      _$ArtQuizModelImpl _value, $Res Function(_$ArtQuizModelImpl) _then)
+class __$$GamesQuizModelImplCopyWithImpl<$Res>
+    extends _$GamesQuizModelCopyWithImpl<$Res, _$GamesQuizModelImpl>
+    implements _$$GamesQuizModelImplCopyWith<$Res> {
+  __$$GamesQuizModelImplCopyWithImpl(
+      _$GamesQuizModelImpl _value, $Res Function(_$GamesQuizModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -86,7 +86,7 @@ class __$$ArtQuizModelImplCopyWithImpl<$Res>
   $Res call({
     Object? results = null,
   }) {
-    return _then(_$ArtQuizModelImpl(
+    return _then(_$GamesQuizModelImpl(
       null == results
           ? _value._results
           : results // ignore: cast_nullable_to_non_nullable
@@ -97,12 +97,12 @@ class __$$ArtQuizModelImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$ArtQuizModelImpl implements _ArtQuizModel {
-  _$ArtQuizModelImpl(@JsonKey(name: "results") final List<Results3> results)
+class _$GamesQuizModelImpl implements _GamesQuizModel {
+  _$GamesQuizModelImpl(@JsonKey(name: "results") final List<Results3> results)
       : _results = results;
 
-  factory _$ArtQuizModelImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ArtQuizModelImplFromJson(json);
+  factory _$GamesQuizModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$GamesQuizModelImplFromJson(json);
 
   final List<Results3> _results;
   @override
@@ -115,14 +115,14 @@ class _$ArtQuizModelImpl implements _ArtQuizModel {
 
   @override
   String toString() {
-    return 'ArtQuizModel(results: $results)';
+    return 'GamesQuizModel(results: $results)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ArtQuizModelImpl &&
+            other is _$GamesQuizModelImpl &&
             const DeepCollectionEquality().equals(other._results, _results));
   }
 
@@ -134,31 +134,32 @@ class _$ArtQuizModelImpl implements _ArtQuizModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ArtQuizModelImplCopyWith<_$ArtQuizModelImpl> get copyWith =>
-      __$$ArtQuizModelImplCopyWithImpl<_$ArtQuizModelImpl>(this, _$identity);
+  _$$GamesQuizModelImplCopyWith<_$GamesQuizModelImpl> get copyWith =>
+      __$$GamesQuizModelImplCopyWithImpl<_$GamesQuizModelImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ArtQuizModelImplToJson(
+    return _$$GamesQuizModelImplToJson(
       this,
     );
   }
 }
 
-abstract class _ArtQuizModel implements ArtQuizModel {
-  factory _ArtQuizModel(
+abstract class _GamesQuizModel implements GamesQuizModel {
+  factory _GamesQuizModel(
           @JsonKey(name: "results") final List<Results3> results) =
-      _$ArtQuizModelImpl;
+      _$GamesQuizModelImpl;
 
-  factory _ArtQuizModel.fromJson(Map<String, dynamic> json) =
-      _$ArtQuizModelImpl.fromJson;
+  factory _GamesQuizModel.fromJson(Map<String, dynamic> json) =
+      _$GamesQuizModelImpl.fromJson;
 
   @override
   @JsonKey(name: "results")
   List<Results3> get results;
   @override
   @JsonKey(ignore: true)
-  _$$ArtQuizModelImplCopyWith<_$ArtQuizModelImpl> get copyWith =>
+  _$$GamesQuizModelImplCopyWith<_$GamesQuizModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -324,7 +325,7 @@ class _$Results3Impl implements _Results3 {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$Results3Impl &&

@@ -3,8 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quiz_quest/app/core/enums.dart';
 import 'package:quiz_quest/app/data/data_sources/quiz_data_source/quiz_categories_data_source.dart';
-import 'package:quiz_quest/app/domain/models/animals_model/animals_quiz_model.dart';
-import 'package:quiz_quest/app/domain/models/art_model/art_quiz_model.dart';
 import 'package:quiz_quest/app/domain/repositories/quiz_repository/quiz_repository.dart';
 import 'package:quiz_quest/app/features/quiz_pages/games_quiz_pages/cubit/games_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/games_quiz_pages/question_quiz_page_games.dart';
@@ -47,10 +45,10 @@ class QuizzPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => GamesCubit(QuizRepository(QuizCategoriesDataSource()))
-        ..getArtCategory(),
+        ..getGamesCategory(),
       child: BlocBuilder<GamesCubit, GamesState>(
         builder: (context, state) {
-          final artModel = state.artQuizModel;
+          final gamesModel = state.gamesQuizModel;
 
           if (state.status == Status.loading) {
             return const Center(child: CircularProgressIndicator());
@@ -136,7 +134,7 @@ class QuizzPage extends StatelessWidget {
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => QuestionQuizPageGames(
-                                model: artModel,
+                                model: gamesModel,
                               )));
                     },
                     style: ElevatedButton.styleFrom(

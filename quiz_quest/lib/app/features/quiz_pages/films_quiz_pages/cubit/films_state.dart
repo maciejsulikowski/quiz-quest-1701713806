@@ -2,7 +2,7 @@ part of 'films_cubit.dart';
 
 class FilmsState {
   FilmsState({
-    this.animalsQuizModel,
+    this.filmsQuizModel,
     this.list,
     this.isLoading = false,
     this.status = Status.initial,
@@ -12,6 +12,6 @@ class FilmsState {
   final bool isLoading;
   final Status status;
   final String? error;
-  final AnimalsQuizModel? animalsQuizModel;
+  final FilmsQuizModel? filmsQuizModel;
   final List<dynamic>? list;
 }

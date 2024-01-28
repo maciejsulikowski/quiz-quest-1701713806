@@ -1,7 +1,7 @@
 import 'package:quiz_quest/app/data/data_sources/quiz_data_source/quiz_categories_data_source.dart';
-import 'package:quiz_quest/app/domain/models/animals_model/animals_quiz_model.dart';
-import 'package:quiz_quest/app/domain/models/art_model/art_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/computer_science_model/computer_science_quiz_model.dart';
+import 'package:quiz_quest/app/domain/models/films_model/films_quiz_model.dart';
+import 'package:quiz_quest/app/domain/models/games_model/games_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/geography_model/geography_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/history_model/history_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/politics_model/politics_quiz_model.dart';
@@ -13,14 +13,14 @@ class QuizRepository {
 
   final QuizCategoriesDataSource quizCategoriesDataSource;
 
-  Future<AnimalsQuizModel?> getAnimalsData() async {
-    final json = await quizCategoriesDataSource.getEasyNatureCategory();
+  Future<FilmsQuizModel?> getEasyFilmsData() async {
+    final json = await quizCategoriesDataSource.getEasyFilmCategory();
 
     if (json == null) {
       return null;
     }
 
-    return AnimalsQuizModel.fromJson(json);
+    return FilmsQuizModel.fromJson(json);
   }
 
   // Future<AnimalsQuizModel?> getFakeAnimal() async {
@@ -33,14 +33,14 @@ class QuizRepository {
   //   return AnimalsQuizModel.fromJson(json);
   // }
 
-  Future<ArtQuizModel?> getArtData() async {
+  Future<GamesQuizModel?> getGamesData() async {
     final json = await quizCategoriesDataSource.getArtCategory();
 
     if (json == null) {
       return null;
     }
 
-    return ArtQuizModel.fromJson(json);
+    return GamesQuizModel.fromJson(json);
   }
 
   Future<ComputerScienceQuizModel?> getComputerScienceData() async {

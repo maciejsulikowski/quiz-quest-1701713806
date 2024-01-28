@@ -3,7 +3,7 @@ part of 'games_cubit.dart';
 
 class GamesState {
   GamesState({
-    this.artQuizModel,
+    this.gamesQuizModel,
     this.isLoading = false,
     this.status = Status.initial,
     this.error,
@@ -12,5 +12,5 @@ class GamesState {
   final bool isLoading;
   final Status status;
   final String? error;
-  final ArtQuizModel? artQuizModel;
+  final GamesQuizModel? gamesQuizModel;
 }

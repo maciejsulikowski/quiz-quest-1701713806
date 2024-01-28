@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quiz_quest/app/core/enums.dart';
 import 'package:quiz_quest/app/data/data_sources/quiz_data_source/quiz_categories_data_source.dart';
-import 'package:quiz_quest/app/domain/models/animals_model/animals_quiz_model.dart';
+import 'package:quiz_quest/app/domain/models/films_model/films_quiz_model.dart';
 import 'package:quiz_quest/app/domain/repositories/quiz_repository/quiz_repository.dart';
 import 'package:quiz_quest/app/features/home_page/cubit/home_cubit.dart';
 import 'package:quiz_quest/app/features/home_page/home_page.dart';
@@ -49,11 +49,11 @@ class _QuestionQuizPageState extends State<QuestionQuizPage> {
     super.initState();
   }
 
-  void generateAnswers(AnimalsQuizModel? animalsModel) {
-    if (animalsModel != null && !answerGenerated) {
-      final correctAnswer = animalsModel.results[currentIndex].correctAnswer;
+  void generateAnswers(FilmsQuizModel? filmsQuizModel) {
+    if (filmsQuizModel != null && !answerGenerated) {
+      final correctAnswer = filmsQuizModel.results[currentIndex].correctAnswer;
       final incorrectAnswers =
-          animalsModel.results[currentIndex].incorrectAnswers;
+          filmsQuizModel.results[currentIndex].incorrectAnswers;
       currentAnswers = incorrectAnswers + [correctAnswer];
       currentAnswers.shuffle();
 
@@ -92,7 +92,7 @@ class _QuestionQuizPageState extends State<QuestionQuizPage> {
       body: BlocProvider(
         create: (context) =>
             FilmsCubit(QuizRepository(QuizCategoriesDataSource()))
-              ..getAnimalsCategory(),
+              ..getFilmsCategory(),
         child: BlocListener<FilmsCubit, FilmsState>(
           listener: (context, state) async {
             if (state.status == Status.error) {
@@ -105,7 +105,7 @@ class _QuestionQuizPageState extends State<QuestionQuizPage> {
                   seconds: 5,
                 ),
               );
-              context.read<FilmsCubit>().getAnimalsCategory();
+              context.read<FilmsCubit>().getFilmsCategory();
             }
           },
           child: BlocBuilder<FilmsCubit, FilmsState>(
@@ -117,8 +117,8 @@ class _QuestionQuizPageState extends State<QuestionQuizPage> {
                 return const Center(child: CircularProgressIndicator());
               }
 
-              final animalsModel = state.animalsQuizModel;
-              generateAnswers(animalsModel);
+              final filmsQuizModel = state.filmsQuizModel;
+              generateAnswers(filmsQuizModel);
 
               return Container(
                 decoration: const BoxDecoration(
@@ -169,7 +169,7 @@ class _QuestionQuizPageState extends State<QuestionQuizPage> {
                     const SizedBox(
                       height: 15,
                     ),
-                    if (animalsModel != null)
+                    if (filmsQuizModel != null)
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20.0),
                         child: ListView.builder(
@@ -181,7 +181,7 @@ class _QuestionQuizPageState extends State<QuestionQuizPage> {
                                   MainAxisAlignment.spaceAround,
                               children: [
                                 QuestionWidget(
-                                  question: animalsModel
+                                  question: filmsQuizModel
                                       .results[currentIndex].question,
                                 ),
                                 const SizedBox(
@@ -208,7 +208,7 @@ class _QuestionQuizPageState extends State<QuestionQuizPage> {
                                       });
                                     },
                                     isCorrectAnswer: currentAnswers[index] ==
-                                            animalsModel.results[currentIndex]
+                                            filmsQuizModel.results[currentIndex]
                                                 .correctAnswer
                                         ? true
                                         : false,

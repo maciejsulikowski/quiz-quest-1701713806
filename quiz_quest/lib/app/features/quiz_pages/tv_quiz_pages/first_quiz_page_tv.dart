@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quiz_quest/app/core/enums.dart';
 import 'package:quiz_quest/app/data/data_sources/quiz_data_source/quiz_categories_data_source.dart';
-import 'package:quiz_quest/app/domain/models/animals_model/animals_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/sports_model/sports_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/vehicles_model/vehicles_quiz_model.dart';
 import 'package:quiz_quest/app/domain/repositories/quiz_repository/quiz_repository.dart';

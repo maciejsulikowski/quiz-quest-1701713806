@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:quiz_quest/app/core/enums.dart';
-import 'package:quiz_quest/app/domain/models/art_model/art_quiz_model.dart';
+import 'package:quiz_quest/app/domain/models/games_model/games_quiz_model.dart';
 import 'package:quiz_quest/app/domain/repositories/quiz_repository/quiz_repository.dart';
 
 part 'games_state.dart';
@@ -11,7 +11,7 @@ class GamesCubit extends Cubit<GamesState> {
 
   final QuizRepository quizRepository;
 
-  Future<void> getArtCategory() async {
+  Future<void> getGamesCategory() async {
     emit(GamesState(
       status: Status.loading,
     ));
@@ -19,10 +19,10 @@ class GamesCubit extends Cubit<GamesState> {
     
 
     try {
-      final artModel = await quizRepository.getArtData();
+      final gamesModel = await quizRepository.getGamesData();
       emit(GamesState(
         status: Status.success,
-        artQuizModel: artModel,
+        gamesQuizModel: gamesModel,
       ));
     } catch (error) {
       emit(GamesState(

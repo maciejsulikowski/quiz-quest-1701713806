@@ -8,7 +8,7 @@ import 'package:quiz_quest/app/domain/models/history_model/history_quiz_model.da
 import 'package:quiz_quest/app/domain/models/music_model/music_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/nature_model/nature_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/sports_model/sports_quiz_model.dart';
-import 'package:quiz_quest/app/domain/models/vehicles_model/vehicles_quiz_model.dart';
+import 'package:quiz_quest/app/domain/models/tv_model/tv_quiz_model.dart';
 import 'package:quiz_quest/app/features/quiz_pages/nature_quiz_pages/cubit/nature_cubit.dart';
 
 part 'home_state.dart';

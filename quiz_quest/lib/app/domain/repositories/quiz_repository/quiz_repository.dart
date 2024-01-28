@@ -6,7 +6,7 @@ import 'package:quiz_quest/app/domain/models/history_model/history_quiz_model.da
 import 'package:quiz_quest/app/domain/models/music_model/music_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/nature_model/nature_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/sports_model/sports_quiz_model.dart';
-import 'package:quiz_quest/app/domain/models/vehicles_model/vehicles_quiz_model.dart';
+import 'package:quiz_quest/app/domain/models/tv_model/tv_quiz_model.dart';
 
 class QuizRepository {
   QuizRepository(this.quizCategoriesDataSource);
@@ -93,13 +93,13 @@ class QuizRepository {
     return SportsQuizModel.fromJson(json);
   }
 
-  Future<VehiclesQuizModel?> getVehiclesData() async {
-    final json = await quizCategoriesDataSource.getVehiclesCategory();
+  Future<TVQuizModel?> getTVData() async {
+    final json = await quizCategoriesDataSource.getEasyTVCategory();
 
     if (json == null) {
       return null;
     }
 
-    return VehiclesQuizModel.fromJson(json);
+    return TVQuizModel.fromJson(json);
   }
 }

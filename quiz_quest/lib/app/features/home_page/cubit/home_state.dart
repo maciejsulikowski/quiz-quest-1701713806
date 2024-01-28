@@ -9,7 +9,7 @@ class HomeState {
     this.geographyModel,
     this.historyModel,
     this.natureModel,
-    this.vehiclesModel,
+    this.tvModel,
     this.status = Status.initial,
     this.errorMessage,
     this.searchedList = const [
@@ -24,7 +24,7 @@ class HomeState {
   final GeographyQuizModel? geographyModel;
   final HistoryQuizModel? historyModel;
   final NatureQuizModel? natureModel;
-  final VehiclesQuizModel? vehiclesModel;
+  final TVQuizModel? tvModel;
   final Status status;
   final String? errorMessage;
   final List searchedList;

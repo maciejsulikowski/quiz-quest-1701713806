@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'vehicles_quiz_model.dart';
+part of 'tv_quiz_model.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,34 +14,34 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-VehiclesQuizModel _$VehiclesQuizModelFromJson(Map<String, dynamic> json) {
-  return _VehiclesQuizModel.fromJson(json);
+TVQuizModel _$TVQuizModelFromJson(Map<String, dynamic> json) {
+  return _TVQuizModel.fromJson(json);
 }
 
 /// @nodoc
-mixin _$VehiclesQuizModel {
+mixin _$TVQuizModel {
   @JsonKey(name: "results")
   List<Results8> get results => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $VehiclesQuizModelCopyWith<VehiclesQuizModel> get copyWith =>
+  $TVQuizModelCopyWith<TVQuizModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $VehiclesQuizModelCopyWith<$Res> {
-  factory $VehiclesQuizModelCopyWith(
-          VehiclesQuizModel value, $Res Function(VehiclesQuizModel) then) =
-      _$VehiclesQuizModelCopyWithImpl<$Res, VehiclesQuizModel>;
+abstract class $TVQuizModelCopyWith<$Res> {
+  factory $TVQuizModelCopyWith(
+          TVQuizModel value, $Res Function(TVQuizModel) then) =
+      _$TVQuizModelCopyWithImpl<$Res, TVQuizModel>;
   @useResult
   $Res call({@JsonKey(name: "results") List<Results8> results});
 }
 
 /// @nodoc
-class _$VehiclesQuizModelCopyWithImpl<$Res, $Val extends VehiclesQuizModel>
-    implements $VehiclesQuizModelCopyWith<$Res> {
-  _$VehiclesQuizModelCopyWithImpl(this._value, this._then);
+class _$TVQuizModelCopyWithImpl<$Res, $Val extends TVQuizModel>
+    implements $TVQuizModelCopyWith<$Res> {
+  _$TVQuizModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -63,22 +63,22 @@ class _$VehiclesQuizModelCopyWithImpl<$Res, $Val extends VehiclesQuizModel>
 }
 
 /// @nodoc
-abstract class _$$VehiclesQuizModelImplCopyWith<$Res>
-    implements $VehiclesQuizModelCopyWith<$Res> {
-  factory _$$VehiclesQuizModelImplCopyWith(_$VehiclesQuizModelImpl value,
-          $Res Function(_$VehiclesQuizModelImpl) then) =
-      __$$VehiclesQuizModelImplCopyWithImpl<$Res>;
+abstract class _$$TVQuizModelImplCopyWith<$Res>
+    implements $TVQuizModelCopyWith<$Res> {
+  factory _$$TVQuizModelImplCopyWith(
+          _$TVQuizModelImpl value, $Res Function(_$TVQuizModelImpl) then) =
+      __$$TVQuizModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({@JsonKey(name: "results") List<Results8> results});
 }
 
 /// @nodoc
-class __$$VehiclesQuizModelImplCopyWithImpl<$Res>
-    extends _$VehiclesQuizModelCopyWithImpl<$Res, _$VehiclesQuizModelImpl>
-    implements _$$VehiclesQuizModelImplCopyWith<$Res> {
-  __$$VehiclesQuizModelImplCopyWithImpl(_$VehiclesQuizModelImpl _value,
-      $Res Function(_$VehiclesQuizModelImpl) _then)
+class __$$TVQuizModelImplCopyWithImpl<$Res>
+    extends _$TVQuizModelCopyWithImpl<$Res, _$TVQuizModelImpl>
+    implements _$$TVQuizModelImplCopyWith<$Res> {
+  __$$TVQuizModelImplCopyWithImpl(
+      _$TVQuizModelImpl _value, $Res Function(_$TVQuizModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -86,7 +86,7 @@ class __$$VehiclesQuizModelImplCopyWithImpl<$Res>
   $Res call({
     Object? results = null,
   }) {
-    return _then(_$VehiclesQuizModelImpl(
+    return _then(_$TVQuizModelImpl(
       null == results
           ? _value._results
           : results // ignore: cast_nullable_to_non_nullable
@@ -97,13 +97,12 @@ class __$$VehiclesQuizModelImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$VehiclesQuizModelImpl implements _VehiclesQuizModel {
-  _$VehiclesQuizModelImpl(
-      @JsonKey(name: "results") final List<Results8> results)
+class _$TVQuizModelImpl implements _TVQuizModel {
+  _$TVQuizModelImpl(@JsonKey(name: "results") final List<Results8> results)
       : _results = results;
 
-  factory _$VehiclesQuizModelImpl.fromJson(Map<String, dynamic> json) =>
-      _$$VehiclesQuizModelImplFromJson(json);
+  factory _$TVQuizModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TVQuizModelImplFromJson(json);
 
   final List<Results8> _results;
   @override
@@ -116,14 +115,14 @@ class _$VehiclesQuizModelImpl implements _VehiclesQuizModel {
 
   @override
   String toString() {
-    return 'VehiclesQuizModel(results: $results)';
+    return 'TVQuizModel(results: $results)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$VehiclesQuizModelImpl &&
+            other is _$TVQuizModelImpl &&
             const DeepCollectionEquality().equals(other._results, _results));
   }
 
@@ -135,32 +134,30 @@ class _$VehiclesQuizModelImpl implements _VehiclesQuizModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$VehiclesQuizModelImplCopyWith<_$VehiclesQuizModelImpl> get copyWith =>
-      __$$VehiclesQuizModelImplCopyWithImpl<_$VehiclesQuizModelImpl>(
-          this, _$identity);
+  _$$TVQuizModelImplCopyWith<_$TVQuizModelImpl> get copyWith =>
+      __$$TVQuizModelImplCopyWithImpl<_$TVQuizModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$VehiclesQuizModelImplToJson(
+    return _$$TVQuizModelImplToJson(
       this,
     );
   }
 }
 
-abstract class _VehiclesQuizModel implements VehiclesQuizModel {
-  factory _VehiclesQuizModel(
-          @JsonKey(name: "results") final List<Results8> results) =
-      _$VehiclesQuizModelImpl;
+abstract class _TVQuizModel implements TVQuizModel {
+  factory _TVQuizModel(@JsonKey(name: "results") final List<Results8> results) =
+      _$TVQuizModelImpl;
 
-  factory _VehiclesQuizModel.fromJson(Map<String, dynamic> json) =
-      _$VehiclesQuizModelImpl.fromJson;
+  factory _TVQuizModel.fromJson(Map<String, dynamic> json) =
+      _$TVQuizModelImpl.fromJson;
 
   @override
   @JsonKey(name: "results")
   List<Results8> get results;
   @override
   @JsonKey(ignore: true)
-  _$$VehiclesQuizModelImplCopyWith<_$VehiclesQuizModelImpl> get copyWith =>
+  _$$TVQuizModelImplCopyWith<_$TVQuizModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

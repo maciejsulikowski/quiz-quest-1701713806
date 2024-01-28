@@ -2,7 +2,7 @@ part of 'tv_cubit.dart';
 
 class TVState {
   TVState({
-    this.vehiclesQuizModel,
+    this.tvQuizModel,
     this.isLoading = false,
     this.status = Status.initial,
     this.error,
@@ -11,5 +11,5 @@ class TVState {
   final bool isLoading;
   final Status status;
   final String? error;
-  final VehiclesQuizModel? vehiclesQuizModel;
+  final TVQuizModel? tvQuizModel;
 }

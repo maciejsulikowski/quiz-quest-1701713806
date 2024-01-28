@@ -1,21 +1,19 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'vehicles_quiz_model.dart';
+part of 'tv_quiz_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$VehiclesQuizModelImpl _$$VehiclesQuizModelImplFromJson(
-        Map<String, dynamic> json) =>
-    _$VehiclesQuizModelImpl(
+_$TVQuizModelImpl _$$TVQuizModelImplFromJson(Map<String, dynamic> json) =>
+    _$TVQuizModelImpl(
       (json['results'] as List<dynamic>)
           .map((e) => Results8.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
-Map<String, dynamic> _$$VehiclesQuizModelImplToJson(
-        _$VehiclesQuizModelImpl instance) =>
+Map<String, dynamic> _$$TVQuizModelImplToJson(_$TVQuizModelImpl instance) =>
     <String, dynamic>{
       'results': instance.results,
     };

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quiz_quest/app/domain/models/sports_model/sports_quiz_model.dart';
-import 'package:quiz_quest/app/domain/models/vehicles_model/vehicles_quiz_model.dart';
+import 'package:quiz_quest/app/domain/models/tv_model/tv_quiz_model.dart';
 import 'package:quiz_quest/app/features/home_page/cubit/home_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/quiz_countdown_timer/quiz_countdown_timer.dart';
 
@@ -13,7 +13,7 @@ class QuestionQuizPageTV extends StatefulWidget {
     super.key,
   });
 
-  final VehiclesQuizModel? model;
+  final TVQuizModel? model;
 
   @override
   State<QuestionQuizPageTV> createState() => _QuestionQuizPageTVState();
@@ -41,7 +41,7 @@ class QuizzPage extends StatelessWidget {
     super.key,
   });
 
-  final VehiclesQuizModel? model;
+  final TVQuizModel? model;
 
   @override
   Widget build(BuildContext context) {

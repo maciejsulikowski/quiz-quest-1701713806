@@ -176,7 +176,8 @@ class _QuestionQuizPageState extends State<QuestionQuizPage> {
                           shrinkWrap: true,
                           itemBuilder: (context, _) {
                             return Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              mainAxisAlignment:
+                                  MainAxisAlignment.spaceAround,
                               children: [
                                 QuestionWidget(
                                   question: animalsModel
@@ -185,45 +186,39 @@ class _QuestionQuizPageState extends State<QuestionQuizPage> {
                                 const SizedBox(
                                   height: 30,
                                 ),
-                                Column(
-                                  children: [
-                                    for (int index = 0;
-                                        index < currentAnswers.length;
-                                        index++) ...[
-                                      AnswerButton(
-                                        isButtonDisabled: (value) {
-                                          setState(() {
-                                            isButtonDisabled = value;
-                                          });
-                                        },
-                                        isButtonClicked: (value) {
-                                          setState(() {
-                                            isButtonClicked = value;
-                                          });
-                                        },
-                                        textcolor: answerColors[index],
-                                        colorFunction: (value, index) {
-                                          setState(() {
-                                            answerColors[index] = value;
-                                          });
-                                        },
-                                        isCorrectAnswer:
-                                            currentAnswers[index] ==
-                                                    animalsModel
-                                                        .results[currentIndex]
-                                                        .correctAnswer
-                                                ? true
-                                                : false,
-                                        answer: currentAnswers[index],
-                                        controller: controller,
-                                        index: index,
-                                      ),
-                                      const SizedBox(
-                                        height: 10,
-                                      )
-                                    ]
-                                  ],
-                                ),
+                                for (int index = 0;
+                                    index < currentAnswers.length;
+                                    index++) ...[
+                                  AnswerButton(
+                                    isButtonDisabled: (value) {
+                                      setState(() {
+                                        isButtonDisabled = value;
+                                      });
+                                    },
+                                    isButtonClicked: (value) {
+                                      setState(() {
+                                        isButtonClicked = value;
+                                      });
+                                    },
+                                    textcolor: answerColors[index],
+                                    colorFunction: (value, index) {
+                                      setState(() {
+                                        answerColors[index] = value;
+                                      });
+                                    },
+                                    isCorrectAnswer: currentAnswers[index] ==
+                                            animalsModel.results[currentIndex]
+                                                .correctAnswer
+                                        ? true
+                                        : false,
+                                    answer: currentAnswers[index],
+                                    controller: controller,
+                                    index: index,
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  )
+                                ],
                                 const SizedBox(
                                   height: 15,
                                 ),
@@ -239,13 +234,15 @@ class _QuestionQuizPageState extends State<QuestionQuizPage> {
                                       Container(
                                           color: Colors.black,
                                           child: ElevatedButton(
-                                            onPressed: isButtonClicked == false
+                                            onPressed: isButtonClicked ==
+                                                    false
                                                 ? null
                                                 : () {
                                                     setState(() {
                                                       currentIndex += 1;
                                                       isButtonClicked = false;
-                                                      isButtonDisabled = false;
+                                                      isButtonDisabled =
+                                                          false;
                                                       answerGenerated = false;
                                                       answerColors =
                                                           List.filled(

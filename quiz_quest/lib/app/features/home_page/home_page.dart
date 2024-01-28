@@ -90,29 +90,29 @@ class _QuizzPageState extends State<QuizzPage> {
     {
       'id': 1,
       'widget': const QuizzCategoryWidget(
-        name: 'Animals',
-        image: 'images/animal.png',
+        name: 'Films',
+        image: 'images/movie.png',
       ),
-      'name': 'Animals',
-      'image': 'images/animal.png'
+      'name': 'Films',
+      'image': 'images/movie.png'
     },
     {
       'id': 2,
       'widget': const QuizzCategoryWidget3(
-        name: 'Art',
-        image: 'images/art.png',
+        name: 'Music',
+        image: 'images/music.png',
       ),
-      'name': 'Art',
-      'image': 'images/art.png'
+      'name': 'Music',
+      'image': 'images/music.png'
     },
     {
       'id': 3,
       'widget': const QuizzCategoryWidget4(
-        name: 'Computer Science',
-        image: 'images/computer.png',
+        name: 'TV',
+        image: 'images/tv.png',
       ),
-      'name': 'Computer Science',
-      'image': 'images/computer.png'
+      'name': 'TV',
+      'image': 'images/tv.png'
     },
     {
       'id': 4,
@@ -135,11 +135,11 @@ class _QuizzPageState extends State<QuizzPage> {
     {
       'id': 6,
       'widget': const QuizzCategoryWidget7(
-        name: 'Politics',
-        image: 'images/politics.png',
+        name: 'Games',
+        image: 'images/games.png',
       ),
-      'name': 'Politics',
-      'image': 'images/politics.png'
+      'name': 'Games',
+      'image': 'images/games.png'
     },
     {
       'id': 7,
@@ -153,11 +153,11 @@ class _QuizzPageState extends State<QuizzPage> {
     {
       'id': 8,
       'widget': const QuizzCategoryWidget8(
-        name: 'Vehicles',
-        image: 'images/vehicle.png',
+        name: 'Nature',
+        image: 'images/nature.png',
       ),
-      'name': 'Vehicles',
-      'image': 'images/vehicle.png'
+      'name': 'Nature',
+      'image': 'images/nature.png'
     },
   ];
 

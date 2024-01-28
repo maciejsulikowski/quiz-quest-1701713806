@@ -14,7 +14,7 @@ class QuizRepository {
   final QuizCategoriesDataSource quizCategoriesDataSource;
 
   Future<AnimalsQuizModel?> getAnimalsData() async {
-    final json = await quizCategoriesDataSource.getAnimalsCategory();
+    final json = await quizCategoriesDataSource.getEasyNatureCategory();
 
     if (json == null) {
       return null;
@@ -23,15 +23,15 @@ class QuizRepository {
     return AnimalsQuizModel.fromJson(json);
   }
 
-  Future<AnimalsQuizModel?> getFakeAnimal() async {
-    final json = await quizCategoriesDataSource.fakeAnimal();
+  // Future<AnimalsQuizModel?> getFakeAnimal() async {
+  //   final json = await quizCategoriesDataSource.fakeAnimal();
 
-    if (json == null) {
-      return null;
-    }
+  //   if (json == null) {
+  //     return null;
+  //   }
 
-    return AnimalsQuizModel.fromJson(json);
-  }
+  //   return AnimalsQuizModel.fromJson(json);
+  // }
 
   Future<ArtQuizModel?> getArtData() async {
     final json = await quizCategoriesDataSource.getArtCategory();
@@ -53,8 +53,8 @@ class QuizRepository {
     return ComputerScienceQuizModel.fromJson(json);
   }
 
-  Future<GeographyQuizModel?> getGeographyData() async {
-    final json = await quizCategoriesDataSource.getGeographyCategory();
+  Future<GeographyQuizModel?> getEasyGeographyData() async {
+    final json = await quizCategoriesDataSource.getEasyGeographyCategory();
 
     if (json == null) {
       return null;
@@ -63,8 +63,8 @@ class QuizRepository {
     return GeographyQuizModel.fromJson(json);
   }
 
-  Future<HistoryQuizModel?> getHistoryData() async {
-    final json = await quizCategoriesDataSource.getHistoryCategory();
+  Future<HistoryQuizModel?> getEasyHistoryData() async {
+    final json = await quizCategoriesDataSource.getEasyHistoryCategory();
 
     if (json == null) {
       return null;
@@ -83,8 +83,8 @@ class QuizRepository {
     return PoliticsQuizModel.fromJson(json);
   }
 
-  Future<SportsQuizModel?> getSportsData() async {
-    final json = await quizCategoriesDataSource.getSportCategory();
+  Future<SportsQuizModel?> getEasySportsData() async {
+    final json = await quizCategoriesDataSource.getEasySportCategory();
 
     if (json == null) {
       return null;

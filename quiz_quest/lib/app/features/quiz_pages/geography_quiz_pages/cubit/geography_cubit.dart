@@ -16,10 +16,8 @@ class GeographyCubit extends Cubit<GeographyState> {
       status: Status.loading,
     ));
 
-    
-
     try {
-      final geographyModel = await quizRepository.getGeographyData();
+      final geographyModel = await quizRepository.getEasyGeographyData();
       emit(GeographyState(
         status: Status.success,
         geographyQuizModel: geographyModel,

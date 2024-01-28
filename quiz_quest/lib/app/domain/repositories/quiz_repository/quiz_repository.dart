@@ -1,10 +1,10 @@
 import 'package:quiz_quest/app/data/data_sources/quiz_data_source/quiz_categories_data_source.dart';
-import 'package:quiz_quest/app/domain/models/computer_science_model/computer_science_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/films_model/films_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/games_model/games_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/geography_model/geography_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/history_model/history_quiz_model.dart';
-import 'package:quiz_quest/app/domain/models/politics_model/politics_quiz_model.dart';
+import 'package:quiz_quest/app/domain/models/music_model/music_quiz_model.dart';
+import 'package:quiz_quest/app/domain/models/nature_model/nature_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/sports_model/sports_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/vehicles_model/vehicles_quiz_model.dart';
 
@@ -34,7 +34,7 @@ class QuizRepository {
   // }
 
   Future<GamesQuizModel?> getGamesData() async {
-    final json = await quizCategoriesDataSource.getArtCategory();
+    final json = await quizCategoriesDataSource.getEasyGamesCategory();
 
     if (json == null) {
       return null;
@@ -43,14 +43,14 @@ class QuizRepository {
     return GamesQuizModel.fromJson(json);
   }
 
-  Future<ComputerScienceQuizModel?> getComputerScienceData() async {
-    final json = await quizCategoriesDataSource.getComputerScienceCategory();
+  Future<MusicQuizModel?> getMusicData() async {
+    final json = await quizCategoriesDataSource.getEasyMusicCategory();
 
     if (json == null) {
       return null;
     }
 
-    return ComputerScienceQuizModel.fromJson(json);
+    return MusicQuizModel.fromJson(json);
   }
 
   Future<GeographyQuizModel?> getEasyGeographyData() async {
@@ -73,14 +73,14 @@ class QuizRepository {
     return HistoryQuizModel.fromJson(json);
   }
 
-  Future<PoliticsQuizModel?> getPoliticsData() async {
-    final json = await quizCategoriesDataSource.getPoliticsCategory();
+  Future<NatureQuizModel?> getNatureData() async {
+    final json = await quizCategoriesDataSource.getEasyNatureCategory();
 
     if (json == null) {
       return null;
     }
 
-    return PoliticsQuizModel.fromJson(json);
+    return NatureQuizModel.fromJson(json);
   }
 
   Future<SportsQuizModel?> getEasySportsData() async {

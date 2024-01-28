@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:quiz_quest/app/core/enums.dart';
-import 'package:quiz_quest/app/domain/models/politics_model/politics_quiz_model.dart';
+import 'package:quiz_quest/app/domain/models/nature_model/nature_quiz_model.dart';
 import 'package:quiz_quest/app/domain/repositories/quiz_repository/quiz_repository.dart';
 
 part 'nature_state.dart';
@@ -11,16 +11,16 @@ class NatureCubit extends Cubit<NatureState> {
 
   final QuizRepository quizRepository;
 
-  Future<void> getPoliticsCategory() async {
+  Future<void> getNatureCategory() async {
     emit(NatureState(
       status: Status.loading,
     ));
 
     try {
-      final politicsModel = await quizRepository.getPoliticsData();
+      final natureModel = await quizRepository.getNatureData();
       emit(NatureState(
         status: Status.success,
-        politicsQuizModel: politicsModel,
+        natureQuizModel: natureModel,
       ));
     } catch (error) {
       emit(NatureState(

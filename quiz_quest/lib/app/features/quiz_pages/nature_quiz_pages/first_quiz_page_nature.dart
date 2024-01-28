@@ -46,11 +46,11 @@ class QuizzPage extends StatelessWidget {
     return BlocProvider(
       create: (context) =>
           NatureCubit(QuizRepository(QuizCategoriesDataSource()))
-            ..getPoliticsCategory(),
+            ..getNatureCategory(),
       child: BlocBuilder<NatureCubit, NatureState>(
         builder: (context, state) {
 
-          final politicsModel = state.politicsQuizModel;
+          final politicsModel = state.natureQuizModel;
 
           if (state.status == Status.loading) {
             return const Center(child: CircularProgressIndicator());

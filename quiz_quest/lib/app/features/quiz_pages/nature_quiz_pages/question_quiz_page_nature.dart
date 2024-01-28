@@ -2,8 +2,8 @@ import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:quiz_quest/app/domain/models/nature_model/nature_quiz_model.dart';
 
-import 'package:quiz_quest/app/domain/models/politics_model/politics_quiz_model.dart';
 import 'package:quiz_quest/app/features/home_page/cubit/home_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/quiz_countdown_timer/quiz_countdown_timer.dart';
 
@@ -13,7 +13,7 @@ class QuestionQuizPageNature extends StatefulWidget {
     super.key,
   });
 
-  final PoliticsQuizModel? model;
+  final NatureQuizModel? model;
 
   @override
   State<QuestionQuizPageNature> createState() => _QuestionQuizPageNatureState();
@@ -41,7 +41,7 @@ class QuizzPage extends StatelessWidget {
     super.key,
   });
 
-  final PoliticsQuizModel? model;
+  final NatureQuizModel? model;
 
   @override
   Widget build(BuildContext context) {

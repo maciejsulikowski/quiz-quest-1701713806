@@ -1,21 +1,21 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'politics_quiz_model.dart';
+part of 'nature_quiz_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$PoliticsQuizModelImpl _$$PoliticsQuizModelImplFromJson(
+_$NatureQuizModelImpl _$$NatureQuizModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$PoliticsQuizModelImpl(
+    _$NatureQuizModelImpl(
       (json['results'] as List<dynamic>)
           .map((e) => Results7.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
-Map<String, dynamic> _$$PoliticsQuizModelImplToJson(
-        _$PoliticsQuizModelImpl instance) =>
+Map<String, dynamic> _$$NatureQuizModelImplToJson(
+        _$NatureQuizModelImpl instance) =>
     <String, dynamic>{
       'results': instance.results,
     };

@@ -2,7 +2,7 @@ import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:quiz_quest/app/domain/models/computer_science_model/computer_science_quiz_model.dart';
+import 'package:quiz_quest/app/domain/models/music_model/music_quiz_model.dart';
 import 'package:quiz_quest/app/features/home_page/cubit/home_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/quiz_countdown_timer/quiz_countdown_timer.dart';
 
@@ -12,7 +12,7 @@ class QuestionQuizPageMusic extends StatefulWidget {
     super.key,
   });
 
-  final ComputerScienceQuizModel? model;
+  final MusicQuizModel? model;
 
   @override
   State<QuestionQuizPageMusic> createState() => _QuestionQuizPageMusicState();
@@ -40,7 +40,7 @@ class QuizzPage extends StatelessWidget {
     super.key,
   });
 
-  final ComputerScienceQuizModel? model;
+  final MusicQuizModel? model;
 
   @override
   Widget build(BuildContext context) {

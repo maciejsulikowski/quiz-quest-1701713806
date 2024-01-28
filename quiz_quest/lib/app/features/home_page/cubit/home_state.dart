@@ -5,10 +5,10 @@ class HomeState {
     this.sportsModel,
     this.filmsModel,
     this.gamesModel,
-    this.computerScienceModel,
+    this.musicModel,
     this.geographyModel,
     this.historyModel,
-    this.politicsModel,
+    this.natureModel,
     this.vehiclesModel,
     this.status = Status.initial,
     this.errorMessage,
@@ -20,10 +20,10 @@ class HomeState {
   final SportsQuizModel? sportsModel;
   final FilmsQuizModel? filmsModel;
   final GamesQuizModel? gamesModel;
-  final ComputerScienceQuizModel? computerScienceModel;
+  final MusicQuizModel? musicModel;
   final GeographyQuizModel? geographyModel;
   final HistoryQuizModel? historyModel;
-  final PoliticsQuizModel? politicsModel;
+  final NatureQuizModel? natureModel;
   final VehiclesQuizModel? vehiclesModel;
   final Status status;
   final String? errorMessage;

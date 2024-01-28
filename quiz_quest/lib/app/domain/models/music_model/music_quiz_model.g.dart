@@ -1,21 +1,20 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'computer_science_quiz_model.dart';
+part of 'music_quiz_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$ComputerScienceQuizModelImpl _$$ComputerScienceQuizModelImplFromJson(
-        Map<String, dynamic> json) =>
-    _$ComputerScienceQuizModelImpl(
+_$MusicQuizModelImpl _$$MusicQuizModelImplFromJson(Map<String, dynamic> json) =>
+    _$MusicQuizModelImpl(
       (json['results'] as List<dynamic>)
           .map((e) => Results4.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
-Map<String, dynamic> _$$ComputerScienceQuizModelImplToJson(
-        _$ComputerScienceQuizModelImpl instance) =>
+Map<String, dynamic> _$$MusicQuizModelImplToJson(
+        _$MusicQuizModelImpl instance) =>
     <String, dynamic>{
       'results': instance.results,
     };

@@ -1,16 +1,16 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'computer_science_quiz_model.g.dart';
-part 'computer_science_quiz_model.freezed.dart';
+part 'music_quiz_model.g.dart';
+part 'music_quiz_model.freezed.dart';
 
 @freezed
-class ComputerScienceQuizModel with _$ComputerScienceQuizModel {
-  factory ComputerScienceQuizModel(
+class MusicQuizModel with _$MusicQuizModel {
+  factory MusicQuizModel(
     @JsonKey(name: "results") List<Results4> results,
-  ) = _ComputerScienceQuizModel;
+  ) = _MusicQuizModel;
 
-  factory ComputerScienceQuizModel.fromJson(Map<String, dynamic> json) =>
-      _$ComputerScienceQuizModelFromJson(json);
+  factory MusicQuizModel.fromJson(Map<String, dynamic> json) =>
+      _$MusicQuizModelFromJson(json);
 }
 
 @freezed

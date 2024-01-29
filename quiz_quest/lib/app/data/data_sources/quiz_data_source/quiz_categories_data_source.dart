@@ -51,7 +51,7 @@ class QuizCategoriesDataSource {
 
   Future<Map<String, dynamic>?> getEasyMusicCategory() async {
     final response = await Dio().get(
-        'https://opentdb.com/api.php?amount=50&category=11&difficulty=easy&type=multiple',
+        'https://opentdb.com/api.php?amount=50&category=12&difficulty=easy&type=multiple',
         options: Options(
           validateStatus: (_) => true,
         ));

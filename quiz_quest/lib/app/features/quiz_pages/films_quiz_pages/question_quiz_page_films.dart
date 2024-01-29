@@ -52,11 +52,15 @@ class _QuestionQuizPageState extends State<QuestionQuizPage> {
   void generateAnswers(FilmsQuizModel? filmsQuizModel) {
     if (filmsQuizModel != null && !answerGenerated) {
       final correctAnswer = filmsQuizModel.results[currentIndex].correctAnswer;
+      final modifiedCorrectAnswer = correctAnswer.replaceAll('&quot;', '');
+      List<String> modifiedIncorrectAnswers = [];
       final incorrectAnswers =
           filmsQuizModel.results[currentIndex].incorrectAnswers;
-      currentAnswers = incorrectAnswers + [correctAnswer];
+      for (String answer in incorrectAnswers) {
+        modifiedIncorrectAnswers.add(answer.replaceAll('&quot;', ''));
+      }
+      currentAnswers = [...modifiedIncorrectAnswers, modifiedCorrectAnswer];
       currentAnswers.shuffle();
-
       if (answerColors.isEmpty) {
         answerColors = List<Color>.filled(currentAnswers.length, Colors.white);
       }
@@ -177,8 +181,7 @@ class _QuestionQuizPageState extends State<QuestionQuizPage> {
                           shrinkWrap: true,
                           itemBuilder: (context, _) {
                             return Column(
-                              mainAxisAlignment:
-                                  MainAxisAlignment.spaceAround,
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
                                 QuestionWidget(
                                   question: filmsQuizModel
@@ -235,15 +238,13 @@ class _QuestionQuizPageState extends State<QuestionQuizPage> {
                                       Container(
                                           color: Colors.black,
                                           child: ElevatedButton(
-                                            onPressed: isButtonClicked ==
-                                                    false
+                                            onPressed: isButtonClicked == false
                                                 ? null
                                                 : () {
                                                     setState(() {
                                                       currentIndex += 1;
                                                       isButtonClicked = false;
-                                                      isButtonDisabled =
-                                                          false;
+                                                      isButtonDisabled = false;
                                                       answerGenerated = false;
                                                       answerColors =
                                                           List.filled(
@@ -289,9 +290,15 @@ class QuestionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final modifiedQuestion = question
+        .replaceAll('&quot;', '')
+        .replaceAll('&#039;', '')
+        .replaceAll('&amp;', '')
+        .replaceAll('&rsquo;', '');
+
     return Center(
       child: Text(
-        question,
+        modifiedQuestion,
         style: GoogleFonts.aBeeZee(
             fontSize: 28, color: Colors.white, fontWeight: FontWeight.bold),
         textAlign: TextAlign.center,

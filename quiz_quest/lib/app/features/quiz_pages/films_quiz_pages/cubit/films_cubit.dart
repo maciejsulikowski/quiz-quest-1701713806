@@ -18,12 +18,50 @@ class FilmsCubit extends Cubit<FilmsState> {
   bool isButtonBlocked = true;
   FilmsQuizModel? filmsQuizModel;
 
-  Future<void> getFilmsCategory() async {
+  Future<void> getEasyFilmsCategory() async {
     emit(FilmsState(
       status: Status.loading,
     ));
     try {
       final filmsModel = await quizRepository.getEasyFilmsData();
+
+      emit(FilmsState(
+        status: Status.success,
+        filmsQuizModel: filmsModel,
+      ));
+    } catch (error) {
+      emit(FilmsState(
+        status: Status.error,
+        error: error.toString(),
+      ));
+    }
+  }
+
+  Future<void> getMediumFilmsCategory() async {
+    emit(FilmsState(
+      status: Status.loading,
+    ));
+    try {
+      final filmsModel = await quizRepository.getMediumFilmsData();
+
+      emit(FilmsState(
+        status: Status.success,
+        filmsQuizModel: filmsModel,
+      ));
+    } catch (error) {
+      emit(FilmsState(
+        status: Status.error,
+        error: error.toString(),
+      ));
+    }
+  }
+
+  Future<void> getHardFilmsCategory() async {
+    emit(FilmsState(
+      status: Status.loading,
+    ));
+    try {
+      final filmsModel = await quizRepository.getHardFilmsData();
 
       emit(FilmsState(
         status: Status.success,

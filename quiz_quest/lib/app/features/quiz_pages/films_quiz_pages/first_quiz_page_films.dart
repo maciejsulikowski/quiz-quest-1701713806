@@ -5,6 +5,9 @@ import 'package:quiz_quest/app/core/enums.dart';
 import 'package:quiz_quest/app/data/data_sources/quiz_data_source/quiz_categories_data_source.dart';
 import 'package:quiz_quest/app/domain/repositories/quiz_repository/quiz_repository.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/question_quiz_page_films.dart';
+import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/second_easy_quiz_page_films.dart';
+import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/second_hard_quiz_page_films.dart';
+import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/second_medium_quiz_page_films.dart';
 
 class FirstQuizPageFilms extends StatefulWidget {
   const FirstQuizPageFilms({
@@ -66,70 +69,34 @@ class QuizzPage extends StatelessWidget {
           ),
           Center(
             child: Text(
-              'Rules',
+              'Choose your difficulty',
               style: GoogleFonts.aBeeZee(
                   fontSize: 46,
                   color: Colors.white,
                   fontWeight: FontWeight.bold),
+              textAlign: TextAlign.center,
             ),
           ),
           const SizedBox(
             height: 30,
           ),
-          const TextWidget(text: 'You have 20 second to answer'),
+          EasyDifficultButton(
+            image: image,
+            text: 'Easy',
+          ),
           const SizedBox(
             height: 30,
           ),
-          const TextWidget(text: 'You have 3 lives ❤️❤️❤️'),
+          MediumDifficultButton(
+            image: image,
+            text: 'Medium',
+          ),
           const SizedBox(
             height: 30,
           ),
-          const TextWidget(text: '1 good answer = 10 points 💎'),
-          const SizedBox(
-            height: 30,
-          ),
-          const TextWidget(
-              text: 'Go as far as you can and keep moving forward  🔥 🧨'),
-          const SizedBox(
-            height: 30,
-          ),
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 20),
-            decoration: BoxDecoration(
-                gradient: const LinearGradient(
-                  colors: [
-                    Color.fromRGBO(143, 165, 255, 1),
-                    Color.fromRGBO(10, 53, 132, 1),
-                  ],
-                  begin: Alignment.centerLeft,
-                  end: Alignment.centerRight,
-                ),
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(25.0),
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
-                    spreadRadius: 4,
-                    blurRadius: 10,
-                    offset: const Offset(0, 3),
-                  )
-                ]),
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const QuestionQuizPage()));
-              },
-              style: ElevatedButton.styleFrom(
-                  minimumSize: const Size.fromHeight(50),
-                  backgroundColor: Colors.transparent,
-                  shadowColor: Colors.transparent),
-              child: Text('''Ready? Let's go!''',
-                  style: GoogleFonts.aBeeZee(
-                    fontSize: 24,
-                    color: Colors.white,
-                  )),
-            ),
+          HardDifficultButton(
+            image: image,
+            text: 'Hard',
           ),
         ],
       ),
@@ -137,24 +104,166 @@ class QuizzPage extends StatelessWidget {
   }
 }
 
-class TextWidget extends StatelessWidget {
-  const TextWidget({
-    required this.text,
+class EasyDifficultButton extends StatelessWidget {
+  const EasyDifficultButton({
     super.key,
+    required this.image,
+    required this.text,
   });
 
+  final String image;
   final String text;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(left: 16),
-      child: Text(
-        text,
-        style: GoogleFonts.aBeeZee(
-          fontSize: 24,
-          color: Colors.white,
-        ),
+      margin: const EdgeInsets.symmetric(horizontal: 20),
+      decoration: BoxDecoration(
+          gradient: const LinearGradient(
+            colors: [
+              Color.fromRGBO(143, 165, 255, 1),
+              Color.fromRGBO(10, 53, 132, 1),
+            ],
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+          ),
+          borderRadius: const BorderRadius.all(
+            Radius.circular(25.0),
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              spreadRadius: 4,
+              blurRadius: 10,
+              offset: const Offset(0, 3),
+            )
+          ]),
+      child: ElevatedButton(
+        onPressed: () {
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => SecondEasyQuizPageFilms(
+                    image: image,
+                  )));
+        },
+        style: ElevatedButton.styleFrom(
+            minimumSize: const Size.fromHeight(50),
+            backgroundColor: Colors.transparent,
+            shadowColor: Colors.transparent),
+        child: Text(text,
+            style: GoogleFonts.aBeeZee(
+              fontSize: 24,
+              color: Colors.white,
+            )),
+      ),
+    );
+  }
+}
+
+class MediumDifficultButton extends StatelessWidget {
+  const MediumDifficultButton({
+    super.key,
+    required this.image,
+    required this.text,
+  });
+
+  final String image;
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 20),
+      decoration: BoxDecoration(
+          gradient: const LinearGradient(
+            colors: [
+              Color.fromRGBO(143, 165, 255, 1),
+              Color.fromRGBO(10, 53, 132, 1),
+            ],
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+          ),
+          borderRadius: const BorderRadius.all(
+            Radius.circular(25.0),
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              spreadRadius: 4,
+              blurRadius: 10,
+              offset: const Offset(0, 3),
+            )
+          ]),
+      child: ElevatedButton(
+        onPressed: () {
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => SecondMediumQuizPageFilms(
+                    image: image,
+                  )));
+        },
+        style: ElevatedButton.styleFrom(
+            minimumSize: const Size.fromHeight(50),
+            backgroundColor: Colors.transparent,
+            shadowColor: Colors.transparent),
+        child: Text(text,
+            style: GoogleFonts.aBeeZee(
+              fontSize: 24,
+              color: Colors.white,
+            )),
+      ),
+    );
+  }
+}
+
+class HardDifficultButton extends StatelessWidget {
+  const HardDifficultButton({
+    super.key,
+    required this.image,
+    required this.text,
+  });
+
+  final String image;
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 20),
+      decoration: BoxDecoration(
+          gradient: const LinearGradient(
+            colors: [
+              Color.fromRGBO(143, 165, 255, 1),
+              Color.fromRGBO(10, 53, 132, 1),
+            ],
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+          ),
+          borderRadius: const BorderRadius.all(
+            Radius.circular(25.0),
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              spreadRadius: 4,
+              blurRadius: 10,
+              offset: const Offset(0, 3),
+            )
+          ]),
+      child: ElevatedButton(
+        onPressed: () {
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => SecondHardQuizPageFilms(
+                    image: image,
+                  )));
+        },
+        style: ElevatedButton.styleFrom(
+            minimumSize: const Size.fromHeight(50),
+            backgroundColor: Colors.transparent,
+            shadowColor: Colors.transparent),
+        child: Text(text,
+            style: GoogleFonts.aBeeZee(
+              fontSize: 24,
+              color: Colors.white,
+            )),
       ),
     );
   }

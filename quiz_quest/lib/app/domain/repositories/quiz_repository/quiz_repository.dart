@@ -23,6 +23,26 @@ class QuizRepository {
     return FilmsQuizModel.fromJson(json);
   }
 
+  Future<FilmsQuizModel?> getMediumFilmsData() async {
+    final json = await quizCategoriesDataSource.getMediumFilmCategory();
+
+    if (json == null) {
+      return null;
+    }
+
+    return FilmsQuizModel.fromJson(json);
+  }
+
+  Future<FilmsQuizModel?> getHardFilmsData() async {
+    final json = await quizCategoriesDataSource.getHardFilmCategory();
+
+    if (json == null) {
+      return null;
+    }
+
+    return FilmsQuizModel.fromJson(json);
+  }
+
   // Future<AnimalsQuizModel?> getFakeAnimal() async {
   //   final json = await quizCategoriesDataSource.fakeAnimal();
 

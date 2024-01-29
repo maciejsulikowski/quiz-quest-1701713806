@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/first_quiz_page_films.dart';
+import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/second_easy_quiz_page_films.dart';
 import 'package:quiz_quest/app/features/quiz_pages/games_quiz_pages/first_quiz_page_games.dart';
 import 'package:quiz_quest/app/features/quiz_pages/geography_quiz_pages/first_quiz_page_geography.dart';
 import 'package:quiz_quest/app/features/quiz_pages/history_quiz_pages/first_quiz_page_history.dart';
@@ -313,8 +314,6 @@ class _QuizzPageState extends State<QuizzPage> {
               itemBuilder: (context, index) {
                 final firstIndex = index * 2;
                 final secondIndex = firstIndex + 1;
-                // if (firstIndex != null && secondIndex != null)
-                // ignore: curly_braces_in_flow_control_structures
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [

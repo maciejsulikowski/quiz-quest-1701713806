@@ -96,7 +96,7 @@ class _QuestionQuizPageState extends State<QuestionQuizPage> {
       body: BlocProvider(
         create: (context) =>
             FilmsCubit(QuizRepository(QuizCategoriesDataSource()))
-              ..getEasyFilmsCategory(),
+              ..getMediumFilmsCategory(),
         child: BlocListener<FilmsCubit, FilmsState>(
           listener: (context, state) async {
             if (state.status == Status.error) {
@@ -109,7 +109,7 @@ class _QuestionQuizPageState extends State<QuestionQuizPage> {
                   seconds: 5,
                 ),
               );
-              context.read<FilmsCubit>().getEasyFilmsCategory();
+              context.read<FilmsCubit>().getMediumFilmsCategory();
             }
           },
           child: BlocBuilder<FilmsCubit, FilmsState>(

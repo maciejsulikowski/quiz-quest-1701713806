@@ -166,9 +166,6 @@ class _QuestionQuizPageState extends State<QuestionQuizPage> {
                         ),
                       ],
                     ),
-                    const SizedBox(
-                      height: 10,
-                    ),
                     CountDownTimer(duration: duration, controller: controller),
                     const SizedBox(
                       height: 15,
@@ -300,7 +297,7 @@ class QuestionWidget extends StatelessWidget {
       child: Text(
         modifiedQuestion,
         style: GoogleFonts.aBeeZee(
-            fontSize: 28, color: Colors.white, fontWeight: FontWeight.bold),
+            fontSize: 24, color: Colors.white, fontWeight: FontWeight.bold),
         textAlign: TextAlign.center,
       ),
     );
@@ -357,6 +354,12 @@ class _AnswerButtonState extends State<AnswerButton> {
 
   @override
   Widget build(BuildContext context) {
+    final modifiedAnswer = widget.answer
+        .replaceAll('&quot;', '')
+        .replaceAll('&#039;', '')
+        .replaceAll('&aacute;', '')
+        .replaceAll('&ntilde;', '');
+
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20),
       decoration: BoxDecoration(
@@ -388,7 +391,7 @@ class _AnswerButtonState extends State<AnswerButton> {
           shadowColor: Colors.transparent,
         ),
         child: Text(
-          widget.answer,
+          modifiedAnswer,
           style: GoogleFonts.aBeeZee(
             fontSize: 24,
             color: widget.textcolor,

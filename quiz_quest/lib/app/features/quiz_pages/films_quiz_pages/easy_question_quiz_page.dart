@@ -25,6 +25,7 @@ class EasyQuestionQuizPage extends StatefulWidget {
 final controller = CountDownController();
 bool isButtonClicked = false;
 bool isButtonDisabled = false;
+bool isButtonNameChanged = false;
 Color textColor = Colors.white;
 bool isTimeUp = false;
 int goodAnswers = 0;
@@ -48,6 +49,7 @@ class _EasyQuestionQuizPageState extends State<EasyQuestionQuizPage> {
     answerColors;
     answerGenerated = false;
     isTimeUp;
+    isButtonNameChanged;
     resetQuizState();
     super.initState();
   }
@@ -75,6 +77,7 @@ class _EasyQuestionQuizPageState extends State<EasyQuestionQuizPage> {
   }
 
   void resetQuizState() {
+    isButtonNameChanged = false;
     badAnswers = 0;
     goodAnswers = 0;
     currentIndex = 0;
@@ -314,6 +317,8 @@ class _EasyQuestionQuizPageState extends State<EasyQuestionQuizPage> {
                                                           filmsQuizModel.results
                                                                   .length -
                                                               1) {
+                                                        isButtonNameChanged =
+                                                            true;
                                                         Navigator.of(context).push(
                                                             MaterialPageRoute(
                                                                 builder:
@@ -338,8 +343,12 @@ class _EasyQuestionQuizPageState extends State<EasyQuestionQuizPage> {
                                               foregroundColor: Colors.white,
                                               backgroundColor: Colors.black,
                                             ),
-                                            child:
-                                                const Text('Next Question ➔'),
+                                            child: Text(currentIndex ==
+                                                    filmsQuizModel
+                                                            .results.length -
+                                                        1
+                                                ? 'Show your results'
+                                                : 'Next Question ➔'),
                                           )),
                                     ],
                                   ),

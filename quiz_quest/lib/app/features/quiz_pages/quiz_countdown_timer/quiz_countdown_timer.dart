@@ -35,10 +35,10 @@ class _CountDownTimerState extends State<CountDownTimer> {
       controller: widget.controller,
 
       // Width of the Countdown Widget.
-      width: MediaQuery.of(context).size.width / 6,
+      width: MediaQuery.of(context).size.width / 8,
 
       // Height of the Countdown Widget.
-      height: MediaQuery.of(context).size.height / 6,
+      height: MediaQuery.of(context).size.height / 8,
 
       // Ring Color for Countdown Widget.
       ringColor: Colors.white,

@@ -45,6 +45,47 @@ class UserDataSource {
     );
   }
 
+  Future<void> setEmptyPoints() async {
+    final userID = FirebaseAuth.instance.currentUser?.uid;
+    if (userID == null) {
+      throw Exception('User is not logged in');
+    }
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userID)
+        .collection('points')
+        .doc(userID)
+        .set(
+      {
+        'total_points': '',
+        'films_easy_points': '',
+        'films_medium_points': '',
+        'films_hard_points': '',
+        'games_easy_points': '',
+        'games_medium_points': '',
+        'games_hard_points': '',
+        'geography_easy_points': '',
+        'geography_medium_points': '',
+        'geography_hard_points': '',
+        'history_easy_points': '',
+        'history_medium_points': '',
+        'history_hard_points': '',
+        'music_easy_points': '',
+        'music_medium_points': '',
+        'music_hard_points': '',
+        'nature_easy_points': '',
+        'nature_medium_points': '',
+        'nature_hard_points': '',
+        'sport_easy_points': '',
+        'sport_medium_points': '',
+        'sport_hard_points': '',
+        'tv_easy_points': '',
+        'tv_medium_points': '',
+        'tv_hard_points': '',
+      },
+    );
+  }
+
   Future<void> updateName({
     required String? name,
   }) async {

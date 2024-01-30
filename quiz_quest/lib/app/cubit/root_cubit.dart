@@ -110,7 +110,8 @@ class RootCubit extends Cubit<RootState> {
         email: email,
         password: password,
       );
-       await userRepository.setEmptyAccount();
+      await userRepository.setEmptyAccount();
+      await userRepository.setEmptyPoints();
       emit(
         const RootState(
           status: Status.success,

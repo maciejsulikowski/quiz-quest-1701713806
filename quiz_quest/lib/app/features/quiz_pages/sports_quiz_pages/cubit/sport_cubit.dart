@@ -17,7 +17,7 @@ class SportCubit extends Cubit<SportState> {
     ));
 
     try {
-      final sportModel = await quizRepository.getSportsData();
+      final sportModel = await quizRepository.getEasySportsData();
       emit(SportState(
         status: Status.success,
         sportsQuizModel: sportModel,

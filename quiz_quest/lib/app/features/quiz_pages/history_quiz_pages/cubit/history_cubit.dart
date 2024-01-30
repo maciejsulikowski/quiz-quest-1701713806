@@ -17,7 +17,7 @@ class HistoryCubit extends Cubit<HistoryState> {
     ));
 
     try {
-      final historyModel = await quizRepository.getHistoryData();
+      final historyModel = await quizRepository.getEasyHistoryData();
       emit(HistoryState(
         status: Status.success,
         historyQuizModel: historyModel,

@@ -1,27 +1,38 @@
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CountDownTimer extends StatelessWidget {
-  const CountDownTimer({
+class CountDownTimer extends StatefulWidget {
+  CountDownTimer({
     super.key,
     required this.duration,
     required this.controller,
+    required this.updateIsTimeUp,
+    this.isButtonDisabled = false,
   });
 
   final int duration;
   final CountDownController controller;
+  bool isTimeUp = false;
+  bool isButtonDisabled;
+  final Function(bool) updateIsTimeUp;
 
+  @override
+  State<CountDownTimer> createState() => _CountDownTimerState();
+}
+
+class _CountDownTimerState extends State<CountDownTimer> {
   @override
   Widget build(BuildContext context) {
     return CircularCountDownTimer(
       // Countdown duration in Seconds.
-      duration: duration,
+      duration: widget.duration,
 
       // Countdown initial elapsed Duration in Seconds.
       initialDuration: 0,
 
       // Controls (i.e Start, Pause, Resume, Restart) the Countdown Timer.
-      controller: controller,
+      controller: widget.controller,
 
       // Width of the Countdown Widget.
       width: MediaQuery.of(context).size.width / 6,
@@ -90,7 +101,11 @@ class CountDownTimer extends StatelessWidget {
 
       // This Callback will execute when the Countdown Ends.
       onComplete: () {
-        // Here, do whatever you want
+        setState(() {
+          widget.isButtonDisabled = true;
+
+          widget.updateIsTimeUp(true);
+        });
         debugPrint('Countdown Ended');
       },
 

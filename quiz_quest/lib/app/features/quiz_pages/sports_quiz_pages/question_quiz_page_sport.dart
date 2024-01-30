@@ -2,7 +2,6 @@ import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:quiz_quest/app/domain/models/animals_model/animals_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/sports_model/sports_quiz_model.dart';
 import 'package:quiz_quest/app/features/home_page/cubit/home_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/quiz_countdown_timer/quiz_countdown_timer.dart';
@@ -65,10 +64,11 @@ class QuizzPage extends StatelessWidget {
           const SizedBox(
             height: 30,
           ),
-          CountDownTimer(
-            duration: duration,
-            controller: controller,
-          ),
+          // CountDownTimer(
+          //   isTimeUp: false,
+          //   duration: duration,
+          //   controller: controller,
+          // ),
           const SizedBox(
             height: 15,
           ),

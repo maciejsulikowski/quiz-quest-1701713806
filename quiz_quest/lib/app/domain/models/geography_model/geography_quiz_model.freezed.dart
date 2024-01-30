@@ -120,7 +120,7 @@ class _$GeographyQuizModelImpl implements _GeographyQuizModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$GeographyQuizModelImpl &&
@@ -326,7 +326,7 @@ class _$Results5Impl implements _Results5 {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$Results5Impl &&

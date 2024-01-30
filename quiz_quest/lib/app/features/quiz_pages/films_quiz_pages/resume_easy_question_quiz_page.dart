@@ -11,8 +11,13 @@ import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/first_quiz_p
 
 class ResumeEasyQuizPageFilms extends StatefulWidget {
   const ResumeEasyQuizPageFilms({
+    required this.badAnswers,
+    required this.goodAnswers,
     super.key,
   });
+
+  final int goodAnswers;
+  final int badAnswers;
 
   @override
   State<ResumeEasyQuizPageFilms> createState() =>
@@ -23,15 +28,23 @@ class _ResumeEasyQuizPageFilmsState extends State<ResumeEasyQuizPageFilms> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: const ResumePage(),
+      body: ResumePage(
+        badAnswers: badAnswers,
+        goodAnswers: goodAnswers,
+      ),
     );
   }
 }
 
 class ResumePage extends StatelessWidget {
   const ResumePage({
+    required this.badAnswers,
+    required this.goodAnswers,
     super.key,
   });
+
+  final int goodAnswers;
+  final int badAnswers;
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +76,7 @@ class ResumePage extends StatelessWidget {
           const SizedBox(
             height: 30,
           ),
-          const TextWidget(text: 'You scored: points 💎'),
+          TextWidget(text: 'You scored: ${goodAnswers * 10} points 💎'),
           const SizedBox(
             height: 30,
           ),

@@ -172,7 +172,7 @@ class _EasyQuestionQuizPageState extends State<EasyQuestionQuizPage> {
                         ),
                         Expanded(
                           child: Text(
-                            'Score: 0',
+                            'Score: ${goodAnswers * 10}',
                             style: GoogleFonts.aBeeZee(
                                 fontSize: 20,
                                 color: Colors.white,
@@ -323,7 +323,12 @@ class _EasyQuestionQuizPageState extends State<EasyQuestionQuizPage> {
                                                             MaterialPageRoute(
                                                                 builder:
                                                                     (context) =>
-                                                                        const ResumeEasyQuizPageFilms()));
+                                                                        ResumeEasyQuizPageFilms(
+                                                                          badAnswers:
+                                                                              badAnswers,
+                                                                          goodAnswers:
+                                                                              goodAnswers,
+                                                                        )));
                                                       } else {
                                                         currentIndex += 1;
                                                         isButtonClicked = false;

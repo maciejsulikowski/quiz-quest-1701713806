@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -78,6 +79,7 @@ class QuizzPage extends StatefulWidget {
 }
 
 class _QuizzPageState extends State<QuizzPage> {
+  int allPoints = 0;
   List list = [
     {
       'id': 1,
@@ -182,167 +184,187 @@ class _QuizzPageState extends State<QuizzPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            Color.fromARGB(255, 10, 58, 214),
-            Color.fromARGB(255, 22, 20, 129),
-          ],
-          begin: Alignment.centerLeft,
-          end: Alignment.centerRight,
-        ),
-      ),
-      child: ListView(
-        children: [
-          const SizedBox(
-            height: 30,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Hi user 👋',
-                  style: GoogleFonts.aBeeZee(
-                      fontSize: 24,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold),
-                ),
-                const CircleAvatar(
-                  child: Icon(Icons.question_mark),
-                )
-              ],
-            ),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  '''Let's play''',
-                  style: GoogleFonts.aBeeZee(
-                      fontSize: 46,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 30),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 32.0),
-            child: Container(
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                  gradient: const LinearGradient(
-                    colors: [
-                      Color.fromARGB(255, 94, 128, 239),
-                      Color.fromARGB(255, 76, 75, 167),
-                    ],
-                    begin: Alignment.centerLeft,
-                    end: Alignment.centerRight,
-                  ),
-                  borderRadius: BorderRadius.circular(20),
-                  color: Colors.red),
-              child: Text(
-                'Points: 100💎',
-                style: GoogleFonts.aBeeZee(
-                    fontSize: 28,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold),
-                textAlign: TextAlign.center,
+    return StreamBuilder<DocumentSnapshot>(
+        stream: FirebaseFirestore.instance
+            .collection('users')
+            .doc(widget.user?.uid)
+            .collection('points')
+            .doc(widget.user?.uid)
+            .snapshots(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return CircularProgressIndicator();
+          }
+          if (snapshot.hasError) {
+            return Text('Error: ${snapshot.error}');
+          }
+
+          final points = snapshot.data;
+          final allPoints = points?['total_points'] ?? '0';
+
+          return Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Color.fromARGB(255, 10, 58, 214),
+                  Color.fromARGB(255, 22, 20, 129),
+                ],
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
               ),
             ),
-          ),
-          const SizedBox(height: 30),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30),
-            child: Container(
-              decoration: BoxDecoration(
-                  gradient: const LinearGradient(
-                    colors: [
-                      Color.fromARGB(255, 94, 128, 239),
-                      Color.fromARGB(255, 76, 75, 167),
+            child: ListView(
+              children: [
+                const SizedBox(
+                  height: 30,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Hi user 👋',
+                        style: GoogleFonts.aBeeZee(
+                            fontSize: 24,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      const CircleAvatar(
+                        child: Icon(Icons.question_mark),
+                      )
                     ],
-                    begin: Alignment.centerLeft,
-                    end: Alignment.centerRight,
                   ),
-                  borderRadius: BorderRadius.circular(20),
-                  color: Colors.red),
-              child: TextField(
-                onChanged: (value) => filter(value),
-                controller: controller,
-                style: GoogleFonts.aBeeZee(fontSize: 16, color: Colors.white),
-                decoration: InputDecoration(
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                      color: Colors.white54,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        '''Let's play''',
+                        style: GoogleFonts.aBeeZee(
+                            fontSize: 46,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 30),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 32.0),
+                  child: Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                        gradient: const LinearGradient(
+                          colors: [
+                            Color.fromARGB(255, 94, 128, 239),
+                            Color.fromARGB(255, 76, 75, 167),
+                          ],
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight,
+                        ),
+                        borderRadius: BorderRadius.circular(20),
+                        color: Colors.red),
+                    child: Text(
+                      'Points: ${allPoints}💎',
+                      style: GoogleFonts.aBeeZee(
+                          fontSize: 28,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.center,
                     ),
-                    borderRadius: BorderRadius.circular(20),
                   ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  contentPadding: const EdgeInsets.all(10),
-                  hintText: 'Search category',
-                  hintStyle: GoogleFonts.aBeeZee(
-                      fontSize: 16,
-                      color: Colors.white54,
-                      fontWeight: FontWeight.bold),
-                  suffixIcon: const Icon(
-                    Icons.search,
-                    color: Colors.white54,
-                  ),
-                  hintMaxLines: 1,
                 ),
-              ),
-            ),
-          ),
-          const SizedBox(height: 30),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: ListView.builder(
-              itemCount: categoryList.length,
-              shrinkWrap: true,
-              physics: const ClampingScrollPhysics(),
-              itemBuilder: (context, index) {
-                final firstIndex = index * 2;
-                final secondIndex = firstIndex + 1;
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    if (firstIndex < categoryList.length)
-                      Column(
-                        children: [
-                          categoryList[firstIndex]['widget'],
-                          const SizedBox(
-                            height: 30,
+                const SizedBox(height: 30),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        gradient: const LinearGradient(
+                          colors: [
+                            Color.fromARGB(255, 94, 128, 239),
+                            Color.fromARGB(255, 76, 75, 167),
+                          ],
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight,
+                        ),
+                        borderRadius: BorderRadius.circular(20),
+                        color: Colors.red),
+                    child: TextField(
+                      onChanged: (value) => filter(value),
+                      controller: controller,
+                      style: GoogleFonts.aBeeZee(
+                          fontSize: 16, color: Colors.white),
+                      decoration: InputDecoration(
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                            color: Colors.white54,
                           ),
-                        ],
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        contentPadding: const EdgeInsets.all(10),
+                        hintText: 'Search category',
+                        hintStyle: GoogleFonts.aBeeZee(
+                            fontSize: 16,
+                            color: Colors.white54,
+                            fontWeight: FontWeight.bold),
+                        suffixIcon: const Icon(
+                          Icons.search,
+                          color: Colors.white54,
+                        ),
+                        hintMaxLines: 1,
                       ),
-                    if (secondIndex < categoryList.length)
-                      Column(
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 30),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: ListView.builder(
+                    itemCount: categoryList.length,
+                    shrinkWrap: true,
+                    physics: const ClampingScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      final firstIndex = index * 2;
+                      final secondIndex = firstIndex + 1;
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          categoryList[secondIndex]['widget'],
-                          const SizedBox(
-                            height: 30,
-                          ),
+                          if (firstIndex < categoryList.length)
+                            Column(
+                              children: [
+                                categoryList[firstIndex]['widget'],
+                                const SizedBox(
+                                  height: 30,
+                                ),
+                              ],
+                            ),
+                          if (secondIndex < categoryList.length)
+                            Column(
+                              children: [
+                                categoryList[secondIndex]['widget'],
+                                const SizedBox(
+                                  height: 30,
+                                ),
+                              ],
+                            ),
                         ],
-                      ),
-                  ],
-                );
-              },
+                      );
+                    },
+                  ),
+                ),
+              ],
             ),
-          ),
-        ],
-      ),
-    );
+          );
+        });
   }
 }
 

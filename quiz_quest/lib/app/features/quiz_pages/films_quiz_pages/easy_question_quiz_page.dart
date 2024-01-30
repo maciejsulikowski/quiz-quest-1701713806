@@ -12,21 +12,22 @@ import 'package:quiz_quest/app/features/home_page/home_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/cubit/films_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/quiz_countdown_timer/quiz_countdown_timer.dart';
 
-class QuestionQuizPage extends StatefulWidget {
-  const QuestionQuizPage({
+class EasyQuestionQuizPage extends StatefulWidget {
+  const EasyQuestionQuizPage({
     super.key,
   });
 
   @override
-  State<QuestionQuizPage> createState() => _QuestionQuizPageState();
+  State<EasyQuestionQuizPage> createState() => _EasyQuestionQuizPageState();
 }
 
 final controller = CountDownController();
 bool isButtonClicked = false;
 bool isButtonDisabled = false;
 Color textColor = Colors.white;
+bool isTimeUp = false;
 
-class _QuestionQuizPageState extends State<QuestionQuizPage> {
+class _EasyQuestionQuizPageState extends State<EasyQuestionQuizPage> {
   int currentIndex = 0;
   late List currentAnswers;
   List<Color> answerColors = [
@@ -37,29 +38,31 @@ class _QuestionQuizPageState extends State<QuestionQuizPage> {
   ];
 
   bool answerGenerated = false;
-  bool isTimeUp = false;
 
   @override
   void initState() {
     currentAnswers = [];
     answerColors;
     answerGenerated = false;
-    isTimeUp = false;
+    isTimeUp;
     resetQuizState();
     super.initState();
+  }
+
+  void updateIsTimeUp(bool value) {
+    setState(() {
+      isTimeUp = value;
+    });
   }
 
   void generateAnswers(FilmsQuizModel? filmsQuizModel) {
     if (filmsQuizModel != null && !answerGenerated) {
       final correctAnswer = filmsQuizModel.results[currentIndex].correctAnswer;
-      final modifiedCorrectAnswer = correctAnswer.replaceAll('&quot;', '');
-      List<String> modifiedIncorrectAnswers = [];
+
       final incorrectAnswers =
           filmsQuizModel.results[currentIndex].incorrectAnswers;
-      for (String answer in incorrectAnswers) {
-        modifiedIncorrectAnswers.add(answer.replaceAll('&quot;', ''));
-      }
-      currentAnswers = [...modifiedIncorrectAnswers, modifiedCorrectAnswer];
+
+      currentAnswers = incorrectAnswers + [correctAnswer];
       currentAnswers.shuffle();
       if (answerColors.isEmpty) {
         answerColors = List<Color>.filled(currentAnswers.length, Colors.white);
@@ -74,6 +77,7 @@ class _QuestionQuizPageState extends State<QuestionQuizPage> {
     isButtonDisabled = false;
     textColor = Colors.white;
     answerGenerated = false;
+    isTimeUp = false;
     answerColors = [
       Colors.white,
       Colors.white,
@@ -82,15 +86,9 @@ class _QuestionQuizPageState extends State<QuestionQuizPage> {
     ];
   }
 
-  void setTimeUp() {
-    setState(() {
-      isTimeUp = true;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    const int duration = 21;
+    const int duration = 3;
 
     return Scaffold(
       body: BlocProvider(
@@ -166,7 +164,11 @@ class _QuestionQuizPageState extends State<QuestionQuizPage> {
                         ),
                       ],
                     ),
-                    CountDownTimer(duration: duration, controller: controller),
+                    CountDownTimer(
+                      duration: duration,
+                      controller: controller,
+                      updateIsTimeUp: updateIsTimeUp,
+                    ),
                     const SizedBox(
                       height: 15,
                     ),
@@ -177,6 +179,10 @@ class _QuestionQuizPageState extends State<QuestionQuizPage> {
                           itemCount: 1,
                           shrinkWrap: true,
                           itemBuilder: (context, _) {
+                            final questionNumber = currentIndex + 1;
+                            final questionNumbers =
+                                filmsQuizModel.results.length;
+
                             return Column(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
@@ -185,12 +191,23 @@ class _QuestionQuizPageState extends State<QuestionQuizPage> {
                                       .results[currentIndex].question,
                                 ),
                                 const SizedBox(
-                                  height: 30,
+                                  height: 15,
+                                ),
+                                Text(
+                                  'Question: $questionNumber/$questionNumbers',
+                                  style: GoogleFonts.aBeeZee(
+                                      fontSize: 20,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                const SizedBox(
+                                  height: 15,
                                 ),
                                 for (int index = 0;
                                     index < currentAnswers.length;
                                     index++) ...[
                                   AnswerButton(
+                                    isTimeUp: isTimeUp,
                                     isButtonDisabled: (value) {
                                       setState(() {
                                         isButtonDisabled = value;
@@ -290,6 +307,8 @@ class QuestionWidget extends StatelessWidget {
     final modifiedQuestion = question
         .replaceAll('&quot;', '')
         .replaceAll('&#039;', '')
+        .replaceAll('&aacute;', '')
+        .replaceAll('&ntilde;', '')
         .replaceAll('&amp;', '')
         .replaceAll('&rsquo;', '');
 
@@ -309,6 +328,7 @@ class AnswerButton extends StatefulWidget {
     required this.answer,
     required this.controller,
     required this.isCorrectAnswer,
+    required this.isTimeUp,
     required this.colorFunction,
     required this.isButtonClicked,
     required this.isButtonDisabled,
@@ -319,6 +339,7 @@ class AnswerButton extends StatefulWidget {
   final String answer;
   final CountDownController controller;
   final bool isCorrectAnswer;
+  bool isTimeUp;
   Function(Color, int) colorFunction;
   final Function(bool) isButtonClicked;
   final Function(bool) isButtonDisabled;
@@ -337,16 +358,16 @@ class _AnswerButtonState extends State<AnswerButton> {
 
     widget.controller.pause();
 
-    if (widget.isCorrectAnswer) {
+    if (widget.isCorrectAnswer || widget.isTimeUp) {
       widget.colorFunction(Colors.green, widget.index);
     } else {
       widget.colorFunction(Colors.red, widget.index);
     }
     setState(() {
-      widget.textcolor = widget.isCorrectAnswer ? Colors.green : Colors.red;
+      widget.textcolor =
+          widget.isCorrectAnswer || widget.isTimeUp ? Colors.green : Colors.red;
     });
     widget.isButtonClicked(true);
-
     widget.isButtonDisabled(true);
   }
 
@@ -358,15 +379,17 @@ class _AnswerButtonState extends State<AnswerButton> {
         .replaceAll('&quot;', '')
         .replaceAll('&#039;', '')
         .replaceAll('&aacute;', '')
-        .replaceAll('&ntilde;', '');
+        .replaceAll('&ntilde;', '')
+        .replaceAll('&amp;', '')
+        .replaceAll('&rsquo;', '');
 
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20),
       decoration: BoxDecoration(
         gradient: const LinearGradient(
           colors: [
-            Color.fromRGBO(143, 165, 255, 1),
-            Color.fromRGBO(10, 53, 132, 1),
+            Color.fromRGBO(11, 22, 65, 1),
+            Color.fromRGBO(9, 77, 203, 1),
           ],
           begin: Alignment.centerLeft,
           end: Alignment.centerRight,

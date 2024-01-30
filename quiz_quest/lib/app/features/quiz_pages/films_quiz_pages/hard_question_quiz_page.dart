@@ -6,19 +6,18 @@ import 'package:quiz_quest/app/core/enums.dart';
 import 'package:quiz_quest/app/data/data_sources/quiz_data_source/quiz_categories_data_source.dart';
 import 'package:quiz_quest/app/domain/models/films_model/films_quiz_model.dart';
 import 'package:quiz_quest/app/domain/repositories/quiz_repository/quiz_repository.dart';
-import 'package:quiz_quest/app/features/home_page/cubit/home_cubit.dart';
 import 'package:quiz_quest/app/features/home_page/home_page.dart';
 
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/cubit/films_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/quiz_countdown_timer/quiz_countdown_timer.dart';
 
-class QuestionQuizPage extends StatefulWidget {
-  const QuestionQuizPage({
+class HardQuestionQuizPage extends StatefulWidget {
+  const HardQuestionQuizPage({
     super.key,
   });
 
   @override
-  State<QuestionQuizPage> createState() => _QuestionQuizPageState();
+  State<HardQuestionQuizPage> createState() => _HardQuestionQuizPageState();
 }
 
 final controller = CountDownController();
@@ -26,7 +25,7 @@ bool isButtonClicked = false;
 bool isButtonDisabled = false;
 Color textColor = Colors.white;
 
-class _QuestionQuizPageState extends State<QuestionQuizPage> {
+class _HardQuestionQuizPageState extends State<HardQuestionQuizPage> {
   int currentIndex = 0;
   late List currentAnswers;
   List<Color> answerColors = [
@@ -91,6 +90,7 @@ class _QuestionQuizPageState extends State<QuestionQuizPage> {
   @override
   Widget build(BuildContext context) {
     const int duration = 21;
+    bool timeUp = false;
 
     return Scaffold(
       body: BlocProvider(
@@ -166,7 +166,7 @@ class _QuestionQuizPageState extends State<QuestionQuizPage> {
                         ),
                       ],
                     ),
-                    CountDownTimer(duration: duration, controller: controller),
+                    // CountDownTimer(duration: duration, controller: controller, isTimeUp: isTimeUp,),
                     const SizedBox(
                       height: 15,
                     ),
@@ -290,6 +290,8 @@ class QuestionWidget extends StatelessWidget {
     final modifiedQuestion = question
         .replaceAll('&quot;', '')
         .replaceAll('&#039;', '')
+        .replaceAll('&aacute;', '')
+        .replaceAll('&ntilde;', '')
         .replaceAll('&amp;', '')
         .replaceAll('&rsquo;', '');
 
@@ -358,15 +360,17 @@ class _AnswerButtonState extends State<AnswerButton> {
         .replaceAll('&quot;', '')
         .replaceAll('&#039;', '')
         .replaceAll('&aacute;', '')
-        .replaceAll('&ntilde;', '');
+        .replaceAll('&ntilde;', '')
+        .replaceAll('&amp;', '')
+        .replaceAll('&rsquo;', '');
 
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20),
       decoration: BoxDecoration(
         gradient: const LinearGradient(
           colors: [
-            Color.fromRGBO(143, 165, 255, 1),
-            Color.fromRGBO(10, 53, 132, 1),
+            Color.fromRGBO(11, 22, 65, 1),
+            Color.fromRGBO(9, 77, 203, 1),
           ],
           begin: Alignment.centerLeft,
           end: Alignment.centerRight,

@@ -166,7 +166,7 @@ class _QuestionQuizPageState extends State<QuestionQuizPage> {
                         ),
                       ],
                     ),
-                    CountDownTimer(duration: duration, controller: controller),
+                    // CountDownTimer(duration: duration, controller: controller, isTimeUp: isTimeUp,),
                     const SizedBox(
                       height: 15,
                     ),

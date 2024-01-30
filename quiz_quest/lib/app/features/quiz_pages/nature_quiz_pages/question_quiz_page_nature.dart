@@ -64,10 +64,11 @@ class QuizzPage extends StatelessWidget {
           const SizedBox(
             height: 30,
           ),
-          CountDownTimer(
-            duration: duration,
-            controller: controller,
-          ),
+          // CountDownTimer(
+          //   isTimeUp: false,
+          //   duration: duration,
+          //   controller: controller,
+          // ),
           const SizedBox(
             height: 15,
           ),

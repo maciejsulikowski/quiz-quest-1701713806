@@ -81,15 +81,20 @@ class QuizzPage extends StatefulWidget {
 class _QuizzPageState extends State<QuizzPage> {
   int points = 0;
 
-  List list = [
+  List<dynamic> list = [
     {
       'id': 1,
       'name': 'Films',
       'image': 'images/movie.png',
       'total_category': 'total_films_points',
-      'category': 'films_easy_points',
+      'easy_category': 'films_easy_points',
+      'medium_category': 'films_medium_points',
+      'hard_category': 'films_hard_points',
       'page': const FirstQuizPageFilms(
         image: 'images/movie.png',
+        easyCategory: 'films_easy_points',
+        mediumCategory: 'films_medium_points',
+        hardCategory: 'films_hard_points',
       )
     },
     {
@@ -97,9 +102,14 @@ class _QuizzPageState extends State<QuizzPage> {
       'name': 'Games',
       'image': 'images/games.png',
       'total_category': 'total_games_points',
-      'category': 'games_easy_points',
+      'easy_category': 'games_easy_points',
+      'medium_category': 'games_medium_points',
+      'hard_category': 'games_hard_points',
       'page': const FirstQuizPageGames(
         image: 'images/games.png',
+        easyCategory: 'games_easy_points',
+        mediumCategory: 'games_medium_points',
+        hardCategory: 'games_hard_points',
       )
     },
     {
@@ -107,9 +117,14 @@ class _QuizzPageState extends State<QuizzPage> {
       'name': 'Geography',
       'image': 'images/geography.png',
       'total_category': 'total_geography_points',
-      'category': 'geography_easy_points',
+      'easy_category': 'geography_easy_points',
+      'medium_category': 'geography_medium_points',
+      'hard_category': 'geography_hard_points',
       'page': const FirstQuizPageGeography(
         image: 'images/geography.png',
+        easyCategory: 'geography_easy_points',
+        mediumCategory: 'geography_medium_points',
+        hardCategory: 'geography_hard_points',
       )
     },
     {
@@ -117,9 +132,14 @@ class _QuizzPageState extends State<QuizzPage> {
       'name': 'History',
       'image': 'images/history.png',
       'total_category': 'total_history_points',
-      'category': 'history_easy_points',
+      'easy_category': 'history_easy_points',
+      'medium_category': 'history_medium_points',
+      'hard_category': 'history_hard_points',
       'page': const FirstQuizPageHistory(
         image: 'images/history.png',
+        easyCategory: 'history_easy_points',
+        mediumCategory: 'history_medium_points',
+        hardCategory: 'history_hard_points',
       )
     },
     {
@@ -127,9 +147,14 @@ class _QuizzPageState extends State<QuizzPage> {
       'name': 'Music',
       'image': 'images/music.png',
       'total_category': 'total_music_points',
-      'category': 'music_easy_points',
+      'easy_category': 'music_easy_points',
+      'medium_category': 'music_medium_points',
+      'hard_category': 'music_hard_points',
       'page': const FirstQuizPageMusic(
         image: 'images/music.png',
+        easyCategory: 'music_easy_points',
+        mediumCategory: 'music_medium_points',
+        hardCategory: 'music_hard_points',
       )
     },
     {
@@ -137,9 +162,14 @@ class _QuizzPageState extends State<QuizzPage> {
       'name': 'Nature',
       'image': 'images/nature.png',
       'total_category': 'total_nature_points',
-      'category': 'nature_easy_points',
+      'easy_category': 'nature_easy_points',
+      'medium_category': 'nature_medium_points',
+      'hard_category': 'nature_hard_points',
       'page': const FirstQuizPageNature(
         image: 'images/nature.png',
+        easyCategory: 'nature_easy_points',
+        mediumCategory: 'nature_medium_points',
+        hardCategory: 'nature_hard_points',
       )
     },
     {
@@ -147,9 +177,14 @@ class _QuizzPageState extends State<QuizzPage> {
       'name': 'Sport',
       'image': 'images/ball.png',
       'total_category': 'total_sports_points',
-      'category': 'sport_easy_points',
+      'easy_category': 'sport_easy_points',
+      'medium_category': 'sport_medium_points',
+      'hard_category': 'sport_hard_points',
       'page': const FirstQuizPageSport(
         image: 'images/nature.png',
+        easyCategory: 'sport_easy_points',
+        mediumCategory: 'sport_medium_points',
+        hardCategory: 'sport_hard_points',
       )
     },
     {
@@ -157,15 +192,20 @@ class _QuizzPageState extends State<QuizzPage> {
       'name': 'TV',
       'image': 'images/tv.png',
       'total_category': 'total_tv_points',
-      'category': 'tv_easy_points',
+      'easy_category': 'tv_easy_points',
+      'medium_category': 'tv_medium_points',
+      'hard_category': 'tv_hard_points',
       'page': const FirstQuizPageTV(
         image: 'images/tv.png',
+        easyCategory: 'tv_easy_points',
+        mediumCategory: 'tv_medium_points',
+        hardCategory: 'tv_hard_points',
       )
     },
   ];
 
   final controller = TextEditingController();
-  List categoryList = [];
+  late List<dynamic> categoryList;
 
   @override
   void initState() {
@@ -174,20 +214,12 @@ class _QuizzPageState extends State<QuizzPage> {
   }
 
   void filter(String categoryWord) {
-    List results = [];
-
-    if (categoryWord.isNotEmpty) {
-      results = list
+    setState(() {
+      categoryList = list
           .where((category) => category['name']
               .toLowerCase()
               .contains(categoryWord.toLowerCase()))
           .toList();
-    } else {
-      results = list;
-    }
-
-    setState(() {
-      categoryList = results;
     });
   }
 
@@ -280,9 +312,9 @@ class _QuizzPageState extends State<QuizzPage> {
                         borderRadius: BorderRadius.circular(20),
                         color: Colors.red),
                     child: Text(
-                      'Points: $allPoints💎',
+                      'Total Points: $allPoints💎',
                       style: GoogleFonts.aBeeZee(
-                          fontSize: 28,
+                          fontSize: 26,
                           color: Colors.white,
                           fontWeight: FontWeight.bold),
                       textAlign: TextAlign.center,
@@ -344,10 +376,13 @@ class _QuizzPageState extends State<QuizzPage> {
                     itemBuilder: (context, index) {
                       final firstIndex = index * 2;
                       final secondIndex = firstIndex + 1;
-                      var firstCategoryPoints =
-                          points?[categoryList[firstIndex]['category']] ?? 0;
-                      var secondCategoryPoints =
-                          points?[categoryList[secondIndex]['category']] ?? 0;
+                      var firstTotalCategoryPoints =
+                          points?[categoryList[firstIndex]['total_category']] ??
+                              0;
+
+                      var secondTotalCategoryPoints = points?[
+                              categoryList[secondIndex]['total_category']] ??
+                          0;
                       return Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -358,8 +393,14 @@ class _QuizzPageState extends State<QuizzPage> {
                                   name: categoryList[firstIndex]['name'],
                                   image: categoryList[firstIndex]['image'],
                                   category: categoryList[firstIndex]
-                                      ['category'],
-                                  categoryPoints: firstCategoryPoints,
+                                      ['total_category'],
+                                  easyCategory: categoryList[firstIndex]
+                                      ['easy_category'],
+                                  mediumCategory: categoryList[firstIndex]
+                                      ['medium_category'],
+                                  hardCategory: categoryList[firstIndex]
+                                      ['hard_category'],
+                                  categoryPoints: firstTotalCategoryPoints,
                                   nextPage: categoryList[firstIndex]['page'],
                                 ),
                                 const SizedBox(
@@ -374,8 +415,14 @@ class _QuizzPageState extends State<QuizzPage> {
                                   name: categoryList[secondIndex]['name'],
                                   image: categoryList[secondIndex]['image'],
                                   category: categoryList[secondIndex]
-                                      ['category'],
-                                  categoryPoints: secondCategoryPoints,
+                                      ['total_category'],
+                                  easyCategory: categoryList[secondIndex]
+                                      ['easy_category'],
+                                  mediumCategory: categoryList[secondIndex]
+                                      ['medium_category'],
+                                  hardCategory: categoryList[secondIndex]
+                                      ['hard_category'],
+                                  categoryPoints: secondTotalCategoryPoints,
                                   nextPage: categoryList[secondIndex]['page'],
                                 ),
                                 const SizedBox(
@@ -397,6 +444,9 @@ class _QuizzPageState extends State<QuizzPage> {
 
 class QuizzCategoryWidget extends StatelessWidget {
   const QuizzCategoryWidget({
+    required this.easyCategory,
+    required this.mediumCategory,
+    required this.hardCategory,
     required this.name,
     required this.image,
     required this.category,
@@ -408,6 +458,9 @@ class QuizzCategoryWidget extends StatelessWidget {
   final String name;
   final String image;
   final String category;
+  final String easyCategory;
+  final String mediumCategory;
+  final String hardCategory;
   final int categoryPoints;
   final Widget nextPage;
 
@@ -420,7 +473,6 @@ class QuizzCategoryWidget extends StatelessWidget {
       },
       child: DetailsQuizzWidget(
         categoryPoints: categoryPoints,
-        category: category,
         name: name,
         image: image,
       ),
@@ -432,14 +484,12 @@ class DetailsQuizzWidget extends StatelessWidget {
   const DetailsQuizzWidget({
     required this.name,
     required this.image,
-    required this.category,
     required this.categoryPoints,
     super.key,
   });
 
   final String name;
   final String image;
-  final String category;
   final int categoryPoints;
 
   @override
@@ -473,9 +523,9 @@ class DetailsQuizzWidget extends StatelessWidget {
           ),
           Expanded(
             child: Text(
-              categoryPoints.toString(),
+              'Points: ${categoryPoints}',
               style: GoogleFonts.aBeeZee(
-                  fontSize: 20,
+                  fontSize: 18,
                   color: Colors.white,
                   fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,

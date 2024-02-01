@@ -10,10 +10,16 @@ import 'package:quiz_quest/app/features/quiz_pages/games_quiz_pages/question_qui
 class FirstQuizPageGames extends StatefulWidget {
   const FirstQuizPageGames({
     required this.image,
+    required this.easyCategory,
+    required this.mediumCategory,
+    required this.hardCategory,
     super.key,
   });
 
   final String image;
+  final String easyCategory;
+  final String mediumCategory;
+  final String hardCategory;
 
   @override
   State<FirstQuizPageGames> createState() => _FirstQuizPageGamesState();

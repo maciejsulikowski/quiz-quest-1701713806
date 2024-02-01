@@ -11,10 +11,16 @@ import 'package:quiz_quest/app/features/quiz_pages/tv_quiz_pages/question_quiz_p
 class FirstQuizPageTV extends StatefulWidget {
   const FirstQuizPageTV({
     required this.image,
+    required this.easyCategory,
+    required this.mediumCategory,
+    required this.hardCategory,
     super.key,
   });
 
   final String image;
+  final String easyCategory;
+  final String mediumCategory;
+  final String hardCategory;
 
   @override
   State<FirstQuizPageTV> createState() => _FirstQuizPageTVState();

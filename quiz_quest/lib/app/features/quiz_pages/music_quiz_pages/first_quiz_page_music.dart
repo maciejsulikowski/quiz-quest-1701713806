@@ -10,10 +10,16 @@ import 'package:quiz_quest/app/features/quiz_pages/music_quiz_pages/question_qui
 class FirstQuizPageMusic extends StatefulWidget {
   const FirstQuizPageMusic({
     required this.image,
+    required this.easyCategory,
+    required this.mediumCategory,
+    required this.hardCategory,
     super.key,
   });
 
   final String image;
+  final String easyCategory;
+  final String mediumCategory;
+  final String hardCategory;
 
   @override
   State<FirstQuizPageMusic> createState() =>

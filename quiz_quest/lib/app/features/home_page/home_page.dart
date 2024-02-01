@@ -86,8 +86,8 @@ class _QuizzPageState extends State<QuizzPage> {
       'id': 1,
       'name': 'Films',
       'image': 'images/movie.png',
+      'total_category': 'total_films_points',
       'category': 'films_easy_points',
-      'categoryPoints': 0,
       'page': const FirstQuizPageFilms(
         image: 'images/movie.png',
       )
@@ -96,8 +96,8 @@ class _QuizzPageState extends State<QuizzPage> {
       'id': 2,
       'name': 'Games',
       'image': 'images/games.png',
+      'total_category': 'total_games_points',
       'category': 'games_easy_points',
-      'categoryPoints': 0,
       'page': const FirstQuizPageGames(
         image: 'images/games.png',
       )
@@ -106,8 +106,8 @@ class _QuizzPageState extends State<QuizzPage> {
       'id': 3,
       'name': 'Geography',
       'image': 'images/geography.png',
+      'total_category': 'total_geography_points',
       'category': 'geography_easy_points',
-      'categoryPoints': 0,
       'page': const FirstQuizPageGeography(
         image: 'images/geography.png',
       )
@@ -116,8 +116,8 @@ class _QuizzPageState extends State<QuizzPage> {
       'id': 4,
       'name': 'History',
       'image': 'images/history.png',
+      'total_category': 'total_history_points',
       'category': 'history_easy_points',
-      'categoryPoints': 0,
       'page': const FirstQuizPageHistory(
         image: 'images/history.png',
       )
@@ -126,8 +126,8 @@ class _QuizzPageState extends State<QuizzPage> {
       'id': 5,
       'name': 'Music',
       'image': 'images/music.png',
+      'total_category': 'total_music_points',
       'category': 'music_easy_points',
-      'categoryPoints': 0,
       'page': const FirstQuizPageMusic(
         image: 'images/music.png',
       )
@@ -136,8 +136,8 @@ class _QuizzPageState extends State<QuizzPage> {
       'id': 6,
       'name': 'Nature',
       'image': 'images/nature.png',
+      'total_category': 'total_nature_points',
       'category': 'nature_easy_points',
-      'categoryPoints': 0,
       'page': const FirstQuizPageNature(
         image: 'images/nature.png',
       )
@@ -146,8 +146,8 @@ class _QuizzPageState extends State<QuizzPage> {
       'id': 7,
       'name': 'Sport',
       'image': 'images/ball.png',
+      'total_category': 'total_sports_points',
       'category': 'sport_easy_points',
-      'categoryPoints': 0,
       'page': const FirstQuizPageSport(
         image: 'images/nature.png',
       )
@@ -156,8 +156,8 @@ class _QuizzPageState extends State<QuizzPage> {
       'id': 8,
       'name': 'TV',
       'image': 'images/tv.png',
+      'total_category': 'total_tv_points',
       'category': 'tv_easy_points',
-      'categoryPoints': 0,
       'page': const FirstQuizPageTV(
         image: 'images/tv.png',
       )
@@ -338,7 +338,7 @@ class _QuizzPageState extends State<QuizzPage> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: ListView.builder(
-                    itemCount: categoryList.length,
+                    itemCount: (categoryList.length / 2).ceil(),
                     shrinkWrap: true,
                     physics: const ClampingScrollPhysics(),
                     itemBuilder: (context, index) {

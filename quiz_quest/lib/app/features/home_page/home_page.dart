@@ -67,7 +67,7 @@ class _HomePageState extends State<HomePage> {
 }
 
 class QuizzPage extends StatefulWidget {
-  QuizzPage({
+  const QuizzPage({
     this.user,
     super.key,
   });
@@ -342,11 +342,12 @@ class _QuizzPageState extends State<QuizzPage> {
                     shrinkWrap: true,
                     physics: const ClampingScrollPhysics(),
                     itemBuilder: (context, index) {
-                      var categoryPoints =
-                          points?[list[index]['category']] ?? 0;
-
                       final firstIndex = index * 2;
                       final secondIndex = firstIndex + 1;
+                      var firstCategoryPoints =
+                          points?[categoryList[firstIndex]['category']] ?? 0;
+                      var secondCategoryPoints =
+                          points?[categoryList[secondIndex]['category']] ?? 0;
                       return Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -354,11 +355,12 @@ class _QuizzPageState extends State<QuizzPage> {
                             Column(
                               children: [
                                 QuizzCategoryWidget(
-                                  name: list[firstIndex]['name'],
-                                  image: list[firstIndex]['image'],
-                                  category: list[firstIndex]['category'],
-                                  categoryPoints: categoryPoints,
-                                  nextPage: list[firstIndex]['page'],
+                                  name: categoryList[firstIndex]['name'],
+                                  image: categoryList[firstIndex]['image'],
+                                  category: categoryList[firstIndex]
+                                      ['category'],
+                                  categoryPoints: firstCategoryPoints,
+                                  nextPage: categoryList[firstIndex]['page'],
                                 ),
                                 const SizedBox(
                                   height: 30,
@@ -369,11 +371,12 @@ class _QuizzPageState extends State<QuizzPage> {
                             Column(
                               children: [
                                 QuizzCategoryWidget(
-                                  name: list[secondIndex]['name'],
-                                  image: list[secondIndex]['image'],
-                                  category: list[secondIndex]['category'],
-                                  categoryPoints: categoryPoints,
-                                  nextPage: list[secondIndex]['page'],
+                                  name: categoryList[secondIndex]['name'],
+                                  image: categoryList[secondIndex]['image'],
+                                  category: categoryList[secondIndex]
+                                      ['category'],
+                                  categoryPoints: secondCategoryPoints,
+                                  nextPage: categoryList[secondIndex]['page'],
                                 ),
                                 const SizedBox(
                                   height: 30,
@@ -424,213 +427,6 @@ class QuizzCategoryWidget extends StatelessWidget {
     );
   }
 }
-
-// class QuizzCategoryWidget2 extends StatelessWidget {
-//   const QuizzCategoryWidget2({
-//     required this.name,
-//     required this.image,
-//     required this.category,
-//     required this.categoryPoints,
-//     super.key,
-//   });
-
-//   final String name;
-//   final String image;
-//   final String category;
-//   final int categoryPoints;
-//   @override
-//   Widget build(BuildContext context) {
-//     return InkWell(
-//       onTap: () {
-//         Navigator.of(context).push(MaterialPageRoute(
-//             builder: (context) => FirstQuizPageSport(
-//                   image: image,
-//                 )));
-//       },
-//       child: DetailsQuizzWidget(
-//         category: category,
-//         categoryPoints: categoryPoints,
-//         name: name,
-//         image: image,
-//       ),
-//     );
-//   }
-// }
-
-// class QuizzCategoryWidget3 extends StatelessWidget {
-//   const QuizzCategoryWidget3({
-//     required this.categoryPoints,
-//     required this.name,
-//     required this.image,
-//     super.key,
-//   });
-
-//   final String name;
-//   final String image;
-//   final String categoryPoints;
-//   @override
-//   Widget build(BuildContext context) {
-//     return InkWell(
-//       onTap: () {
-//         Navigator.of(context).push(MaterialPageRoute(
-//             builder: (context) => FirstQuizPageGames(
-//                   image: image,
-//                 )));
-//       },
-//       child: DetailsQuizzWidget(
-//         categoryPoints: categoryPoints.toString(),
-//         name: name,
-//         image: image,
-//       ),
-//     );
-//   }
-// }
-
-// class QuizzCategoryWidget4 extends StatelessWidget {
-//   const QuizzCategoryWidget4({
-//     required this.name,
-//     required this.image,
-//     required this.categoryPoints,
-//     super.key,
-//   });
-
-//   final String name;
-//   final String image;
-//   final String categoryPoints;
-//   @override
-//   Widget build(BuildContext context) {
-//     return InkWell(
-//       onTap: () {
-//         Navigator.of(context).push(MaterialPageRoute(
-//             builder: (context) => FirstQuizPageGeography(
-//                   image: image,
-//                 )));
-//       },
-//       child: DetailsQuizzWidget(
-//         categoryPoints: categoryPoints.toString(),
-//         name: name,
-//         image: image,
-//       ),
-//     );
-//   }
-// }
-
-// class QuizzCategoryWidget5 extends StatelessWidget {
-//   const QuizzCategoryWidget5({
-//     required this.name,
-//     required this.image,
-//     required this.categoryPoints,
-//     super.key,
-//   });
-
-//   final String name;
-//   final String image;
-//   final String categoryPoints;
-//   @override
-//   Widget build(BuildContext context) {
-//     return InkWell(
-//       onTap: () {
-//         Navigator.of(context).push(MaterialPageRoute(
-//             builder: (context) => FirstQuizPageHistory(
-//                   image: image,
-//                 )));
-//       },
-//       child: DetailsQuizzWidget(
-//         name: name,
-//         categoryPoints: categoryPoints.toString(),
-//         image: image,
-//       ),
-//     );
-//   }
-// }
-
-// class QuizzCategoryWidget6 extends StatelessWidget {
-//   const QuizzCategoryWidget6({
-//     required this.name,
-//     required this.image,
-//     required this.categoryPoints,
-//     super.key,
-//   });
-
-//   final String name;
-//   final String image;
-//   final String categoryPoints;
-//   @override
-//   Widget build(BuildContext context) {
-//     return InkWell(
-//       onTap: () {
-//         Navigator.of(context).push(MaterialPageRoute(
-//             builder: (context) => FirstQuizPageMusic(
-//                   image: image,
-//                 )));
-//       },
-//       child: DetailsQuizzWidget(
-//         categoryPoints: categoryPoints.toString(),
-//         name: name,
-//         image: image,
-//       ),
-//     );
-//   }
-// }
-
-// class QuizzCategoryWidget7 extends StatelessWidget {
-//   const QuizzCategoryWidget7({
-//     required this.name,
-//     required this.image,
-//     required this.categoryPoints,
-//     super.key,
-//   });
-
-//   final String name;
-//   final String image;
-//   final String categoryPoints;
-//   @override
-//   Widget build(BuildContext context) {
-//     return InkWell(
-//       onTap: () {
-//         Navigator.of(context).push(MaterialPageRoute(
-//             builder: (context) => FirstQuizPageNature(
-//                   image: image,
-//                 )));
-//       },
-//       child: DetailsQuizzWidget(
-//         categoryPoints: categoryPoints.toString(),
-//         name: name,
-//         image: image,
-//       ),
-//     );
-//   }
-// }
-
-// class QuizzCategoryWidget8 extends StatelessWidget {
-//   const QuizzCategoryWidget8({
-//     required this.name,
-//     required this.image,
-//     required this.categoryPoints,
-//     super.key,
-//   });
-
-//   final String name;
-//   final String image;
-//   final String categoryPoints;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return InkWell(
-//       onTap: () {
-//         Navigator.of(context).push(MaterialPageRoute(
-//             builder: (context) => FirstQuizPageTV(
-//                   image: image,
-//                 )));
-//       },
-//       child: DetailsQuizzWidget(
-//         categoryPoints: categoryPoints.toString(),
-//         name: name,
-//         image: image,
-//       ),
-//     );
-//   }
-// }
 
 class DetailsQuizzWidget extends StatelessWidget {
   const DetailsQuizzWidget({

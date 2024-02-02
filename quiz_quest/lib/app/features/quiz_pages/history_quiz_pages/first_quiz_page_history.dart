@@ -14,10 +14,16 @@ import 'package:quiz_quest/app/features/quiz_pages/history_quiz_pages/question_q
 class FirstQuizPageHistory extends StatefulWidget {
   const FirstQuizPageHistory({
     required this.image,
+    required this.easyCategory,
+    required this.mediumCategory,
+    required this.hardCategory,
     super.key,
   });
 
   final String image;
+  final String easyCategory;
+  final String mediumCategory;
+  final String hardCategory;
 
   @override
   State<FirstQuizPageHistory> createState() => _FirstQuizPageHistoryState();

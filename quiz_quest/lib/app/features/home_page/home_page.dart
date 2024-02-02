@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -66,7 +67,7 @@ class _HomePageState extends State<HomePage> {
 }
 
 class QuizzPage extends StatefulWidget {
-  QuizzPage({
+  const QuizzPage({
     this.user,
     super.key,
   });
@@ -78,83 +79,133 @@ class QuizzPage extends StatefulWidget {
 }
 
 class _QuizzPageState extends State<QuizzPage> {
-  List list = [
+  int points = 0;
+
+  List<dynamic> list = [
     {
       'id': 1,
-      'widget': const QuizzCategoryWidget(
-        name: 'Films',
-        image: 'images/movie.png',
-      ),
       'name': 'Films',
-      'image': 'images/movie.png'
+      'image': 'images/movie.png',
+      'total_category': 'total_films_points',
+      'easy_category': 'films_easy_points',
+      'medium_category': 'films_medium_points',
+      'hard_category': 'films_hard_points',
+      'page': const FirstQuizPageFilms(
+        image: 'images/movie.png',
+        // easyCategory: 'films_easy_points',
+        // // mediumCategory: 'films_medium_points',
+        // // hardCategory: 'films_hard_points',
+      )
     },
     {
       'id': 2,
-      'widget': const QuizzCategoryWidget3(
-        name: 'Games',
-        image: 'images/games.png',
-      ),
       'name': 'Games',
-      'image': 'images/games.png'
+      'image': 'images/games.png',
+      'total_category': 'total_games_points',
+      'easy_category': 'games_easy_points',
+      'medium_category': 'games_medium_points',
+      'hard_category': 'games_hard_points',
+      'page': const FirstQuizPageGames(
+        image: 'images/games.png',
+        easyCategory: 'games_easy_points',
+        mediumCategory: 'games_medium_points',
+        hardCategory: 'games_hard_points',
+      )
     },
     {
       'id': 3,
-      'widget': const QuizzCategoryWidget4(
-        name: 'Geography',
-        image: 'images/geography.png',
-      ),
       'name': 'Geography',
-      'image': 'images/geography.png'
+      'image': 'images/geography.png',
+      'total_category': 'total_geography_points',
+      'easy_category': 'geography_easy_points',
+      'medium_category': 'geography_medium_points',
+      'hard_category': 'geography_hard_points',
+      'page': const FirstQuizPageGeography(
+        image: 'images/geography.png',
+        easyCategory: 'geography_easy_points',
+        mediumCategory: 'geography_medium_points',
+        hardCategory: 'geography_hard_points',
+      )
     },
     {
       'id': 4,
-      'widget': const QuizzCategoryWidget5(
-        name: 'History',
-        image: 'images/history.png',
-      ),
       'name': 'History',
-      'image': 'images/history.png'
+      'image': 'images/history.png',
+      'total_category': 'total_history_points',
+      'easy_category': 'history_easy_points',
+      'medium_category': 'history_medium_points',
+      'hard_category': 'history_hard_points',
+      'page': const FirstQuizPageHistory(
+        image: 'images/history.png',
+        easyCategory: 'history_easy_points',
+        mediumCategory: 'history_medium_points',
+        hardCategory: 'history_hard_points',
+      )
     },
     {
       'id': 5,
-      'widget': const QuizzCategoryWidget6(
-        name: 'Music',
-        image: 'images/music.png',
-      ),
       'name': 'Music',
-      'image': 'images/music.png'
+      'image': 'images/music.png',
+      'total_category': 'total_music_points',
+      'easy_category': 'music_easy_points',
+      'medium_category': 'music_medium_points',
+      'hard_category': 'music_hard_points',
+      'page': const FirstQuizPageMusic(
+        image: 'images/music.png',
+        easyCategory: 'music_easy_points',
+        mediumCategory: 'music_medium_points',
+        hardCategory: 'music_hard_points',
+      )
     },
     {
       'id': 6,
-      'widget': const QuizzCategoryWidget7(
-        name: 'Nature',
-        image: 'images/nature.png',
-      ),
       'name': 'Nature',
-      'image': 'images/nature.png'
+      'image': 'images/nature.png',
+      'total_category': 'total_nature_points',
+      'easy_category': 'nature_easy_points',
+      'medium_category': 'nature_medium_points',
+      'hard_category': 'nature_hard_points',
+      'page': const FirstQuizPageNature(
+        image: 'images/nature.png',
+        easyCategory: 'nature_easy_points',
+        mediumCategory: 'nature_medium_points',
+        hardCategory: 'nature_hard_points',
+      )
     },
     {
       'id': 7,
-      'widget': const QuizzCategoryWidget2(
-        name: 'Sport',
-        image: 'images/ball.png',
-      ),
       'name': 'Sport',
-      'image': 'images/ball.png'
+      'image': 'images/ball.png',
+      'total_category': 'total_sports_points',
+      'easy_category': 'sport_easy_points',
+      'medium_category': 'sport_medium_points',
+      'hard_category': 'sport_hard_points',
+      'page': const FirstQuizPageSport(
+        image: 'images/nature.png',
+        easyCategory: 'sport_easy_points',
+        mediumCategory: 'sport_medium_points',
+        hardCategory: 'sport_hard_points',
+      )
     },
     {
       'id': 8,
-      'widget': const QuizzCategoryWidget8(
-        name: 'TV',
-        image: 'images/tv.png',
-      ),
       'name': 'TV',
-      'image': 'images/tv.png'
+      'image': 'images/tv.png',
+      'total_category': 'total_tv_points',
+      'easy_category': 'tv_easy_points',
+      'medium_category': 'tv_medium_points',
+      'hard_category': 'tv_hard_points',
+      'page': const FirstQuizPageTV(
+        image: 'images/tv.png',
+        easyCategory: 'tv_easy_points',
+        mediumCategory: 'tv_medium_points',
+        hardCategory: 'tv_hard_points',
+      )
     },
   ];
 
   final controller = TextEditingController();
-  List categoryList = [];
+  late List<dynamic> categoryList;
 
   @override
   void initState() {
@@ -163,398 +214,283 @@ class _QuizzPageState extends State<QuizzPage> {
   }
 
   void filter(String categoryWord) {
-    List results = [];
-
-    if (categoryWord.isNotEmpty) {
-      results = list
+    setState(() {
+      categoryList = list
           .where((category) => category['name']
               .toLowerCase()
               .contains(categoryWord.toLowerCase()))
           .toList();
-    } else {
-      results = list;
-    }
-
-    setState(() {
-      categoryList = results;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            Color.fromARGB(255, 10, 58, 214),
-            Color.fromARGB(255, 22, 20, 129),
-          ],
-          begin: Alignment.centerLeft,
-          end: Alignment.centerRight,
-        ),
-      ),
-      child: ListView(
-        children: [
-          const SizedBox(
-            height: 30,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Hi user 👋',
-                  style: GoogleFonts.aBeeZee(
-                      fontSize: 24,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold),
-                ),
-                const CircleAvatar(
-                  child: Icon(Icons.question_mark),
-                )
-              ],
-            ),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  '''Let's play''',
-                  style: GoogleFonts.aBeeZee(
-                      fontSize: 46,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 30),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 32.0),
-            child: Container(
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                  gradient: const LinearGradient(
-                    colors: [
-                      Color.fromARGB(255, 94, 128, 239),
-                      Color.fromARGB(255, 76, 75, 167),
-                    ],
-                    begin: Alignment.centerLeft,
-                    end: Alignment.centerRight,
-                  ),
-                  borderRadius: BorderRadius.circular(20),
-                  color: Colors.red),
-              child: Text(
-                'Points: 100💎',
-                style: GoogleFonts.aBeeZee(
-                    fontSize: 28,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold),
-                textAlign: TextAlign.center,
+    return StreamBuilder<DocumentSnapshot>(
+        stream: FirebaseFirestore.instance
+            .collection('users')
+            .doc(widget.user?.uid)
+            .collection('points')
+            .doc(widget.user?.uid)
+            .snapshots(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const CircularProgressIndicator();
+          }
+          if (snapshot.hasError) {
+            return Text('Error: ${snapshot.error}');
+          }
+
+          final points = snapshot.data;
+          final allPoints = points?['total_points'] ?? '0';
+
+          return Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Color.fromARGB(255, 10, 58, 214),
+                  Color.fromARGB(255, 22, 20, 129),
+                ],
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
               ),
             ),
-          ),
-          const SizedBox(height: 30),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30),
-            child: Container(
-              decoration: BoxDecoration(
-                  gradient: const LinearGradient(
-                    colors: [
-                      Color.fromARGB(255, 94, 128, 239),
-                      Color.fromARGB(255, 76, 75, 167),
+            child: ListView(
+              children: [
+                const SizedBox(
+                  height: 30,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Hi user 👋',
+                        style: GoogleFonts.aBeeZee(
+                            fontSize: 24,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      const CircleAvatar(
+                        child: Icon(Icons.question_mark),
+                      )
                     ],
-                    begin: Alignment.centerLeft,
-                    end: Alignment.centerRight,
                   ),
-                  borderRadius: BorderRadius.circular(20),
-                  color: Colors.red),
-              child: TextField(
-                onChanged: (value) => filter(value),
-                controller: controller,
-                style: GoogleFonts.aBeeZee(fontSize: 16, color: Colors.white),
-                decoration: InputDecoration(
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                      color: Colors.white54,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        '''Let's play''',
+                        style: GoogleFonts.aBeeZee(
+                            fontSize: 46,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 30),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 32.0),
+                  child: Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                        gradient: const LinearGradient(
+                          colors: [
+                            Color.fromARGB(255, 94, 128, 239),
+                            Color.fromARGB(255, 76, 75, 167),
+                          ],
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight,
+                        ),
+                        borderRadius: BorderRadius.circular(20),
+                        color: Colors.red),
+                    child: Text(
+                      'Total Points: $allPoints💎',
+                      style: GoogleFonts.aBeeZee(
+                          fontSize: 26,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.center,
                     ),
-                    borderRadius: BorderRadius.circular(20),
                   ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  contentPadding: const EdgeInsets.all(10),
-                  hintText: 'Search category',
-                  hintStyle: GoogleFonts.aBeeZee(
-                      fontSize: 16,
-                      color: Colors.white54,
-                      fontWeight: FontWeight.bold),
-                  suffixIcon: const Icon(
-                    Icons.search,
-                    color: Colors.white54,
-                  ),
-                  hintMaxLines: 1,
                 ),
-              ),
-            ),
-          ),
-          const SizedBox(height: 30),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: ListView.builder(
-              itemCount: categoryList.length,
-              shrinkWrap: true,
-              physics: const ClampingScrollPhysics(),
-              itemBuilder: (context, index) {
-                final firstIndex = index * 2;
-                final secondIndex = firstIndex + 1;
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    if (firstIndex < categoryList.length)
-                      Column(
-                        children: [
-                          categoryList[firstIndex]['widget'],
-                          const SizedBox(
-                            height: 30,
+                const SizedBox(height: 30),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        gradient: const LinearGradient(
+                          colors: [
+                            Color.fromARGB(255, 94, 128, 239),
+                            Color.fromARGB(255, 76, 75, 167),
+                          ],
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight,
+                        ),
+                        borderRadius: BorderRadius.circular(20),
+                        color: Colors.red),
+                    child: TextField(
+                      onChanged: (value) => filter(value),
+                      controller: controller,
+                      style: GoogleFonts.aBeeZee(
+                          fontSize: 16, color: Colors.white),
+                      decoration: InputDecoration(
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                            color: Colors.white54,
                           ),
-                        ],
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        contentPadding: const EdgeInsets.all(10),
+                        hintText: 'Search category',
+                        hintStyle: GoogleFonts.aBeeZee(
+                            fontSize: 16,
+                            color: Colors.white54,
+                            fontWeight: FontWeight.bold),
+                        suffixIcon: const Icon(
+                          Icons.search,
+                          color: Colors.white54,
+                        ),
+                        hintMaxLines: 1,
                       ),
-                    if (secondIndex < categoryList.length)
-                      Column(
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 30),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: ListView.builder(
+                    itemCount: (categoryList.length / 2).ceil(),
+                    shrinkWrap: true,
+                    physics: const ClampingScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      final firstIndex = index * 2;
+                      final secondIndex = firstIndex + 1;
+                      var firstTotalCategoryPoints =
+                          points?[categoryList[firstIndex]['total_category']] ??
+                              0;
+                      var easyFirstCategoryPoints =
+                          points?[categoryList[firstIndex]['easy_category']] ??
+                              '0';
+                      var easySecondCategoryPoints =
+                          points?[categoryList[secondIndex]['easy_category']] ??
+                              '0';
+                      var mediumFirstCategoryPoints = points?[
+                              categoryList[firstIndex]['medium_category']] ??
+                          '0';
+                      var mediumSecondCategoryPoints = points?[
+                              categoryList[secondIndex]['medium_category']] ??
+                          '0';
+                      var hardFirstCategoryPoints =
+                          points?[categoryList[firstIndex]['hard_category']] ??
+                              '0';
+                      var hardSecondCategoryPoints =
+                          points?[categoryList[secondIndex]['hard_category']] ??
+                              '0';
+                      var secondTotalCategoryPoints = points?[
+                              categoryList[secondIndex]['total_category']] ??
+                          0;
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          categoryList[secondIndex]['widget'],
-                          const SizedBox(
-                            height: 30,
-                          ),
+                          if (firstIndex < categoryList.length)
+                            Column(
+                              children: [
+                                QuizzCategoryWidget(
+                                  name: categoryList[firstIndex]['name'],
+                                  image: categoryList[firstIndex]['image'],
+                                  category: categoryList[firstIndex]
+                                      ['total_category'],
+                                  easyCategory: easyFirstCategoryPoints,
+                                  mediumCategory: mediumFirstCategoryPoints,
+                                  hardCategory: hardFirstCategoryPoints,
+                                  categoryPoints: firstTotalCategoryPoints,
+                                  nextPage: categoryList[firstIndex]['page'],
+                                ),
+                                const SizedBox(
+                                  height: 30,
+                                ),
+                              ],
+                            ),
+                          if (secondIndex < categoryList.length)
+                            Column(
+                              children: [
+                                QuizzCategoryWidget(
+                                  name: categoryList[secondIndex]['name'],
+                                  image: categoryList[secondIndex]['image'],
+                                  category: categoryList[secondIndex]
+                                      ['total_category'],
+                                  easyCategory: easySecondCategoryPoints,
+                                  mediumCategory: mediumSecondCategoryPoints,
+                                  hardCategory: hardSecondCategoryPoints,
+                                  categoryPoints: secondTotalCategoryPoints,
+                                  nextPage: categoryList[secondIndex]['page'],
+                                ),
+                                const SizedBox(
+                                  height: 30,
+                                ),
+                              ],
+                            ),
                         ],
-                      ),
-                  ],
-                );
-              },
+                      );
+                    },
+                  ),
+                ),
+              ],
             ),
-          ),
-        ],
-      ),
-    );
+          );
+        });
   }
 }
 
 class QuizzCategoryWidget extends StatelessWidget {
   const QuizzCategoryWidget({
+    required this.easyCategory,
+    required this.mediumCategory,
+    required this.hardCategory,
     required this.name,
     required this.image,
+    required this.category,
+    required this.categoryPoints,
+    required this.nextPage,
     super.key,
   });
 
   final String name;
   final String image;
+  final String category;
+  final dynamic easyCategory;
+  final dynamic mediumCategory;
+  final dynamic hardCategory;
+  final int categoryPoints;
+  final Widget nextPage;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => FirstQuizPageFilms(
-                  image: image,
-                )));
+            builder: (context) => nextPage,
+            settings: RouteSettings(
+              arguments: [
+                easyCategory,
+                mediumCategory,
+                hardCategory,
+              ],
+            )));
       },
       child: DetailsQuizzWidget(
-        name: name,
-        image: image,
-      ),
-    );
-  }
-}
-
-class QuizzCategoryWidget2 extends StatelessWidget {
-  const QuizzCategoryWidget2({
-    required this.name,
-    required this.image,
-    super.key,
-  });
-
-  final String name;
-  final String image;
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => FirstQuizPageSport(
-                  image: image,
-                )));
-      },
-      child: DetailsQuizzWidget(
-        name: name,
-        image: image,
-      ),
-    );
-  }
-}
-
-class QuizzCategoryWidget3 extends StatelessWidget {
-  const QuizzCategoryWidget3({
-    required this.name,
-    required this.image,
-    super.key,
-  });
-
-  final String name;
-  final String image;
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => FirstQuizPageGames(
-                  image: image,
-                )));
-      },
-      child: DetailsQuizzWidget(
-        name: name,
-        image: image,
-      ),
-    );
-  }
-}
-
-class QuizzCategoryWidget4 extends StatelessWidget {
-  const QuizzCategoryWidget4({
-    required this.name,
-    required this.image,
-    super.key,
-  });
-
-  final String name;
-  final String image;
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => FirstQuizPageGeography(
-                  image: image,
-                )));
-      },
-      child: DetailsQuizzWidget(
-        name: name,
-        image: image,
-      ),
-    );
-  }
-}
-
-class QuizzCategoryWidget5 extends StatelessWidget {
-  const QuizzCategoryWidget5({
-    required this.name,
-    required this.image,
-    super.key,
-  });
-
-  final String name;
-  final String image;
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => FirstQuizPageHistory(
-                  image: image,
-                )));
-      },
-      child: DetailsQuizzWidget(
-        name: name,
-        image: image,
-      ),
-    );
-  }
-}
-
-class QuizzCategoryWidget6 extends StatelessWidget {
-  const QuizzCategoryWidget6({
-    required this.name,
-    required this.image,
-    super.key,
-  });
-
-  final String name;
-  final String image;
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => FirstQuizPageMusic(
-                  image: image,
-                )));
-      },
-      child: DetailsQuizzWidget(
-        name: name,
-        image: image,
-      ),
-    );
-  }
-}
-
-class QuizzCategoryWidget7 extends StatelessWidget {
-  const QuizzCategoryWidget7({
-    required this.name,
-    required this.image,
-    super.key,
-  });
-
-  final String name;
-  final String image;
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => FirstQuizPageNature(
-                  image: image,
-                )));
-      },
-      child: DetailsQuizzWidget(
-        name: name,
-        image: image,
-      ),
-    );
-  }
-}
-
-class QuizzCategoryWidget8 extends StatelessWidget {
-  const QuizzCategoryWidget8({
-    required this.name,
-    required this.image,
-    super.key,
-  });
-
-  final String name;
-  final String image;
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => FirstQuizPageTV(
-                  image: image,
-                )));
-      },
-      child: DetailsQuizzWidget(
+        categoryPoints: categoryPoints,
         name: name,
         image: image,
       ),
@@ -566,11 +502,13 @@ class DetailsQuizzWidget extends StatelessWidget {
   const DetailsQuizzWidget({
     required this.name,
     required this.image,
+    required this.categoryPoints,
     super.key,
   });
 
   final String name;
   final String image;
+  final int categoryPoints;
 
   @override
   Widget build(BuildContext context) {
@@ -596,6 +534,16 @@ class DetailsQuizzWidget extends StatelessWidget {
               name,
               style: GoogleFonts.aBeeZee(
                   fontSize: 20,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold),
+              textAlign: TextAlign.center,
+            ),
+          ),
+          Expanded(
+            child: Text(
+              'Points: $categoryPoints',
+              style: GoogleFonts.aBeeZee(
+                  fontSize: 18,
                   color: Colors.white,
                   fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,

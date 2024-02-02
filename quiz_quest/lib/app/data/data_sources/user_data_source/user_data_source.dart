@@ -45,6 +45,55 @@ class UserDataSource {
     );
   }
 
+  Future<void> setEmptyPoints() async {
+    final userID = FirebaseAuth.instance.currentUser?.uid;
+    if (userID == null) {
+      throw Exception('User is not logged in');
+    }
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userID)
+        .collection('points')
+        .doc(userID)
+        .set(
+      {
+        'total_points': 0,
+        'total_films_points': 0,
+        'films_easy_points': 0,
+        'films_medium_points': 0,
+        'films_hard_points': 0,
+        'total_games_points': 0,
+        'games_easy_points': 0,
+        'games_medium_points': 0,
+        'games_hard_points': 0,
+        'total_geography_points': 0,
+        'geography_easy_points': 0,
+        'geography_medium_points': 0,
+        'geography_hard_points': 0,
+        'total_history_points': 0,
+        'history_easy_points': 0,
+        'history_medium_points': 0,
+        'history_hard_points': 0,
+        'total_music_points': 0,
+        'music_easy_points': 0,
+        'music_medium_points': 0,
+        'music_hard_points': 0,
+        'total_nature_points': 0,
+        'nature_easy_points': 0,
+        'nature_medium_points': 0,
+        'nature_hard_points': 0,
+        'total_sports_points': 0,
+        'sport_easy_points': 0,
+        'sport_medium_points': 0,
+        'sport_hard_points': 0,
+        'total_tv_points': 0,
+        'tv_easy_points': 0,
+        'tv_medium_points': 0,
+        'tv_hard_points': 0,
+      },
+    );
+  }
+
   Future<void> updateName({
     required String? name,
   }) async {

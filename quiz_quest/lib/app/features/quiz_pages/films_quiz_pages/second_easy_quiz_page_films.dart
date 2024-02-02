@@ -11,13 +11,16 @@ import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/first_quiz_p
 class SecondEasyQuizPageFilms extends StatefulWidget {
   const SecondEasyQuizPageFilms({
     required this.image,
+    required this.easyCategory,
     super.key,
   });
 
   final String image;
+  final dynamic easyCategory;
 
   @override
-  State<SecondEasyQuizPageFilms> createState() => _SecondEasyQuizPageFilmsState();
+  State<SecondEasyQuizPageFilms> createState() =>
+      _SecondEasyQuizPageFilmsState();
 }
 
 class _SecondEasyQuizPageFilmsState extends State<SecondEasyQuizPageFilms> {
@@ -26,6 +29,7 @@ class _SecondEasyQuizPageFilmsState extends State<SecondEasyQuizPageFilms> {
     return Scaffold(
       body: QuizzPage(
         image: widget.image,
+        easyCategory: widget.easyCategory,
       ),
     );
   }
@@ -34,10 +38,12 @@ class _SecondEasyQuizPageFilmsState extends State<SecondEasyQuizPageFilms> {
 class QuizzPage extends StatelessWidget {
   const QuizzPage({
     required this.image,
+    required this.easyCategory,
     super.key,
   });
 
   final String image;
+  final dynamic easyCategory;
 
   @override
   Widget build(BuildContext context) {
@@ -61,6 +67,18 @@ class QuizzPage extends StatelessWidget {
             child: CircleAvatar(
               radius: 35,
               backgroundImage: AssetImage(image),
+            ),
+          ),
+          const SizedBox(
+            height: 15,
+          ),
+          Center(
+            child: Text(
+              'Easy category points: $easyCategory💎',
+              style: GoogleFonts.aBeeZee(
+                fontSize: 18,
+                color: Colors.white,
+              ),
             ),
           ),
           const SizedBox(

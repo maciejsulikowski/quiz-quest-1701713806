@@ -11,10 +11,12 @@ import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/first_quiz_p
 class SecondMediumQuizPageFilms extends StatefulWidget {
   const SecondMediumQuizPageFilms({
     required this.image,
+    required this.mediumCategory,
     super.key,
   });
 
   final String image;
+  final dynamic mediumCategory;
 
   @override
   State<SecondMediumQuizPageFilms> createState() =>
@@ -27,6 +29,7 @@ class _SecondMediumQuizPageFilmsState extends State<SecondMediumQuizPageFilms> {
     return Scaffold(
       body: QuizzPage(
         image: widget.image,
+        mediumCategory: widget.mediumCategory,
       ),
     );
   }
@@ -35,10 +38,12 @@ class _SecondMediumQuizPageFilmsState extends State<SecondMediumQuizPageFilms> {
 class QuizzPage extends StatelessWidget {
   const QuizzPage({
     required this.image,
+    required this.mediumCategory,
     super.key,
   });
 
   final String image;
+  final dynamic mediumCategory;
 
   @override
   Widget build(BuildContext context) {
@@ -62,6 +67,18 @@ class QuizzPage extends StatelessWidget {
             child: CircleAvatar(
               radius: 35,
               backgroundImage: AssetImage(image),
+            ),
+          ),
+          const SizedBox(
+            height: 15,
+          ),
+          Center(
+            child: Text(
+              'Medium category points: $mediumCategory💎',
+              style: GoogleFonts.aBeeZee(
+                fontSize: 18,
+                color: Colors.white,
+              ),
             ),
           ),
           const SizedBox(

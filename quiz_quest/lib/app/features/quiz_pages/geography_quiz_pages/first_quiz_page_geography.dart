@@ -11,11 +11,16 @@ import 'package:quiz_quest/app/features/quiz_pages/geography_quiz_pages/question
 class FirstQuizPageGeography extends StatefulWidget {
   const FirstQuizPageGeography({
     required this.image,
+    required this.easyCategory,
+    required this.mediumCategory,
+    required this.hardCategory,
     super.key,
   });
 
   final String image;
-
+final String easyCategory;
+  final String mediumCategory;
+  final String hardCategory;
   @override
   State<FirstQuizPageGeography> createState() => _FirstQuizPageGeographyState();
 }

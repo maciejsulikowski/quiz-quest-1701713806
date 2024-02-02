@@ -39,6 +39,9 @@ class _UserAccountState extends State<UserAccount> {
         },
         child: BlocBuilder<UserCubit, UserState>(
           builder: (context, state) {
+            if (widget.user == null) {
+              return const CircularProgressIndicator();
+            }
             return UserWidget(
               user: widget.user!,
               userModel: state.userModel,

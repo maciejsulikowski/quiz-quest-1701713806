@@ -10,6 +10,7 @@ import 'package:quiz_quest/app/features/home_page/cubit/home_cubit.dart';
 import 'package:quiz_quest/app/features/home_page/home_page.dart';
 
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/cubit/films_cubit.dart';
+import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/resume_easy_question_quiz_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/quiz_countdown_timer/quiz_countdown_timer.dart';
 
 class EasyQuestionQuizPage extends StatefulWidget {
@@ -24,8 +25,11 @@ class EasyQuestionQuizPage extends StatefulWidget {
 final controller = CountDownController();
 bool isButtonClicked = false;
 bool isButtonDisabled = false;
+bool isButtonNameChanged = false;
 Color textColor = Colors.white;
 bool isTimeUp = false;
+int goodAnswers = 0;
+int badAnswers = 0;
 
 class _EasyQuestionQuizPageState extends State<EasyQuestionQuizPage> {
   int currentIndex = 0;
@@ -45,6 +49,7 @@ class _EasyQuestionQuizPageState extends State<EasyQuestionQuizPage> {
     answerColors;
     answerGenerated = false;
     isTimeUp;
+    isButtonNameChanged;
     resetQuizState();
     super.initState();
   }
@@ -72,6 +77,9 @@ class _EasyQuestionQuizPageState extends State<EasyQuestionQuizPage> {
   }
 
   void resetQuizState() {
+    isButtonNameChanged = false;
+    badAnswers = 0;
+    goodAnswers = 0;
     currentIndex = 0;
     isButtonClicked = false;
     isButtonDisabled = false;
@@ -139,7 +147,7 @@ class _EasyQuestionQuizPageState extends State<EasyQuestionQuizPage> {
                       height: 15,
                     ),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -162,7 +170,30 @@ class _EasyQuestionQuizPageState extends State<EasyQuestionQuizPage> {
                             ),
                           ),
                         ),
+                        Expanded(
+                          child: Text(
+                            'Score: ${goodAnswers * 10}',
+                            style: GoogleFonts.aBeeZee(
+                                fontSize: 20,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(right: 20.0),
+                          child: Text(
+                            '❤️❤️❤️',
+                            style: GoogleFonts.aBeeZee(
+                                fontSize: 20,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
                       ],
+                    ),
+                    const SizedBox(
+                      height: 30,
                     ),
                     CountDownTimer(
                       duration: duration,
@@ -193,12 +224,38 @@ class _EasyQuestionQuizPageState extends State<EasyQuestionQuizPage> {
                                 const SizedBox(
                                   height: 15,
                                 ),
-                                Text(
-                                  'Question: $questionNumber/$questionNumbers',
-                                  style: GoogleFonts.aBeeZee(
-                                      fontSize: 20,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Text(
+                                      'Bad: $badAnswers',
+                                      style: GoogleFonts.aBeeZee(
+                                          fontSize: 20,
+                                          color: Colors.red,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    Text(
+                                      'Question: $questionNumber/$questionNumbers',
+                                      style: GoogleFonts.aBeeZee(
+                                          fontSize: 20,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    Text(
+                                      'Good: $goodAnswers',
+                                      style: GoogleFonts.aBeeZee(
+                                          fontSize: 20,
+                                          color: Colors.green,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
                                 ),
                                 const SizedBox(
                                   height: 15,
@@ -256,15 +313,34 @@ class _EasyQuestionQuizPageState extends State<EasyQuestionQuizPage> {
                                                 ? null
                                                 : () {
                                                     setState(() {
-                                                      currentIndex += 1;
-                                                      isButtonClicked = false;
-                                                      isButtonDisabled = false;
-                                                      answerGenerated = false;
-                                                      answerColors =
-                                                          List.filled(
-                                                              currentAnswers
-                                                                  .length,
-                                                              Colors.white);
+                                                      if (currentIndex ==
+                                                          filmsQuizModel.results
+                                                                  .length -
+                                                              1) {
+                                                        isButtonNameChanged =
+                                                            true;
+                                                        Navigator.of(context).push(
+                                                            MaterialPageRoute(
+                                                                builder:
+                                                                    (context) =>
+                                                                        ResumeEasyQuizPageFilms(
+                                                                          badAnswers:
+                                                                              badAnswers,
+                                                                          goodAnswers:
+                                                                              goodAnswers,
+                                                                        )));
+                                                      } else {
+                                                        currentIndex += 1;
+                                                        isButtonClicked = false;
+                                                        isButtonDisabled =
+                                                            false;
+                                                        answerGenerated = false;
+                                                        answerColors =
+                                                            List.filled(
+                                                                currentAnswers
+                                                                    .length,
+                                                                Colors.white);
+                                                      }
                                                     });
                                                     controller.start();
                                                   },
@@ -272,8 +348,12 @@ class _EasyQuestionQuizPageState extends State<EasyQuestionQuizPage> {
                                               foregroundColor: Colors.white,
                                               backgroundColor: Colors.black,
                                             ),
-                                            child:
-                                                const Text('Next Question ➔'),
+                                            child: Text(currentIndex ==
+                                                    filmsQuizModel
+                                                            .results.length -
+                                                        1
+                                                ? 'Show your results'
+                                                : 'Next Question ➔'),
                                           )),
                                     ],
                                   ),
@@ -360,8 +440,10 @@ class _AnswerButtonState extends State<AnswerButton> {
 
     if (widget.isCorrectAnswer || widget.isTimeUp) {
       widget.colorFunction(Colors.green, widget.index);
+      goodAnswers += 1;
     } else {
       widget.colorFunction(Colors.red, widget.index);
+      badAnswers += 1;
     }
     setState(() {
       widget.textcolor =

@@ -26,6 +26,10 @@ class UserRepository {
     return userDataSource.setEmptyAccount();
   }
 
+  Future<void> setEmptyPoints() async {
+    return userDataSource.setEmptyPoints();
+  }
+
   Future<void> updateName(String name) async {
     return userDataSource.updateName(name: name);
   }

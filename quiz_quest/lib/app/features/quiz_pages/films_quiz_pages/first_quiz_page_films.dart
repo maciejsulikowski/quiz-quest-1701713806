@@ -12,16 +12,10 @@ import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/second_mediu
 class FirstQuizPageFilms extends StatefulWidget {
   const FirstQuizPageFilms({
     required this.image,
-    required this.easyCategory,
-    required this.mediumCategory,
-    required this.hardCategory,
     super.key,
   });
 
   final String image;
-  final String easyCategory;
-  final String mediumCategory;
-  final String hardCategory;
 
   @override
   State<FirstQuizPageFilms> createState() => _FirstQuizPageFilmsState();
@@ -48,6 +42,8 @@ class QuizzPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
+
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
@@ -87,6 +83,7 @@ class QuizzPage extends StatelessWidget {
             height: 30,
           ),
           EasyDifficultButton(
+           
             image: image,
             text: 'Easy',
           ),
@@ -94,6 +91,7 @@ class QuizzPage extends StatelessWidget {
             height: 30,
           ),
           MediumDifficultButton(
+            
             image: image,
             text: 'Medium',
           ),
@@ -101,6 +99,7 @@ class QuizzPage extends StatelessWidget {
             height: 30,
           ),
           HardDifficultButton(
+            
             image: image,
             text: 'Hard',
           ),
@@ -122,6 +121,8 @@ class EasyDifficultButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dynamic easyCategory = ModalRoute.of(context)?.settings.arguments;
+    final dynamic category = easyCategory[0];
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20),
       decoration: BoxDecoration(
@@ -148,6 +149,7 @@ class EasyDifficultButton extends StatelessWidget {
         onPressed: () {
           Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => SecondEasyQuizPageFilms(
+                    easyCategory: category,
                     image: image,
                   )));
         },
@@ -177,6 +179,9 @@ class MediumDifficultButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dynamic categories = ModalRoute.of(context)?.settings.arguments;
+    final dynamic mediumCategory = categories[1];
+
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20),
       decoration: BoxDecoration(
@@ -203,6 +208,7 @@ class MediumDifficultButton extends StatelessWidget {
         onPressed: () {
           Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => SecondMediumQuizPageFilms(
+                    mediumCategory: mediumCategory,
                     image: image,
                   )));
         },
@@ -232,6 +238,10 @@ class HardDifficultButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final dynamic categories = ModalRoute.of(context)?.settings.arguments;
+    final dynamic hardCategory = categories[2];
+
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20),
       decoration: BoxDecoration(
@@ -258,6 +268,7 @@ class HardDifficultButton extends StatelessWidget {
         onPressed: () {
           Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => SecondHardQuizPageFilms(
+                hardCategory: hardCategory,
                     image: image,
                   )));
         },

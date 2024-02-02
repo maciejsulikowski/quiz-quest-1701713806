@@ -92,9 +92,9 @@ class _QuizzPageState extends State<QuizzPage> {
       'hard_category': 'films_hard_points',
       'page': const FirstQuizPageFilms(
         image: 'images/movie.png',
-        easyCategory: 'films_easy_points',
-        mediumCategory: 'films_medium_points',
-        hardCategory: 'films_hard_points',
+        // easyCategory: 'films_easy_points',
+        // // mediumCategory: 'films_medium_points',
+        // // hardCategory: 'films_hard_points',
       )
     },
     {
@@ -379,7 +379,24 @@ class _QuizzPageState extends State<QuizzPage> {
                       var firstTotalCategoryPoints =
                           points?[categoryList[firstIndex]['total_category']] ??
                               0;
-
+                      var easyFirstCategoryPoints =
+                          points?[categoryList[firstIndex]['easy_category']] ??
+                              '0';
+                      var easySecondCategoryPoints =
+                          points?[categoryList[secondIndex]['easy_category']] ??
+                              '0';
+                      var mediumFirstCategoryPoints = points?[
+                              categoryList[firstIndex]['medium_category']] ??
+                          '0';
+                      var mediumSecondCategoryPoints = points?[
+                              categoryList[secondIndex]['medium_category']] ??
+                          '0';
+                      var hardFirstCategoryPoints =
+                          points?[categoryList[firstIndex]['hard_category']] ??
+                              '0';
+                      var hardSecondCategoryPoints =
+                          points?[categoryList[secondIndex]['hard_category']] ??
+                              '0';
                       var secondTotalCategoryPoints = points?[
                               categoryList[secondIndex]['total_category']] ??
                           0;
@@ -394,12 +411,9 @@ class _QuizzPageState extends State<QuizzPage> {
                                   image: categoryList[firstIndex]['image'],
                                   category: categoryList[firstIndex]
                                       ['total_category'],
-                                  easyCategory: categoryList[firstIndex]
-                                      ['easy_category'],
-                                  mediumCategory: categoryList[firstIndex]
-                                      ['medium_category'],
-                                  hardCategory: categoryList[firstIndex]
-                                      ['hard_category'],
+                                  easyCategory: easyFirstCategoryPoints,
+                                  mediumCategory: mediumFirstCategoryPoints,
+                                  hardCategory: hardFirstCategoryPoints,
                                   categoryPoints: firstTotalCategoryPoints,
                                   nextPage: categoryList[firstIndex]['page'],
                                 ),
@@ -416,12 +430,9 @@ class _QuizzPageState extends State<QuizzPage> {
                                   image: categoryList[secondIndex]['image'],
                                   category: categoryList[secondIndex]
                                       ['total_category'],
-                                  easyCategory: categoryList[secondIndex]
-                                      ['easy_category'],
-                                  mediumCategory: categoryList[secondIndex]
-                                      ['medium_category'],
-                                  hardCategory: categoryList[secondIndex]
-                                      ['hard_category'],
+                                  easyCategory: easySecondCategoryPoints,
+                                  mediumCategory: mediumSecondCategoryPoints,
+                                  hardCategory: hardSecondCategoryPoints,
                                   categoryPoints: secondTotalCategoryPoints,
                                   nextPage: categoryList[secondIndex]['page'],
                                 ),
@@ -458,9 +469,9 @@ class QuizzCategoryWidget extends StatelessWidget {
   final String name;
   final String image;
   final String category;
-  final String easyCategory;
-  final String mediumCategory;
-  final String hardCategory;
+  final dynamic easyCategory;
+  final dynamic mediumCategory;
+  final dynamic hardCategory;
   final int categoryPoints;
   final Widget nextPage;
 
@@ -468,8 +479,15 @@ class QuizzCategoryWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => nextPage));
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => nextPage,
+            settings: RouteSettings(
+              arguments: [
+                easyCategory,
+                mediumCategory,
+                hardCategory,
+              ],
+            )));
       },
       child: DetailsQuizzWidget(
         categoryPoints: categoryPoints,
@@ -523,7 +541,7 @@ class DetailsQuizzWidget extends StatelessWidget {
           ),
           Expanded(
             child: Text(
-              'Points: ${categoryPoints}',
+              'Points: $categoryPoints',
               style: GoogleFonts.aBeeZee(
                   fontSize: 18,
                   color: Colors.white,

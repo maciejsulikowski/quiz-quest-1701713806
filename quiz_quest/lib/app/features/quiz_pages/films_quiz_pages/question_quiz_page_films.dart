@@ -149,8 +149,7 @@ class _QuestionQuizPageState extends State<QuestionQuizPage> {
                             onTap: () {
                               Navigator.pop(
                                   context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const HomePage()));
+                                  );
                             },
                             child: Container(
                               decoration: BoxDecoration(

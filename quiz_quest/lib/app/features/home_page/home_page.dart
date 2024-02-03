@@ -16,11 +16,11 @@ import 'package:quiz_quest/app/features/user_page/user_account.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
-    this.user,
+    required this.user,
     super.key,
   });
 
-  final User? user;
+  final User user;
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -225,20 +225,17 @@ class _QuizzPageState extends State<QuizzPage> {
     return StreamBuilder<DocumentSnapshot>(
         stream: FirebaseFirestore.instance
             .collection('users')
-            .doc(widget.user?.uid)
+            .doc(widget.user!.uid)
             .collection('points')
-            .doc(widget.user?.uid)
+            .doc(widget.user!.uid)
             .snapshots(),
         builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const CircularProgressIndicator();
-          }
           if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           }
-          if (!snapshot.hasData || !snapshot.data!.exists) {
-            return const Text('Document does not exist or is empty');
-          }
+          // if (!snapshot.hasData || !snapshot.data!.exists) {
+          //   return const Text('Document does not exist or is empty');
+          // }
 
           final points = snapshot.data;
           final allPoints = points?['total_points'] ?? '0';
@@ -370,7 +367,8 @@ class _QuizzPageState extends State<QuizzPage> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: GridView.builder(
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       crossAxisSpacing: 20,
                       mainAxisSpacing: 20,
@@ -497,7 +495,7 @@ class DetailsQuizzWidget extends StatelessWidget {
           ),
           Expanded(
             child: Text(
-              'Points: $categoryPoints',
+              'Points: $categoryPoints💎',
               style: GoogleFonts.aBeeZee(
                   fontSize: 18,
                   color: Colors.white,

@@ -108,9 +108,11 @@ class ResumePage extends StatelessWidget {
                 ]),
             child: ElevatedButton(
               onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => const HomePage(),
-                ));
+                Navigator.of(context).popUntil((route) => route.isFirst);
+                //throw Exception('No user found');
+                //Navigator.of(context).push(MaterialPageRoute(
+                //  builder: (context) => const HomePage(),
+                //));
               },
               style: ElevatedButton.styleFrom(
                   minimumSize: const Size.fromHeight(50),

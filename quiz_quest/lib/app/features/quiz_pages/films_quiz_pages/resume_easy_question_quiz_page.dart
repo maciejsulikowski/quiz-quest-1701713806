@@ -108,7 +108,7 @@ class ResumePage extends StatelessWidget {
                 ]),
             child: ElevatedButton(
               onPressed: () {
-                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => const HomePage(),
                 ));
               },

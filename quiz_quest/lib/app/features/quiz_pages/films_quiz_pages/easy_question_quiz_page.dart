@@ -284,7 +284,13 @@ class _EasyQuestionQuizPageState extends State<EasyQuestionQuizPage> {
                                     isButtonClicked: (value) {
                                       setState(() {
                                         isButtonClicked = value;
-                                        ringColor = Colors.red;
+                                        if (value = currentAnswers[index] ==
+                                            filmsQuizModel.results[currentIndex]
+                                                .correctAnswer) {
+                                          ringColor = Colors.green;
+                                        } else {
+                                          ringColor = Colors.red;
+                                        }
                                       });
                                     },
                                     textcolor: answerColors[index],
@@ -472,8 +478,6 @@ class _AnswerButtonState extends State<AnswerButton> {
     widget.isButtonClicked(true);
     widget.isButtonDisabled(true);
   }
-
-  Color color = Colors.white;
 
   @override
   Widget build(BuildContext context) {

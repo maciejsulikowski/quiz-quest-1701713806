@@ -6,9 +6,6 @@ import 'package:quiz_quest/app/core/enums.dart';
 import 'package:quiz_quest/app/data/data_sources/quiz_data_source/quiz_categories_data_source.dart';
 import 'package:quiz_quest/app/domain/models/films_model/films_quiz_model.dart';
 import 'package:quiz_quest/app/domain/repositories/quiz_repository/quiz_repository.dart';
-import 'package:quiz_quest/app/features/home_page/cubit/home_cubit.dart';
-import 'package:quiz_quest/app/features/home_page/home_page.dart';
-
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/cubit/films_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/resume_easy_question_quiz_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/quiz_countdown_timer/quiz_countdown_timer.dart';
@@ -23,17 +20,21 @@ class EasyQuestionQuizPage extends StatefulWidget {
 }
 
 final controller = CountDownController();
-bool isButtonClicked = false;
+late bool isButtonClicked;
 bool isButtonDisabled = false;
 bool isButtonNameChanged = false;
 Color textColor = Colors.white;
+late bool isDurationEnded;
+late Color ringColor;
 bool isTimeUp = false;
 int goodAnswers = 0;
 int badAnswers = 0;
+bool isCorrectAnswer = false;
 
 class _EasyQuestionQuizPageState extends State<EasyQuestionQuizPage> {
   int currentIndex = 0;
   late List currentAnswers;
+
   List<Color> answerColors = [
     Colors.white,
     Colors.white,
@@ -49,15 +50,12 @@ class _EasyQuestionQuizPageState extends State<EasyQuestionQuizPage> {
     answerColors;
     answerGenerated = false;
     isTimeUp;
+    isButtonClicked = false;
     isButtonNameChanged;
+    isDurationEnded = false;
+    ringColor = Colors.white;
     resetQuizState();
     super.initState();
-  }
-
-  void updateIsTimeUp(bool value) {
-    setState(() {
-      isTimeUp = value;
-    });
   }
 
   void generateAnswers(FilmsQuizModel? filmsQuizModel) {
@@ -86,6 +84,8 @@ class _EasyQuestionQuizPageState extends State<EasyQuestionQuizPage> {
     textColor = Colors.white;
     answerGenerated = false;
     isTimeUp = false;
+    isDurationEnded = false;
+
     answerColors = [
       Colors.white,
       Colors.white,
@@ -154,8 +154,8 @@ class _EasyQuestionQuizPageState extends State<EasyQuestionQuizPage> {
                           child: InkWell(
                             onTap: () {
                               Navigator.pop(
-                                  context,
-                                  );
+                                context,
+                              );
                             },
                             child: Container(
                               decoration: BoxDecoration(
@@ -195,9 +195,20 @@ class _EasyQuestionQuizPageState extends State<EasyQuestionQuizPage> {
                       height: 30,
                     ),
                     CountDownTimer(
+                      setDurationEnd: (value) {
+                        setState(() {
+                          isDurationEnded = value;
+                          ringColor = Colors.red;
+                          badAnswers += 1;
+                          isButtonDisabled = true;
+                          isTimeUp = true;
+                        });
+                      },
+                      isDurationEnded: isDurationEnded,
+                      isButtonClicked: isButtonClicked,
+                      ringColor: ringColor,
                       duration: duration,
                       controller: controller,
-                      updateIsTimeUp: updateIsTimeUp,
                     ),
                     const SizedBox(
                       height: 15,
@@ -264,6 +275,7 @@ class _EasyQuestionQuizPageState extends State<EasyQuestionQuizPage> {
                                     index++) ...[
                                   AnswerButton(
                                     isTimeUp: isTimeUp,
+                                    duration: duration,
                                     isButtonDisabled: (value) {
                                       setState(() {
                                         isButtonDisabled = value;
@@ -272,6 +284,7 @@ class _EasyQuestionQuizPageState extends State<EasyQuestionQuizPage> {
                                     isButtonClicked: (value) {
                                       setState(() {
                                         isButtonClicked = value;
+                                        ringColor = Colors.red;
                                       });
                                     },
                                     textcolor: answerColors[index],
@@ -308,41 +321,47 @@ class _EasyQuestionQuizPageState extends State<EasyQuestionQuizPage> {
                                       Container(
                                           color: Colors.black,
                                           child: ElevatedButton(
-                                            onPressed: isButtonClicked == false
-                                                ? null
-                                                : () {
+                                            onPressed: (isButtonClicked ||
+                                                    isDurationEnded)
+                                                ? () {
                                                     setState(() {
                                                       if (currentIndex ==
                                                           filmsQuizModel.results
                                                                   .length -
                                                               1) {
-                                                        isButtonNameChanged =
-                                                            true;
-                                                        Navigator.of(context).push(
-                                                            MaterialPageRoute(
-                                                                builder:
-                                                                    (context) =>
-                                                                        ResumeEasyQuizPageFilms(
-                                                                          badAnswers:
-                                                                              badAnswers,
-                                                                          goodAnswers:
-                                                                              goodAnswers,
-                                                                        )));
-                                                      } else {
+                                                        Navigator.of(context)
+                                                            .push(
+                                                          MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                ResumeEasyQuizPageFilms(
+                                                              badAnswers:
+                                                                  badAnswers,
+                                                              goodAnswers:
+                                                                  goodAnswers,
+                                                            ),
+                                                          ),
+                                                        );
+                                                      } else if (isButtonClicked ||
+                                                          isDurationEnded) {
                                                         currentIndex += 1;
                                                         isButtonClicked = false;
                                                         isButtonDisabled =
                                                             false;
                                                         answerGenerated = false;
+                                                        ringColor =
+                                                            Colors.white;
+                                                        isTimeUp = false;
                                                         answerColors =
                                                             List.filled(
-                                                                currentAnswers
-                                                                    .length,
-                                                                Colors.white);
+                                                          currentAnswers.length,
+                                                          Colors.white,
+                                                        );
                                                       }
+                                                      isDurationEnded = false;
                                                     });
                                                     controller.start();
-                                                  },
+                                                  }
+                                                : null,
                                             style: ElevatedButton.styleFrom(
                                               foregroundColor: Colors.white,
                                               backgroundColor: Colors.black,
@@ -407,17 +426,20 @@ class AnswerButton extends StatefulWidget {
     required this.answer,
     required this.controller,
     required this.isCorrectAnswer,
-    required this.isTimeUp,
     required this.colorFunction,
     required this.isButtonClicked,
     required this.isButtonDisabled,
     required this.textcolor,
     required this.index,
+    required this.duration,
+    required this.isTimeUp,
   });
 
   final String answer;
   final CountDownController controller;
   final bool isCorrectAnswer;
+
+  int duration;
   bool isTimeUp;
   Function(Color, int) colorFunction;
   final Function(bool) isButtonClicked;
@@ -437,7 +459,7 @@ class _AnswerButtonState extends State<AnswerButton> {
 
     widget.controller.pause();
 
-    if (widget.isCorrectAnswer || widget.isTimeUp) {
+    if (widget.isCorrectAnswer) {
       widget.colorFunction(Colors.green, widget.index);
       goodAnswers += 1;
     } else {
@@ -445,8 +467,7 @@ class _AnswerButtonState extends State<AnswerButton> {
       badAnswers += 1;
     }
     setState(() {
-      widget.textcolor =
-          widget.isCorrectAnswer || widget.isTimeUp ? Colors.green : Colors.red;
+      widget.textcolor = widget.isCorrectAnswer ? Colors.green : Colors.red;
     });
     widget.isButtonClicked(true);
     widget.isButtonDisabled(true);
@@ -498,7 +519,9 @@ class _AnswerButtonState extends State<AnswerButton> {
           modifiedAnswer,
           style: GoogleFonts.aBeeZee(
             fontSize: 24,
-            color: widget.textcolor,
+            color: widget.isTimeUp && widget.isCorrectAnswer
+                ? Colors.green
+                : widget.textcolor,
           ),
         ),
       ),

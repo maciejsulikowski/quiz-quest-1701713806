@@ -229,13 +229,11 @@ class _QuizzPageState extends State<QuizzPage> {
             .collection('points')
             .doc(widget.user!.uid)
             .snapshots(),
+            
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           }
-          // if (!snapshot.hasData || !snapshot.data!.exists) {
-          //   return const Text('Document does not exist or is empty');
-          // }
 
           final points = snapshot.data;
           final allPoints = points?['total_points'] ?? '0';

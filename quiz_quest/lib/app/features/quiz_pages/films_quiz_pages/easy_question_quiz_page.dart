@@ -30,6 +30,9 @@ bool isTimeUp = false;
 int goodAnswers = 0;
 int badAnswers = 0;
 bool isCorrectAnswer = false;
+String threeLives = '❤️❤️❤️';
+String twoLives = ' ❤️❤️';
+String oneLive = ' ❤️';
 
 class _EasyQuestionQuizPageState extends State<EasyQuestionQuizPage> {
   int currentIndex = 0;
@@ -146,48 +149,62 @@ class _EasyQuestionQuizPageState extends State<EasyQuestionQuizPage> {
                     const SizedBox(
                       height: 15,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    Stack(
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.pop(
-                                context,
-                              );
-                            },
-                            child: Container(
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                border:
-                                    Border.all(color: Colors.white, width: 2.0),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 20.0),
+                                child: InkWell(
+                                  onTap: () {
+                                    Navigator.pop(
+                                      context,
+                                    );
+                                  },
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                          color: Colors.white, width: 2.0),
+                                    ),
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: const Icon(Icons.close,
+                                        color: Colors.white),
+                                  ),
+                                ),
                               ),
-                              padding: const EdgeInsets.all(10.0),
-                              child:
-                                  const Icon(Icons.close, color: Colors.white),
                             ),
-                          ),
-                        ),
-                        Expanded(
-                          child: Text(
-                            'Score: ${goodAnswers * 10}',
-                            style: GoogleFonts.aBeeZee(
-                                fontSize: 20,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(right: 20.0),
-                          child: Text(
-                            '❤️❤️❤️',
-                            style: GoogleFonts.aBeeZee(
-                                fontSize: 20,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold),
-                          ),
+                            Expanded(
+                              child: Text(
+                                'Score: ${goodAnswers * 10}',
+                                style: GoogleFonts.aBeeZee(
+                                    fontSize: 20,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                            if (badAnswers == 3) const Spacer(),
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.only(right: 20.0),
+                                child: Text(
+                                  badAnswers == 2
+                                      ? oneLive
+                                      : badAnswers == 1
+                                          ? twoLives
+                                          : threeLives,
+                                  style: GoogleFonts.aBeeZee(
+                                      fontSize: 20,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),

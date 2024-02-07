@@ -48,6 +48,8 @@ class ResumePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final record = goodAnswers * 10;
+
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
@@ -76,7 +78,7 @@ class ResumePage extends StatelessWidget {
           const SizedBox(
             height: 30,
           ),
-          TextWidget(text: 'You scored: ${goodAnswers * 10} points 💎'),
+          TextWidget(text: 'You scored: $record points 💎'),
           const SizedBox(
             height: 30,
           ),

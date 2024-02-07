@@ -4,8 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quiz_quest/app/core/enums.dart';
 import 'package:quiz_quest/app/data/data_sources/quiz_data_source/quiz_categories_data_source.dart';
+import 'package:quiz_quest/app/data/data_sources/user_data_source/user_data_source.dart';
 import 'package:quiz_quest/app/domain/models/films_model/films_quiz_model.dart';
 import 'package:quiz_quest/app/domain/repositories/quiz_repository/quiz_repository.dart';
+import 'package:quiz_quest/app/domain/repositories/user_repository/user_repository.dart';
 import 'package:quiz_quest/app/features/home_page/home_page.dart';
 
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/cubit/films_cubit.dart';
@@ -95,7 +97,8 @@ class _HardQuestionQuizPageState extends State<HardQuestionQuizPage> {
     return Scaffold(
       body: BlocProvider(
         create: (context) =>
-            FilmsCubit(QuizRepository(QuizCategoriesDataSource()))
+            FilmsCubit(QuizRepository(QuizCategoriesDataSource()),
+            UserRepository(UserDataSource()))
               ..getHardFilmsCategory(),
         child: BlocListener<FilmsCubit, FilmsState>(
           listener: (context, state) async {

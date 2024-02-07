@@ -79,8 +79,6 @@ class QuizzPage extends StatefulWidget {
 }
 
 class _QuizzPageState extends State<QuizzPage> {
-  int points = 0;
-
   List<dynamic> list = [
     {
       'id': 1,
@@ -229,14 +227,13 @@ class _QuizzPageState extends State<QuizzPage> {
             .collection('points')
             .doc(widget.user!.uid)
             .snapshots(),
-            
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           }
 
           final points = snapshot.data;
-          final allPoints = points?['total_points'] ?? '0';
+          final allPoints = points?['total_points'] ?? 0;
 
           return Container(
             decoration: const BoxDecoration(

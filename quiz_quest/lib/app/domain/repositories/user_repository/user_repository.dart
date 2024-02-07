@@ -22,12 +22,24 @@ class UserRepository {
     });
   }
 
+  Stream<DocumentSnapshot<Map<String, dynamic>>> getPointsData() {
+    return userDataSource.getPointsData();
+  }
+
   Future<void> setEmptyAccount() async {
     return userDataSource.setEmptyAccount();
   }
 
   Future<void> setEmptyPoints() async {
     return userDataSource.setEmptyPoints();
+  }
+
+  Future<void> addTotalFilmsPoints(int totalFilmsPoints) async {
+    return userDataSource.addTotalFilmPoints(totalFilmsPoints);
+  }
+
+  Future<void> addEasyFilmsPoints(int easyFilmsPoints) async {
+    return userDataSource.addEasyFilmPoints(easyFilmsPoints);
   }
 
   Future<void> updateName(String name) async {

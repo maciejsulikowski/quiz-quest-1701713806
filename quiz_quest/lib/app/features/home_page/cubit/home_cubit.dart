@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:meta/meta.dart';
 import 'package:quiz_quest/app/core/enums.dart';
 import 'package:quiz_quest/app/domain/models/films_model/films_quiz_model.dart';
@@ -9,13 +12,16 @@ import 'package:quiz_quest/app/domain/models/music_model/music_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/nature_model/nature_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/sports_model/sports_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/tv_model/tv_quiz_model.dart';
+import 'package:quiz_quest/app/domain/repositories/user_repository/user_repository.dart';
 import 'package:quiz_quest/app/features/quiz_pages/nature_quiz_pages/cubit/nature_cubit.dart';
 
 part 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
-  HomeCubit() : super(HomeState());
+  HomeCubit(this.userRepository) : super(HomeState());
 
+  final UserRepository userRepository;
+  StreamSubscription? streamSubscription;
   List list = [];
 
   Future<void> updateList(String value) async {
@@ -30,5 +36,11 @@ class HomeCubit extends Cubit<HomeState> {
         searchedList: filteredCategory,
       ),
     );
+  }
+
+  Stream<DocumentSnapshot<Map<String, dynamic>>>? getPointsData() {
+    try {
+      userRepository.getPointsData();
+    } catch (error) {}
   }
 }

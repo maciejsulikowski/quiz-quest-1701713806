@@ -4,8 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quiz_quest/app/core/enums.dart';
 import 'package:quiz_quest/app/data/data_sources/quiz_data_source/quiz_categories_data_source.dart';
+import 'package:quiz_quest/app/data/data_sources/user_data_source/user_data_source.dart';
 import 'package:quiz_quest/app/domain/models/films_model/films_quiz_model.dart';
 import 'package:quiz_quest/app/domain/repositories/quiz_repository/quiz_repository.dart';
+import 'package:quiz_quest/app/domain/repositories/user_repository/user_repository.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/cubit/films_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/lost_lives_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/resume_easy_question_quiz_page.dart';
@@ -50,6 +52,7 @@ class _EasyQuestionQuizPageState extends State<EasyQuestionQuizPage> {
 
   @override
   void initState() {
+    
     currentAnswers = [];
     answerColors;
     answerGenerated = false;
@@ -104,9 +107,10 @@ class _EasyQuestionQuizPageState extends State<EasyQuestionQuizPage> {
 
     return Scaffold(
       body: BlocProvider(
-        create: (context) =>
-            FilmsCubit(QuizRepository(QuizCategoriesDataSource()))
-              ..getEasyFilmsCategory(),
+        create: (context) => FilmsCubit(
+            QuizRepository(QuizCategoriesDataSource()),
+            UserRepository(UserDataSource()))
+          ..getEasyFilmsCategory(),
         child: BlocListener<FilmsCubit, FilmsState>(
           listener: (context, state) async {
             if (state.status == Status.error) {
@@ -191,31 +195,18 @@ class _EasyQuestionQuizPageState extends State<EasyQuestionQuizPage> {
                             Expanded(
                               child: Padding(
                                 padding: const EdgeInsets.only(right: 20.0),
-                                child: GestureDetector(
-                                  onTap: () {
-                                    if (badAnswers == 3) {
-                                      Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                          builder: (context) => LostLivesPage(
-                                            goodAnswers: goodAnswers,
-                                          ),
-                                        ),
-                                      );
-                                    }
-                                  },
-                                  child: Text(
-                                    badAnswers == 0
-                                        ? threeLives
-                                        : badAnswers == 1
-                                            ? twoLives
-                                            : badAnswers == 2
-                                                ? oneLive
-                                                : '',
-                                    style: GoogleFonts.aBeeZee(
-                                      fontSize: 20,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                child: Text(
+                                  badAnswers == 0
+                                      ? threeLives
+                                      : badAnswers == 1
+                                          ? twoLives
+                                          : badAnswers == 2
+                                              ? oneLive
+                                              : '',
+                                  style: GoogleFonts.aBeeZee(
+                                    fontSize: 20,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
                                   ),
                                 ),
                               ),
@@ -236,6 +227,9 @@ class _EasyQuestionQuizPageState extends State<EasyQuestionQuizPage> {
                           isButtonDisabled = true;
                           isTimeUp = true;
                           if (badAnswers == 3) {
+                            context
+                                .read<FilmsCubit>()
+                                .addTotalFilmsPoints(goodAnswers);
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (context) =>
@@ -513,6 +507,7 @@ class _AnswerButtonState extends State<AnswerButton> {
       widget.colorFunction(Colors.red, widget.index);
       badAnswers += 1;
       if (badAnswers == 3) {
+        context.read<FilmsCubit>().addTotalFilmsPoints(goodAnswers);
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) => LostLivesPage(goodAnswers: goodAnswers),

@@ -25,6 +25,20 @@ class UserDataSource {
     });
   }
 
+  Stream<DocumentSnapshot<Map<String, dynamic>>> getPointsData() {
+    final userID = FirebaseAuth.instance.currentUser?.uid;
+    if (userID == null) {
+      throw Exception('User is not logged in');
+    }
+
+    return FirebaseFirestore.instance
+        .collection('users')
+        .doc(userID)
+        .collection('points')
+        .doc(userID)
+        .snapshots();
+  }
+
   Future<void> setEmptyAccount() async {
     final userID = FirebaseAuth.instance.currentUser?.uid;
     if (userID == null) {
@@ -91,6 +105,59 @@ class UserDataSource {
         'tv_easy_points': 0,
         'tv_medium_points': 0,
         'tv_hard_points': 0,
+      },
+    );
+  }
+
+  Future<void> addTotalFilmPoints(int secondTotalFilmPoints) async {
+    final userID = FirebaseAuth.instance.currentUser?.uid;
+    if (userID == null) {
+      throw Exception('User is not logged in');
+    }
+    final userData = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userID)
+        .collection('points')
+        .doc(userID)
+        .get();
+
+    final firstTotalFilmsPoints = userData['total_films_points'] ?? 0;
+    if (secondTotalFilmPoints > firstTotalFilmsPoints) {
+      final result = (secondTotalFilmPoints - firstTotalFilmsPoints) * 10;
+      final totalPoints = userData['total_points'] ?? 0;
+
+      final updateTotalFilmsPoints = firstTotalFilmsPoints + result;
+      final updateTotalPoints = updateTotalFilmsPoints + totalPoints;
+
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userID)
+          .collection('points')
+          .doc(userID)
+          .update({
+        'total_points': updateTotalPoints,
+        'total_films_points': updateTotalFilmsPoints,
+      });
+    }
+  }
+
+  Future<void> addEasyFilmPoints(int easyFilmPoints) async {
+    final userID = FirebaseAuth.instance.currentUser?.uid;
+    if (userID == null) {
+      throw Exception('User is not logged in');
+    }
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userID)
+        .collection('points')
+        .doc(userID)
+        .set(
+      {
+        'total_points': 0 + easyFilmPoints,
+        'total_films_points': 0,
+        'films_easy_points': 0 + easyFilmPoints,
+        'films_medium_points': 0,
+        'films_hard_points': 0,
       },
     );
   }

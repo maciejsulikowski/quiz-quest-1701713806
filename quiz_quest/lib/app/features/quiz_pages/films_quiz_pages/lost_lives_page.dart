@@ -11,8 +11,11 @@ import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/first_quiz_p
 
 class LostLivesPage extends StatefulWidget {
   const LostLivesPage({
+    required this.goodAnswers,
     super.key,
   });
+
+  final int goodAnswers;
 
   @override
   State<LostLivesPage> createState() => _LostLivesPageState();
@@ -21,16 +24,19 @@ class LostLivesPage extends StatefulWidget {
 class _LostLivesPageState extends State<LostLivesPage> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: ResumePage(),
+    return Scaffold(
+      body: ResumePage(goodAnswers: goodAnswers),
     );
   }
 }
 
 class ResumePage extends StatelessWidget {
   const ResumePage({
+    required this.goodAnswers,
     super.key,
   });
+
+  final int goodAnswers;
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +68,15 @@ class ResumePage extends StatelessWidget {
           const SizedBox(
             height: 30,
           ),
-          TextWidget(text: 'Your lives are over, try again!'),
+          TextWidget(text: 'You scored: ${goodAnswers * 10} points 💎'),
+          const SizedBox(
+            height: 30,
+          ),
+          const TextWidget(text: 'Try beat your record: points 💎'),
+          const SizedBox(
+            height: 30,
+          ),
+          const TextWidget(text: 'Your lives are over, try again!'),
           const SizedBox(
             height: 30,
           ),

@@ -25,7 +25,7 @@ class UserDataSource {
     });
   }
 
-  Stream<DocumentSnapshot<Map<String, dynamic>>> getPointsData() {
+  Stream<Map<String, dynamic>> getPointsData() {
     final userID = FirebaseAuth.instance.currentUser?.uid;
     if (userID == null) {
       throw Exception('User is not logged in');
@@ -36,7 +36,16 @@ class UserDataSource {
         .doc(userID)
         .collection('points')
         .doc(userID)
-        .snapshots();
+        .snapshots()
+        .map((docSnapshot) {
+      if (docSnapshot.exists) {
+        //docSnapshot.id;
+        final data = docSnapshot.data() ?? {};
+        return data;
+      } else {
+        return {};
+      }
+    });
   }
 
   Future<void> setEmptyAccount() async {

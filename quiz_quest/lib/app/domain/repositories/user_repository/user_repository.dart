@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:quiz_quest/app/data/data_sources/user_data_source/user_data_source.dart';
+import 'package:quiz_quest/app/domain/models/points_model/points_model.dart';
 import 'package:quiz_quest/app/domain/models/user_model/user_model.dart';
 
 class UserRepository {
@@ -22,8 +23,56 @@ class UserRepository {
     });
   }
 
-  Stream<DocumentSnapshot<Map<String, dynamic>>> getPointsData() {
-    return userDataSource.getPointsData();
+  Stream<PointsModel> getPointsModel() {
+    final data = userDataSource.getUserData();
+
+    return data.map((doc) {
+      return PointsModel(
+          totalPoints: doc['total_points'] ?? 0,
+          categoryPoints: {
+            'films': {
+              'easy': doc['films_easy_points'] ?? 0,
+              'medium': doc['films_medium_points'] ?? 0,
+              'hard': doc['films_hard_points'] ?? 0,
+            },
+            'games': {
+              'easy': doc['games_easy_points'] ?? 0,
+              'medium': doc['games_medium_points'] ?? 0,
+              'hard': doc['games_hard_points'] ?? 0,
+            },
+            'geography': {
+              'easy': doc['geography_easy_points'] ?? 0,
+              'medium': doc['geography_medium_points'] ?? 0,
+              'hard': doc['geography_hard_points'] ?? 0,
+            },
+
+            'history': {
+              'easy': doc['history_easy_points'] ?? 0,
+              'medium': doc['history_medium_points'] ?? 0,
+              'hard': doc['history_hard_points'] ?? 0,
+            },
+            'nature': {
+              'easy': doc['nature_easy_points'] ?? 0,
+              'medium': doc['nature_medium_points'] ?? 0,
+              'hard': doc['nature_hard_points'] ?? 0,
+            },
+            'tv': {
+              'easy': doc['tv_easy_points'] ?? 0,
+              'medium': doc['tv_medium_points'] ?? 0,
+              'hard': doc['tv_hard_points'] ?? 0,
+            },
+            'sport': {
+              'easy': doc['sport_easy_points'] ?? 0,
+              'medium': doc['sport_medium_points'] ?? 0,
+              'hard': doc['sport_hard_points'] ?? 0,
+            },
+            'music': {
+              'easy': doc['music_easy_points'] ?? 0,
+              'medium': doc['music_medium_points'] ?? 0,
+              'hard': doc['music_hard_points'] ?? 0,
+            },
+          });
+    });
   }
 
   Future<void> setEmptyAccount() async {

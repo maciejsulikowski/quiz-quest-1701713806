@@ -3,6 +3,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:quiz_quest/app/data/data_sources/user_data_source/user_data_source.dart';
+import 'package:quiz_quest/app/domain/repositories/user_repository/user_repository.dart';
+import 'package:quiz_quest/app/features/home_page/cubit/home_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/first_quiz_page_films.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/second_easy_quiz_page_films.dart';
 import 'package:quiz_quest/app/features/quiz_pages/games_quiz_pages/first_quiz_page_games.dart';
@@ -220,20 +223,28 @@ class _QuizzPageState extends State<QuizzPage> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<DocumentSnapshot>(
-        stream: FirebaseFirestore.instance
-            .collection('users')
-            .doc(widget.user!.uid)
-            .collection('points')
-            .doc(widget.user!.uid)
-            .snapshots(),
-        builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            return Text('Error: ${snapshot.error}');
-          }
+    return BlocProvider(
+      create: (context) =>
+          HomeCubit(UserRepository(UserDataSource()))..getPointsData(),
+      child: BlocBuilder<HomeCubit, HomeState>(
+        builder: (context, state) {
+          // return StreamBuilder<DocumentSnapshot>(
+          //     stream: FirebaseFirestore.instance
+          //         .collection('users')
+          //         .doc(widget.user!.uid)
+          //         .collection('points')
+          //         .doc(widget.user!.uid)
+          //         .snapshots(),
+          //     builder: (context, snapshot) {
+          //       if (snapshot.hasError) {
+          //         return Text('Error: ${snapshot.error}');
+          //       }
 
-          final points = snapshot.data;
-          final allPoints = points?['total_points'] ?? 0;
+          // final points = snapshot.data;
+          // final allPoints = points?['total_points'] ?? 0;
+
+          final allPoints = state.pointsModel?.totalPoints;
+        
 
           return Container(
             decoration: const BoxDecoration(
@@ -372,24 +383,21 @@ class _QuizzPageState extends State<QuizzPage> {
                     shrinkWrap: true,
                     physics: const ClampingScrollPhysics(),
                     itemBuilder: (context, index) {
-                      var totalCategoryPoints =
-                          points?[categoryList[index]['total_category']] ?? 0;
-                      var easyCategoryPoints =
-                          points?[categoryList[index]['easy_category']] ?? 0;
-                      var mediumCategoryPoints =
-                          points?[categoryList[index]['medium_category']] ?? 0;
-                      var hardCategoryPoints =
-                          points?[categoryList[index]['hard_category']] ?? 0;
-
                       return QuizzCategoryWidget(
-                        name: categoryList[index]['name'],
-                        image: categoryList[index]['image'],
-                        category: categoryList[index]['total_category'],
-                        easyCategory: easyCategoryPoints,
-                        mediumCategory: mediumCategoryPoints,
-                        hardCategory: hardCategoryPoints,
-                        categoryPoints: totalCategoryPoints,
-                        nextPage: categoryList[index]['page'],
+                        name: state.list[index]['name'],
+                        image: state.list[index]['image'],
+                        category: state.list[index]['total_category'],
+                        easyCategory: 'easy',
+                        mediumCategory: 'medium',
+                        hardCategory: 'hard',
+                        categoryPoints: state
+                                .pointsModel
+                                ?.categoryPoints[
+                                    state.list[index]['name'].toLowerCase()]
+                                ?.values
+                                .reduce((a, b) => a + b) ??
+                            0,
+                        nextPage: state.list[index]['page'],
                       );
                     },
                   ),
@@ -398,7 +406,10 @@ class _QuizzPageState extends State<QuizzPage> {
               ],
             ),
           );
-        });
+          // });
+        },
+      ),
+    );
   }
 }
 

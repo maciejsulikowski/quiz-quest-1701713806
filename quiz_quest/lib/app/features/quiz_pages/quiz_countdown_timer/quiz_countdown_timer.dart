@@ -1,21 +1,26 @@
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/easy_question_quiz_page.dart';
 
 class CountDownTimer extends StatefulWidget {
   CountDownTimer({
     super.key,
     required this.duration,
     required this.controller,
-    required this.updateIsTimeUp,
-    this.isButtonDisabled = false,
+    required this.isButtonClicked,
+    required this.ringColor,
+    required this.isDurationEnded,
+    required this.setDurationEnd,
   });
 
   final int duration;
   final CountDownController controller;
-  bool isTimeUp = false;
-  bool isButtonDisabled;
-  final Function(bool) updateIsTimeUp;
+
+  bool isButtonClicked;
+  Color ringColor;
+  bool isDurationEnded;
+  Function(bool) setDurationEnd;
 
   @override
   State<CountDownTimer> createState() => _CountDownTimerState();
@@ -41,7 +46,7 @@ class _CountDownTimerState extends State<CountDownTimer> {
       height: MediaQuery.of(context).size.height / 8,
 
       // Ring Color for Countdown Widget.
-      ringColor: Colors.white,
+      ringColor: widget.ringColor,
 
       // Ring Gradient for Countdown Widget.
       ringGradient: null,
@@ -95,23 +100,23 @@ class _CountDownTimerState extends State<CountDownTimer> {
 
       // This Callback will execute when the Countdown Starts.
       onStart: () {
-        // Here, do whatever you want
         debugPrint('Countdown Started');
       },
 
       // This Callback will execute when the Countdown Ends.
       onComplete: () {
         setState(() {
-          widget.isButtonDisabled = true;
-
-          widget.updateIsTimeUp(true);
+          widget.ringColor = Colors.red;
+          widget.setDurationEnd(true);
         });
+
         debugPrint('Countdown Ended');
       },
 
       // This Callback will execute when the Countdown Changes.
       onChange: (String timeStamp) {
         // Here, do whatever you want
+
         debugPrint('Countdown Changed $timeStamp');
       },
 
@@ -124,7 +129,7 @@ class _CountDownTimerState extends State<CountDownTimer> {
     */
       timeFormatterFunction: (defaultFormatterFunction, duration) {
         if (duration.inSeconds == 0) {
-          // only format for '0'
+          widget.isButtonClicked = true;
           return "0";
         } else {
           // other durations by it's default format

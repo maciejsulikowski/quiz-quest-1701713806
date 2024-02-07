@@ -16,11 +16,11 @@ import 'package:quiz_quest/app/features/user_page/user_account.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
-    this.user,
+    required this.user,
     super.key,
   });
 
-  final User? user;
+  final User user;
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -92,9 +92,6 @@ class _QuizzPageState extends State<QuizzPage> {
       'hard_category': 'films_hard_points',
       'page': const FirstQuizPageFilms(
         image: 'images/movie.png',
-        // easyCategory: 'films_easy_points',
-        // // mediumCategory: 'films_medium_points',
-        // // hardCategory: 'films_hard_points',
       )
     },
     {
@@ -228,14 +225,12 @@ class _QuizzPageState extends State<QuizzPage> {
     return StreamBuilder<DocumentSnapshot>(
         stream: FirebaseFirestore.instance
             .collection('users')
-            .doc(widget.user?.uid)
+            .doc(widget.user!.uid)
             .collection('points')
-            .doc(widget.user?.uid)
+            .doc(widget.user!.uid)
             .snapshots(),
+            
         builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const CircularProgressIndicator();
-          }
           if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           }
@@ -369,83 +364,40 @@ class _QuizzPageState extends State<QuizzPage> {
                 const SizedBox(height: 30),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  child: ListView.builder(
-                    itemCount: (categoryList.length / 2).ceil(),
+                  child: GridView.builder(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 20,
+                      mainAxisSpacing: 20,
+                    ),
+                    itemCount: categoryList.length,
                     shrinkWrap: true,
                     physics: const ClampingScrollPhysics(),
                     itemBuilder: (context, index) {
-                      final firstIndex = index * 2;
-                      final secondIndex = firstIndex + 1;
-                      var firstTotalCategoryPoints =
-                          points?[categoryList[firstIndex]['total_category']] ??
-                              0;
-                      var easyFirstCategoryPoints =
-                          points?[categoryList[firstIndex]['easy_category']] ??
-                              '0';
-                      var easySecondCategoryPoints =
-                          points?[categoryList[secondIndex]['easy_category']] ??
-                              '0';
-                      var mediumFirstCategoryPoints = points?[
-                              categoryList[firstIndex]['medium_category']] ??
-                          '0';
-                      var mediumSecondCategoryPoints = points?[
-                              categoryList[secondIndex]['medium_category']] ??
-                          '0';
-                      var hardFirstCategoryPoints =
-                          points?[categoryList[firstIndex]['hard_category']] ??
-                              '0';
-                      var hardSecondCategoryPoints =
-                          points?[categoryList[secondIndex]['hard_category']] ??
-                              '0';
-                      var secondTotalCategoryPoints = points?[
-                              categoryList[secondIndex]['total_category']] ??
-                          0;
-                      return Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          if (firstIndex < categoryList.length)
-                            Column(
-                              children: [
-                                QuizzCategoryWidget(
-                                  name: categoryList[firstIndex]['name'],
-                                  image: categoryList[firstIndex]['image'],
-                                  category: categoryList[firstIndex]
-                                      ['total_category'],
-                                  easyCategory: easyFirstCategoryPoints,
-                                  mediumCategory: mediumFirstCategoryPoints,
-                                  hardCategory: hardFirstCategoryPoints,
-                                  categoryPoints: firstTotalCategoryPoints,
-                                  nextPage: categoryList[firstIndex]['page'],
-                                ),
-                                const SizedBox(
-                                  height: 30,
-                                ),
-                              ],
-                            ),
-                          if (secondIndex < categoryList.length)
-                            Column(
-                              children: [
-                                QuizzCategoryWidget(
-                                  name: categoryList[secondIndex]['name'],
-                                  image: categoryList[secondIndex]['image'],
-                                  category: categoryList[secondIndex]
-                                      ['total_category'],
-                                  easyCategory: easySecondCategoryPoints,
-                                  mediumCategory: mediumSecondCategoryPoints,
-                                  hardCategory: hardSecondCategoryPoints,
-                                  categoryPoints: secondTotalCategoryPoints,
-                                  nextPage: categoryList[secondIndex]['page'],
-                                ),
-                                const SizedBox(
-                                  height: 30,
-                                ),
-                              ],
-                            ),
-                        ],
+                      var totalCategoryPoints =
+                          points?[categoryList[index]['total_category']] ?? 0;
+                      var easyCategoryPoints =
+                          points?[categoryList[index]['easy_category']] ?? 0;
+                      var mediumCategoryPoints =
+                          points?[categoryList[index]['medium_category']] ?? 0;
+                      var hardCategoryPoints =
+                          points?[categoryList[index]['hard_category']] ?? 0;
+
+                      return QuizzCategoryWidget(
+                        name: categoryList[index]['name'],
+                        image: categoryList[index]['image'],
+                        category: categoryList[index]['total_category'],
+                        easyCategory: easyCategoryPoints,
+                        mediumCategory: mediumCategoryPoints,
+                        hardCategory: hardCategoryPoints,
+                        categoryPoints: totalCategoryPoints,
+                        nextPage: categoryList[index]['page'],
                       );
                     },
                   ),
                 ),
+                const SizedBox(height: 30),
               ],
             ),
           );
@@ -541,7 +493,7 @@ class DetailsQuizzWidget extends StatelessWidget {
           ),
           Expanded(
             child: Text(
-              'Points: $categoryPoints',
+              'Points: $categoryPoints💎',
               style: GoogleFonts.aBeeZee(
                   fontSize: 18,
                   color: Colors.white,

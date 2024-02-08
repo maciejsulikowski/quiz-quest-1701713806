@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:quiz_quest/app/data/data_sources/user_data_source/user_data_source.dart';
 import 'package:quiz_quest/app/domain/repositories/user_repository/user_repository.dart';
 import 'package:quiz_quest/app/features/home_page/cubit/home_cubit.dart';
+import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/cubit/films_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/first_quiz_page_films.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/second_easy_quiz_page_films.dart';
 import 'package:quiz_quest/app/features/quiz_pages/games_quiz_pages/first_quiz_page_games.dart';
@@ -228,7 +229,6 @@ class _QuizzPageState extends State<QuizzPage> {
           HomeCubit(UserRepository(UserDataSource()))..getPointsData(),
       child: BlocBuilder<HomeCubit, HomeState>(
         builder: (context, state) {
-          
           final allPoints = state.pointsModel?.totalPoints ?? 0;
 
           return Container(
@@ -369,8 +369,8 @@ class _QuizzPageState extends State<QuizzPage> {
                     physics: const ClampingScrollPhysics(),
                     itemBuilder: (context, index) {
                       return QuizzCategoryWidget(
-                        name: state.list[index]['name'],
-                        image: state.list[index]['image'],
+                        name: categoryList[index]['name'],
+                        image: categoryList[index]['image'],
                         easyCategory: state.pointsModel
                                     ?.categoryPoints[categoryList[index]['id']]
                                 ?['easy'] ??

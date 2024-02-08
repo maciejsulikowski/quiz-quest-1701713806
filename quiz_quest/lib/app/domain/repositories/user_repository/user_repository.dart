@@ -24,52 +24,67 @@ class UserRepository {
   }
 
   Stream<PointsModel> getPointsModel() {
-    final data = userDataSource.getUserData();
+    final data = userDataSource.getPointsData();
 
     return data.map((doc) {
       return PointsModel(
           totalPoints: doc['total_points'] ?? 0,
           categoryPoints: {
-            'films': {
+            1: {
+              'id':1,
+              'total': doc['total_films_points'] ?? 0,
               'easy': doc['films_easy_points'] ?? 0,
               'medium': doc['films_medium_points'] ?? 0,
               'hard': doc['films_hard_points'] ?? 0,
             },
-            'games': {
+            2: {
+              'id': 2,
+              'total': doc['total_games_points'] ?? 0,
               'easy': doc['games_easy_points'] ?? 0,
               'medium': doc['games_medium_points'] ?? 0,
               'hard': doc['games_hard_points'] ?? 0,
             },
-            'geography': {
+            3: {
+              'id': 3,
+              'total': doc['total_geography_points'] ?? 0,
               'easy': doc['geography_easy_points'] ?? 0,
               'medium': doc['geography_medium_points'] ?? 0,
               'hard': doc['geography_hard_points'] ?? 0,
             },
-
-            'history': {
+            4: {
+              'id': 4,
+              'total': doc['total_history_points'] ?? 0,
               'easy': doc['history_easy_points'] ?? 0,
               'medium': doc['history_medium_points'] ?? 0,
               'hard': doc['history_hard_points'] ?? 0,
             },
-            'nature': {
+            5: {
+              'id': 5,
+              'total': doc['total_music_points'] ?? 0,
+              'easy': doc['music_easy_points'] ?? 0,
+              'medium': doc['music_medium_points'] ?? 0,
+              'hard': doc['music_hard_points'] ?? 0,
+            },
+            6: {
+              'id': 6,
+              'total': doc['total_nature_points'] ?? 0,
               'easy': doc['nature_easy_points'] ?? 0,
               'medium': doc['nature_medium_points'] ?? 0,
               'hard': doc['nature_hard_points'] ?? 0,
             },
-            'tv': {
-              'easy': doc['tv_easy_points'] ?? 0,
-              'medium': doc['tv_medium_points'] ?? 0,
-              'hard': doc['tv_hard_points'] ?? 0,
-            },
-            'sport': {
+            7: {
+              'id': 7,
+              'total': doc['total_sport_points'] ?? 0,
               'easy': doc['sport_easy_points'] ?? 0,
               'medium': doc['sport_medium_points'] ?? 0,
               'hard': doc['sport_hard_points'] ?? 0,
             },
-            'music': {
-              'easy': doc['music_easy_points'] ?? 0,
-              'medium': doc['music_medium_points'] ?? 0,
-              'hard': doc['music_hard_points'] ?? 0,
+            8: {
+              'id': 8,
+              'total': doc['total_tv_points'] ?? 0,
+              'easy': doc['tv_easy_points'] ?? 0,
+              'medium': doc['tv_medium_points'] ?? 0,
+              'hard': doc['tv_hard_points'] ?? 0,
             },
           });
     });
@@ -111,3 +126,27 @@ class UserRepository {
     return userDataSource.updateCategory(category: category);
   }
 }
+
+// class PointsModel {
+//   PointsModel({
+//     required this.totalPoints,
+//     required this.filmsCategoryPoints,
+//     required this.gamesCategoryPoints,
+//     required this.geographyCategoryPoints,
+//     required this.historyCategoryPoints,
+//     required this.musicCategoryPoints,
+//     required this.natureCategoryPoints,
+//     required this.sportCategoryPoints,
+//     required this.tvCategoryPoints,
+//   });
+
+//   final int totalPoints;
+//   final Map<int, Map<String, int>> filmsCategoryPoints;
+//   final Map<int, Map<String, int>> gamesCategoryPoints;
+//   final Map<int, Map<String, int>> geographyCategoryPoints;
+//   final Map<int, Map<String, int>> historyCategoryPoints;
+//   final Map<int, Map<String, int>> musicCategoryPoints;
+//   final Map<int, Map<String, int>> natureCategoryPoints;
+//   final Map<int, Map<String, int>> sportCategoryPoints;
+//   final Map<int, Map<String, int>> tvCategoryPoints;
+// }

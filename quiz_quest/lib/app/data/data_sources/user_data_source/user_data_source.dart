@@ -16,7 +16,6 @@ class UserDataSource {
         .snapshots()
         .map((docSnapshot) {
       if (docSnapshot.exists) {
-        //docSnapshot.id;
         final data = docSnapshot.data() ?? {};
         return data;
       } else {

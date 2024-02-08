@@ -243,8 +243,7 @@ class _QuizzPageState extends State<QuizzPage> {
           // final points = snapshot.data;
           // final allPoints = points?['total_points'] ?? 0;
 
-          final allPoints = state.pointsModel?.totalPoints;
-        
+          final allPoints = state.pointsModel?.totalPoints ?? 0;
 
           return Container(
             decoration: const BoxDecoration(
@@ -386,16 +385,17 @@ class _QuizzPageState extends State<QuizzPage> {
                       return QuizzCategoryWidget(
                         name: state.list[index]['name'],
                         image: state.list[index]['image'],
-                        category: state.list[index]['total_category'],
-                        easyCategory: 'easy',
-                        mediumCategory: 'medium',
-                        hardCategory: 'hard',
-                        categoryPoints: state
-                                .pointsModel
-                                ?.categoryPoints[
-                                    state.list[index]['name'].toLowerCase()]
-                                ?.values
-                                .reduce((a, b) => a + b) ??
+                        easyCategory: state.pointsModel?.categoryPoints[index]
+                                ?['easy'] ??
+                            0,
+                        mediumCategory: state.pointsModel?.categoryPoints[index]
+                                ?['medium'] ??
+                            0,
+                        hardCategory: state.pointsModel?.categoryPoints[index]
+                                ?['hard'] ??
+                            0,
+                        categoryPoints: state.pointsModel
+                                ?.categoryPoints[index + 1]?['total'] ??
                             0,
                         nextPage: state.list[index]['page'],
                       );
@@ -420,7 +420,6 @@ class QuizzCategoryWidget extends StatelessWidget {
     required this.hardCategory,
     required this.name,
     required this.image,
-    required this.category,
     required this.categoryPoints,
     required this.nextPage,
     super.key,
@@ -428,7 +427,7 @@ class QuizzCategoryWidget extends StatelessWidget {
 
   final String name;
   final String image;
-  final String category;
+
   final dynamic easyCategory;
   final dynamic mediumCategory;
   final dynamic hardCategory;

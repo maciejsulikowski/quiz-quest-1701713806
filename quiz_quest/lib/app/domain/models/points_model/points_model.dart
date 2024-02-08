@@ -75,6 +75,5 @@ class PointsModel {
   });
 
   final int totalPoints;
-  final Map<String, Map<String, int>>
-      categoryPoints;
+  final Map<int, Map<String, int>> categoryPoints;
 }

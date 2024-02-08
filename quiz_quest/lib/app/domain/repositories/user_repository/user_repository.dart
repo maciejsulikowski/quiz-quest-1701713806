@@ -31,7 +31,7 @@ class UserRepository {
           totalPoints: doc['total_points'] ?? 0,
           categoryPoints: {
             1: {
-              'id':1,
+              'id': 1,
               'total': doc['total_films_points'] ?? 0,
               'easy': doc['films_easy_points'] ?? 0,
               'medium': doc['films_medium_points'] ?? 0,
@@ -99,7 +99,8 @@ class UserRepository {
   }
 
   Future<void> addTotalFilmsPoints(int totalFilmsPoints) async {
-    return userDataSource.addTotalFilmPoints(totalFilmsPoints);
+   
+    return userDataSource.updateTotalFilmsPoints(totalFilmsPoints);
   }
 
   Future<void> addEasyFilmsPoints(int easyFilmsPoints) async {

@@ -228,21 +228,7 @@ class _QuizzPageState extends State<QuizzPage> {
           HomeCubit(UserRepository(UserDataSource()))..getPointsData(),
       child: BlocBuilder<HomeCubit, HomeState>(
         builder: (context, state) {
-          // return StreamBuilder<DocumentSnapshot>(
-          //     stream: FirebaseFirestore.instance
-          //         .collection('users')
-          //         .doc(widget.user!.uid)
-          //         .collection('points')
-          //         .doc(widget.user!.uid)
-          //         .snapshots(),
-          //     builder: (context, snapshot) {
-          //       if (snapshot.hasError) {
-          //         return Text('Error: ${snapshot.error}');
-          //       }
-
-          // final points = snapshot.data;
-          // final allPoints = points?['total_points'] ?? 0;
-
+          
           final allPoints = state.pointsModel?.totalPoints ?? 0;
 
           return Container(
@@ -385,13 +371,16 @@ class _QuizzPageState extends State<QuizzPage> {
                       return QuizzCategoryWidget(
                         name: state.list[index]['name'],
                         image: state.list[index]['image'],
-                        easyCategory: state.pointsModel?.categoryPoints[index]
+                        easyCategory: state.pointsModel
+                                    ?.categoryPoints[categoryList[index]['id']]
                                 ?['easy'] ??
                             0,
-                        mediumCategory: state.pointsModel?.categoryPoints[index]
+                        mediumCategory: state.pointsModel
+                                    ?.categoryPoints[categoryList[index]['id']]
                                 ?['medium'] ??
                             0,
-                        hardCategory: state.pointsModel?.categoryPoints[index]
+                        hardCategory: state.pointsModel
+                                    ?.categoryPoints[categoryList[index]['id']]
                                 ?['hard'] ??
                             0,
                         categoryPoints: state.pointsModel

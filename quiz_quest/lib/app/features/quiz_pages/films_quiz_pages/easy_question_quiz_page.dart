@@ -30,8 +30,8 @@ Color textColor = Colors.white;
 late bool isDurationEnded;
 late Color ringColor;
 bool isTimeUp = false;
-int goodAnswers = 0;
-int badAnswers = 0;
+late int goodAnswers;
+late int badAnswers;
 bool isCorrectAnswer = false;
 String threeLives = '❤️❤️❤️';
 String twoLives = ' ❤️❤️';
@@ -52,7 +52,8 @@ class _EasyQuestionQuizPageState extends State<EasyQuestionQuizPage> {
 
   @override
   void initState() {
-    
+    goodAnswers = 0;
+    badAnswers = 0;
     currentAnswers = [];
     answerColors;
     answerGenerated = false;

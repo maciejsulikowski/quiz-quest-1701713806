@@ -117,11 +117,12 @@ class UserDataSource {
     );
   }
 
-  Future<void> addTotalFilmPoints(int secondTotalFilmPoints) async {
+  Future<void> updateTotalFilmsPoints(int newTotalFilmsPoints) async {
     final userID = FirebaseAuth.instance.currentUser?.uid;
     if (userID == null) {
       throw Exception('User is not logged in');
     }
+
     final userData = await FirebaseFirestore.instance
         .collection('users')
         .doc(userID)
@@ -129,13 +130,16 @@ class UserDataSource {
         .doc(userID)
         .get();
 
-    final firstTotalFilmsPoints = userData['total_films_points'] ?? 0;
-    if (secondTotalFilmPoints > firstTotalFilmsPoints) {
-      final result = (secondTotalFilmPoints - firstTotalFilmsPoints) * 10;
-      final totalPoints = userData['total_points'] ?? 0;
+    final filmsTotalPoints = userData['total_films_points'] ?? 0;
+    final totalPoints = userData['total_points'] ?? 0;
 
-      final updateTotalFilmsPoints = firstTotalFilmsPoints + result;
-      final updateTotalPoints = updateTotalFilmsPoints + totalPoints;
+    final newPoints = newTotalFilmsPoints * 10;
+
+    if (newPoints > filmsTotalPoints) {
+      final result = (newPoints - filmsTotalPoints);
+      final updateTotalFilmsPoints = filmsTotalPoints + result;
+      final updateTotalPoints =
+          totalPoints - filmsTotalPoints + updateTotalFilmsPoints;
 
       await FirebaseFirestore.instance
           .collection('users')
@@ -147,6 +151,19 @@ class UserDataSource {
         'total_films_points': updateTotalFilmsPoints,
       });
     }
+    // else {
+    //   final deductedPoints = (filmsTotalPoints - newPoints) ~/ 10;
+    //   final updatedTotalPoints = totalPoints - deductedPoints;
+
+    //   await FirebaseFirestore.instance
+    //       .collection('users')
+    //       .doc(userID)
+    //       .collection('points')
+    //       .doc(userID)
+    //       .update({
+    //     'total_points': updatedTotalPoints,
+    //   });
+    // }
   }
 
   Future<void> addEasyFilmPoints(int easyFilmPoints) async {

@@ -395,7 +395,8 @@ class _QuizzPageState extends State<QuizzPage> {
                                 ?['hard'] ??
                             0,
                         categoryPoints: state.pointsModel
-                                ?.categoryPoints[index + 1]?['total'] ??
+                                    ?.categoryPoints[categoryList[index]['id']]
+                                ?['total'] ??
                             0,
                         nextPage: state.list[index]['page'],
                       );

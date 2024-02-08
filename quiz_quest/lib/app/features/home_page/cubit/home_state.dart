@@ -103,21 +103,6 @@ class HomeState {
       },
       {
         'id': 7,
-        'name': 'TV',
-        'image': 'images/tv.png',
-        'total_category': 'total_tv_points',
-        'easy_category': 'tv_easy_points',
-        'medium_category': 'tv_medium_points',
-        'hard_category': 'tv_hard_points',
-        'page': FirstQuizPageTV(
-          image: 'images/tv.png',
-          easyCategory: 'tv_easy_points',
-          mediumCategory: 'tv_medium_points',
-          hardCategory: 'tv_hard_points',
-        )
-      },
-      {
-        'id': 8,
         'name': 'Sport',
         'image': 'images/ball.png',
         'total_category': 'total_sports_points',
@@ -129,6 +114,21 @@ class HomeState {
           easyCategory: 'sport_easy_points',
           mediumCategory: 'sport_medium_points',
           hardCategory: 'sport_hard_points',
+        )
+      },
+      {
+        'id': 8,
+        'name': 'TV',
+        'image': 'images/tv.png',
+        'total_category': 'total_tv_points',
+        'easy_category': 'tv_easy_points',
+        'medium_category': 'tv_medium_points',
+        'hard_category': 'tv_hard_points',
+        'page': FirstQuizPageTV(
+          image: 'images/tv.png',
+          easyCategory: 'tv_easy_points',
+          mediumCategory: 'tv_medium_points',
+          hardCategory: 'tv_hard_points',
         )
       },
     ],

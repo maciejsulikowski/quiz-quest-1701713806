@@ -9,6 +9,7 @@ import 'package:quiz_quest/app/domain/models/films_model/films_quiz_model.dart';
 import 'package:quiz_quest/app/domain/repositories/quiz_repository/quiz_repository.dart';
 import 'package:quiz_quest/app/domain/repositories/user_repository/user_repository.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/cubit/films_cubit.dart';
+import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/easy_films_quiz_page/easy_lost_life_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/lost_lives_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/resume_easy_question_quiz_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/quiz_countdown_timer/quiz_countdown_timer.dart';
@@ -238,7 +239,7 @@ class _EasyQuestionQuizPageState extends State<EasyQuestionQuizPage> {
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (context) =>
-                                    LostLivesPage(goodAnswers: goodAnswers),
+                                    EasyLostLifePage(goodAnswers: goodAnswers),
                               ),
                             );
                           }
@@ -516,7 +517,7 @@ class _AnswerButtonState extends State<AnswerButton> {
         context.read<FilmsCubit>().updateEasyFilmsPoints(goodAnswers);
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => LostLivesPage(goodAnswers: goodAnswers),
+            builder: (context) => EasyLostLifePage(goodAnswers: goodAnswers),
           ),
         );
       }

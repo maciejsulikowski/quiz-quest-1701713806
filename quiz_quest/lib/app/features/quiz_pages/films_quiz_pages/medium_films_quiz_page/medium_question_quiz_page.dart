@@ -536,7 +536,10 @@ class _AnswerButtonState extends State<AnswerButton> {
         .replaceAll('&aacute;', '')
         .replaceAll('&ntilde;', '')
         .replaceAll('&amp;', '')
-        .replaceAll('&rsquo;', '');
+        .replaceAll('&rsquo;', '')
+        .replaceAll('&rdquo;', '')
+        .replaceAll('&ldquo;', '')
+        .replaceAll('&hellip;', '');
 
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20),

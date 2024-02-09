@@ -100,4 +100,19 @@ class FilmsCubit extends Cubit<FilmsState> {
       ));
     }
   }
+
+  Future<void> updateMediumFilmsPoints(int easyFilmsPoints) async {
+    try {
+      await userRepository.updateMediumFilmsPoints(easyFilmsPoints);
+
+      emit(FilmsState(
+        status: Status.success,
+      ));
+    } catch (error) {
+      emit(FilmsState(
+        status: Status.error,
+        error: error.toString(),
+      ));
+    }
+  }
 }

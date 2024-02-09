@@ -183,11 +183,6 @@ class UserDataSource {
     final newEasyPoints = newEasyFilmPoints * 10;
 
     if (newEasyPoints > easyFilmsPoints) {
-      // final result = (newPoints - filmsTotalPoints);
-      // final updateTotalFilmsPoints = filmsTotalPoints + result;
-      // final updateTotalPoints =
-      //     totalPoints - filmsTotalPoints + updateTotalFilmsPoints;
-
       await FirebaseFirestore.instance
           .collection('users')
           .doc(userID)
@@ -195,6 +190,34 @@ class UserDataSource {
           .doc(userID)
           .update({
         'films_easy_points': newEasyPoints,
+      });
+    }
+  }
+
+  Future<void> updateMediumFilmPoints(int newMediumFilmPoints) async {
+    final userID = FirebaseAuth.instance.currentUser?.uid;
+    if (userID == null) {
+      throw Exception('User is not logged in');
+    }
+    final userData = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userID)
+        .collection('points')
+        .doc(userID)
+        .get();
+
+    final mediumFilmsPoints = userData['films_medium_points'] ?? 0;
+
+    final newMediumPoints = newMediumFilmPoints * 10;
+
+    if (newMediumPoints > mediumFilmsPoints) {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userID)
+          .collection('points')
+          .doc(userID)
+          .update({
+        'films_medium_points': newMediumPoints,
       });
     }
   }

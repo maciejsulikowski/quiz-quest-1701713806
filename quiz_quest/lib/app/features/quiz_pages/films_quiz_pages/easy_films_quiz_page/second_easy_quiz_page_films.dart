@@ -4,32 +4,32 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:quiz_quest/app/core/enums.dart';
 import 'package:quiz_quest/app/data/data_sources/quiz_data_source/quiz_categories_data_source.dart';
 import 'package:quiz_quest/app/domain/repositories/quiz_repository/quiz_repository.dart';
-import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/hard_question_quiz_page.dart';
+import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/easy_films_quiz_page/easy_question_quiz_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/question_quiz_page_films.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/first_quiz_page_films.dart';
 
-class SecondHardQuizPageFilms extends StatefulWidget {
-  const SecondHardQuizPageFilms({
+class SecondEasyQuizPageFilms extends StatefulWidget {
+  const SecondEasyQuizPageFilms({
     required this.image,
-    required this.hardCategory,
+    required this.easyCategory,
     super.key,
   });
 
   final String image;
-  final dynamic hardCategory;
+  final dynamic easyCategory;
 
   @override
-  State<SecondHardQuizPageFilms> createState() =>
-      _SecondHardQuizPageFilmsState();
+  State<SecondEasyQuizPageFilms> createState() =>
+      _SecondEasyQuizPageFilmsState();
 }
 
-class _SecondHardQuizPageFilmsState extends State<SecondHardQuizPageFilms> {
+class _SecondEasyQuizPageFilmsState extends State<SecondEasyQuizPageFilms> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: QuizzPage(
         image: widget.image,
-        hardCategory: widget.hardCategory,
+        easyCategory: widget.easyCategory,
       ),
     );
   }
@@ -38,12 +38,12 @@ class _SecondHardQuizPageFilmsState extends State<SecondHardQuizPageFilms> {
 class QuizzPage extends StatelessWidget {
   const QuizzPage({
     required this.image,
-    required this.hardCategory,
+    required this.easyCategory,
     super.key,
   });
 
   final String image;
-  final dynamic hardCategory;
+  final dynamic easyCategory;
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +74,7 @@ class QuizzPage extends StatelessWidget {
           ),
           Center(
             child: Text(
-              'Hard category points: $hardCategory💎',
+              'Easy category points: $easyCategory💎',
               style: GoogleFonts.aBeeZee(
                 fontSize: 18,
                 color: Colors.white,
@@ -138,7 +138,7 @@ class QuizzPage extends StatelessWidget {
             child: ElevatedButton(
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => const HardQuestionQuizPage(),
+                  builder: (context) => const EasyQuestionQuizPage(),
                 ));
               },
               style: ElevatedButton.styleFrom(

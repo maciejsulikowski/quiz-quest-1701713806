@@ -99,12 +99,15 @@ class UserRepository {
   }
 
   Future<void> addTotalFilmsPoints(int totalFilmsPoints) async {
-   
     return userDataSource.updateTotalFilmsPoints(totalFilmsPoints);
   }
 
   Future<void> updateEasyFilmsPoints(int easyFilmsPoints) async {
     return userDataSource.updateEasyFilmPoints(easyFilmsPoints);
+  }
+
+  Future<void> updateMediumFilmsPoints(int easyFilmsPoints) async {
+    return userDataSource.updateMediumFilmPoints(easyFilmsPoints);
   }
 
   Future<void> updateName(String name) async {

@@ -8,10 +8,9 @@ import 'package:quiz_quest/app/data/data_sources/user_data_source/user_data_sour
 import 'package:quiz_quest/app/domain/models/films_model/films_quiz_model.dart';
 import 'package:quiz_quest/app/domain/repositories/quiz_repository/quiz_repository.dart';
 import 'package:quiz_quest/app/domain/repositories/user_repository/user_repository.dart';
-import 'package:quiz_quest/app/features/home_page/cubit/home_cubit.dart';
-import 'package:quiz_quest/app/features/home_page/home_page.dart';
-
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/cubit/films_cubit.dart';
+import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/lost_lives_page.dart';
+import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/resume_easy_question_quiz_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/quiz_countdown_timer/quiz_countdown_timer.dart';
 
 class MediumQuestionQuizPage extends StatefulWidget {
@@ -24,13 +23,24 @@ class MediumQuestionQuizPage extends StatefulWidget {
 }
 
 final controller = CountDownController();
-bool isButtonClicked = false;
+late bool isButtonClicked;
 bool isButtonDisabled = false;
+bool isButtonNameChanged = false;
 Color textColor = Colors.white;
+late bool isDurationEnded;
+late Color ringColor;
+bool isTimeUp = false;
+late int goodAnswers;
+late int badAnswers;
+bool isCorrectAnswer = false;
+String threeLives = '❤️❤️❤️';
+String twoLives = ' ❤️❤️';
+String oneLive = ' ❤️';
 
 class _MediumQuestionQuizPageState extends State<MediumQuestionQuizPage> {
   int currentIndex = 0;
   late List currentAnswers;
+
   List<Color> answerColors = [
     Colors.white,
     Colors.white,
@@ -39,14 +49,19 @@ class _MediumQuestionQuizPageState extends State<MediumQuestionQuizPage> {
   ];
 
   bool answerGenerated = false;
-  bool isTimeUp = false;
 
   @override
   void initState() {
+    goodAnswers = 0;
+    badAnswers = 0;
     currentAnswers = [];
     answerColors;
     answerGenerated = false;
-    isTimeUp = false;
+    isTimeUp;
+    isButtonClicked = false;
+    isButtonNameChanged;
+    isDurationEnded = false;
+    ringColor = Colors.white;
     resetQuizState();
     super.initState();
   }
@@ -54,14 +69,11 @@ class _MediumQuestionQuizPageState extends State<MediumQuestionQuizPage> {
   void generateAnswers(FilmsQuizModel? filmsQuizModel) {
     if (filmsQuizModel != null && !answerGenerated) {
       final correctAnswer = filmsQuizModel.results[currentIndex].correctAnswer;
-      final modifiedCorrectAnswer = correctAnswer.replaceAll('&quot;', '');
-      List<String> modifiedIncorrectAnswers = [];
+
       final incorrectAnswers =
           filmsQuizModel.results[currentIndex].incorrectAnswers;
-      for (String answer in incorrectAnswers) {
-        modifiedIncorrectAnswers.add(answer.replaceAll('&quot;', ''));
-      }
-      currentAnswers = [...modifiedIncorrectAnswers, modifiedCorrectAnswer];
+
+      currentAnswers = incorrectAnswers + [correctAnswer];
       currentAnswers.shuffle();
       if (answerColors.isEmpty) {
         answerColors = List<Color>.filled(currentAnswers.length, Colors.white);
@@ -71,11 +83,17 @@ class _MediumQuestionQuizPageState extends State<MediumQuestionQuizPage> {
   }
 
   void resetQuizState() {
+    isButtonNameChanged = false;
+    badAnswers = 0;
+    goodAnswers = 0;
     currentIndex = 0;
     isButtonClicked = false;
     isButtonDisabled = false;
     textColor = Colors.white;
     answerGenerated = false;
+    isTimeUp = false;
+    isDurationEnded = false;
+
     answerColors = [
       Colors.white,
       Colors.white,
@@ -84,22 +102,16 @@ class _MediumQuestionQuizPageState extends State<MediumQuestionQuizPage> {
     ];
   }
 
-  void setTimeUp() {
-    setState(() {
-      isTimeUp = true;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    const int duration = 21;
+    const int duration = 3;
 
     return Scaffold(
       body: BlocProvider(
-        create: (context) =>
-            FilmsCubit(QuizRepository(QuizCategoriesDataSource()),
+        create: (context) => FilmsCubit(
+            QuizRepository(QuizCategoriesDataSource()),
             UserRepository(UserDataSource()))
-              ..getMediumFilmsCategory(),
+          ..getMediumFilmsCategory(),
         child: BlocListener<FilmsCubit, FilmsState>(
           listener: (context, state) async {
             if (state.status == Status.error) {
@@ -112,6 +124,7 @@ class _MediumQuestionQuizPageState extends State<MediumQuestionQuizPage> {
                   seconds: 5,
                 ),
               );
+              // ignore: use_build_context_synchronously
               context.read<FilmsCubit>().getMediumFilmsCategory();
             }
           },
@@ -143,32 +156,100 @@ class _MediumQuestionQuizPageState extends State<MediumQuestionQuizPage> {
                     const SizedBox(
                       height: 15,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
+                    Stack(
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.pop(
-                                  context,
-                                 );
-                            },
-                            child: Container(
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                border:
-                                    Border.all(color: Colors.white, width: 2.0),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 20.0),
+                                child: InkWell(
+                                  onTap: () {
+                                    Navigator.pop(
+                                      context,
+                                    );
+                                  },
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                          color: Colors.white, width: 2.0),
+                                    ),
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: const Icon(Icons.close,
+                                        color: Colors.white),
+                                  ),
+                                ),
                               ),
-                              padding: const EdgeInsets.all(10.0),
-                              child:
-                                  const Icon(Icons.close, color: Colors.white),
                             ),
-                          ),
+                            Expanded(
+                              child: Text(
+                                'Score: ${goodAnswers * 10}',
+                                style: GoogleFonts.aBeeZee(
+                                    fontSize: 20,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.only(right: 20.0),
+                                child: Text(
+                                  badAnswers == 0
+                                      ? threeLives
+                                      : badAnswers == 1
+                                          ? twoLives
+                                          : badAnswers == 2
+                                              ? oneLive
+                                              : '',
+                                  style: GoogleFonts.aBeeZee(
+                                    fontSize: 20,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
-                    // CountDownTimer(duration: duration, controller: controller, isTimeUp: isTimeUp,),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    CountDownTimer(
+                      setDurationEnd: (value) {
+                        setState(() {
+                          isDurationEnded = value;
+                          ringColor = Colors.red;
+                          badAnswers += 1;
+                          isButtonDisabled = true;
+                          isTimeUp = true;
+                          if (badAnswers == 3) {
+                            context
+                                .read<FilmsCubit>()
+                                .addTotalFilmsPoints(goodAnswers);
+                            context
+                                .read<FilmsCubit>()
+                                .updateMediumFilmsPoints(goodAnswers);
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    LostLivesPage(goodAnswers: goodAnswers),
+                              ),
+                            );
+                          }
+                        });
+                      },
+                      isDurationEnded: isDurationEnded,
+                      isButtonClicked: isButtonClicked,
+                      ringColor: ringColor,
+                      duration: duration,
+                      controller: controller,
+                    ),
                     const SizedBox(
                       height: 15,
                     ),
@@ -179,6 +260,10 @@ class _MediumQuestionQuizPageState extends State<MediumQuestionQuizPage> {
                           itemCount: 1,
                           shrinkWrap: true,
                           itemBuilder: (context, _) {
+                            final questionNumber = currentIndex + 1;
+                            final questionNumbers =
+                                filmsQuizModel.results.length;
+
                             return Column(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
@@ -187,12 +272,50 @@ class _MediumQuestionQuizPageState extends State<MediumQuestionQuizPage> {
                                       .results[currentIndex].question,
                                 ),
                                 const SizedBox(
-                                  height: 30,
+                                  height: 15,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Text(
+                                      'Bad: $badAnswers',
+                                      style: GoogleFonts.aBeeZee(
+                                          fontSize: 20,
+                                          color: Colors.red,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    Text(
+                                      'Question: $questionNumber/$questionNumbers',
+                                      style: GoogleFonts.aBeeZee(
+                                          fontSize: 20,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    Text(
+                                      'Good: $goodAnswers',
+                                      style: GoogleFonts.aBeeZee(
+                                          fontSize: 20,
+                                          color: Colors.green,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 15,
                                 ),
                                 for (int index = 0;
                                     index < currentAnswers.length;
                                     index++) ...[
                                   AnswerButton(
+                                    isTimeUp: isTimeUp,
+                                    duration: duration,
                                     isButtonDisabled: (value) {
                                       setState(() {
                                         isButtonDisabled = value;
@@ -201,6 +324,13 @@ class _MediumQuestionQuizPageState extends State<MediumQuestionQuizPage> {
                                     isButtonClicked: (value) {
                                       setState(() {
                                         isButtonClicked = value;
+                                        if (value = currentAnswers[index] ==
+                                            filmsQuizModel.results[currentIndex]
+                                                .correctAnswer) {
+                                          ringColor = Colors.green;
+                                        } else {
+                                          ringColor = Colors.red;
+                                        }
                                       });
                                     },
                                     textcolor: answerColors[index],
@@ -237,28 +367,57 @@ class _MediumQuestionQuizPageState extends State<MediumQuestionQuizPage> {
                                       Container(
                                           color: Colors.black,
                                           child: ElevatedButton(
-                                            onPressed: isButtonClicked == false
-                                                ? null
-                                                : () {
+                                            onPressed: (isButtonClicked ||
+                                                    isDurationEnded)
+                                                ? () {
                                                     setState(() {
-                                                      currentIndex += 1;
-                                                      isButtonClicked = false;
-                                                      isButtonDisabled = false;
-                                                      answerGenerated = false;
-                                                      answerColors =
-                                                          List.filled(
-                                                              currentAnswers
-                                                                  .length,
-                                                              Colors.white);
+                                                      if (currentIndex ==
+                                                          filmsQuizModel.results
+                                                                  .length -
+                                                              1) {
+                                                        Navigator.of(context)
+                                                            .push(
+                                                          MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                ResumeEasyQuizPageFilms(
+                                                              badAnswers:
+                                                                  badAnswers,
+                                                              goodAnswers:
+                                                                  goodAnswers,
+                                                            ),
+                                                          ),
+                                                        );
+                                                      } else if (isButtonClicked ||
+                                                          isDurationEnded) {
+                                                        currentIndex += 1;
+                                                        isButtonClicked = false;
+                                                        isButtonDisabled =
+                                                            false;
+                                                        answerGenerated = false;
+                                                        ringColor =
+                                                            Colors.white;
+                                                        isTimeUp = false;
+                                                        answerColors =
+                                                            List.filled(
+                                                          currentAnswers.length,
+                                                          Colors.white,
+                                                        );
+                                                      }
+                                                      isDurationEnded = false;
                                                     });
                                                     controller.start();
-                                                  },
+                                                  }
+                                                : null,
                                             style: ElevatedButton.styleFrom(
                                               foregroundColor: Colors.white,
                                               backgroundColor: Colors.black,
                                             ),
-                                            child:
-                                                const Text('Next Question ➔'),
+                                            child: Text(currentIndex ==
+                                                    filmsQuizModel
+                                                            .results.length -
+                                                        1
+                                                ? 'Show your results'
+                                                : 'Next Question ➔'),
                                           )),
                                     ],
                                   ),
@@ -318,11 +477,16 @@ class AnswerButton extends StatefulWidget {
     required this.isButtonDisabled,
     required this.textcolor,
     required this.index,
+    required this.duration,
+    required this.isTimeUp,
   });
 
   final String answer;
   final CountDownController controller;
   final bool isCorrectAnswer;
+
+  int duration;
+  bool isTimeUp;
   Function(Color, int) colorFunction;
   final Function(bool) isButtonClicked;
   final Function(bool) isButtonDisabled;
@@ -343,18 +507,26 @@ class _AnswerButtonState extends State<AnswerButton> {
 
     if (widget.isCorrectAnswer) {
       widget.colorFunction(Colors.green, widget.index);
+      goodAnswers += 1;
     } else {
       widget.colorFunction(Colors.red, widget.index);
+      badAnswers += 1;
+      if (badAnswers == 3) {
+        context.read<FilmsCubit>().addTotalFilmsPoints(goodAnswers);
+        context.read<FilmsCubit>().updateMediumFilmsPoints(goodAnswers);
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => LostLivesPage(goodAnswers: goodAnswers),
+          ),
+        );
+      }
     }
     setState(() {
       widget.textcolor = widget.isCorrectAnswer ? Colors.green : Colors.red;
     });
     widget.isButtonClicked(true);
-
     widget.isButtonDisabled(true);
   }
-
-  Color color = Colors.white;
 
   @override
   Widget build(BuildContext context) {
@@ -400,7 +572,9 @@ class _AnswerButtonState extends State<AnswerButton> {
           modifiedAnswer,
           style: GoogleFonts.aBeeZee(
             fontSize: 24,
-            color: widget.textcolor,
+            color: widget.isTimeUp && widget.isCorrectAnswer
+                ? Colors.green
+                : widget.textcolor,
           ),
         ),
       ),

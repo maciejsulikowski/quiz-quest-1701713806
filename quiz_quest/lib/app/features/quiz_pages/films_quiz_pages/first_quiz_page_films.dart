@@ -8,9 +8,9 @@ import 'package:quiz_quest/app/domain/repositories/quiz_repository/quiz_reposito
 import 'package:quiz_quest/app/domain/repositories/user_repository/user_repository.dart';
 import 'package:quiz_quest/app/features/home_page/cubit/home_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/question_quiz_page_films.dart';
-import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/second_easy_quiz_page_films.dart';
-import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/second_hard_quiz_page_films.dart';
-import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/second_medium_quiz_page_films.dart';
+import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/easy_films_quiz_page/second_easy_quiz_page_films.dart';
+import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/hard_films_quiz_page/second_hard_quiz_page_films.dart';
+import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/medium_films_quiz_page/second_medium_quiz_page_films.dart';
 
 class FirstQuizPageFilms extends StatefulWidget {
   const FirstQuizPageFilms({
@@ -125,9 +125,6 @@ class EasyDifficultButton extends StatelessWidget {
       create: (context) => HomeCubit(UserRepository(UserDataSource())),
       child: BlocBuilder<HomeCubit, HomeState>(
         builder: (context, state) {
-          final categoryPoints =
-              state.pointsModel?.categoryPoints['id']?['easy'];
-
           return Container(
             margin: const EdgeInsets.symmetric(horizontal: 20),
             decoration: BoxDecoration(

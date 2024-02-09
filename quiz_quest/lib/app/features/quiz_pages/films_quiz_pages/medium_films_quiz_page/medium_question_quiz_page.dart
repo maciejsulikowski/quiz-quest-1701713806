@@ -9,8 +9,9 @@ import 'package:quiz_quest/app/domain/models/films_model/films_quiz_model.dart';
 import 'package:quiz_quest/app/domain/repositories/quiz_repository/quiz_repository.dart';
 import 'package:quiz_quest/app/domain/repositories/user_repository/user_repository.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/cubit/films_cubit.dart';
-import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/lost_lives_page.dart';
-import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/resume_easy_question_quiz_page.dart';
+import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/medium_films_quiz_page/medium_lost_life_page.dart';
+import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/medium_films_quiz_page/resume_medium_question_quiz_page.dart';
+
 import 'package:quiz_quest/app/features/quiz_pages/quiz_countdown_timer/quiz_countdown_timer.dart';
 
 class MediumQuestionQuizPage extends StatefulWidget {
@@ -30,8 +31,8 @@ Color textColor = Colors.white;
 late bool isDurationEnded;
 late Color ringColor;
 bool isTimeUp = false;
-late int goodAnswers;
-late int badAnswers;
+late int mediumFilmsGoodAnswers;
+late int mediumFilmsBadAnswers;
 bool isCorrectAnswer = false;
 String threeLives = '❤️❤️❤️';
 String twoLives = ' ❤️❤️';
@@ -52,8 +53,8 @@ class _MediumQuestionQuizPageState extends State<MediumQuestionQuizPage> {
 
   @override
   void initState() {
-    goodAnswers = 0;
-    badAnswers = 0;
+    mediumFilmsGoodAnswers = 0;
+    mediumFilmsBadAnswers = 0;
     currentAnswers = [];
     answerColors;
     answerGenerated = false;
@@ -84,8 +85,8 @@ class _MediumQuestionQuizPageState extends State<MediumQuestionQuizPage> {
 
   void resetQuizState() {
     isButtonNameChanged = false;
-    badAnswers = 0;
-    goodAnswers = 0;
+    mediumFilmsBadAnswers = 0;
+    mediumFilmsGoodAnswers = 0;
     currentIndex = 0;
     isButtonClicked = false;
     isButtonDisabled = false;
@@ -186,7 +187,7 @@ class _MediumQuestionQuizPageState extends State<MediumQuestionQuizPage> {
                             ),
                             Expanded(
                               child: Text(
-                                'Score: ${goodAnswers * 10}',
+                                'Score: ${mediumFilmsGoodAnswers * 10}',
                                 style: GoogleFonts.aBeeZee(
                                     fontSize: 20,
                                     color: Colors.white,
@@ -198,11 +199,11 @@ class _MediumQuestionQuizPageState extends State<MediumQuestionQuizPage> {
                               child: Padding(
                                 padding: const EdgeInsets.only(right: 20.0),
                                 child: Text(
-                                  badAnswers == 0
+                                  mediumFilmsBadAnswers == 0
                                       ? threeLives
-                                      : badAnswers == 1
+                                      : mediumFilmsBadAnswers == 1
                                           ? twoLives
-                                          : badAnswers == 2
+                                          : mediumFilmsBadAnswers == 2
                                               ? oneLive
                                               : '',
                                   style: GoogleFonts.aBeeZee(
@@ -225,20 +226,19 @@ class _MediumQuestionQuizPageState extends State<MediumQuestionQuizPage> {
                         setState(() {
                           isDurationEnded = value;
                           ringColor = Colors.red;
-                          badAnswers += 1;
+                          mediumFilmsBadAnswers += 1;
                           isButtonDisabled = true;
                           isTimeUp = true;
-                          if (badAnswers == 3) {
+                          if (mediumFilmsBadAnswers == 3) {
                             context
                                 .read<FilmsCubit>()
-                                .addTotalFilmsPoints(goodAnswers);
-                            context
-                                .read<FilmsCubit>()
-                                .updateMediumFilmsPoints(goodAnswers);
+                                .addTotalFilmsPoints(mediumFilmsGoodAnswers);
+                            context.read<FilmsCubit>().updateMediumFilmsPoints(
+                                mediumFilmsGoodAnswers);
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                builder: (context) =>
-                                    LostLivesPage(goodAnswers: goodAnswers),
+                                builder: (context) => MediumLostLifePage(
+                                    goodAnswers: mediumFilmsGoodAnswers),
                               ),
                             );
                           }
@@ -279,7 +279,7 @@ class _MediumQuestionQuizPageState extends State<MediumQuestionQuizPage> {
                                       MainAxisAlignment.spaceAround,
                                   children: [
                                     Text(
-                                      'Bad: $badAnswers',
+                                      'Bad: $mediumFilmsBadAnswers',
                                       style: GoogleFonts.aBeeZee(
                                           fontSize: 20,
                                           color: Colors.red,
@@ -299,7 +299,7 @@ class _MediumQuestionQuizPageState extends State<MediumQuestionQuizPage> {
                                       width: 10,
                                     ),
                                     Text(
-                                      'Good: $goodAnswers',
+                                      'Good: $mediumFilmsGoodAnswers',
                                       style: GoogleFonts.aBeeZee(
                                           fontSize: 20,
                                           color: Colors.green,
@@ -379,11 +379,11 @@ class _MediumQuestionQuizPageState extends State<MediumQuestionQuizPage> {
                                                             .push(
                                                           MaterialPageRoute(
                                                             builder: (context) =>
-                                                                ResumeEasyQuizPageFilms(
+                                                                ResumeMediumQuizPageFilms(
                                                               badAnswers:
-                                                                  badAnswers,
+                                                                  mediumFilmsBadAnswers,
                                                               goodAnswers:
-                                                                  goodAnswers,
+                                                                  mediumFilmsGoodAnswers,
                                                             ),
                                                           ),
                                                         );
@@ -454,7 +454,8 @@ class QuestionWidget extends StatelessWidget {
         .replaceAll('&aacute;', '')
         .replaceAll('&ntilde;', '')
         .replaceAll('&amp;', '')
-        .replaceAll('&rsquo;', '');
+        .replaceAll('&rsquo;', '')
+        .replaceAll('oacute;n', '');
 
     return Center(
       child: Text(
@@ -507,16 +508,19 @@ class _AnswerButtonState extends State<AnswerButton> {
 
     if (widget.isCorrectAnswer) {
       widget.colorFunction(Colors.green, widget.index);
-      goodAnswers += 1;
+      mediumFilmsGoodAnswers += 1;
     } else {
       widget.colorFunction(Colors.red, widget.index);
-      badAnswers += 1;
-      if (badAnswers == 3) {
-        context.read<FilmsCubit>().addTotalFilmsPoints(goodAnswers);
-        context.read<FilmsCubit>().updateMediumFilmsPoints(goodAnswers);
+      mediumFilmsBadAnswers += 1;
+      if (mediumFilmsBadAnswers == 3) {
+        context.read<FilmsCubit>().addTotalFilmsPoints(mediumFilmsGoodAnswers);
+        context
+            .read<FilmsCubit>()
+            .updateMediumFilmsPoints(mediumFilmsGoodAnswers);
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => LostLivesPage(goodAnswers: goodAnswers),
+            builder: (context) =>
+                MediumLostLifePage(goodAnswers: mediumFilmsGoodAnswers),
           ),
         );
       }

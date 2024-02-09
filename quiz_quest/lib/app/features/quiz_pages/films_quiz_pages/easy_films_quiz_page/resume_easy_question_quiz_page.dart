@@ -9,37 +9,47 @@ import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/easy_films_q
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/question_quiz_page_films.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/first_quiz_page_films.dart';
 
-class LostLivesPage extends StatefulWidget {
-  const LostLivesPage({
+class ResumeEasyQuizPageFilms extends StatefulWidget {
+  const ResumeEasyQuizPageFilms({
+    required this.badAnswers,
     required this.goodAnswers,
     super.key,
   });
 
   final int goodAnswers;
+  final int badAnswers;
 
   @override
-  State<LostLivesPage> createState() => _LostLivesPageState();
+  State<ResumeEasyQuizPageFilms> createState() =>
+      _ResumeEasyQuizPageFilmsState();
 }
 
-class _LostLivesPageState extends State<LostLivesPage> {
+class _ResumeEasyQuizPageFilmsState extends State<ResumeEasyQuizPageFilms> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ResumePage(goodAnswers: goodAnswers),
+      body: ResumePage(
+        badAnswers: easyFilmsBadAnswers,
+        goodAnswers: easyFilmsGoodAnswers,
+      ),
     );
   }
 }
 
 class ResumePage extends StatelessWidget {
   const ResumePage({
+    required this.badAnswers,
     required this.goodAnswers,
     super.key,
   });
 
   final int goodAnswers;
+  final int badAnswers;
 
   @override
   Widget build(BuildContext context) {
+    final record = goodAnswers * 10;
+
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
@@ -58,7 +68,7 @@ class ResumePage extends StatelessWidget {
           ),
           Center(
             child: Text(
-              'Auch! 💔',
+              'Good work!',
               style: GoogleFonts.aBeeZee(
                   fontSize: 46,
                   color: Colors.white,
@@ -68,15 +78,11 @@ class ResumePage extends StatelessWidget {
           const SizedBox(
             height: 30,
           ),
-          TextWidget(text: 'You scored: ${goodAnswers * 10} points 💎'),
+          TextWidget(text: 'You scored: $record points 💎'),
           const SizedBox(
             height: 30,
           ),
           const TextWidget(text: 'Try beat your record: points 💎'),
-          const SizedBox(
-            height: 30,
-          ),
-          const TextWidget(text: 'Your lives are over, try again!'),
           const SizedBox(
             height: 30,
           ),
@@ -105,6 +111,10 @@ class ResumePage extends StatelessWidget {
             child: ElevatedButton(
               onPressed: () {
                 Navigator.of(context).popUntil((route) => route.isFirst);
+                //throw Exception('No user found');
+                //Navigator.of(context).push(MaterialPageRoute(
+                //  builder: (context) => const HomePage(),
+                //));
               },
               style: ElevatedButton.styleFrom(
                   minimumSize: const Size.fromHeight(50),

@@ -25,7 +25,7 @@ class _EasyLostLifePageState extends State<EasyLostLifePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ResumePage(goodAnswers: goodAnswers),
+      body: ResumePage(goodAnswers: easyFilmsGoodAnswers),
     );
   }
 }

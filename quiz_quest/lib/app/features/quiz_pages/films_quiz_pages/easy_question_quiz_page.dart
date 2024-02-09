@@ -124,6 +124,7 @@ class _EasyQuestionQuizPageState extends State<EasyQuestionQuizPage> {
                   seconds: 5,
                 ),
               );
+              // ignore: use_build_context_synchronously
               context.read<FilmsCubit>().getEasyFilmsCategory();
             }
           },
@@ -231,6 +232,9 @@ class _EasyQuestionQuizPageState extends State<EasyQuestionQuizPage> {
                             context
                                 .read<FilmsCubit>()
                                 .addTotalFilmsPoints(goodAnswers);
+                            context
+                                .read<FilmsCubit>()
+                                .updateEasyFilmsPoints(goodAnswers);
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (context) =>
@@ -509,6 +513,7 @@ class _AnswerButtonState extends State<AnswerButton> {
       badAnswers += 1;
       if (badAnswers == 3) {
         context.read<FilmsCubit>().addTotalFilmsPoints(goodAnswers);
+        context.read<FilmsCubit>().updateEasyFilmsPoints(goodAnswers);
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) => LostLivesPage(goodAnswers: goodAnswers),

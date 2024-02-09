@@ -154,7 +154,7 @@ class EasyDifficultButton extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => SecondEasyQuizPageFilms(
-                          easyCategory: categoryPoints,
+                          easyCategory: category,
                           image: image,
                         )));
               },

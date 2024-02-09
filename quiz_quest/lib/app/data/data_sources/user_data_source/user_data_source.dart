@@ -166,25 +166,37 @@ class UserDataSource {
     // }
   }
 
-  Future<void> addEasyFilmPoints(int easyFilmPoints) async {
+  Future<void> updateEasyFilmPoints(int newEasyFilmPoints) async {
     final userID = FirebaseAuth.instance.currentUser?.uid;
     if (userID == null) {
       throw Exception('User is not logged in');
     }
-    await FirebaseFirestore.instance
+    final userData = await FirebaseFirestore.instance
         .collection('users')
         .doc(userID)
         .collection('points')
         .doc(userID)
-        .set(
-      {
-        'total_points': 0 + easyFilmPoints,
-        'total_films_points': 0,
-        'films_easy_points': 0 + easyFilmPoints,
-        'films_medium_points': 0,
-        'films_hard_points': 0,
-      },
-    );
+        .get();
+
+    final easyFilmsPoints = userData['films_easy_points'] ?? 0;
+
+    final newEasyPoints = newEasyFilmPoints * 10;
+
+    if (newEasyPoints > easyFilmsPoints) {
+      // final result = (newPoints - filmsTotalPoints);
+      // final updateTotalFilmsPoints = filmsTotalPoints + result;
+      // final updateTotalPoints =
+      //     totalPoints - filmsTotalPoints + updateTotalFilmsPoints;
+
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userID)
+          .collection('points')
+          .doc(userID)
+          .update({
+        'films_easy_points': newEasyPoints,
+      });
+    }
   }
 
   Future<void> updateName({

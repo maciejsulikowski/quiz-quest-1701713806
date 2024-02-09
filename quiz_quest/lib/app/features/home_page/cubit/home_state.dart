@@ -36,9 +36,9 @@ class HomeState {
         'hard_category': 'games_hard_points',
         'page': FirstQuizPageGames(
           image: 'images/games.png',
-          easyCategory: 'games_easy_points',
-          mediumCategory: 'games_medium_points',
-          hardCategory: 'games_hard_points',
+          // easyCategory: 'games_easy_points',
+          // mediumCategory: 'games_medium_points',
+          // hardCategory: 'games_hard_points',
         )
       },
       {

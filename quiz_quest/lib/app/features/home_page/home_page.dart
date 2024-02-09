@@ -17,6 +17,7 @@ import 'package:quiz_quest/app/features/quiz_pages/nature_quiz_pages/first_quiz_
 import 'package:quiz_quest/app/features/quiz_pages/sports_quiz_pages/first_quiz_page_sport.dart';
 import 'package:quiz_quest/app/features/quiz_pages/tv_quiz_pages/first_quiz_page_tv.dart';
 import 'package:quiz_quest/app/features/user_page/user_account.dart';
+import 'package:share_plus/share_plus.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
@@ -106,9 +107,9 @@ class _QuizzPageState extends State<QuizzPage> {
       'hard_category': 'games_hard_points',
       'page': const FirstQuizPageGames(
         image: 'images/games.png',
-        easyCategory: 'games_easy_points',
-        mediumCategory: 'games_medium_points',
-        hardCategory: 'games_hard_points',
+        // easyCategory: 'games_easy_points',
+        // mediumCategory: 'games_medium_points',
+        // hardCategory: 'games_hard_points',
       )
     },
     {
@@ -299,13 +300,28 @@ class _QuizzPageState extends State<QuizzPage> {
                         ),
                         borderRadius: BorderRadius.circular(20),
                         color: Colors.red),
-                    child: Text(
-                      'Total Points: $allPoints💎',
-                      style: GoogleFonts.aBeeZee(
-                          fontSize: 26,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold),
-                      textAlign: TextAlign.center,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Total Points: $allPoints💎',
+                          style: GoogleFonts.aBeeZee(
+                              fontSize: 26,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold),
+                          textAlign: TextAlign.center,
+                        ),
+                        IconButton(
+                            onPressed: () {
+                              String message =
+                                  'In QuizQuest you scored Total Points: $allPoints💎! Congratulations!';
+                              Share.share(message);
+                            },
+                            icon: const Icon(
+                              Icons.share,
+                              color: Colors.white54,
+                            ))
+                      ],
                     ),
                   ),
                 ),

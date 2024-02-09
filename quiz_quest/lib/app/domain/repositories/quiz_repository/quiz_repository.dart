@@ -53,8 +53,28 @@ class QuizRepository {
   //   return AnimalsQuizModel.fromJson(json);
   // }
 
-  Future<GamesQuizModel?> getGamesData() async {
+  Future<GamesQuizModel?> getEasyGamesData() async {
     final json = await quizCategoriesDataSource.getEasyGamesCategory();
+
+    if (json == null) {
+      return null;
+    }
+
+    return GamesQuizModel.fromJson(json);
+  }
+
+  Future<GamesQuizModel?> getMediumGamesData() async {
+    final json = await quizCategoriesDataSource.getMediumGamesCategory();
+
+    if (json == null) {
+      return null;
+    }
+
+    return GamesQuizModel.fromJson(json);
+  }
+
+  Future<GamesQuizModel?> getHardGamesData() async {
+    final json = await quizCategoriesDataSource.getHardGamesCategory();
 
     if (json == null) {
       return null;

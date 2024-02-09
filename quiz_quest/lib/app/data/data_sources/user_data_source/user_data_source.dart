@@ -150,20 +150,9 @@ class UserDataSource {
         'total_points': updateTotalPoints,
         'total_films_points': updateTotalFilmsPoints,
       });
+    } else {
+      print('Nic');
     }
-    // else {
-    //   final deductedPoints = (filmsTotalPoints - newPoints) ~/ 10;
-    //   final updatedTotalPoints = totalPoints - deductedPoints;
-
-    //   await FirebaseFirestore.instance
-    //       .collection('users')
-    //       .doc(userID)
-    //       .collection('points')
-    //       .doc(userID)
-    //       .update({
-    //     'total_points': updatedTotalPoints,
-    //   });
-    // }
   }
 
   Future<void> updateEasyFilmPoints(int newEasyFilmPoints) async {

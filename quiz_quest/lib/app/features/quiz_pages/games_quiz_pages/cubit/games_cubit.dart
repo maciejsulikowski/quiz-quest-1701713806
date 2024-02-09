@@ -11,15 +11,13 @@ class GamesCubit extends Cubit<GamesState> {
 
   final QuizRepository quizRepository;
 
-  Future<void> getGamesCategory() async {
+  Future<void> getEasyGamesCategory() async {
     emit(GamesState(
       status: Status.loading,
     ));
 
-    
-
     try {
-      final gamesModel = await quizRepository.getGamesData();
+      final gamesModel = await quizRepository.getEasyGamesData();
       emit(GamesState(
         status: Status.success,
         gamesQuizModel: gamesModel,

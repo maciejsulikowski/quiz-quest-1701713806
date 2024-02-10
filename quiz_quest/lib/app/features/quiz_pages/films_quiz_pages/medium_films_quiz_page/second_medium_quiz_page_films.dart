@@ -73,7 +73,7 @@ class QuizzPage extends StatelessWidget {
           ),
           Center(
             child: Text(
-              'Medium category points: $mediumCategory💎',
+              'Your record in medium category: $mediumCategory💎',
               style: GoogleFonts.aBeeZee(
                 fontSize: 18,
                 color: Colors.white,

@@ -120,10 +120,20 @@ class UserRepository {
     return userDataSource.setEmptyPoints();
   }
 
+//games
   Future<void> updateEasyGamesPoints(int easyGamesPoints) async {
     return userDataSource.updateEasyGamesPoints(easyGamesPoints);
   }
 
+  Future<void> updateMediumGamesPoints(int mediumGamesPoints) async {
+    return userDataSource.updateMediumGamesPoints(mediumGamesPoints);
+  }
+
+  Future<void> updateHardGamesPoints(int hardGamesPoints) async {
+    return userDataSource.updateHardGamesPoints(hardGamesPoints);
+  }
+
+//films
   Future<void> updateEasyFilmsPoints(int easyFilmsPoints) async {
     return userDataSource.updateEasyFilmPoints(easyFilmsPoints);
   }

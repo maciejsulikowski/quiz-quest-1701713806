@@ -227,6 +227,62 @@ class UserDataSource {
     }
   }
 
+  Future<void> updateMediumGamesPoints(int newMediumGamesPoints) async {
+    final userID = FirebaseAuth.instance.currentUser?.uid;
+    if (userID == null) {
+      throw Exception('User is not logged in');
+    }
+    final userData = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userID)
+        .collection('points')
+        .doc(userID)
+        .get();
+
+    final mediumGamesPoints = userData['games_medium_points'] ?? 0;
+
+    final newGamesPoints = newMediumGamesPoints * 10;
+
+    if (newGamesPoints > mediumGamesPoints) {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userID)
+          .collection('points')
+          .doc(userID)
+          .update({
+        'games_medium_points': newGamesPoints,
+      });
+    }
+  }
+
+  Future<void> updateHardGamesPoints(int newHardGamesPoints) async {
+    final userID = FirebaseAuth.instance.currentUser?.uid;
+    if (userID == null) {
+      throw Exception('User is not logged in');
+    }
+    final userData = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userID)
+        .collection('points')
+        .doc(userID)
+        .get();
+
+    final hardGamesPoints = userData['games_hard_points'] ?? 0;
+
+    final newGamesPoints = newHardGamesPoints * 10;
+
+    if (newGamesPoints > hardGamesPoints) {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userID)
+          .collection('points')
+          .doc(userID)
+          .update({
+        'games_hard_points': newGamesPoints,
+      });
+    }
+  }
+
   Future<void> updateName({
     required String? name,
   }) async {

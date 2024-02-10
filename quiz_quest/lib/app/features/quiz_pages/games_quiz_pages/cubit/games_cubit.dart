@@ -32,9 +32,77 @@ class GamesCubit extends Cubit<GamesState> {
     }
   }
 
+  Future<void> getMediumGamesCategory() async {
+    emit(GamesState(
+      status: Status.loading,
+    ));
+    try {
+      final gamesModel = await quizRepository.getMediumGamesData();
+
+      emit(GamesState(
+        status: Status.success,
+        gamesQuizModel: gamesModel,
+      ));
+    } catch (error) {
+      emit(GamesState(
+        status: Status.error,
+        error: error.toString(),
+      ));
+    }
+  }
+
+  Future<void> getHardGamesCategory() async {
+    emit(GamesState(
+      status: Status.loading,
+    ));
+    try {
+      final gamesModel = await quizRepository.getHardGamesData();
+
+      emit(GamesState(
+        status: Status.success,
+        gamesQuizModel: gamesModel,
+      ));
+    } catch (error) {
+      emit(GamesState(
+        status: Status.error,
+        error: error.toString(),
+      ));
+    }
+  }
+
   Future<void> updateEasyGamesPoints(int easyGamesPoints) async {
     try {
       await userRepository.updateEasyGamesPoints(easyGamesPoints);
+
+      emit(GamesState(
+        status: Status.success,
+      ));
+    } catch (error) {
+      emit(GamesState(
+        status: Status.error,
+        error: error.toString(),
+      ));
+    }
+  }
+
+  Future<void> updateMediumGamesPoints(int mediumGamesPoints) async {
+    try {
+      await userRepository.updateMediumGamesPoints(mediumGamesPoints);
+
+      emit(GamesState(
+        status: Status.success,
+      ));
+    } catch (error) {
+      emit(GamesState(
+        status: Status.error,
+        error: error.toString(),
+      ));
+    }
+  }
+
+  Future<void> updateHardGamesPoints(int hardGamesPoints) async {
+    try {
+      await userRepository.updateHardGamesPoints(hardGamesPoints);
 
       emit(GamesState(
         status: Status.success,

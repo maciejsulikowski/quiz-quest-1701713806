@@ -43,16 +43,6 @@ class QuizRepository {
     return FilmsQuizModel.fromJson(json);
   }
 
-  // Future<AnimalsQuizModel?> getFakeAnimal() async {
-  //   final json = await quizCategoriesDataSource.fakeAnimal();
-
-  //   if (json == null) {
-  //     return null;
-  //   }
-
-  //   return AnimalsQuizModel.fromJson(json);
-  // }
-
   Future<GamesQuizModel?> getEasyGamesData() async {
     final json = await quizCategoriesDataSource.getEasyGamesCategory();
 

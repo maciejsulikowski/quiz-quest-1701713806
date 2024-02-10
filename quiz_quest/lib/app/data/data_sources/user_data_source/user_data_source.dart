@@ -38,7 +38,6 @@ class UserDataSource {
         .snapshots()
         .map((docSnapshot) {
       if (docSnapshot.exists) {
-        //docSnapshot.id;
         final data = docSnapshot.data() ?? {};
         return data;
       } else {
@@ -168,6 +167,34 @@ class UserDataSource {
           .doc(userID)
           .update({
         'films_medium_points': newMediumPoints,
+      });
+    }
+  }
+
+  Future<void> updateHardFilmPoints(int newHardFilmPoints) async {
+    final userID = FirebaseAuth.instance.currentUser?.uid;
+    if (userID == null) {
+      throw Exception('User is not logged in');
+    }
+    final userData = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userID)
+        .collection('points')
+        .doc(userID)
+        .get();
+
+    final hardFilmsPoints = userData['films_hard_points'] ?? 0;
+
+    final newHardPoints = newHardFilmPoints * 10;
+
+    if (newHardPoints > hardFilmsPoints) {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userID)
+          .collection('points')
+          .doc(userID)
+          .update({
+        'films_hard_points': newHardPoints,
       });
     }
   }

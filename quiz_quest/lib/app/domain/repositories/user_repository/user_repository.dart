@@ -120,16 +120,20 @@ class UserRepository {
     return userDataSource.setEmptyPoints();
   }
 
-  // Future<void> addTotalFilmsPoints(int totalFilmsPoints) async {
-  //   return userDataSource.updateTotalFilmsPoints(totalFilmsPoints);
-  // }
+  Future<void> updateEasyGamesPoints(int easyGamesPoints) async {
+    return userDataSource.updateEasyGamesPoints(easyGamesPoints);
+  }
 
   Future<void> updateEasyFilmsPoints(int easyFilmsPoints) async {
     return userDataSource.updateEasyFilmPoints(easyFilmsPoints);
   }
 
-  Future<void> updateMediumFilmsPoints(int easyFilmsPoints) async {
-    return userDataSource.updateMediumFilmPoints(easyFilmsPoints);
+  Future<void> updateMediumFilmsPoints(int mediumFilmsPoints) async {
+    return userDataSource.updateMediumFilmPoints(mediumFilmsPoints);
+  }
+
+  Future<void> updateHardFilmsPoints(int hardFilmsPoints) async {
+    return userDataSource.updateHardFilmPoints(hardFilmsPoints);
   }
 
   Future<void> updateName(String name) async {

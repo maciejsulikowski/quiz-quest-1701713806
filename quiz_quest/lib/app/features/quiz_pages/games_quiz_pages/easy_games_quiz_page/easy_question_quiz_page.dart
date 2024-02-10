@@ -113,9 +113,9 @@ class _EasyQuestionGamesQuizPageState extends State<EasyQuestionGamesQuizPage> {
     return Scaffold(
       body: BlocProvider(
         create: (context) => GamesCubit(
-          QuizRepository(QuizCategoriesDataSource()),
-          // UserRepository(UserDataSource())
-        )..getEasyGamesCategory(),
+            QuizRepository(QuizCategoriesDataSource()),
+            UserRepository(UserDataSource()))
+          ..getEasyGamesCategory(),
         child: BlocListener<GamesCubit, GamesState>(
           listener: (context, state) async {
             if (state.status == Status.error) {
@@ -233,12 +233,9 @@ class _EasyQuestionGamesQuizPageState extends State<EasyQuestionGamesQuizPage> {
                           isButtonDisabled = true;
                           isTimeUp = true;
                           if (easyGamesBadAnswers == 3) {
-                            // context
-                            //     .read<GamesCubit>()
-                            //     .addTotalFilmsPoints(easyGamesGoodAnswers);
-                            // context
-                            //     .read<GamesCubit>()
-                            //     .updateEasyFilmsPoints(easyGamesGoodAnswers);
+                            context
+                                .read<GamesCubit>()
+                                .updateEasyGamesPoints(easyGamesGoodAnswers);
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (context) => EasyGamesLostLifePage(
@@ -516,8 +513,7 @@ class _AnswerButtonState extends State<AnswerButton> {
       widget.colorFunction(Colors.red, widget.index);
       easyGamesBadAnswers += 1;
       if (easyGamesBadAnswers == 3) {
-        // context.read<GamesCubit>().addTotalFilmsPoints(easyGamesGoodAnswers);
-        // context.read<GamesCubit>().updateEasyFilmsPoints(easyGamesGoodAnswers);
+        context.read<GamesCubit>().updateEasyGamesPoints(easyGamesGoodAnswers);
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) =>

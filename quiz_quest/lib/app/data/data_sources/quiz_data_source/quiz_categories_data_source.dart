@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 class QuizCategoriesDataSource {
   Future<Map<String, dynamic>?> getEasyFilmCategory() async {
     final response = await Dio().get(
-        'https://opentdb.com/api.php?amount=5&category=11&difficulty=easy&type=multiple',
+        'https://opentdb.com/api.php?amount=10&category=11&difficulty=easy&type=multiple',
         options: Options(
           validateStatus: (_) => true,
         ));
@@ -147,7 +147,7 @@ class QuizCategoriesDataSource {
 
   Future<Map<String, dynamic>?> getEasyGamesCategory() async {
     final response = await Dio().get(
-        'https://opentdb.com/api.php?amount=50&category=15&difficulty=easy&type=multiple',
+        'https://opentdb.com/api.php?amount=5&category=15&difficulty=easy&type=multiple',
         options: Options(
           validateStatus: (_) => true,
         ));

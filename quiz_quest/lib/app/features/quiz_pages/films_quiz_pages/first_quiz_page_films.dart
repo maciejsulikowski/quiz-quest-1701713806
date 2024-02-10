@@ -3,11 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quiz_quest/app/core/enums.dart';
 import 'package:quiz_quest/app/data/data_sources/quiz_data_source/quiz_categories_data_source.dart';
+import 'package:quiz_quest/app/data/data_sources/user_data_source/user_data_source.dart';
 import 'package:quiz_quest/app/domain/repositories/quiz_repository/quiz_repository.dart';
-import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/question_quiz_page_films.dart';
-import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/second_easy_quiz_page_films.dart';
-import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/second_hard_quiz_page_films.dart';
-import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/second_medium_quiz_page_films.dart';
+import 'package:quiz_quest/app/domain/repositories/user_repository/user_repository.dart';
+import 'package:quiz_quest/app/features/home_page/cubit/home_cubit.dart';
+import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/easy_films_quiz_page/second_easy_quiz_page_films.dart';
+import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/hard_films_quiz_page/second_hard_quiz_page_films.dart';
+import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/medium_films_quiz_page/second_medium_quiz_page_films.dart';
 
 class FirstQuizPageFilms extends StatefulWidget {
   const FirstQuizPageFilms({
@@ -42,8 +44,6 @@ class QuizzPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
-
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
@@ -83,7 +83,6 @@ class QuizzPage extends StatelessWidget {
             height: 30,
           ),
           EasyDifficultButton(
-           
             image: image,
             text: 'Easy',
           ),
@@ -91,7 +90,6 @@ class QuizzPage extends StatelessWidget {
             height: 30,
           ),
           MediumDifficultButton(
-            
             image: image,
             text: 'Medium',
           ),
@@ -99,7 +97,6 @@ class QuizzPage extends StatelessWidget {
             height: 30,
           ),
           HardDifficultButton(
-            
             image: image,
             text: 'Hard',
           ),
@@ -123,45 +120,52 @@ class EasyDifficultButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final dynamic easyCategory = ModalRoute.of(context)?.settings.arguments;
     final dynamic category = easyCategory[0];
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 20),
-      decoration: BoxDecoration(
-          gradient: const LinearGradient(
-            colors: [
-              Color.fromRGBO(143, 165, 255, 1),
-              Color.fromRGBO(10, 53, 132, 1),
-            ],
-            begin: Alignment.centerLeft,
-            end: Alignment.centerRight,
-          ),
-          borderRadius: const BorderRadius.all(
-            Radius.circular(25.0),
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.1),
-              spreadRadius: 4,
-              blurRadius: 10,
-              offset: const Offset(0, 3),
-            )
-          ]),
-      child: ElevatedButton(
-        onPressed: () {
-          Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => SecondEasyQuizPageFilms(
-                    easyCategory: category,
-                    image: image,
-                  )));
+    return BlocProvider(
+      create: (context) => HomeCubit(UserRepository(UserDataSource())),
+      child: BlocBuilder<HomeCubit, HomeState>(
+        builder: (context, state) {
+          return Container(
+            margin: const EdgeInsets.symmetric(horizontal: 20),
+            decoration: BoxDecoration(
+                gradient: const LinearGradient(
+                  colors: [
+                    Color.fromRGBO(143, 165, 255, 1),
+                    Color.fromRGBO(10, 53, 132, 1),
+                  ],
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                ),
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(25.0),
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    spreadRadius: 4,
+                    blurRadius: 10,
+                    offset: const Offset(0, 3),
+                  )
+                ]),
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => SecondEasyQuizPageFilms(
+                          easyCategory: category,
+                          image: image,
+                        )));
+              },
+              style: ElevatedButton.styleFrom(
+                  minimumSize: const Size.fromHeight(50),
+                  backgroundColor: Colors.transparent,
+                  shadowColor: Colors.transparent),
+              child: Text(text,
+                  style: GoogleFonts.aBeeZee(
+                    fontSize: 24,
+                    color: Colors.white,
+                  )),
+            ),
+          );
         },
-        style: ElevatedButton.styleFrom(
-            minimumSize: const Size.fromHeight(50),
-            backgroundColor: Colors.transparent,
-            shadowColor: Colors.transparent),
-        child: Text(text,
-            style: GoogleFonts.aBeeZee(
-              fontSize: 24,
-              color: Colors.white,
-            )),
       ),
     );
   }
@@ -238,7 +242,6 @@ class HardDifficultButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final dynamic categories = ModalRoute.of(context)?.settings.arguments;
     final dynamic hardCategory = categories[2];
 
@@ -268,7 +271,7 @@ class HardDifficultButton extends StatelessWidget {
         onPressed: () {
           Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => SecondHardQuizPageFilms(
-                hardCategory: hardCategory,
+                    hardCategory: hardCategory,
                     image: image,
                   )));
         },

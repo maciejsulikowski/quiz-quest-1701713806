@@ -4,32 +4,31 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:quiz_quest/app/core/enums.dart';
 import 'package:quiz_quest/app/data/data_sources/quiz_data_source/quiz_categories_data_source.dart';
 import 'package:quiz_quest/app/domain/repositories/quiz_repository/quiz_repository.dart';
-import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/medium_question_quiz_page.dart';
-import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/question_quiz_page_films.dart';
+import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/hard_films_quiz_page/hard_question_quiz_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/first_quiz_page_films.dart';
 
-class SecondMediumQuizPageFilms extends StatefulWidget {
-  const SecondMediumQuizPageFilms({
+class SecondHardQuizPageFilms extends StatefulWidget {
+  const SecondHardQuizPageFilms({
     required this.image,
-    required this.mediumCategory,
+    required this.hardCategory,
     super.key,
   });
 
   final String image;
-  final dynamic mediumCategory;
+  final dynamic hardCategory;
 
   @override
-  State<SecondMediumQuizPageFilms> createState() =>
-      _SecondMediumQuizPageFilmsState();
+  State<SecondHardQuizPageFilms> createState() =>
+      _SecondHardQuizPageFilmsState();
 }
 
-class _SecondMediumQuizPageFilmsState extends State<SecondMediumQuizPageFilms> {
+class _SecondHardQuizPageFilmsState extends State<SecondHardQuizPageFilms> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: QuizzPage(
         image: widget.image,
-        mediumCategory: widget.mediumCategory,
+        hardCategory: widget.hardCategory,
       ),
     );
   }
@@ -38,12 +37,12 @@ class _SecondMediumQuizPageFilmsState extends State<SecondMediumQuizPageFilms> {
 class QuizzPage extends StatelessWidget {
   const QuizzPage({
     required this.image,
-    required this.mediumCategory,
+    required this.hardCategory,
     super.key,
   });
 
   final String image;
-  final dynamic mediumCategory;
+  final dynamic hardCategory;
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +73,7 @@ class QuizzPage extends StatelessWidget {
           ),
           Center(
             child: Text(
-              'Medium category points: $mediumCategory💎',
+              'Hard category points: $hardCategory💎',
               style: GoogleFonts.aBeeZee(
                 fontSize: 18,
                 color: Colors.white,
@@ -138,7 +137,7 @@ class QuizzPage extends StatelessWidget {
             child: ElevatedButton(
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => const MediumQuestionQuizPage(),
+                  builder: (context) => const HardQuestionQuizPage(),
                 ));
               },
               style: ElevatedButton.styleFrom(

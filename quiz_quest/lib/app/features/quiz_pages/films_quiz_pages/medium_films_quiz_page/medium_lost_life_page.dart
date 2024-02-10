@@ -5,46 +5,38 @@ import 'package:quiz_quest/app/core/enums.dart';
 import 'package:quiz_quest/app/data/data_sources/quiz_data_source/quiz_categories_data_source.dart';
 import 'package:quiz_quest/app/domain/repositories/quiz_repository/quiz_repository.dart';
 import 'package:quiz_quest/app/features/home_page/home_page.dart';
-import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/easy_question_quiz_page.dart';
-import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/question_quiz_page_films.dart';
+import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/easy_films_quiz_page/easy_question_quiz_page.dart';
+import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/medium_films_quiz_page/medium_question_quiz_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/first_quiz_page_films.dart';
 
-class ResumeEasyQuizPageFilms extends StatefulWidget {
-  const ResumeEasyQuizPageFilms({
-    required this.badAnswers,
+class MediumLostLifePage extends StatefulWidget {
+  const MediumLostLifePage({
     required this.goodAnswers,
     super.key,
   });
 
   final int goodAnswers;
-  final int badAnswers;
 
   @override
-  State<ResumeEasyQuizPageFilms> createState() =>
-      _ResumeEasyQuizPageFilmsState();
+  State<MediumLostLifePage> createState() => _MediumLostLifePageState();
 }
 
-class _ResumeEasyQuizPageFilmsState extends State<ResumeEasyQuizPageFilms> {
+class _MediumLostLifePageState extends State<MediumLostLifePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ResumePage(
-        badAnswers: badAnswers,
-        goodAnswers: goodAnswers,
-      ),
+      body: ResumePage(goodAnswers: mediumFilmsGoodAnswers),
     );
   }
 }
 
 class ResumePage extends StatelessWidget {
   const ResumePage({
-    required this.badAnswers,
     required this.goodAnswers,
     super.key,
   });
 
   final int goodAnswers;
-  final int badAnswers;
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +58,7 @@ class ResumePage extends StatelessWidget {
           ),
           Center(
             child: Text(
-              'Good work!',
+              'Auch! 💔',
               style: GoogleFonts.aBeeZee(
                   fontSize: 46,
                   color: Colors.white,
@@ -81,6 +73,10 @@ class ResumePage extends StatelessWidget {
             height: 30,
           ),
           const TextWidget(text: 'Try beat your record: points 💎'),
+          const SizedBox(
+            height: 30,
+          ),
+          const TextWidget(text: 'Your lives are over, try again!'),
           const SizedBox(
             height: 30,
           ),
@@ -109,10 +105,6 @@ class ResumePage extends StatelessWidget {
             child: ElevatedButton(
               onPressed: () {
                 Navigator.of(context).popUntil((route) => route.isFirst);
-                //throw Exception('No user found');
-                //Navigator.of(context).push(MaterialPageRoute(
-                //  builder: (context) => const HomePage(),
-                //));
               },
               style: ElevatedButton.styleFrom(
                   minimumSize: const Size.fromHeight(50),

@@ -12,6 +12,14 @@ class GeographyQuizModel with _$GeographyQuizModel {
   factory GeographyQuizModel.fromJson(Map<String, dynamic> json) =>
       _$GeographyQuizModelFromJson(json);
 }
+// for (var element in points) {
+//         easyPoints += element['easy']!;
+//         mediumPoints += element['medium']!;
+//         hardPoints += element['hard']!;
+//         totalPoints += element['total']!;
+//       }
+
+//       int combinedPoints = easyPoints + mediumPoints + hardPoints;
 
 @freezed
 class Results5 with _$Results5 {

@@ -3,8 +3,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:quiz_quest/app/core/enums.dart';
+import 'package:quiz_quest/app/data/data_sources/user_data_source/user_data_source.dart';
+import 'package:quiz_quest/app/domain/repositories/user_repository/user_repository.dart';
+import 'package:quiz_quest/app/features/home_page/cubit/home_cubit.dart';
+import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/cubit/films_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/first_quiz_page_films.dart';
-import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/second_easy_quiz_page_films.dart';
+import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/easy_films_quiz_page/second_easy_quiz_page_films.dart';
 import 'package:quiz_quest/app/features/quiz_pages/games_quiz_pages/first_quiz_page_games.dart';
 import 'package:quiz_quest/app/features/quiz_pages/geography_quiz_pages/first_quiz_page_geography.dart';
 import 'package:quiz_quest/app/features/quiz_pages/history_quiz_pages/first_quiz_page_history.dart';
@@ -13,6 +18,7 @@ import 'package:quiz_quest/app/features/quiz_pages/nature_quiz_pages/first_quiz_
 import 'package:quiz_quest/app/features/quiz_pages/sports_quiz_pages/first_quiz_page_sport.dart';
 import 'package:quiz_quest/app/features/quiz_pages/tv_quiz_pages/first_quiz_page_tv.dart';
 import 'package:quiz_quest/app/features/user_page/user_account.dart';
+import 'package:share_plus/share_plus.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
@@ -79,11 +85,9 @@ class QuizzPage extends StatefulWidget {
 }
 
 class _QuizzPageState extends State<QuizzPage> {
-  int points = 0;
-
   List<dynamic> list = [
     {
-      'id': 1,
+      'id': 0,
       'name': 'Films',
       'image': 'images/movie.png',
       'total_category': 'total_films_points',
@@ -95,7 +99,7 @@ class _QuizzPageState extends State<QuizzPage> {
       )
     },
     {
-      'id': 2,
+      'id': 1,
       'name': 'Games',
       'image': 'images/games.png',
       'total_category': 'total_games_points',
@@ -104,13 +108,13 @@ class _QuizzPageState extends State<QuizzPage> {
       'hard_category': 'games_hard_points',
       'page': const FirstQuizPageGames(
         image: 'images/games.png',
-        easyCategory: 'games_easy_points',
-        mediumCategory: 'games_medium_points',
-        hardCategory: 'games_hard_points',
+        // easyCategory: 'games_easy_points',
+        // mediumCategory: 'games_medium_points',
+        // hardCategory: 'games_hard_points',
       )
     },
     {
-      'id': 3,
+      'id': 2,
       'name': 'Geography',
       'image': 'images/geography.png',
       'total_category': 'total_geography_points',
@@ -125,7 +129,7 @@ class _QuizzPageState extends State<QuizzPage> {
       )
     },
     {
-      'id': 4,
+      'id': 3,
       'name': 'History',
       'image': 'images/history.png',
       'total_category': 'total_history_points',
@@ -140,7 +144,7 @@ class _QuizzPageState extends State<QuizzPage> {
       )
     },
     {
-      'id': 5,
+      'id': 4,
       'name': 'Music',
       'image': 'images/music.png',
       'total_category': 'total_music_points',
@@ -155,7 +159,7 @@ class _QuizzPageState extends State<QuizzPage> {
       )
     },
     {
-      'id': 6,
+      'id': 5,
       'name': 'Nature',
       'image': 'images/nature.png',
       'total_category': 'total_nature_points',
@@ -170,7 +174,7 @@ class _QuizzPageState extends State<QuizzPage> {
       )
     },
     {
-      'id': 7,
+      'id': 6,
       'name': 'Sport',
       'image': 'images/ball.png',
       'total_category': 'total_sports_points',
@@ -185,7 +189,7 @@ class _QuizzPageState extends State<QuizzPage> {
       )
     },
     {
-      'id': 8,
+      'id': 7,
       'name': 'TV',
       'image': 'images/tv.png',
       'total_category': 'total_tv_points',
@@ -222,21 +226,16 @@ class _QuizzPageState extends State<QuizzPage> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<DocumentSnapshot>(
-        stream: FirebaseFirestore.instance
-            .collection('users')
-            .doc(widget.user!.uid)
-            .collection('points')
-            .doc(widget.user!.uid)
-            .snapshots(),
-            
-        builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            return Text('Error: ${snapshot.error}');
-          }
+    return BlocProvider(
+      create: (context) =>
+          HomeCubit(UserRepository(UserDataSource()))..getPointsData(),
+      child: BlocBuilder<HomeCubit, HomeState>(
+        builder: (context, state) {
+          final allPoints = state.totalPoints;
 
-          final points = snapshot.data;
-          final allPoints = points?['total_points'] ?? '0';
+          if (state.status == Status.loading) {
+            return const Center(child: CircularProgressIndicator());
+          }
 
           return Container(
             decoration: const BoxDecoration(
@@ -306,13 +305,28 @@ class _QuizzPageState extends State<QuizzPage> {
                         ),
                         borderRadius: BorderRadius.circular(20),
                         color: Colors.red),
-                    child: Text(
-                      'Total Points: $allPoints💎',
-                      style: GoogleFonts.aBeeZee(
-                          fontSize: 26,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold),
-                      textAlign: TextAlign.center,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Total Points: $allPoints💎',
+                          style: GoogleFonts.aBeeZee(
+                              fontSize: 26,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold),
+                          textAlign: TextAlign.center,
+                        ),
+                        IconButton(
+                            onPressed: () {
+                              String message =
+                                  'In QuizQuest you scored Total Points: $allPoints💎! Congratulations!';
+                              Share.share(message);
+                            },
+                            icon: const Icon(
+                              Icons.share,
+                              color: Colors.white54,
+                            ))
+                      ],
                     ),
                   ),
                 ),
@@ -375,24 +389,27 @@ class _QuizzPageState extends State<QuizzPage> {
                     shrinkWrap: true,
                     physics: const ClampingScrollPhysics(),
                     itemBuilder: (context, index) {
-                      var totalCategoryPoints =
-                          points?[categoryList[index]['total_category']] ?? 0;
-                      var easyCategoryPoints =
-                          points?[categoryList[index]['easy_category']] ?? 0;
-                      var mediumCategoryPoints =
-                          points?[categoryList[index]['medium_category']] ?? 0;
-                      var hardCategoryPoints =
-                          points?[categoryList[index]['hard_category']] ?? 0;
-
                       return QuizzCategoryWidget(
                         name: categoryList[index]['name'],
                         image: categoryList[index]['image'],
-                        category: categoryList[index]['total_category'],
-                        easyCategory: easyCategoryPoints,
-                        mediumCategory: mediumCategoryPoints,
-                        hardCategory: hardCategoryPoints,
-                        categoryPoints: totalCategoryPoints,
-                        nextPage: categoryList[index]['page'],
+                        easyCategory:
+                            state.categoryPoints[categoryList[index]['id']]
+                                    ['easy'] ??
+                                0,
+                        mediumCategory:
+                            state.categoryPoints[categoryList[index]['id']]
+                                    ['medium'] ??
+                                0,
+                        hardCategory:
+                            state.categoryPoints[categoryList[index]['id']]
+                                    ['hard'] ??
+                                0,
+                        categoryPoints:
+                            state.categoryPoints[categoryList[index]['id']]
+                                    ['total'] ??
+                                0,
+                        nextPage: state.list[index]['page'],
+                        // allCategoryPoints: allCategoryPoints,
                       );
                     },
                   ),
@@ -401,7 +418,10 @@ class _QuizzPageState extends State<QuizzPage> {
               ],
             ),
           );
-        });
+          // });
+        },
+      ),
+    );
   }
 }
 
@@ -412,7 +432,6 @@ class QuizzCategoryWidget extends StatelessWidget {
     required this.hardCategory,
     required this.name,
     required this.image,
-    required this.category,
     required this.categoryPoints,
     required this.nextPage,
     super.key,
@@ -420,7 +439,6 @@ class QuizzCategoryWidget extends StatelessWidget {
 
   final String name;
   final String image;
-  final String category;
   final dynamic easyCategory;
   final dynamic mediumCategory;
   final dynamic hardCategory;

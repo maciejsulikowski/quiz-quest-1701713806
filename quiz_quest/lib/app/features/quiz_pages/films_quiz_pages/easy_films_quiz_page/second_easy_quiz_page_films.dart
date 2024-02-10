@@ -4,39 +4,45 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:quiz_quest/app/core/enums.dart';
 import 'package:quiz_quest/app/data/data_sources/quiz_data_source/quiz_categories_data_source.dart';
 import 'package:quiz_quest/app/domain/repositories/quiz_repository/quiz_repository.dart';
-import 'package:quiz_quest/app/features/home_page/home_page.dart';
-import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/easy_question_quiz_page.dart';
-import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/question_quiz_page_films.dart';
+import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/easy_films_quiz_page/easy_question_quiz_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/first_quiz_page_films.dart';
 
-class LostLivesPage extends StatefulWidget {
-  const LostLivesPage({
-    required this.goodAnswers,
+class SecondEasyQuizPageFilms extends StatefulWidget {
+  const SecondEasyQuizPageFilms({
+    required this.image,
+    required this.easyCategory,
     super.key,
   });
 
-  final int goodAnswers;
+  final String image;
+  final dynamic easyCategory;
 
   @override
-  State<LostLivesPage> createState() => _LostLivesPageState();
+  State<SecondEasyQuizPageFilms> createState() =>
+      _SecondEasyQuizPageFilmsState();
 }
 
-class _LostLivesPageState extends State<LostLivesPage> {
+class _SecondEasyQuizPageFilmsState extends State<SecondEasyQuizPageFilms> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ResumePage(goodAnswers: goodAnswers),
+      body: QuizzPage(
+        image: widget.image,
+        easyCategory: widget.easyCategory,
+      ),
     );
   }
 }
 
-class ResumePage extends StatelessWidget {
-  const ResumePage({
-    required this.goodAnswers,
+class QuizzPage extends StatelessWidget {
+  const QuizzPage({
+    required this.image,
+    required this.easyCategory,
     super.key,
   });
 
-  final int goodAnswers;
+  final String image;
+  final dynamic easyCategory;
 
   @override
   Widget build(BuildContext context) {
@@ -57,8 +63,29 @@ class ResumePage extends StatelessWidget {
             height: 30,
           ),
           Center(
+            child: CircleAvatar(
+              radius: 35,
+              backgroundImage: AssetImage(image),
+            ),
+          ),
+          const SizedBox(
+            height: 15,
+          ),
+          Center(
             child: Text(
-              'Auch! 💔',
+              'Easy category points: $easyCategory💎',
+              style: GoogleFonts.aBeeZee(
+                fontSize: 18,
+                color: Colors.white,
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 15,
+          ),
+          Center(
+            child: Text(
+              'Rules',
               style: GoogleFonts.aBeeZee(
                   fontSize: 46,
                   color: Colors.white,
@@ -68,15 +95,20 @@ class ResumePage extends StatelessWidget {
           const SizedBox(
             height: 30,
           ),
-          TextWidget(text: 'You scored: ${goodAnswers * 10} points 💎'),
+          const TextWidget(text: 'You have 20 second to answer'),
           const SizedBox(
             height: 30,
           ),
-          const TextWidget(text: 'Try beat your record: points 💎'),
+          const TextWidget(text: 'You have 3 lives ❤️❤️❤️'),
           const SizedBox(
             height: 30,
           ),
-          const TextWidget(text: 'Your lives are over, try again!'),
+          const TextWidget(text: '1 good answer = 10 points 💎'),
+          const SizedBox(
+            height: 30,
+          ),
+          const TextWidget(
+              text: 'Go as far as you can and keep moving forward  🔥 🧨'),
           const SizedBox(
             height: 30,
           ),
@@ -104,13 +136,15 @@ class ResumePage extends StatelessWidget {
                 ]),
             child: ElevatedButton(
               onPressed: () {
-                Navigator.of(context).popUntil((route) => route.isFirst);
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const EasyQuestionQuizPage(),
+                ));
               },
               style: ElevatedButton.styleFrom(
                   minimumSize: const Size.fromHeight(50),
                   backgroundColor: Colors.transparent,
                   shadowColor: Colors.transparent),
-              child: Text('''Back to Home Page''',
+              child: Text('''Ready? Let's go!''',
                   style: GoogleFonts.aBeeZee(
                     fontSize: 24,
                     color: Colors.white,

@@ -11,6 +11,7 @@ import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/easy_films_q
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/hard_films_quiz_page/second_hard_quiz_page_films.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/medium_films_quiz_page/second_medium_quiz_page_films.dart';
 import 'package:quiz_quest/app/features/quiz_pages/games_quiz_pages/easy_games_quiz_page/second_easy_quiz_page_games.dart';
+import 'package:quiz_quest/app/features/quiz_pages/games_quiz_pages/hard_games_quiz_page/second_hard_quiz_page_games.dart';
 import 'package:quiz_quest/app/features/quiz_pages/games_quiz_pages/medium_games_quiz_page/medium_question_quiz_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/games_quiz_pages/medium_games_quiz_page/second_medium_quiz_page_games.dart';
 
@@ -99,10 +100,10 @@ class QuizzPage extends StatelessWidget {
           const SizedBox(
             height: 30,
           ),
-          // HardDifficultButton(
-          //   image: image,
-          //   text: 'Hard',
-          // ),
+          HardDifficultButton(
+            image: image,
+            text: 'Hard',
+          ),
         ],
       ),
     );
@@ -230,61 +231,61 @@ class MediumDifficultButton extends StatelessWidget {
   }
 }
 
-// class HardDifficultButton extends StatelessWidget {
-//   const HardDifficultButton({
-//     super.key,
-//     required this.image,
-//     required this.text,
-//   });
+class HardDifficultButton extends StatelessWidget {
+  const HardDifficultButton({
+    super.key,
+    required this.image,
+    required this.text,
+  });
 
-//   final String image;
-//   final String text;
+  final String image;
+  final String text;
 
-//   @override
-//   Widget build(BuildContext context) {
-//     final dynamic categories = ModalRoute.of(context)?.settings.arguments;
-//     final dynamic hardCategory = categories[2];
+  @override
+  Widget build(BuildContext context) {
+    final dynamic categories = ModalRoute.of(context)?.settings.arguments;
+    final dynamic hardCategory = categories[2];
 
-//     return Container(
-//       margin: const EdgeInsets.symmetric(horizontal: 20),
-//       decoration: BoxDecoration(
-//           gradient: const LinearGradient(
-//             colors: [
-//               Color.fromRGBO(143, 165, 255, 1),
-//               Color.fromRGBO(10, 53, 132, 1),
-//             ],
-//             begin: Alignment.centerLeft,
-//             end: Alignment.centerRight,
-//           ),
-//           borderRadius: const BorderRadius.all(
-//             Radius.circular(25.0),
-//           ),
-//           boxShadow: [
-//             BoxShadow(
-//               color: Colors.black.withOpacity(0.1),
-//               spreadRadius: 4,
-//               blurRadius: 10,
-//               offset: const Offset(0, 3),
-//             )
-//           ]),
-//       child: ElevatedButton(
-//         onPressed: () {
-//           Navigator.of(context).push(MaterialPageRoute(
-//               builder: (context) => SecondHardQuizPageFilms(
-//                     hardCategory: hardCategory,
-//                     image: image,
-//                   )));
-//         },
-//         style: ElevatedButton.styleFrom(
-//             minimumSize: const Size.fromHeight(50),
-//             backgroundColor: Colors.transparent,
-//             shadowColor: Colors.transparent),
-//         child: Text(text,
-//             style: GoogleFonts.aBeeZee(
-//               fontSize: 24,
-//               color: Colors.white,
-//             )),
-//       ),
-//     );
-//   }
-// }
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 20),
+      decoration: BoxDecoration(
+          gradient: const LinearGradient(
+            colors: [
+              Color.fromRGBO(143, 165, 255, 1),
+              Color.fromRGBO(10, 53, 132, 1),
+            ],
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+          ),
+          borderRadius: const BorderRadius.all(
+            Radius.circular(25.0),
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              spreadRadius: 4,
+              blurRadius: 10,
+              offset: const Offset(0, 3),
+            )
+          ]),
+      child: ElevatedButton(
+        onPressed: () {
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => SecondHardQuizPageGames(
+                    hardCategory: hardCategory,
+                    image: image,
+                  )));
+        },
+        style: ElevatedButton.styleFrom(
+            minimumSize: const Size.fromHeight(50),
+            backgroundColor: Colors.transparent,
+            shadowColor: Colors.transparent),
+        child: Text(text,
+            style: GoogleFonts.aBeeZee(
+              fontSize: 24,
+              color: Colors.white,
+            )),
+      ),
+    );
+  }
+}

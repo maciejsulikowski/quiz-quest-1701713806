@@ -86,9 +86,9 @@ class FilmsCubit extends Cubit<FilmsState> {
     }
   }
 
-  Future<void> updateMediumFilmsPoints(int easyFilmsPoints) async {
+  Future<void> updateMediumFilmsPoints(int mediumFilmsPoints) async {
     try {
-      await userRepository.updateMediumFilmsPoints(easyFilmsPoints);
+      await userRepository.updateMediumFilmsPoints(mediumFilmsPoints);
 
       emit(FilmsState(
         status: Status.success,
@@ -101,9 +101,9 @@ class FilmsCubit extends Cubit<FilmsState> {
     }
   }
 
-  Future<void> updateHardFilmsPoints(int easyFilmsPoints) async {
+  Future<void> updateHardFilmsPoints(int hardFilmsPoints) async {
     try {
-      await userRepository.updateHardFilmsPoints(easyFilmsPoints);
+      await userRepository.updateHardFilmsPoints(hardFilmsPoints);
 
       emit(FilmsState(
         status: Status.success,

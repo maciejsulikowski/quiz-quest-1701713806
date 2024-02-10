@@ -7,8 +7,6 @@ import 'package:quiz_quest/app/domain/repositories/quiz_repository/quiz_reposito
 import 'package:quiz_quest/app/features/home_page/home_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/easy_films_quiz_page/easy_question_quiz_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/medium_films_quiz_page/medium_question_quiz_page.dart';
-import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/question_quiz_page_films.dart';
-import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/first_quiz_page_films.dart';
 
 class ResumeMediumQuizPageFilms extends StatefulWidget {
   const ResumeMediumQuizPageFilms({

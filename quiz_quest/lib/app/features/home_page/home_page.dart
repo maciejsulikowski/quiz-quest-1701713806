@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:quiz_quest/app/core/enums.dart';
 import 'package:quiz_quest/app/data/data_sources/user_data_source/user_data_source.dart';
 import 'package:quiz_quest/app/domain/repositories/user_repository/user_repository.dart';
 import 'package:quiz_quest/app/features/home_page/cubit/home_cubit.dart';
@@ -231,6 +232,10 @@ class _QuizzPageState extends State<QuizzPage> {
       child: BlocBuilder<HomeCubit, HomeState>(
         builder: (context, state) {
           final allPoints = state.totalPoints;
+
+          if (state.status == Status.loading) {
+            return const Center(child: CircularProgressIndicator());
+          }
 
           return Container(
             decoration: const BoxDecoration(

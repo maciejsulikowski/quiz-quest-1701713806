@@ -80,7 +80,6 @@ class UserDataSource {
         .doc(userID)
         .set(
       {
-        'total_points': 0,
         'total_films_points': 0,
         'films_easy_points': 0,
         'films_medium_points': 0,
@@ -115,44 +114,6 @@ class UserDataSource {
         'tv_hard_points': 0,
       },
     );
-  }
-
-  Future<void> updateTotalFilmsPoints(int newTotalFilmsPoints) async {
-    final userID = FirebaseAuth.instance.currentUser?.uid;
-    if (userID == null) {
-      throw Exception('User is not logged in');
-    }
-
-    final userData = await FirebaseFirestore.instance
-        .collection('users')
-        .doc(userID)
-        .collection('points')
-        .doc(userID)
-        .get();
-
-    final filmsTotalPoints = userData['total_films_points'] ?? 0;
-    final totalPoints = userData['total_points'] ?? 0;
-
-    final newPoints = newTotalFilmsPoints * 10;
-
-    if (newPoints > filmsTotalPoints) {
-      final result = (newPoints - filmsTotalPoints);
-      final updateTotalFilmsPoints = filmsTotalPoints + result;
-      final updateTotalPoints =
-          totalPoints - filmsTotalPoints + updateTotalFilmsPoints;
-
-      await FirebaseFirestore.instance
-          .collection('users')
-          .doc(userID)
-          .collection('points')
-          .doc(userID)
-          .update({
-        'total_points': updateTotalPoints,
-        'total_films_points': updateTotalFilmsPoints,
-      });
-    } else {
-      print('Nic');
-    }
   }
 
   Future<void> updateEasyFilmPoints(int newEasyFilmPoints) async {
@@ -207,6 +168,34 @@ class UserDataSource {
           .doc(userID)
           .update({
         'films_medium_points': newMediumPoints,
+      });
+    }
+  }
+
+  Future<void> updateEasyGamesPoints(int newEasyGamesPoints) async {
+    final userID = FirebaseAuth.instance.currentUser?.uid;
+    if (userID == null) {
+      throw Exception('User is not logged in');
+    }
+    final userData = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userID)
+        .collection('points')
+        .doc(userID)
+        .get();
+
+    final easyGamesPoints = userData['games_easy_points'] ?? 0;
+
+    final newGamesPoints = newEasyGamesPoints * 10;
+
+    if (newGamesPoints > easyGamesPoints) {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userID)
+          .collection('points')
+          .doc(userID)
+          .update({
+        'games_easy_points': newGamesPoints,
       });
     }
   }

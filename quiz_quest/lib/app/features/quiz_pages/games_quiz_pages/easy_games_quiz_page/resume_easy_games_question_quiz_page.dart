@@ -8,6 +8,7 @@ import 'package:quiz_quest/app/features/home_page/home_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/easy_films_quiz_page/easy_question_quiz_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/question_quiz_page_films.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/first_quiz_page_films.dart';
+import 'package:quiz_quest/app/features/quiz_pages/games_quiz_pages/easy_games_quiz_page/easy_question_quiz_page.dart';
 
 class ResumeEasyQuizPageGames extends StatefulWidget {
   const ResumeEasyQuizPageGames({
@@ -29,8 +30,8 @@ class _ResumeEasyQuizPageGamesState extends State<ResumeEasyQuizPageGames> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ResumePage(
-        badAnswers: easyFilmsBadAnswers,
-        goodAnswers: easyFilmsGoodAnswers,
+        badAnswers: easyGamesBadAnswers,
+        goodAnswers: easyGamesGoodAnswers,
       ),
     );
   }
@@ -111,10 +112,6 @@ class ResumePage extends StatelessWidget {
             child: ElevatedButton(
               onPressed: () {
                 Navigator.of(context).popUntil((route) => route.isFirst);
-                //throw Exception('No user found');
-                //Navigator.of(context).push(MaterialPageRoute(
-                //  builder: (context) => const HomePage(),
-                //));
               },
               style: ElevatedButton.styleFrom(
                   minimumSize: const Size.fromHeight(50),

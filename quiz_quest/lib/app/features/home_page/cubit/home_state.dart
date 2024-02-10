@@ -132,7 +132,9 @@ class HomeState {
         )
       },
     ],
-    this.pointsModel,
+    this.categoryPoints = const [],
+    this.totalPoints = 0,
+    this.totalCategoryPoints = 0,
   });
 
   final SportsQuizModel? sportsModel;
@@ -147,5 +149,7 @@ class HomeState {
   final String? errorMessage;
   final List searchedList;
   final List list;
-  final PointsModel? pointsModel;
+  final List<Map<String, int>> categoryPoints;
+  final int totalPoints;
+  final int totalCategoryPoints;
 }

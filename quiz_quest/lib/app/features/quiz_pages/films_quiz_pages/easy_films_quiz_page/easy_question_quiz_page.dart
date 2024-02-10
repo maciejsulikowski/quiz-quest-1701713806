@@ -229,16 +229,16 @@ class _EasyQuestionQuizPageState extends State<EasyQuestionQuizPage> {
                           isButtonDisabled = true;
                           isTimeUp = true;
                           if (easyFilmsBadAnswers == 3) {
-                            context
-                                .read<FilmsCubit>()
-                                .addTotalFilmsPoints(easyFilmsGoodAnswers);
+                            // context
+                            //     .read<FilmsCubit>()
+                            //     .addTotalFilmsPoints(easyFilmsGoodAnswers);
                             context
                                 .read<FilmsCubit>()
                                 .updateEasyFilmsPoints(easyFilmsGoodAnswers);
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                builder: (context) =>
-                                    EasyLostLifePage(goodAnswers: easyFilmsGoodAnswers),
+                                builder: (context) => EasyLostLifePage(
+                                    goodAnswers: easyFilmsGoodAnswers),
                               ),
                             );
                           }
@@ -512,11 +512,12 @@ class _AnswerButtonState extends State<AnswerButton> {
       widget.colorFunction(Colors.red, widget.index);
       easyFilmsBadAnswers += 1;
       if (easyFilmsBadAnswers == 3) {
-        context.read<FilmsCubit>().addTotalFilmsPoints(easyFilmsGoodAnswers);
+        // context.read<FilmsCubit>().addTotalFilmsPoints(easyFilmsGoodAnswers);
         context.read<FilmsCubit>().updateEasyFilmsPoints(easyFilmsGoodAnswers);
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => EasyLostLifePage(goodAnswers: easyFilmsGoodAnswers),
+            builder: (context) =>
+                EasyLostLifePage(goodAnswers: easyFilmsGoodAnswers),
           ),
         );
       }

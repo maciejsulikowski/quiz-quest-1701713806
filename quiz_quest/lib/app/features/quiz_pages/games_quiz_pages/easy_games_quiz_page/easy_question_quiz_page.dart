@@ -34,8 +34,8 @@ Color textColor = Colors.white;
 late bool isDurationEnded;
 late Color ringColor;
 bool isTimeUp = false;
-late int easyFilmsGoodAnswers;
-late int easyFilmsBadAnswers;
+late int easyGamesGoodAnswers;
+late int easyGamesBadAnswers;
 bool isCorrectAnswer = false;
 String threeLives = '❤️❤️❤️';
 String twoLives = ' ❤️❤️';
@@ -56,8 +56,8 @@ class _EasyQuestionGamesQuizPageState extends State<EasyQuestionGamesQuizPage> {
 
   @override
   void initState() {
-    easyFilmsGoodAnswers = 0;
-    easyFilmsBadAnswers = 0;
+    easyGamesGoodAnswers = 0;
+    easyGamesBadAnswers = 0;
     currentAnswers = [];
     answerColors;
     answerGenerated = false;
@@ -88,8 +88,8 @@ class _EasyQuestionGamesQuizPageState extends State<EasyQuestionGamesQuizPage> {
 
   void resetQuizState() {
     isButtonNameChanged = false;
-    easyFilmsBadAnswers = 0;
-    easyFilmsGoodAnswers = 0;
+    easyGamesBadAnswers = 0;
+    easyGamesGoodAnswers = 0;
     currentIndex = 0;
     isButtonClicked = false;
     isButtonDisabled = false;
@@ -190,7 +190,7 @@ class _EasyQuestionGamesQuizPageState extends State<EasyQuestionGamesQuizPage> {
                             ),
                             Expanded(
                               child: Text(
-                                'Score: ${easyFilmsGoodAnswers * 10}',
+                                'Score: ${easyGamesGoodAnswers * 10}',
                                 style: GoogleFonts.aBeeZee(
                                     fontSize: 20,
                                     color: Colors.white,
@@ -202,11 +202,11 @@ class _EasyQuestionGamesQuizPageState extends State<EasyQuestionGamesQuizPage> {
                               child: Padding(
                                 padding: const EdgeInsets.only(right: 20.0),
                                 child: Text(
-                                  easyFilmsBadAnswers == 0
+                                  easyGamesBadAnswers == 0
                                       ? threeLives
-                                      : easyFilmsBadAnswers == 1
+                                      : easyGamesBadAnswers == 1
                                           ? twoLives
-                                          : easyFilmsBadAnswers == 2
+                                          : easyGamesBadAnswers == 2
                                               ? oneLive
                                               : '',
                                   style: GoogleFonts.aBeeZee(
@@ -229,20 +229,20 @@ class _EasyQuestionGamesQuizPageState extends State<EasyQuestionGamesQuizPage> {
                         setState(() {
                           isDurationEnded = value;
                           ringColor = Colors.red;
-                          easyFilmsBadAnswers += 1;
+                          easyGamesBadAnswers += 1;
                           isButtonDisabled = true;
                           isTimeUp = true;
-                          if (easyFilmsBadAnswers == 3) {
+                          if (easyGamesBadAnswers == 3) {
                             // context
                             //     .read<GamesCubit>()
-                            //     .addTotalFilmsPoints(easyFilmsGoodAnswers);
+                            //     .addTotalFilmsPoints(easyGamesGoodAnswers);
                             // context
                             //     .read<GamesCubit>()
-                            //     .updateEasyFilmsPoints(easyFilmsGoodAnswers);
+                            //     .updateEasyFilmsPoints(easyGamesGoodAnswers);
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (context) => EasyGamesLostLifePage(
-                                    goodAnswers: easyFilmsGoodAnswers),
+                                    goodAnswers: easyGamesGoodAnswers),
                               ),
                             );
                           }
@@ -283,7 +283,7 @@ class _EasyQuestionGamesQuizPageState extends State<EasyQuestionGamesQuizPage> {
                                       MainAxisAlignment.spaceAround,
                                   children: [
                                     Text(
-                                      'Bad: $easyFilmsBadAnswers',
+                                      'Bad: $easyGamesBadAnswers',
                                       style: GoogleFonts.aBeeZee(
                                           fontSize: 20,
                                           color: Colors.red,
@@ -303,7 +303,7 @@ class _EasyQuestionGamesQuizPageState extends State<EasyQuestionGamesQuizPage> {
                                       width: 10,
                                     ),
                                     Text(
-                                      'Good: $easyFilmsGoodAnswers',
+                                      'Good: $easyGamesGoodAnswers',
                                       style: GoogleFonts.aBeeZee(
                                           fontSize: 20,
                                           color: Colors.green,
@@ -385,9 +385,9 @@ class _EasyQuestionGamesQuizPageState extends State<EasyQuestionGamesQuizPage> {
                                                             builder: (context) =>
                                                                 ResumeEasyQuizPageFilms(
                                                               badAnswers:
-                                                                  easyFilmsBadAnswers,
+                                                                  easyGamesBadAnswers,
                                                               goodAnswers:
-                                                                  easyFilmsGoodAnswers,
+                                                                  easyGamesGoodAnswers,
                                                             ),
                                                           ),
                                                         );
@@ -511,17 +511,17 @@ class _AnswerButtonState extends State<AnswerButton> {
 
     if (widget.isCorrectAnswer) {
       widget.colorFunction(Colors.green, widget.index);
-      easyFilmsGoodAnswers += 1;
+      easyGamesGoodAnswers += 1;
     } else {
       widget.colorFunction(Colors.red, widget.index);
-      easyFilmsBadAnswers += 1;
-      if (easyFilmsBadAnswers == 3) {
-        // context.read<GamesCubit>().addTotalFilmsPoints(easyFilmsGoodAnswers);
-        // context.read<GamesCubit>().updateEasyFilmsPoints(easyFilmsGoodAnswers);
+      easyGamesBadAnswers += 1;
+      if (easyGamesBadAnswers == 3) {
+        // context.read<GamesCubit>().addTotalFilmsPoints(easyGamesGoodAnswers);
+        // context.read<GamesCubit>().updateEasyFilmsPoints(easyGamesGoodAnswers);
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) =>
-                EasyGamesLostLifePage(goodAnswers: easyFilmsGoodAnswers),
+                EasyGamesLostLifePage(goodAnswers: easyGamesGoodAnswers),
           ),
         );
       }

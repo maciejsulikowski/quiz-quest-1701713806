@@ -230,9 +230,9 @@ class _MediumQuestionQuizPageState extends State<MediumQuestionQuizPage> {
                           isButtonDisabled = true;
                           isTimeUp = true;
                           if (mediumFilmsBadAnswers == 3) {
-                            context
-                                .read<FilmsCubit>()
-                                .addTotalFilmsPoints(mediumFilmsGoodAnswers);
+                            // context
+                            //     .read<FilmsCubit>()
+                            //     .addTotalFilmsPoints(mediumFilmsGoodAnswers);
                             context.read<FilmsCubit>().updateMediumFilmsPoints(
                                 mediumFilmsGoodAnswers);
                             Navigator.of(context).push(
@@ -513,7 +513,7 @@ class _AnswerButtonState extends State<AnswerButton> {
       widget.colorFunction(Colors.red, widget.index);
       mediumFilmsBadAnswers += 1;
       if (mediumFilmsBadAnswers == 3) {
-        context.read<FilmsCubit>().addTotalFilmsPoints(mediumFilmsGoodAnswers);
+        // context.read<FilmsCubit>().addTotalFilmsPoints(mediumFilmsGoodAnswers);
         context
             .read<FilmsCubit>()
             .updateMediumFilmsPoints(mediumFilmsGoodAnswers);

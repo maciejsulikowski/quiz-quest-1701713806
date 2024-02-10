@@ -8,6 +8,7 @@ import 'package:quiz_quest/app/features/home_page/home_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/easy_films_quiz_page/easy_question_quiz_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/question_quiz_page_films.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/first_quiz_page_films.dart';
+import 'package:quiz_quest/app/features/quiz_pages/games_quiz_pages/easy_games_quiz_page/easy_question_quiz_page.dart';
 
 class EasyGamesLostLifePage extends StatefulWidget {
   const EasyGamesLostLifePage({
@@ -25,7 +26,7 @@ class _EasyGamesLostLifePageState extends State<EasyGamesLostLifePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ResumePage(goodAnswers: easyFilmsGoodAnswers),
+      body: ResumePage(goodAnswers: easyGamesGoodAnswers),
     );
   }
 }

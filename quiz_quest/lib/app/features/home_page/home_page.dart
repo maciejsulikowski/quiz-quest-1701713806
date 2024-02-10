@@ -86,7 +86,7 @@ class QuizzPage extends StatefulWidget {
 class _QuizzPageState extends State<QuizzPage> {
   List<dynamic> list = [
     {
-      'id': 1,
+      'id': 0,
       'name': 'Films',
       'image': 'images/movie.png',
       'total_category': 'total_films_points',
@@ -98,7 +98,7 @@ class _QuizzPageState extends State<QuizzPage> {
       )
     },
     {
-      'id': 2,
+      'id': 1,
       'name': 'Games',
       'image': 'images/games.png',
       'total_category': 'total_games_points',
@@ -113,7 +113,7 @@ class _QuizzPageState extends State<QuizzPage> {
       )
     },
     {
-      'id': 3,
+      'id': 2,
       'name': 'Geography',
       'image': 'images/geography.png',
       'total_category': 'total_geography_points',
@@ -128,7 +128,7 @@ class _QuizzPageState extends State<QuizzPage> {
       )
     },
     {
-      'id': 4,
+      'id': 3,
       'name': 'History',
       'image': 'images/history.png',
       'total_category': 'total_history_points',
@@ -143,7 +143,7 @@ class _QuizzPageState extends State<QuizzPage> {
       )
     },
     {
-      'id': 5,
+      'id': 4,
       'name': 'Music',
       'image': 'images/music.png',
       'total_category': 'total_music_points',
@@ -158,7 +158,7 @@ class _QuizzPageState extends State<QuizzPage> {
       )
     },
     {
-      'id': 6,
+      'id': 5,
       'name': 'Nature',
       'image': 'images/nature.png',
       'total_category': 'total_nature_points',
@@ -173,7 +173,7 @@ class _QuizzPageState extends State<QuizzPage> {
       )
     },
     {
-      'id': 7,
+      'id': 6,
       'name': 'Sport',
       'image': 'images/ball.png',
       'total_category': 'total_sports_points',
@@ -188,7 +188,7 @@ class _QuizzPageState extends State<QuizzPage> {
       )
     },
     {
-      'id': 8,
+      'id': 7,
       'name': 'TV',
       'image': 'images/tv.png',
       'total_category': 'total_tv_points',
@@ -230,7 +230,7 @@ class _QuizzPageState extends State<QuizzPage> {
           HomeCubit(UserRepository(UserDataSource()))..getPointsData(),
       child: BlocBuilder<HomeCubit, HomeState>(
         builder: (context, state) {
-          final allPoints = state.pointsModel?.totalPoints ?? 0;
+          final allPoints = state.totalPoints;
 
           return Container(
             decoration: const BoxDecoration(
@@ -387,23 +387,24 @@ class _QuizzPageState extends State<QuizzPage> {
                       return QuizzCategoryWidget(
                         name: categoryList[index]['name'],
                         image: categoryList[index]['image'],
-                        easyCategory: state.pointsModel
-                                    ?.categoryPoints[categoryList[index]['id']]
-                                ?['easy'] ??
-                            0,
-                        mediumCategory: state.pointsModel
-                                    ?.categoryPoints[categoryList[index]['id']]
-                                ?['medium'] ??
-                            0,
-                        hardCategory: state.pointsModel
-                                    ?.categoryPoints[categoryList[index]['id']]
-                                ?['hard'] ??
-                            0,
-                        categoryPoints: state.pointsModel
-                                    ?.categoryPoints[categoryList[index]['id']]
-                                ?['total'] ??
-                            0,
+                        easyCategory:
+                            state.categoryPoints[categoryList[index]['id']]
+                                    ['easy'] ??
+                                0,
+                        mediumCategory:
+                            state.categoryPoints[categoryList[index]['id']]
+                                    ['medium'] ??
+                                0,
+                        hardCategory:
+                            state.categoryPoints[categoryList[index]['id']]
+                                    ['hard'] ??
+                                0,
+                        categoryPoints:
+                            state.categoryPoints[categoryList[index]['id']]
+                                    ['total'] ??
+                                0,
                         nextPage: state.list[index]['page'],
+                        // allCategoryPoints: allCategoryPoints,
                       );
                     },
                   ),
@@ -433,7 +434,6 @@ class QuizzCategoryWidget extends StatelessWidget {
 
   final String name;
   final String image;
-
   final dynamic easyCategory;
   final dynamic mediumCategory;
   final dynamic hardCategory;

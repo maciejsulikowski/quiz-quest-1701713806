@@ -71,20 +71,20 @@ class FilmsCubit extends Cubit<FilmsState> {
     }
   }
 
-  Future<void> addTotalFilmsPoints(int totalFilmsPoints) async {
-    try {
-      await userRepository.addTotalFilmsPoints(totalFilmsPoints);
+  // Future<void> addTotalFilmsPoints(int totalFilmsPoints) async {
+  //   try {
+  //     await userRepository.addTotalFilmsPoints(totalFilmsPoints);
 
-      emit(FilmsState(
-        status: Status.success,
-      ));
-    } catch (error) {
-      emit(FilmsState(
-        status: Status.error,
-        error: error.toString(),
-      ));
-    }
-  }
+  //     emit(FilmsState(
+  //       status: Status.success,
+  //     ));
+  //   } catch (error) {
+  //     emit(FilmsState(
+  //       status: Status.error,
+  //       error: error.toString(),
+  //     ));
+  //   }
+  // }
 
   Future<void> updateEasyFilmsPoints(int easyFilmsPoints) async {
     try {

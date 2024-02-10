@@ -37,9 +37,14 @@ class HomeCubit extends Cubit<HomeState> {
       status: Status.loading,
     ));
 
-    streamSubscription = userRepository.getPointsModel().listen((points) {
+    streamSubscription = userRepository.getPoints().listen((points) {
+      int totalPoints = 0;
+      for (var element in points) {
+        totalPoints += element['total']!;
+      }
       emit(HomeState(
-        pointsModel: points,
+        categoryPoints: points,
+        totalPoints: totalPoints,
         status: Status.success,
       ));
     })

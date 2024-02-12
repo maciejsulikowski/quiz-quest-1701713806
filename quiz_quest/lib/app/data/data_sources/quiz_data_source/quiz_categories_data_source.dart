@@ -241,70 +241,8 @@ class QuizCategoriesDataSource {
     return responseData;
   }
 
-  Future<Map<String, dynamic>?> getAnimalsCategory() async {
-    final response = await Dio().get(
-        'https://opentdb.com/api.php?amount=13&category=27&difficulty=easy&type=multiple',
-        options: Options(
-          validateStatus: (_) => true,
-        ));
-
-    final responseData = response.data;
-
-    if (responseData == null) {
-      return null;
-    }
-
-    return responseData;
-  }
-
-  Future<Map<String, dynamic>?> getMediumAnimalsCategory() async {
-    final response = await Dio().get(
-        'https://opentdb.com/api.php?amount=22&category=27&difficulty=medium&type=multiple',
-        options: Options(
-          validateStatus: (_) => true,
-        ));
-
-    final responseData = response.data;
-
-    if (responseData == null) {
-      return null;
-    }
-
-    return responseData;
-  }
-
-  Future<Map<String, dynamic>?> getArtCategory() async {
-    final response = await Dio().get(
-        'https://opentdb.com/api.php?amount=10&category=25&difficulty=easy&type=multiple',
-        options: Options(
-          validateStatus: (_) => true,
-        ));
-
-    final responseData = response.data;
-
-    if (responseData == null) {
-      return null;
-    }
-
-    return responseData;
-  }
-
-  Future<Map<String, dynamic>?> getComputerScienceCategory() async {
-    final response = await Dio().get(
-        'https://opentdb.com/api.php?amount=10&category=18&difficulty=easy&type=multiple',
-        options: Options(
-          validateStatus: (_) => true,
-        ));
-
-    final responseData = response.data;
-
-    if (responseData == null) {
-      return null;
-    }
-
-    return responseData;
-  }
-
+ 
+  
   Future<Map<String, dynamic>?> getEasyGeographyCategory() async {
     final response = await Dio().get(
         'https://opentdb.com/api.php?amount=50&category=22&difficulty=easy&type=multiple',
@@ -401,21 +339,7 @@ class QuizCategoriesDataSource {
     return responseData;
   }
 
-  Future<Map<String, dynamic>?> getPoliticsCategory() async {
-    final response = await Dio().get(
-        'https://opentdb.com/api.php?amount=24&category=21&difficulty=easy&type=multiple',
-        options: Options(
-          validateStatus: (_) => true,
-        ));
-
-    final responseData = response.data;
-
-    if (responseData == null) {
-      return null;
-    }
-
-    return responseData;
-  }
+  
 
   Future<Map<String, dynamic>?> getRandomCategory() async {
     final response = await Dio().get(
@@ -435,7 +359,7 @@ class QuizCategoriesDataSource {
 
   Future<Map<String, dynamic>?> getEasySportCategory() async {
     final response = await Dio().get(
-        'https://opentdb.com/api.php?amount=40&category=21&difficulty=easy&type=multiple',
+        'https://opentdb.com/api.php?amount=5&category=21&difficulty=easy&type=multiple',
         options: Options(
           validateStatus: (_) => true,
         ));
@@ -451,7 +375,7 @@ class QuizCategoriesDataSource {
 
   Future<Map<String, dynamic>?> getMediumSportCategory() async {
     final response = await Dio().get(
-        'https://opentdb.com/api.php?amount=40&category=21&difficulty=medium&type=multiple',
+        'https://opentdb.com/api.php?amount=5&category=21&difficulty=medium&type=multiple',
         options: Options(
           validateStatus: (_) => true,
         ));
@@ -467,7 +391,7 @@ class QuizCategoriesDataSource {
 
   Future<Map<String, dynamic>?> getHardSportCategory() async {
     final response = await Dio().get(
-        'https://opentdb.com/api.php?amount=20&category=21&difficulty=hard&type=multiple',
+        'https://opentdb.com/api.php?amount=5&category=21&difficulty=hard&type=multiple',
         options: Options(
           validateStatus: (_) => true,
         ));

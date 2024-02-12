@@ -198,6 +198,19 @@ class UserRepository {
     return userDataSource.updateHardNaturePoints(hardNaturePoints);
   }
 
+  //sport
+  Future<void> updateEasySportPoints(int easySportPoints) async {
+    return userDataSource.updateEasySportPoints(easySportPoints);
+  }
+
+  Future<void> updateMediumSportPoints(int mediumSportPoints) async {
+    return userDataSource.updateMediumSportPoints(mediumSportPoints);
+  }
+
+  Future<void> updateHardSportPoints(int hardSportPoints) async {
+    return userDataSource.updateHardSportPoints(hardSportPoints);
+  }
+
   Future<void> updateName(String name) async {
     return userDataSource.updateName(name: name);
   }

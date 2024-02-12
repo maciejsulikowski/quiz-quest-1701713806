@@ -619,6 +619,90 @@ class UserDataSource {
     }
   }
 
+  Future<void> updateEasySportPoints(int newEasySportPoints) async {
+    final userID = FirebaseAuth.instance.currentUser?.uid;
+    if (userID == null) {
+      throw Exception('User is not logged in');
+    }
+    final userData = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userID)
+        .collection('points')
+        .doc(userID)
+        .get();
+
+    final easySportPoints = userData['sport_easy_points'] ?? 0;
+
+    final newSportPoints = newEasySportPoints * 10;
+
+    if (newSportPoints > easySportPoints) {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userID)
+          .collection('points')
+          .doc(userID)
+          .update({
+        'sport_easy_points': newSportPoints,
+      });
+    }
+  }
+
+  Future<void> updateMediumSportPoints(int newMediumSportPoints) async {
+    final userID = FirebaseAuth.instance.currentUser?.uid;
+    if (userID == null) {
+      throw Exception('User is not logged in');
+    }
+    final userData = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userID)
+        .collection('points')
+        .doc(userID)
+        .get();
+
+    final mediumSportPoints = userData['sport_medium_points'] ?? 0;
+
+    final newSportPoints = newMediumSportPoints * 10;
+
+    if (newSportPoints > mediumSportPoints) {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userID)
+          .collection('points')
+          .doc(userID)
+          .update({
+        'sport_medium_points': newSportPoints,
+      });
+    }
+  }
+
+  Future<void> updateHardSportPoints(int newHardSportPoints) async {
+    final userID = FirebaseAuth.instance.currentUser?.uid;
+    if (userID == null) {
+      throw Exception('User is not logged in');
+    }
+    final userData = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userID)
+        .collection('points')
+        .doc(userID)
+        .get();
+
+    final hardSportPoints = userData['sport_hard_points'] ?? 0;
+
+    final newSportPoints = newHardSportPoints * 10;
+
+    if (newSportPoints > hardSportPoints) {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userID)
+          .collection('points')
+          .doc(userID)
+          .update({
+        'sport_hard_points': newSportPoints,
+      });
+    }
+  }
+
   Future<void> updateName({
     required String? name,
   }) async {

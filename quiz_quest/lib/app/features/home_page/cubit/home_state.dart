@@ -95,10 +95,7 @@ class HomeState {
         'medium_category': 'sport_medium_points',
         'hard_category': 'sport_hard_points',
         'page': FirstQuizPageSport(
-          image: 'images/nature.png',
-          easyCategory: 'sport_easy_points',
-          mediumCategory: 'sport_medium_points',
-          hardCategory: 'sport_hard_points',
+          image: 'images/ball.png',
         )
       },
       {

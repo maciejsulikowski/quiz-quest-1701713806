@@ -207,9 +207,29 @@ Future<GeographyQuizModel?> getEasyGeographyData() async {
     return NatureQuizModel.fromJson(json);
   }
 
-
-  Future<SportsQuizModel?> getEasySportsData() async {
+  //sport
+  Future<SportsQuizModel?> getEasySportData() async {
     final json = await quizCategoriesDataSource.getEasySportCategory();
+
+    if (json == null) {
+      return null;
+    }
+
+    return SportsQuizModel.fromJson(json);
+  }
+
+  Future<SportsQuizModel?> getMediumSportData() async {
+    final json = await quizCategoriesDataSource.getMediumSportCategory();
+
+    if (json == null) {
+      return null;
+    }
+
+    return SportsQuizModel.fromJson(json);
+  }
+
+  Future<SportsQuizModel?> getHardSportData() async {
+    final json = await quizCategoriesDataSource.getHardSportCategory();
 
     if (json == null) {
       return null;

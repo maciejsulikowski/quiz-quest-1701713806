@@ -146,6 +146,19 @@ class UserRepository {
     return userDataSource.updateHardFilmPoints(hardFilmsPoints);
   }
 
+  //geo
+  Future<void> updateEasyGeographyPoints(int easyGeographyPoints) async {
+    return userDataSource.updateEasyGeographyPoints(easyGeographyPoints);
+  }
+
+  Future<void> updateMediumGeographyPoints(int mediumGeographyPoints) async {
+    return userDataSource.updateMediumGeographyPoints(mediumGeographyPoints);
+  }
+
+  Future<void> updateHardGeographyPoints(int hardGeographyPoints) async {
+    return userDataSource.updateHardGeographyPoints(hardGeographyPoints);
+  }
+
   Future<void> updateName(String name) async {
     return userDataSource.updateName(name: name);
   }

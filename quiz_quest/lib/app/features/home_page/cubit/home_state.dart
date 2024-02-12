@@ -36,9 +36,6 @@ class HomeState {
         'hard_category': 'games_hard_points',
         'page': FirstQuizPageGames(
           image: 'images/games.png',
-          // easyCategory: 'games_easy_points',
-          // mediumCategory: 'games_medium_points',
-          // hardCategory: 'games_hard_points',
         )
       },
       {
@@ -51,9 +48,6 @@ class HomeState {
         'hard_category': 'geography_hard_points',
         'page': FirstQuizPageGeography(
           image: 'images/geography.png',
-          easyCategory: 'geography_easy_points',
-          mediumCategory: 'geography_medium_points',
-          hardCategory: 'geography_hard_points',
         )
       },
       {

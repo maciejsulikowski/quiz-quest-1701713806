@@ -283,6 +283,90 @@ class UserDataSource {
     }
   }
 
+  Future<void> updateEasyGeographyPoints(int newEasyGeographyPoints) async {
+    final userID = FirebaseAuth.instance.currentUser?.uid;
+    if (userID == null) {
+      throw Exception('User is not logged in');
+    }
+    final userData = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userID)
+        .collection('points')
+        .doc(userID)
+        .get();
+
+    final easyGeographyPoints = userData['geography_easy_points'] ?? 0;
+
+    final newGeographyPoints = newEasyGeographyPoints * 10;
+
+    if (newGeographyPoints > easyGeographyPoints) {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userID)
+          .collection('points')
+          .doc(userID)
+          .update({
+        'geography_easy_points': newGeographyPoints,
+      });
+    }
+  }
+
+  Future<void> updateMediumGeographyPoints(int newMediumGeographyPoints) async {
+    final userID = FirebaseAuth.instance.currentUser?.uid;
+    if (userID == null) {
+      throw Exception('User is not logged in');
+    }
+    final userData = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userID)
+        .collection('points')
+        .doc(userID)
+        .get();
+
+    final mediumGeographyPoints = userData['geography_medium_points'] ?? 0;
+
+    final newGeographyPoints = newMediumGeographyPoints * 10;
+
+    if (newGeographyPoints > mediumGeographyPoints) {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userID)
+          .collection('points')
+          .doc(userID)
+          .update({
+        'geography_medium_points': newGeographyPoints,
+      });
+    }
+  }
+
+  Future<void> updateHardGeographyPoints(int newHardGeographyPoints) async {
+    final userID = FirebaseAuth.instance.currentUser?.uid;
+    if (userID == null) {
+      throw Exception('User is not logged in');
+    }
+    final userData = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userID)
+        .collection('points')
+        .doc(userID)
+        .get();
+
+    final hardGeographyPoints = userData['geography_hard_points'] ?? 0;
+
+    final newGeographyPoints = newHardGeographyPoints * 10;
+
+    if (newGeographyPoints > hardGeographyPoints) {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userID)
+          .collection('points')
+          .doc(userID)
+          .update({
+        'geography_hard_points': newGeographyPoints,
+      });
+    }
+  }
+
   Future<void> updateName({
     required String? name,
   }) async {

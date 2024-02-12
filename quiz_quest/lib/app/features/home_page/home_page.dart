@@ -108,9 +108,6 @@ class _QuizzPageState extends State<QuizzPage> {
       'hard_category': 'games_hard_points',
       'page': const FirstQuizPageGames(
         image: 'images/games.png',
-        // easyCategory: 'games_easy_points',
-        // mediumCategory: 'games_medium_points',
-        // hardCategory: 'games_hard_points',
       )
     },
     {
@@ -123,9 +120,6 @@ class _QuizzPageState extends State<QuizzPage> {
       'hard_category': 'geography_hard_points',
       'page': const FirstQuizPageGeography(
         image: 'images/geography.png',
-        easyCategory: 'geography_easy_points',
-        mediumCategory: 'geography_medium_points',
-        hardCategory: 'geography_hard_points',
       )
     },
     {

@@ -10,51 +10,43 @@ import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/first_quiz_p
 import 'package:quiz_quest/app/features/quiz_pages/games_quiz_pages/easy_games_quiz_page/easy_question_quiz_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/geography_quiz_pages/easy_geography_quiz_page/easy_question_quiz_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/history_quiz_pages/easy_history_quiz_page/easy_question_quiz_page.dart';
-import 'package:quiz_quest/app/features/quiz_pages/history_quiz_pages/medium_history_quiz_page/medium_question_quiz_page.dart';
-import 'package:quiz_quest/app/features/quiz_pages/music_quiz_pages/medium_music_quiz_page/medium_question_quiz_page.dart';
+import 'package:quiz_quest/app/features/quiz_pages/music_quiz_pages/easy_music_quiz_page/easy_question_quiz_page.dart';
+import 'package:quiz_quest/app/features/quiz_pages/nature_quiz_pages/easy_nature_quiz_page/easy_question_quiz_page.dart';
+import 'package:quiz_quest/app/features/quiz_pages/nature_quiz_pages/hard_nature_quiz_page/hard_question_quiz_page.dart';
+import 'package:quiz_quest/app/features/quiz_pages/nature_quiz_pages/medium_nature_quiz_page/medium_question_quiz_page.dart';
 
-class ResumeMediumMusicQuizPageGames extends StatefulWidget {
-  const ResumeMediumMusicQuizPageGames({
-    required this.badAnswers,
+class HardNatureLostLifePage extends StatefulWidget {
+  const HardNatureLostLifePage({
     required this.goodAnswers,
     super.key,
   });
 
   final int goodAnswers;
-  final int badAnswers;
 
   @override
-  State<ResumeMediumMusicQuizPageGames> createState() =>
-      _ResumeMediumMusicQuizPageGamesState();
+  State<HardNatureLostLifePage> createState() =>
+      _HardNatureLostLifePageState();
 }
 
-class _ResumeMediumMusicQuizPageGamesState
-    extends State<ResumeMediumMusicQuizPageGames> {
+class _HardNatureLostLifePageState extends State<HardNatureLostLifePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ResumePage(
-        badAnswers: mediumMusicBadAnswers,
-        goodAnswers: mediumMusicGoodAnswers,
-      ),
+      body: ResumePage(goodAnswers: hardNatureGoodAnswers),
     );
   }
 }
 
 class ResumePage extends StatelessWidget {
   const ResumePage({
-    required this.badAnswers,
     required this.goodAnswers,
     super.key,
   });
 
   final int goodAnswers;
-  final int badAnswers;
 
   @override
   Widget build(BuildContext context) {
-    final record = goodAnswers * 10;
-
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
@@ -73,7 +65,7 @@ class ResumePage extends StatelessWidget {
           ),
           Center(
             child: Text(
-              'Good work!',
+              'Auch! 💔',
               style: GoogleFonts.aBeeZee(
                   fontSize: 46,
                   color: Colors.white,
@@ -83,7 +75,15 @@ class ResumePage extends StatelessWidget {
           const SizedBox(
             height: 30,
           ),
-          TextWidget(text: 'You scored: $record points 💎'),
+          TextWidget(text: 'You scored: ${goodAnswers * 10} points 💎'),
+          const SizedBox(
+            height: 30,
+          ),
+          const TextWidget(text: 'Try beat your record: points 💎'),
+          const SizedBox(
+            height: 30,
+          ),
+          const TextWidget(text: 'Your lives are over, try again!'),
           const SizedBox(
             height: 30,
           ),

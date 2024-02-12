@@ -10,11 +10,10 @@ import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/first_quiz_p
 import 'package:quiz_quest/app/features/quiz_pages/games_quiz_pages/easy_games_quiz_page/easy_question_quiz_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/geography_quiz_pages/easy_geography_quiz_page/easy_question_quiz_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/history_quiz_pages/easy_history_quiz_page/easy_question_quiz_page.dart';
-import 'package:quiz_quest/app/features/quiz_pages/history_quiz_pages/medium_history_quiz_page/medium_question_quiz_page.dart';
-import 'package:quiz_quest/app/features/quiz_pages/music_quiz_pages/medium_music_quiz_page/medium_question_quiz_page.dart';
+import 'package:quiz_quest/app/features/quiz_pages/nature_quiz_pages/easy_nature_quiz_page/easy_question_quiz_page.dart';
 
-class ResumeMediumMusicQuizPageGames extends StatefulWidget {
-  const ResumeMediumMusicQuizPageGames({
+class ResumeEasyNatureQuizPageGames extends StatefulWidget {
+  const ResumeEasyNatureQuizPageGames({
     required this.badAnswers,
     required this.goodAnswers,
     super.key,
@@ -24,18 +23,18 @@ class ResumeMediumMusicQuizPageGames extends StatefulWidget {
   final int badAnswers;
 
   @override
-  State<ResumeMediumMusicQuizPageGames> createState() =>
-      _ResumeMediumMusicQuizPageGamesState();
+  State<ResumeEasyNatureQuizPageGames> createState() =>
+      _ResumeEasyNatureQuizPageGamesState();
 }
 
-class _ResumeMediumMusicQuizPageGamesState
-    extends State<ResumeMediumMusicQuizPageGames> {
+class _ResumeEasyNatureQuizPageGamesState
+    extends State<ResumeEasyNatureQuizPageGames> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: ResumePage(
-        badAnswers: mediumMusicBadAnswers,
-        goodAnswers: mediumMusicGoodAnswers,
+        badAnswers: easyNatureBadAnswers,
+        goodAnswers: easyNatureGoodAnswers,
       ),
     );
   }

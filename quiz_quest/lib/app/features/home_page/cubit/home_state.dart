@@ -60,7 +60,6 @@ class HomeState {
         'hard_category': 'history_hard_points',
         'page': FirstQuizPageHistory(
           image: 'images/history.png',
-       
         )
       },
       {
@@ -73,7 +72,6 @@ class HomeState {
         'hard_category': 'music_hard_points',
         'page': FirstQuizPageMusic(
           image: 'images/music.png',
-         
         )
       },
       {
@@ -86,9 +84,6 @@ class HomeState {
         'hard_category': 'nature_hard_points',
         'page': FirstQuizPageNature(
           image: 'images/nature.png',
-          easyCategory: 'nature_easy_points',
-          mediumCategory: 'nature_medium_points',
-          hardCategory: 'nature_hard_points',
         )
       },
       {

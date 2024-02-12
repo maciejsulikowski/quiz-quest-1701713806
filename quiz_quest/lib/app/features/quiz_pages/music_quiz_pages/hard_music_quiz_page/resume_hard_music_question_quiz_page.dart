@@ -12,6 +12,7 @@ import 'package:quiz_quest/app/features/quiz_pages/geography_quiz_pages/easy_geo
 import 'package:quiz_quest/app/features/quiz_pages/history_quiz_pages/easy_history_quiz_page/easy_question_quiz_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/history_quiz_pages/hard_history_quiz_page/hard_question_quiz_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/history_quiz_pages/medium_history_quiz_page/medium_question_quiz_page.dart';
+import 'package:quiz_quest/app/features/quiz_pages/music_quiz_pages/hard_music_quiz_page/hard_question_quiz_page.dart';
 
 class ResumeHardMusicQuizPageGames extends StatefulWidget {
   const ResumeHardMusicQuizPageGames({
@@ -34,8 +35,8 @@ class _ResumeHardMusicQuizPageGamesState
   Widget build(BuildContext context) {
     return Scaffold(
       body: ResumePage(
-        badAnswers: hardHistoryBadAnswers,
-        goodAnswers: hardHistoryGoodAnswers,
+        badAnswers: hardMusicBadAnswers,
+        goodAnswers: hardMusicGoodAnswers,
       ),
     );
   }

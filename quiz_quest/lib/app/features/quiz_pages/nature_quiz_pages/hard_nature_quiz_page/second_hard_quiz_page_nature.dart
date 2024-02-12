@@ -4,57 +4,56 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:quiz_quest/app/core/enums.dart';
 import 'package:quiz_quest/app/data/data_sources/quiz_data_source/quiz_categories_data_source.dart';
 import 'package:quiz_quest/app/domain/repositories/quiz_repository/quiz_repository.dart';
-import 'package:quiz_quest/app/features/home_page/home_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/easy_films_quiz_page/easy_question_quiz_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/first_quiz_page_films.dart';
 import 'package:quiz_quest/app/features/quiz_pages/games_quiz_pages/easy_games_quiz_page/easy_question_quiz_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/geography_quiz_pages/easy_geography_quiz_page/easy_question_quiz_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/history_quiz_pages/easy_history_quiz_page/easy_question_quiz_page.dart';
-import 'package:quiz_quest/app/features/quiz_pages/history_quiz_pages/medium_history_quiz_page/medium_question_quiz_page.dart';
-import 'package:quiz_quest/app/features/quiz_pages/music_quiz_pages/medium_music_quiz_page/medium_question_quiz_page.dart';
+import 'package:quiz_quest/app/features/quiz_pages/music_quiz_pages/easy_music_quiz_page/easy_question_quiz_page.dart';
+import 'package:quiz_quest/app/features/quiz_pages/nature_quiz_pages/easy_nature_quiz_page/easy_question_quiz_page.dart';
+import 'package:quiz_quest/app/features/quiz_pages/nature_quiz_pages/hard_nature_quiz_page/hard_question_quiz_page.dart';
+import 'package:quiz_quest/app/features/quiz_pages/nature_quiz_pages/medium_nature_quiz_page/medium_question_quiz_page.dart';
 
-class ResumeMediumMusicQuizPageGames extends StatefulWidget {
-  const ResumeMediumMusicQuizPageGames({
-    required this.badAnswers,
-    required this.goodAnswers,
+class SecondHardQuizPageNature extends StatefulWidget {
+  const SecondHardQuizPageNature({
+    required this.image,
+    required this.hardCategory,
     super.key,
   });
 
-  final int goodAnswers;
-  final int badAnswers;
+  final String image;
+  final dynamic hardCategory;
 
   @override
-  State<ResumeMediumMusicQuizPageGames> createState() =>
-      _ResumeMediumMusicQuizPageGamesState();
+  State<SecondHardQuizPageNature> createState() =>
+      _SecondHardQuizPageNatureState();
 }
 
-class _ResumeMediumMusicQuizPageGamesState
-    extends State<ResumeMediumMusicQuizPageGames> {
+class _SecondHardQuizPageNatureState
+    extends State<SecondHardQuizPageNature> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ResumePage(
-        badAnswers: mediumMusicBadAnswers,
-        goodAnswers: mediumMusicGoodAnswers,
+      body: QuizzPage(
+        image: widget.image,
+        hardCategory: widget.hardCategory,
       ),
     );
   }
 }
 
-class ResumePage extends StatelessWidget {
-  const ResumePage({
-    required this.badAnswers,
-    required this.goodAnswers,
+class QuizzPage extends StatelessWidget {
+  const QuizzPage({
+    required this.image,
+    required this.hardCategory,
     super.key,
   });
 
-  final int goodAnswers;
-  final int badAnswers;
+  final String image;
+  final dynamic hardCategory;
 
   @override
   Widget build(BuildContext context) {
-    final record = goodAnswers * 10;
-
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
@@ -72,8 +71,29 @@ class ResumePage extends StatelessWidget {
             height: 30,
           ),
           Center(
+            child: CircleAvatar(
+              radius: 35,
+              backgroundImage: AssetImage(image),
+            ),
+          ),
+          const SizedBox(
+            height: 15,
+          ),
+          Center(
             child: Text(
-              'Good work!',
+              'Your record in hard category: $hardCategory💎',
+              style: GoogleFonts.aBeeZee(
+                fontSize: 18,
+                color: Colors.white,
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 15,
+          ),
+          Center(
+            child: Text(
+              'Rules',
               style: GoogleFonts.aBeeZee(
                   fontSize: 46,
                   color: Colors.white,
@@ -83,7 +103,20 @@ class ResumePage extends StatelessWidget {
           const SizedBox(
             height: 30,
           ),
-          TextWidget(text: 'You scored: $record points 💎'),
+          const TextWidget(text: 'You have 20 second to answer'),
+          const SizedBox(
+            height: 30,
+          ),
+          const TextWidget(text: 'You have 3 lives ❤️❤️❤️'),
+          const SizedBox(
+            height: 30,
+          ),
+          const TextWidget(text: '1 good answer = 10 points 💎'),
+          const SizedBox(
+            height: 30,
+          ),
+          const TextWidget(
+              text: 'Go as far as you can and keep moving forward  🔥 🧨'),
           const SizedBox(
             height: 30,
           ),
@@ -111,13 +144,15 @@ class ResumePage extends StatelessWidget {
                 ]),
             child: ElevatedButton(
               onPressed: () {
-                Navigator.of(context).popUntil((route) => route.isFirst);
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const HardQuestionNatureQuizPage(),
+                ));
               },
               style: ElevatedButton.styleFrom(
                   minimumSize: const Size.fromHeight(50),
                   backgroundColor: Colors.transparent,
                   shadowColor: Colors.transparent),
-              child: Text('''Back to Home Page''',
+              child: Text('''Ready? Let's go!''',
                   style: GoogleFonts.aBeeZee(
                     fontSize: 24,
                     color: Colors.white,

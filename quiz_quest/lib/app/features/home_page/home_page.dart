@@ -144,7 +144,6 @@ class _QuizzPageState extends State<QuizzPage> {
       'hard_category': 'music_hard_points',
       'page': const FirstQuizPageMusic(
         image: 'images/music.png',
-     
       )
     },
     {
@@ -157,9 +156,6 @@ class _QuizzPageState extends State<QuizzPage> {
       'hard_category': 'nature_hard_points',
       'page': const FirstQuizPageNature(
         image: 'images/nature.png',
-        easyCategory: 'nature_easy_points',
-        mediumCategory: 'nature_medium_points',
-        hardCategory: 'nature_hard_points',
       )
     },
     {

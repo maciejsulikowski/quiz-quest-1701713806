@@ -172,6 +172,19 @@ class UserRepository {
     return userDataSource.updateHardHistoryPoints(hardHistoryPoints);
   }
 
+  //music
+  Future<void> updateEasyMusicPoints(int easyMusicPoints) async {
+    return userDataSource.updateEasyMusicPoints(easyMusicPoints);
+  }
+
+  Future<void> updateMediumMusicPoints(int mediumMusicPoints) async {
+    return userDataSource.updateMediumMusicPoints(mediumMusicPoints);
+  }
+
+  Future<void> updateHardMusicPoints(int hardMusicPoints) async {
+    return userDataSource.updateHardMusicPoints(hardMusicPoints);
+  }
+
   Future<void> updateName(String name) async {
     return userDataSource.updateName(name: name);
   }

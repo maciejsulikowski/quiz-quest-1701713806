@@ -73,9 +73,7 @@ class HomeState {
         'hard_category': 'music_hard_points',
         'page': FirstQuizPageMusic(
           image: 'images/music.png',
-          easyCategory: 'music_easy_points',
-          mediumCategory: 'music_medium_points',
-          hardCategory: 'music_hard_points',
+         
         )
       },
       {

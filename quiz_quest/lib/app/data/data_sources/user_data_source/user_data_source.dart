@@ -451,6 +451,90 @@ class UserDataSource {
     }
   }
 
+   Future<void> updateEasyMusicPoints(int newEasyMusicPoints) async {
+    final userID = FirebaseAuth.instance.currentUser?.uid;
+    if (userID == null) {
+      throw Exception('User is not logged in');
+    }
+    final userData = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userID)
+        .collection('points')
+        .doc(userID)
+        .get();
+
+    final easyMusicPoints = userData['music_easy_points'] ?? 0;
+
+    final newMusicPoints = newEasyMusicPoints * 10;
+
+    if (newMusicPoints > easyMusicPoints) {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userID)
+          .collection('points')
+          .doc(userID)
+          .update({
+        'music_easy_points': newMusicPoints,
+      });
+    }
+  }
+
+  Future<void> updateMediumMusicPoints(int newMediumMusicPoints) async {
+    final userID = FirebaseAuth.instance.currentUser?.uid;
+    if (userID == null) {
+      throw Exception('User is not logged in');
+    }
+    final userData = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userID)
+        .collection('points')
+        .doc(userID)
+        .get();
+
+    final mediumMusicPoints = userData['music_medium_points'] ?? 0;
+
+    final newMusicPoints = newMediumMusicPoints * 10;
+
+    if (newMusicPoints > mediumMusicPoints) {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userID)
+          .collection('points')
+          .doc(userID)
+          .update({
+        'music_medium_points': newMusicPoints,
+      });
+    }
+  }
+
+  Future<void> updateHardMusicPoints(int newHardMusicPoints) async {
+    final userID = FirebaseAuth.instance.currentUser?.uid;
+    if (userID == null) {
+      throw Exception('User is not logged in');
+    }
+    final userData = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userID)
+        .collection('points')
+        .doc(userID)
+        .get();
+
+    final hardMusicPoints = userData['music_hard_points'] ?? 0;
+
+    final newMusicPoints = newHardMusicPoints * 10;
+
+    if (newMusicPoints > hardMusicPoints) {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userID)
+          .collection('points')
+          .doc(userID)
+          .update({
+        'music_hard_points': newMusicPoints,
+      });
+    }
+  }
+
   Future<void> updateName({
     required String? name,
   }) async {

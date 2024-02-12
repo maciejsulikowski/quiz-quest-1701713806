@@ -142,8 +142,30 @@ Future<GeographyQuizModel?> getEasyGeographyData() async {
     return HistoryQuizModel.fromJson(json);
   }
 
-  Future<MusicQuizModel?> getMusicData() async {
+  //music
+
+  Future<MusicQuizModel?> getEasyMusicData() async {
     final json = await quizCategoriesDataSource.getEasyMusicCategory();
+
+    if (json == null) {
+      return null;
+    }
+
+    return MusicQuizModel.fromJson(json);
+  }
+
+  Future<MusicQuizModel?> getMediumMusicData() async {
+    final json = await quizCategoriesDataSource.getMediumMusicCategory();
+
+    if (json == null) {
+      return null;
+    }
+
+    return MusicQuizModel.fromJson(json);
+  }
+
+  Future<MusicQuizModel?> getHardMusicData() async {
+    final json = await quizCategoriesDataSource.getHardMusicCategory();
 
     if (json == null) {
       return null;

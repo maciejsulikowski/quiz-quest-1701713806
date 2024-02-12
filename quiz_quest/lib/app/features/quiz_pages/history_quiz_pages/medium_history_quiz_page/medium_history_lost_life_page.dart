@@ -9,49 +9,41 @@ import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/easy_films_q
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/first_quiz_page_films.dart';
 import 'package:quiz_quest/app/features/quiz_pages/games_quiz_pages/easy_games_quiz_page/easy_question_quiz_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/geography_quiz_pages/easy_geography_quiz_page/easy_question_quiz_page.dart';
+import 'package:quiz_quest/app/features/quiz_pages/history_quiz_pages/easy_history_quiz_page/easy_question_quiz_page.dart';
+import 'package:quiz_quest/app/features/quiz_pages/history_quiz_pages/medium_history_quiz_page/medium_question_quiz_page.dart';
 
-class ResumeEasyGeographyQuizPageGames extends StatefulWidget {
-  const ResumeEasyGeographyQuizPageGames({
-    required this.badAnswers,
+class MediumHistoryLostLifePage extends StatefulWidget {
+  const MediumHistoryLostLifePage({
     required this.goodAnswers,
     super.key,
   });
 
   final int goodAnswers;
-  final int badAnswers;
 
   @override
-  State<ResumeEasyGeographyQuizPageGames> createState() =>
-      _ResumeEasyGeographyQuizPageGamesState();
+  State<MediumHistoryLostLifePage> createState() =>
+      _MediumHistoryLostLifePageState();
 }
 
-class _ResumeEasyGeographyQuizPageGamesState
-    extends State<ResumeEasyGeographyQuizPageGames> {
+class _MediumHistoryLostLifePageState extends State<MediumHistoryLostLifePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ResumePage(
-        badAnswers: easyGeographyBadAnswers,
-        goodAnswers: easyGeographyGoodAnswers,
-      ),
+      body: ResumePage(goodAnswers: mediumHistoryGoodAnswers),
     );
   }
 }
 
 class ResumePage extends StatelessWidget {
   const ResumePage({
-    required this.badAnswers,
     required this.goodAnswers,
     super.key,
   });
 
   final int goodAnswers;
-  final int badAnswers;
 
   @override
   Widget build(BuildContext context) {
-    final record = goodAnswers * 10;
-
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
@@ -70,7 +62,7 @@ class ResumePage extends StatelessWidget {
           ),
           Center(
             child: Text(
-              'Good work!',
+              'Auch! 💔',
               style: GoogleFonts.aBeeZee(
                   fontSize: 46,
                   color: Colors.white,
@@ -80,7 +72,15 @@ class ResumePage extends StatelessWidget {
           const SizedBox(
             height: 30,
           ),
-          TextWidget(text: 'You scored: $record points 💎'),
+          TextWidget(text: 'You scored: ${goodAnswers * 10} points 💎'),
+          const SizedBox(
+            height: 30,
+          ),
+          const TextWidget(text: 'Try beat your record: points 💎'),
+          const SizedBox(
+            height: 30,
+          ),
+          const TextWidget(text: 'Your lives are over, try again!'),
           const SizedBox(
             height: 30,
           ),

@@ -110,17 +110,7 @@ Future<GeographyQuizModel?> getEasyGeographyData() async {
     return GeographyQuizModel.fromJson(json);
   }
 
-  Future<MusicQuizModel?> getMusicData() async {
-    final json = await quizCategoriesDataSource.getEasyMusicCategory();
-
-    if (json == null) {
-      return null;
-    }
-
-    return MusicQuizModel.fromJson(json);
-  }
-
-  
+  //history
 
   Future<HistoryQuizModel?> getEasyHistoryData() async {
     final json = await quizCategoriesDataSource.getEasyHistoryCategory();
@@ -131,6 +121,37 @@ Future<GeographyQuizModel?> getEasyGeographyData() async {
 
     return HistoryQuizModel.fromJson(json);
   }
+
+  Future<HistoryQuizModel?> getMediumHistoryData() async {
+    final json = await quizCategoriesDataSource.getMediumHistoryCategory();
+
+    if (json == null) {
+      return null;
+    }
+
+    return HistoryQuizModel.fromJson(json);
+  }
+
+  Future<HistoryQuizModel?> getHardHistoryData() async {
+    final json = await quizCategoriesDataSource.getHardHistoryCategory();
+
+    if (json == null) {
+      return null;
+    }
+
+    return HistoryQuizModel.fromJson(json);
+  }
+
+  Future<MusicQuizModel?> getMusicData() async {
+    final json = await quizCategoriesDataSource.getEasyMusicCategory();
+
+    if (json == null) {
+      return null;
+    }
+
+    return MusicQuizModel.fromJson(json);
+  }
+
 
   Future<NatureQuizModel?> getNatureData() async {
     final json = await quizCategoriesDataSource.getEasyNatureCategory();

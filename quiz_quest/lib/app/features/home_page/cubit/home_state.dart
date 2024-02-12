@@ -60,9 +60,7 @@ class HomeState {
         'hard_category': 'history_hard_points',
         'page': FirstQuizPageHistory(
           image: 'images/history.png',
-          easyCategory: 'history_easy_points',
-          mediumCategory: 'history_medium_points',
-          hardCategory: 'history_hard_points',
+       
         )
       },
       {

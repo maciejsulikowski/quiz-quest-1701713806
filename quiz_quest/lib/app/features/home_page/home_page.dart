@@ -132,9 +132,6 @@ class _QuizzPageState extends State<QuizzPage> {
       'hard_category': 'history_hard_points',
       'page': const FirstQuizPageHistory(
         image: 'images/history.png',
-        easyCategory: 'history_easy_points',
-        mediumCategory: 'history_medium_points',
-        hardCategory: 'history_hard_points',
       )
     },
     {

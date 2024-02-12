@@ -8,6 +8,7 @@ import 'package:quiz_quest/app/data/data_sources/user_data_source/user_data_sour
 import 'package:quiz_quest/app/domain/models/films_model/films_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/games_model/games_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/geography_model/geography_quiz_model.dart';
+import 'package:quiz_quest/app/domain/models/history_model/history_quiz_model.dart';
 import 'package:quiz_quest/app/domain/repositories/quiz_repository/quiz_repository.dart';
 import 'package:quiz_quest/app/domain/repositories/user_repository/user_repository.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/cubit/films_cubit.dart';
@@ -17,17 +18,19 @@ import 'package:quiz_quest/app/features/quiz_pages/games_quiz_pages/cubit/games_
 import 'package:quiz_quest/app/features/quiz_pages/games_quiz_pages/easy_games_quiz_page/easy_games_lost_life_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/geography_quiz_pages/cubit/geography_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/geography_quiz_pages/easy_geography_quiz_page/easy_geography_lost_life_page.dart';
-import 'package:quiz_quest/app/features/quiz_pages/geography_quiz_pages/easy_geography_quiz_page/resume_easy_geography_question_quiz_page.dart';
+import 'package:quiz_quest/app/features/quiz_pages/history_quiz_pages/cubit/history_cubit.dart';
+import 'package:quiz_quest/app/features/quiz_pages/history_quiz_pages/easy_history_quiz_page/easy_history_lost_life_page.dart';
+import 'package:quiz_quest/app/features/quiz_pages/history_quiz_pages/easy_history_quiz_page/resume_easy_history_question_quiz_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/quiz_countdown_timer/quiz_countdown_timer.dart';
 
-class EasyQuestionGeographyQuizPage extends StatefulWidget {
-  const EasyQuestionGeographyQuizPage({
+class EasyQuestionHistoryQuizPage extends StatefulWidget {
+  const EasyQuestionHistoryQuizPage({
     super.key,
   });
 
   @override
-  State<EasyQuestionGeographyQuizPage> createState() =>
-      _EasyQuestionGeographyQuizPageState();
+  State<EasyQuestionHistoryQuizPage> createState() =>
+      _EasyQuestionHistoryQuizPageState();
 }
 
 final controller = CountDownController();
@@ -38,15 +41,15 @@ Color textColor = Colors.white;
 late bool isDurationEnded;
 late Color ringColor;
 bool isTimeUp = false;
-late int easyGeographyGoodAnswers;
-late int easyGeographyBadAnswers;
+late int easyHistoryGoodAnswers;
+late int easyHistoryBadAnswers;
 bool isCorrectAnswer = false;
 String threeLives = '❤️❤️❤️';
 String twoLives = ' ❤️❤️';
 String oneLive = ' ❤️';
 
-class _EasyQuestionGeographyQuizPageState
-    extends State<EasyQuestionGeographyQuizPage> {
+class _EasyQuestionHistoryQuizPageState
+    extends State<EasyQuestionHistoryQuizPage> {
   int currentIndex = 0;
   late List currentAnswers;
 
@@ -61,8 +64,8 @@ class _EasyQuestionGeographyQuizPageState
 
   @override
   void initState() {
-    easyGeographyGoodAnswers = 0;
-    easyGeographyBadAnswers = 0;
+    easyHistoryGoodAnswers = 0;
+    easyHistoryBadAnswers = 0;
     currentAnswers = [];
     answerColors;
     answerGenerated = false;
@@ -75,13 +78,13 @@ class _EasyQuestionGeographyQuizPageState
     super.initState();
   }
 
-  void generateAnswers(GeographyQuizModel? geographyQuizModel) {
-    if (geographyQuizModel != null && !answerGenerated) {
+  void generateAnswers(HistoryQuizModel? historyQuizModel) {
+    if (historyQuizModel != null && !answerGenerated) {
       final correctAnswer =
-          geographyQuizModel.results[currentIndex].correctAnswer;
+          historyQuizModel.results[currentIndex].correctAnswer;
 
       final incorrectAnswers =
-          geographyQuizModel.results[currentIndex].incorrectAnswers;
+          historyQuizModel.results[currentIndex].incorrectAnswers;
 
       currentAnswers = incorrectAnswers + [correctAnswer];
       currentAnswers.shuffle();
@@ -94,8 +97,8 @@ class _EasyQuestionGeographyQuizPageState
 
   void resetQuizState() {
     isButtonNameChanged = false;
-    easyGeographyBadAnswers = 0;
-    easyGeographyGoodAnswers = 0;
+    easyHistoryBadAnswers = 0;
+    easyHistoryGoodAnswers = 0;
     currentIndex = 0;
     isButtonClicked = false;
     isButtonDisabled = false;
@@ -118,11 +121,11 @@ class _EasyQuestionGeographyQuizPageState
 
     return Scaffold(
       body: BlocProvider(
-        create: (context) => GeographyCubit(
+        create: (context) => HistoryCubit(
             QuizRepository(QuizCategoriesDataSource()),
             UserRepository(UserDataSource()))
-          ..getEasyGeographyCategory(),
-        child: BlocListener<GeographyCubit, GeographyState>(
+          ..getEasyHistoryCategory(),
+        child: BlocListener<HistoryCubit, HistoryState>(
           listener: (context, state) async {
             if (state.status == Status.error) {
               ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
@@ -135,10 +138,10 @@ class _EasyQuestionGeographyQuizPageState
                 ),
               );
               // ignore: use_build_context_synchronously
-              context.read<GeographyCubit>().getEasyGeographyCategory();
+              context.read<HistoryCubit>().getEasyHistoryCategory();
             }
           },
-          child: BlocBuilder<GeographyCubit, GeographyState>(
+          child: BlocBuilder<HistoryCubit, HistoryState>(
             builder: (context, state) {
               if (state.status == Status.loading) {
                 return const Center(child: CircularProgressIndicator());
@@ -147,8 +150,8 @@ class _EasyQuestionGeographyQuizPageState
                 return const Center(child: CircularProgressIndicator());
               }
 
-              final geographyQuizModel = state.geographyQuizModel;
-              generateAnswers(geographyQuizModel);
+              final historyQuizModel = state.historyQuizModel;
+              generateAnswers(historyQuizModel);
 
               return Container(
                 decoration: const BoxDecoration(
@@ -196,7 +199,7 @@ class _EasyQuestionGeographyQuizPageState
                             ),
                             Expanded(
                               child: Text(
-                                'Score: ${easyGeographyGoodAnswers * 10}',
+                                'Score: ${easyHistoryGoodAnswers * 10}',
                                 style: GoogleFonts.aBeeZee(
                                     fontSize: 20,
                                     color: Colors.white,
@@ -208,11 +211,11 @@ class _EasyQuestionGeographyQuizPageState
                               child: Padding(
                                 padding: const EdgeInsets.only(right: 20.0),
                                 child: Text(
-                                  easyGeographyBadAnswers == 0
+                                  easyHistoryBadAnswers == 0
                                       ? threeLives
-                                      : easyGeographyBadAnswers == 1
+                                      : easyHistoryBadAnswers == 1
                                           ? twoLives
-                                          : easyGeographyBadAnswers == 2
+                                          : easyHistoryBadAnswers == 2
                                               ? oneLive
                                               : '',
                                   style: GoogleFonts.aBeeZee(
@@ -235,18 +238,18 @@ class _EasyQuestionGeographyQuizPageState
                         setState(() {
                           isDurationEnded = value;
                           ringColor = Colors.red;
-                          easyGeographyBadAnswers += 1;
+                          easyHistoryBadAnswers += 1;
                           isButtonDisabled = true;
                           isTimeUp = true;
-                          if (easyGeographyBadAnswers == 3) {
+                          if (easyHistoryBadAnswers == 3) {
                             context
-                                .read<GeographyCubit>()
-                                .updateEasyGeographyPoints(
-                                    easyGeographyGoodAnswers);
+                                .read<HistoryCubit>()
+                                .updateEasyHistoryPoints(
+                                    easyHistoryGoodAnswers);
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                builder: (context) => EasyGeographyLostLifePage(
-                                    goodAnswers: easyGeographyGoodAnswers),
+                                builder: (context) => EasyHistoryLostLifePage(
+                                    goodAnswers: easyHistoryGoodAnswers),
                               ),
                             );
                           }
@@ -261,7 +264,7 @@ class _EasyQuestionGeographyQuizPageState
                     const SizedBox(
                       height: 15,
                     ),
-                    if (geographyQuizModel != null)
+                    if (historyQuizModel != null)
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20.0),
                         child: ListView.builder(
@@ -270,13 +273,13 @@ class _EasyQuestionGeographyQuizPageState
                           itemBuilder: (context, _) {
                             final questionNumber = currentIndex + 1;
                             final questionNumbers =
-                                geographyQuizModel.results.length;
+                                historyQuizModel.results.length;
 
                             return Column(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
                                 QuestionWidget(
-                                  question: geographyQuizModel
+                                  question: historyQuizModel
                                       .results[currentIndex].question,
                                 ),
                                 const SizedBox(
@@ -287,7 +290,7 @@ class _EasyQuestionGeographyQuizPageState
                                       MainAxisAlignment.spaceAround,
                                   children: [
                                     Text(
-                                      'Bad: $easyGeographyBadAnswers',
+                                      'Bad: $easyHistoryBadAnswers',
                                       style: GoogleFonts.aBeeZee(
                                           fontSize: 20,
                                           color: Colors.red,
@@ -307,7 +310,7 @@ class _EasyQuestionGeographyQuizPageState
                                       width: 10,
                                     ),
                                     Text(
-                                      'Good: $easyGeographyGoodAnswers',
+                                      'Good: $easyHistoryGoodAnswers',
                                       style: GoogleFonts.aBeeZee(
                                           fontSize: 20,
                                           color: Colors.green,
@@ -333,7 +336,7 @@ class _EasyQuestionGeographyQuizPageState
                                       setState(() {
                                         isButtonClicked = value;
                                         if (value = currentAnswers[index] ==
-                                            geographyQuizModel
+                                            historyQuizModel
                                                 .results[currentIndex]
                                                 .correctAnswer) {
                                           ringColor = Colors.green;
@@ -349,7 +352,7 @@ class _EasyQuestionGeographyQuizPageState
                                       });
                                     },
                                     isCorrectAnswer: currentAnswers[index] ==
-                                            geographyQuizModel
+                                            historyQuizModel
                                                 .results[currentIndex]
                                                 .correctAnswer
                                         ? true
@@ -382,7 +385,7 @@ class _EasyQuestionGeographyQuizPageState
                                                 ? () {
                                                     setState(() {
                                                       if (currentIndex ==
-                                                          geographyQuizModel
+                                                          historyQuizModel
                                                                   .results
                                                                   .length -
                                                               1) {
@@ -390,11 +393,11 @@ class _EasyQuestionGeographyQuizPageState
                                                             .push(
                                                           MaterialPageRoute(
                                                             builder: (context) =>
-                                                                ResumeEasyGeographyQuizPageGames(
+                                                                ResumeEasyHistoryQuizPageGames(
                                                               badAnswers:
-                                                                  easyGeographyBadAnswers,
+                                                                  easyHistoryBadAnswers,
                                                               goodAnswers:
-                                                                  easyGeographyGoodAnswers,
+                                                                  easyHistoryGoodAnswers,
                                                             ),
                                                           ),
                                                         );
@@ -424,7 +427,7 @@ class _EasyQuestionGeographyQuizPageState
                                               backgroundColor: Colors.black,
                                             ),
                                             child: Text(currentIndex ==
-                                                    geographyQuizModel
+                                                    historyQuizModel
                                                             .results.length -
                                                         1
                                                 ? 'Show your results'
@@ -518,18 +521,18 @@ class _AnswerButtonState extends State<AnswerButton> {
 
     if (widget.isCorrectAnswer) {
       widget.colorFunction(Colors.green, widget.index);
-      easyGeographyGoodAnswers += 1;
+      easyHistoryGoodAnswers += 1;
     } else {
       widget.colorFunction(Colors.red, widget.index);
-      easyGeographyBadAnswers += 1;
-      if (easyGeographyBadAnswers == 3) {
+      easyHistoryBadAnswers += 1;
+      if (easyHistoryBadAnswers == 3) {
         context
-            .read<GeographyCubit>()
-            .updateEasyGeographyPoints(easyGeographyGoodAnswers);
+            .read<HistoryCubit>()
+            .updateEasyHistoryPoints(easyHistoryGoodAnswers);
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => EasyGeographyLostLifePage(
-                goodAnswers: easyGeographyGoodAnswers),
+            builder: (context) =>
+                EasyHistoryLostLifePage(goodAnswers: easyHistoryGoodAnswers),
           ),
         );
       }
@@ -549,7 +552,8 @@ class _AnswerButtonState extends State<AnswerButton> {
         .replaceAll('&aacute;', '')
         .replaceAll('&ntilde;', '')
         .replaceAll('&amp;', '')
-        .replaceAll('&rsquo;', '');
+        .replaceAll('&rsquo;', '')
+        .replaceAll('&ocirc;', '');
 
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20),

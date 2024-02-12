@@ -19,7 +19,8 @@ class EasyGeographyLostLifePage extends StatefulWidget {
   final int goodAnswers;
 
   @override
-  State<EasyGeographyLostLifePage> createState() => _EasyGeographyLostLifePageState();
+  State<EasyGeographyLostLifePage> createState() =>
+      _EasyGeographyLostLifePageState();
 }
 
 class _EasyGeographyLostLifePageState extends State<EasyGeographyLostLifePage> {

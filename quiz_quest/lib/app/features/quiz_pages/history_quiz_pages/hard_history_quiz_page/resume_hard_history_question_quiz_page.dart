@@ -9,9 +9,11 @@ import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/easy_films_q
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/first_quiz_page_films.dart';
 import 'package:quiz_quest/app/features/quiz_pages/games_quiz_pages/easy_games_quiz_page/easy_question_quiz_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/geography_quiz_pages/easy_geography_quiz_page/easy_question_quiz_page.dart';
+import 'package:quiz_quest/app/features/quiz_pages/history_quiz_pages/easy_history_quiz_page/easy_question_quiz_page.dart';
+import 'package:quiz_quest/app/features/quiz_pages/history_quiz_pages/hard_history_quiz_page/hard_question_quiz_page.dart';
 
-class ResumeEasyGeographyQuizPageGames extends StatefulWidget {
-  const ResumeEasyGeographyQuizPageGames({
+class ResumeHardQuizPageHistory extends StatefulWidget {
+  const ResumeHardQuizPageHistory({
     required this.badAnswers,
     required this.goodAnswers,
     super.key,
@@ -21,18 +23,17 @@ class ResumeEasyGeographyQuizPageGames extends StatefulWidget {
   final int badAnswers;
 
   @override
-  State<ResumeEasyGeographyQuizPageGames> createState() =>
-      _ResumeEasyGeographyQuizPageGamesState();
+  State<ResumeHardQuizPageHistory> createState() =>
+      _ResumeHardQuizPageHistoryState();
 }
 
-class _ResumeEasyGeographyQuizPageGamesState
-    extends State<ResumeEasyGeographyQuizPageGames> {
+class _ResumeHardQuizPageHistoryState extends State<ResumeHardQuizPageHistory> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: ResumePage(
-        badAnswers: easyGeographyBadAnswers,
-        goodAnswers: easyGeographyGoodAnswers,
+        badAnswers: hardHistoryBadAnswers,
+        goodAnswers: hardHistoryGoodAnswers,
       ),
     );
   }

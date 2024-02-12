@@ -108,9 +108,6 @@ class HomeState {
         'hard_category': 'tv_hard_points',
         'page': FirstQuizPageTV(
           image: 'images/tv.png',
-          easyCategory: 'tv_easy_points',
-          mediumCategory: 'tv_medium_points',
-          hardCategory: 'tv_hard_points',
         )
       },
     ],

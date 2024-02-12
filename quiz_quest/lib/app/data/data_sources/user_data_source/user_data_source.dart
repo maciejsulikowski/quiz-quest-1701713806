@@ -703,6 +703,90 @@ class UserDataSource {
     }
   }
 
+  Future<void> updateEasyTvPoints(int newEasyTvPoints) async {
+    final userID = FirebaseAuth.instance.currentUser?.uid;
+    if (userID == null) {
+      throw Exception('User is not logged in');
+    }
+    final userData = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userID)
+        .collection('points')
+        .doc(userID)
+        .get();
+
+    final easyTvPoints = userData['tv_easy_points'] ?? 0;
+
+    final newTvPoints = newEasyTvPoints * 10;
+
+    if (newTvPoints > easyTvPoints) {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userID)
+          .collection('points')
+          .doc(userID)
+          .update({
+        'tv_easy_points': newTvPoints,
+      });
+    }
+  }
+
+  Future<void> updateMediumTvPoints(int newMediumTvPoints) async {
+    final userID = FirebaseAuth.instance.currentUser?.uid;
+    if (userID == null) {
+      throw Exception('User is not logged in');
+    }
+    final userData = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userID)
+        .collection('points')
+        .doc(userID)
+        .get();
+
+    final mediumTvPoints = userData['tv_medium_points'] ?? 0;
+
+    final newTvPoints = newMediumTvPoints * 10;
+
+    if (newTvPoints > mediumTvPoints) {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userID)
+          .collection('points')
+          .doc(userID)
+          .update({
+        'tv_medium_points': newTvPoints,
+      });
+    }
+  }
+
+  Future<void> updateHardTvPoints(int newHardTvPoints) async {
+    final userID = FirebaseAuth.instance.currentUser?.uid;
+    if (userID == null) {
+      throw Exception('User is not logged in');
+    }
+    final userData = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userID)
+        .collection('points')
+        .doc(userID)
+        .get();
+
+    final hardTvPoints = userData['tv_hard_points'] ?? 0;
+
+    final newTvPoints = newHardTvPoints * 10;
+
+    if (newTvPoints > hardTvPoints) {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userID)
+          .collection('points')
+          .doc(userID)
+          .update({
+        'tv_hard_points': newTvPoints,
+      });
+    }
+  }
+
   Future<void> updateName({
     required String? name,
   }) async {

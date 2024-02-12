@@ -77,10 +77,9 @@ class QuizRepository {
     return GamesQuizModel.fromJson(json);
   }
 
-
 //geo
 
-Future<GeographyQuizModel?> getEasyGeographyData() async {
+  Future<GeographyQuizModel?> getEasyGeographyData() async {
     final json = await quizCategoriesDataSource.getEasyGeographyCategory();
 
     if (json == null) {
@@ -174,7 +173,6 @@ Future<GeographyQuizModel?> getEasyGeographyData() async {
     return MusicQuizModel.fromJson(json);
   }
 
-
   //nature
 
   Future<NatureQuizModel?> getEasyNatureData() async {
@@ -238,8 +236,29 @@ Future<GeographyQuizModel?> getEasyGeographyData() async {
     return SportsQuizModel.fromJson(json);
   }
 
-  Future<TVQuizModel?> getTVData() async {
+  //tv
+  Future<TVQuizModel?> getEasyTVData() async {
     final json = await quizCategoriesDataSource.getEasyTVCategory();
+
+    if (json == null) {
+      return null;
+    }
+
+    return TVQuizModel.fromJson(json);
+  }
+
+  Future<TVQuizModel?> getMediumTVData() async {
+    final json = await quizCategoriesDataSource.getMediumTVCategory();
+
+    if (json == null) {
+      return null;
+    }
+
+    return TVQuizModel.fromJson(json);
+  }
+
+  Future<TVQuizModel?> getHardTVData() async {
+    final json = await quizCategoriesDataSource.getHardTVCategory();
 
     if (json == null) {
       return null;

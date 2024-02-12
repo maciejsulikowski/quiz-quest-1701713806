@@ -180,9 +180,7 @@ class _QuizzPageState extends State<QuizzPage> {
       'hard_category': 'tv_hard_points',
       'page': const FirstQuizPageTV(
         image: 'images/tv.png',
-        easyCategory: 'tv_easy_points',
-        mediumCategory: 'tv_medium_points',
-        hardCategory: 'tv_hard_points',
+     
       )
     },
   ];

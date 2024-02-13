@@ -63,6 +63,7 @@ class UserDataSource {
         'gender': '',
         'favourite_categories': '',
         'image_url': '',
+        'is_user_new': true,
       },
     );
   }
@@ -961,6 +962,24 @@ class UserDataSource {
         .set(
       {
         'image_url': imageURL,
+      },
+      SetOptions(merge: true),
+    );
+  }
+
+  Future<void> changeUserBool() async {
+    final userID = FirebaseAuth.instance.currentUser?.uid;
+    if (userID == null) {
+      throw Exception('User is not logged in');
+    }
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userID)
+        .collection('user_profile')
+        .doc(userID)
+        .set(
+      {
+        'is_user_new': true,
       },
       SetOptions(merge: true),
     );

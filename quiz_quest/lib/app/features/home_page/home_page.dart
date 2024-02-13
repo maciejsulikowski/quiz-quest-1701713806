@@ -7,6 +7,7 @@ import 'package:quiz_quest/app/core/enums.dart';
 import 'package:quiz_quest/app/data/data_sources/user_data_source/user_data_source.dart';
 import 'package:quiz_quest/app/domain/repositories/user_repository/user_repository.dart';
 import 'package:quiz_quest/app/features/home_page/cubit/home_cubit.dart';
+import 'package:quiz_quest/app/features/login_page/first_page_after_registration.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/cubit/films_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/first_quiz_page_films.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/easy_films_quiz_page/second_easy_quiz_page_films.dart';
@@ -22,13 +23,13 @@ import 'package:quiz_quest/app/features/user_page/user_account.dart';
 import 'package:share_plus/share_plus.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({
+  HomePage({
     required this.user,
     super.key,
   });
 
   final User user;
-
+  bool isNewUser = true;
   @override
   State<HomePage> createState() => _HomePageState();
 }
@@ -59,14 +60,25 @@ class _HomePageState extends State<HomePage> {
           ]),
       body: SafeArea(
         child: Builder(builder: (context) {
-          if (currentIndex == 0) {
-            return QuizzPage(
+          if (widget.isNewUser) {
+            return FirstPageAfterRegistration(
+              isNewUser: widget.isNewUser,
+              setUserOld: (value) {
+                setState(() {
+                  widget.isNewUser = value;
+                });
+              },
+            );
+          } else {
+            if (currentIndex == 0) {
+              return QuizzPage(
+                user: widget.user,
+              );
+            }
+            return UserAccount(
               user: widget.user,
             );
           }
-          return UserAccount(
-            user: widget.user,
-          );
         }),
       ),
     );

@@ -192,7 +192,7 @@ class _MediumQuestionGamesQuizPageState extends State<MediumQuestionGamesQuizPag
                             ),
                             Expanded(
                               child: Text(
-                                'Score: ${mediumGamesGoodAnswers * 10}',
+                                'Score: ${mediumGamesGoodAnswers * 20}',
                                 style: GoogleFonts.aBeeZee(
                                     fontSize: 20,
                                     color: Colors.white,

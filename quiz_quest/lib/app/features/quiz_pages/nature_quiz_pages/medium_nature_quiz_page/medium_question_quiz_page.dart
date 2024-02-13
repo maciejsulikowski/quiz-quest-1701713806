@@ -208,7 +208,7 @@ class _MediumQuestionNatureQuizPageState
                             ),
                             Expanded(
                               child: Text(
-                                'Score: ${mediumNatureGoodAnswers * 10}',
+                                'Score: ${mediumNatureGoodAnswers * 20}',
                                 style: GoogleFonts.aBeeZee(
                                     fontSize: 20,
                                     color: Colors.white,

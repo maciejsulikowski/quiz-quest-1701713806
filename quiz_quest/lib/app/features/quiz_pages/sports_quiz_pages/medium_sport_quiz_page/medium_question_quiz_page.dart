@@ -212,7 +212,7 @@ class _MediumQuestionSportQuizPageState
                             ),
                             Expanded(
                               child: Text(
-                                'Score: ${mediumSportGoodAnswers * 10}',
+                                'Score: ${mediumSportGoodAnswers * 20}',
                                 style: GoogleFonts.aBeeZee(
                                     fontSize: 20,
                                     color: Colors.white,

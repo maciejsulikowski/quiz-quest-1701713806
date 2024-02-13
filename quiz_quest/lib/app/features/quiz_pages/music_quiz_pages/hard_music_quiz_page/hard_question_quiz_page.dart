@@ -206,7 +206,7 @@ class HardQuestionMusicQuizPageState
                             ),
                             Expanded(
                               child: Text(
-                                'Score: ${hardMusicGoodAnswers * 10}',
+                                'Score: ${hardMusicGoodAnswers * 30}',
                                 style: GoogleFonts.aBeeZee(
                                     fontSize: 20,
                                     color: Colors.white,

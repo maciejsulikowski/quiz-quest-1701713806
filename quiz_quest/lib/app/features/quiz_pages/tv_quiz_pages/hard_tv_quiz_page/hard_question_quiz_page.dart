@@ -213,7 +213,7 @@ class _HardQuestionTvQuizPageState extends State<HardQuestionTvQuizPage> {
                             ),
                             Expanded(
                               child: Text(
-                                'Score: ${hardTvGoodAnswers * 10}',
+                                'Score: ${hardTvGoodAnswers * 30}',
                                 style: GoogleFonts.aBeeZee(
                                     fontSize: 20,
                                     color: Colors.white,

@@ -19,7 +19,7 @@ import 'package:quiz_quest/app/features/quiz_pages/general_quiz_pages/hard_gener
 import 'package:quiz_quest/app/features/quiz_pages/general_quiz_pages/medium_general_quiz_page/second_medium_quiz_page_general.dart';
 import 'package:quiz_quest/app/features/quiz_pages/geography_quiz_pages/easy_geography_quiz_page/second_easy_quiz_page_geography.dart';
 import 'package:quiz_quest/app/features/quiz_pages/geography_quiz_pages/hard_geography_quiz_page/second_hard_quiz_page_geography.dart';
-import 'package:quiz_quest/app/features/quiz_pages/geography_quiz_pages/medium_geography_quiz_page/second_easy_quiz_page_geography.dart';
+import 'package:quiz_quest/app/features/quiz_pages/geography_quiz_pages/medium_geography_quiz_page/second_medium_quiz_page_geography.dart';
 import 'package:quiz_quest/app/features/quiz_pages/history_quiz_pages/easy_history_quiz_page/second_easy_quiz_page_history.dart';
 import 'package:quiz_quest/app/features/quiz_pages/history_quiz_pages/hard_history_quiz_page/second_hard_quiz_page_history.dart';
 import 'package:quiz_quest/app/features/quiz_pages/history_quiz_pages/medium_history_quiz_page/second_medium_quiz_page_history.dart';

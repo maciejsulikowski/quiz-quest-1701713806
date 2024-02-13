@@ -213,7 +213,7 @@ class _MediumQuestionTvQuizPageState extends State<MediumQuestionTvQuizPage> {
                             ),
                             Expanded(
                               child: Text(
-                                'Score: ${mediumTvGoodAnswers * 10}',
+                                'Score: ${mediumTvGoodAnswers * 20}',
                                 style: GoogleFonts.aBeeZee(
                                     fontSize: 20,
                                     color: Colors.white,

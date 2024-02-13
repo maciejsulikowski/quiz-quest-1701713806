@@ -202,7 +202,7 @@ class _HardQuestionGeneralQuizPageState
                             ),
                             Expanded(
                               child: Text(
-                                'Score: ${hardGeneralGoodAnswers * 10}',
+                                'Score: ${hardGeneralGoodAnswers * 30}',
                                 style: GoogleFonts.aBeeZee(
                                     fontSize: 20,
                                     color: Colors.white,

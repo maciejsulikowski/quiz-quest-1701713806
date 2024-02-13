@@ -204,7 +204,7 @@ class _MediumQuestionGeneralQuizPageState
                             ),
                             Expanded(
                               child: Text(
-                                'Score: ${mediumGeneralGoodAnswers * 10}',
+                                'Score: ${mediumGeneralGoodAnswers * 20}',
                                 style: GoogleFonts.aBeeZee(
                                     fontSize: 20,
                                     color: Colors.white,

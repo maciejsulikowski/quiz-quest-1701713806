@@ -210,7 +210,7 @@ class HardmQuestionNatureQuizPageState
                             ),
                             Expanded(
                               child: Text(
-                                'Score: ${hardNatureGoodAnswers * 10}',
+                                'Score: ${hardNatureGoodAnswers * 30}',
                                 style: GoogleFonts.aBeeZee(
                                     fontSize: 20,
                                     color: Colors.white,

@@ -203,7 +203,7 @@ class _HardQuestionHistoryQuizPageState
                             ),
                             Expanded(
                               child: Text(
-                                'Score: ${hardHistoryGoodAnswers * 10}',
+                                'Score: ${hardHistoryGoodAnswers * 30}',
                                 style: GoogleFonts.aBeeZee(
                                     fontSize: 20,
                                     color: Colors.white,

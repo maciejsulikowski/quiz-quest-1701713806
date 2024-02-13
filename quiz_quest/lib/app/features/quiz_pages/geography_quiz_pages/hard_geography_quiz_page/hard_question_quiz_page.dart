@@ -198,7 +198,7 @@ class _HardQuestionGeographyQuizPageState
                             ),
                             Expanded(
                               child: Text(
-                                'Score: ${hardGeographyGoodAnswers * 10}',
+                                'Score: ${hardGeographyGoodAnswers * 30}',
                                 style: GoogleFonts.aBeeZee(
                                     fontSize: 20,
                                     color: Colors.white,

@@ -214,7 +214,7 @@ class _HardQuestionSportQuizPageState
                             ),
                             Expanded(
                               child: Text(
-                                'Score: ${hardSportGoodAnswers * 10}',
+                                'Score: ${hardSportGoodAnswers * 30}',
                                 style: GoogleFonts.aBeeZee(
                                     fontSize: 20,
                                     color: Colors.white,

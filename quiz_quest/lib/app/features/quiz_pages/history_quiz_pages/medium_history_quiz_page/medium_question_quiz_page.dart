@@ -201,7 +201,7 @@ class _MediumQuestionHistoryQuizPageState
                             ),
                             Expanded(
                               child: Text(
-                                'Score: ${mediumHistoryGoodAnswers * 10}',
+                                'Score: ${mediumHistoryGoodAnswers * 20}',
                                 style: GoogleFonts.aBeeZee(
                                     fontSize: 20,
                                     color: Colors.white,

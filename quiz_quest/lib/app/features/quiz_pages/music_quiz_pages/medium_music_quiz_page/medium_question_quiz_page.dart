@@ -203,7 +203,7 @@ class MediumQuestionMusicQuizPageState extends State<MediumQuestionMusicQuizPage
                             ),
                             Expanded(
                               child: Text(
-                                'Score: ${mediumMusicGoodAnswers * 10}',
+                                'Score: ${mediumMusicGoodAnswers * 20}',
                                 style: GoogleFonts.aBeeZee(
                                     fontSize: 20,
                                     color: Colors.white,

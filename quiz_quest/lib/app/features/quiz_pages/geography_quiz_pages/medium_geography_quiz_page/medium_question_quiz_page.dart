@@ -196,7 +196,7 @@ class _MediumQuestionGeographyQuizPageState
                             ),
                             Expanded(
                               child: Text(
-                                'Score: ${mediumGeographyGoodAnswers * 10}',
+                                'Score: ${mediumGeographyGoodAnswers * 20}',
                                 style: GoogleFonts.aBeeZee(
                                     fontSize: 20,
                                     color: Colors.white,

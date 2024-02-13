@@ -30,6 +30,12 @@ class _SecondEasyQuizPageMusicState extends State<SecondEasyQuizPageMusic> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        iconTheme: const IconThemeData(color: Colors.white),
+      ),
       body: QuizzPage(
         image: widget.image,
         easyCategory: widget.easyCategory,
@@ -63,9 +69,7 @@ class QuizzPage extends StatelessWidget {
       ),
       child: ListView(
         children: [
-          const SizedBox(
-            height: 30,
-          ),
+          
           Center(
             child: CircleAvatar(
               radius: 35,

@@ -347,6 +347,8 @@ class _EasyQuestionQuizPageState extends State<EasyQuestionQuizPage> {
                                     answer: currentAnswers[index],
                                     controller: controller,
                                     index: index,
+                                    filmsQuizModel: filmsQuizModel,
+                                    currentIndex: currentIndex,
                                   ),
                                   const SizedBox(
                                     height: 10,
@@ -479,12 +481,13 @@ class AnswerButton extends StatefulWidget {
     required this.index,
     required this.duration,
     required this.isTimeUp,
+    required this.filmsQuizModel,
+    required this.currentIndex,
   });
 
   final String answer;
   final CountDownController controller;
   final bool isCorrectAnswer;
-
   int duration;
   bool isTimeUp;
   Function(Color, int) colorFunction;
@@ -492,6 +495,8 @@ class AnswerButton extends StatefulWidget {
   final Function(bool) isButtonDisabled;
   Color textcolor;
   final int index;
+  final FilmsQuizModel? filmsQuizModel;
+  int currentIndex;
 
   @override
   State<AnswerButton> createState() => _AnswerButtonState();
@@ -510,9 +515,9 @@ class _AnswerButtonState extends State<AnswerButton> {
       easyFilmsGoodAnswers += 1;
     } else {
       widget.colorFunction(Colors.red, widget.index);
+
       easyFilmsBadAnswers += 1;
       if (easyFilmsBadAnswers == 3) {
-        // context.read<FilmsCubit>().addTotalFilmsPoints(easyFilmsGoodAnswers);
         context.read<FilmsCubit>().updateEasyFilmsPoints(easyFilmsGoodAnswers);
         Navigator.of(context).push(
           MaterialPageRoute(

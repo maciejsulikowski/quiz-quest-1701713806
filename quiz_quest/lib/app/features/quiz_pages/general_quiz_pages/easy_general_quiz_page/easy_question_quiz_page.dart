@@ -467,9 +467,13 @@ class QuestionWidget extends StatelessWidget {
         .replaceAll('&quot;', '')
         .replaceAll('&#039;', '')
         .replaceAll('&aacute;', '')
+        .replaceAll('&oacute;', '')
         .replaceAll('&ntilde;', '')
         .replaceAll('&amp;', '')
-        .replaceAll('&rsquo;', '');
+        .replaceAll('&rsquo;', '')
+        .replaceAll('&rdquo;', '')
+        .replaceAll('&ldquo;', '')
+        .replaceAll('&fairy;', '');
 
     return Center(
       child: Text(

@@ -787,6 +787,90 @@ class UserDataSource {
     }
   }
 
+  Future<void> updateEasyGeneralPoints(int newEasyGeneralPoints) async {
+    final userID = FirebaseAuth.instance.currentUser?.uid;
+    if (userID == null) {
+      throw Exception('User is not logged in');
+    }
+    final userData = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userID)
+        .collection('points')
+        .doc(userID)
+        .get();
+
+    final easyGeneralPoints = userData['general_easy_points'] ?? 0;
+
+    final newGeneralPoints = newEasyGeneralPoints * 10;
+
+    if (newGeneralPoints > easyGeneralPoints) {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userID)
+          .collection('points')
+          .doc(userID)
+          .update({
+        'general_easy_points': newGeneralPoints,
+      });
+    }
+  }
+
+  Future<void> updateMediumGeneralPoints(int newMediumGeneralPoints) async {
+    final userID = FirebaseAuth.instance.currentUser?.uid;
+    if (userID == null) {
+      throw Exception('User is not logged in');
+    }
+    final userData = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userID)
+        .collection('points')
+        .doc(userID)
+        .get();
+
+    final mediumGeneralPoints = userData['general_medium_points'] ?? 0;
+
+    final newGeneralPoints = newMediumGeneralPoints * 10;
+
+    if (newGeneralPoints > mediumGeneralPoints) {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userID)
+          .collection('points')
+          .doc(userID)
+          .update({
+        'general_medium_points': newGeneralPoints,
+      });
+    }
+  }
+
+  Future<void> updateHardGeneralPoints(int newHardGeneralPoints) async {
+    final userID = FirebaseAuth.instance.currentUser?.uid;
+    if (userID == null) {
+      throw Exception('User is not logged in');
+    }
+    final userData = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userID)
+        .collection('points')
+        .doc(userID)
+        .get();
+
+    final hardGeneralPoints = userData['general_hard_points'] ?? 0;
+
+    final newGeneralPoints = newHardGeneralPoints * 10;
+
+    if (newGeneralPoints > hardGeneralPoints) {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userID)
+          .collection('points')
+          .doc(userID)
+          .update({
+        'general_hard_points': newGeneralPoints,
+      });
+    }
+  }
+
   Future<void> updateName({
     required String? name,
   }) async {

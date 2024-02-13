@@ -1,6 +1,7 @@
 import 'package:quiz_quest/app/data/data_sources/quiz_data_source/quiz_categories_data_source.dart';
 import 'package:quiz_quest/app/domain/models/films_model/films_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/games_model/games_quiz_model.dart';
+import 'package:quiz_quest/app/domain/models/general_model/general_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/geography_model/geography_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/history_model/history_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/music_model/music_quiz_model.dart';
@@ -265,5 +266,36 @@ class QuizRepository {
     }
 
     return TVQuizModel.fromJson(json);
+  }
+
+  //genral
+  Future<GeneralQuizModel?> getEasyGeneralData() async {
+    final json = await quizCategoriesDataSource.getEasyGeneralCategory();
+
+    if (json == null) {
+      return null;
+    }
+
+    return GeneralQuizModel.fromJson(json);
+  }
+
+  Future<GeneralQuizModel?> getMediumGeneralData() async {
+    final json = await quizCategoriesDataSource.getMediumGeneralCategory();
+
+    if (json == null) {
+      return null;
+    }
+
+    return GeneralQuizModel.fromJson(json);
+  }
+
+  Future<GeneralQuizModel?> getHardGeneralData() async {
+    final json = await quizCategoriesDataSource.getHardGeneralCategory();
+
+    if (json == null) {
+      return null;
+    }
+
+    return GeneralQuizModel.fromJson(json);
   }
 }

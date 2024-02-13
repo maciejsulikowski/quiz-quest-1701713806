@@ -10,7 +10,6 @@ import 'package:quiz_quest/app/domain/models/geography_model/geography_quiz_mode
 import 'package:quiz_quest/app/domain/models/history_model/history_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/music_model/music_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/nature_model/nature_quiz_model.dart';
-import 'package:quiz_quest/app/domain/models/points_model/points_model.dart';
 import 'package:quiz_quest/app/domain/models/sports_model/sports_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/tv_model/tv_quiz_model.dart';
 import 'package:quiz_quest/app/domain/repositories/user_repository/user_repository.dart';

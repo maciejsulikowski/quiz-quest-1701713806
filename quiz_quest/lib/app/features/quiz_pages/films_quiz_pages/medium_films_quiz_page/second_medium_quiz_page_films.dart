@@ -103,7 +103,7 @@ class QuizzPage extends StatelessWidget {
           const SizedBox(
             height: 30,
           ),
-          const TextWidget(text: '1 good answer = 10 points 💎'),
+          const TextWidget(text: '1 good answer = 20 points 💎'),
           const SizedBox(
             height: 30,
           ),

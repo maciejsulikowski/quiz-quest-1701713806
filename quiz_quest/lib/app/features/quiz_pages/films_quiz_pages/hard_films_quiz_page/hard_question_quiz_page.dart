@@ -187,7 +187,7 @@ class _HardQuestionQuizPageState extends State<HardQuestionQuizPage> {
                             ),
                             Expanded(
                               child: Text(
-                                'Score: ${hardFilmsGoodAnswers * 10}',
+                                'Score: ${hardFilmsGoodAnswers * 30}',
                                 style: GoogleFonts.aBeeZee(
                                     fontSize: 20,
                                     color: Colors.white,

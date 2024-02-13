@@ -403,7 +403,7 @@ class QuizCategoriesDataSource {
 
   Future<Map<String, dynamic>?> getEasyGeneralCategory() async {
     final response = await Dio().get(
-        'https://opentdb.com/api.php?amount=10&category=9&difficulty=easy&type=multiple',
+        'https://opentdb.com/api.php?amount=5&category=9&difficulty=easy&type=multiple',
         options: Options(
           validateStatus: (_) => true,
         ));
@@ -419,7 +419,7 @@ class QuizCategoriesDataSource {
 
   Future<Map<String, dynamic>?> getMediumGeneralCategory() async {
     final response = await Dio().get(
-        'https://opentdb.com/api.php?amount=10&category=9&difficulty=medium&type=multiple',
+        'https://opentdb.com/api.php?amount=5&category=9&difficulty=medium&type=multiple',
         options: Options(
           validateStatus: (_) => true,
         ));
@@ -435,7 +435,7 @@ class QuizCategoriesDataSource {
 
   Future<Map<String, dynamic>?> getHardGeneralCategory() async {
     final response = await Dio().get(
-        'https://opentdb.com/api.php?amount=10&category=9&difficulty=hard&type=multiple',
+        'https://opentdb.com/api.php?amount=5&category=9&difficulty=hard&type=multiple',
         options: Options(
           validateStatus: (_) => true,
         ));

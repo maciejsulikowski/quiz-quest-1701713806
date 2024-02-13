@@ -49,6 +49,16 @@ class UserRepository {
         },
         {
           'id': 3,
+          'total': doc['general_easy_points'] +
+                  doc['general_medium_points'] +
+                  doc['general_hard_points'] ??
+              0,
+          'easy': doc['general_easy_points'] ?? 0,
+          'medium': doc['general_medium_points'] ?? 0,
+          'hard': doc['general_hard_points'] ?? 0,
+        },
+        {
+          'id': 4,
           'total': doc['geography_easy_points'] +
                   doc['geography_medium_points'] +
                   doc['geography_hard_points'] ??
@@ -58,7 +68,7 @@ class UserRepository {
           'hard': doc['geography_hard_points'] ?? 0,
         },
         {
-          'id': 4,
+          'id': 5,
           'total': doc['history_easy_points'] +
                   doc['history_medium_points'] +
                   doc['history_hard_points'] ??
@@ -68,7 +78,7 @@ class UserRepository {
           'hard': doc['history_hard_points'] ?? 0,
         },
         {
-          'id': 5,
+          'id': 6,
           'total': doc['music_easy_points'] +
                   doc['music_medium_points'] +
                   doc['music_hard_points'] ??
@@ -78,7 +88,7 @@ class UserRepository {
           'hard': doc['music_hard_points'] ?? 0,
         },
         {
-          'id': 6,
+          'id': 7,
           'total': doc['nature_easy_points'] +
                   doc['nature_medium_points'] +
                   doc['nature_hard_points'] ??
@@ -88,7 +98,7 @@ class UserRepository {
           'hard': doc['nature_hard_points'] ?? 0,
         },
         {
-          'id': 7,
+          'id': 8,
           'total': doc['sport_easy_points'] +
                   doc['sport_medium_points'] +
                   doc['sport_hard_points'] ??
@@ -98,7 +108,7 @@ class UserRepository {
           'hard': doc['sport_hard_points'] ?? 0,
         },
         {
-          'id': 8,
+          'id': 9,
           'total': doc['tv_easy_points'] +
                   doc['tv_medium_points'] +
                   doc['tv_hard_points'] ??
@@ -223,6 +233,20 @@ class UserRepository {
     return userDataSource.updateHardTvPoints(hardTVPoints);
   }
 
+  //general
+  Future<void> updateEasyGeneralPoints(int easyGeneralPoints) async {
+    return userDataSource.updateEasyGeneralPoints(easyGeneralPoints);
+  }
+
+  Future<void> updateMediumGeneralPoints(int mediumGeneralPoints) async {
+    return userDataSource.updateMediumGeneralPoints(mediumGeneralPoints);
+  }
+
+  Future<void> updateHardGeneralPoints(int hardGeneralPoints) async {
+    return userDataSource.updateHardGeneralPoints(hardGeneralPoints);
+  }
+
+  //-----user-----//
   Future<void> updateName(String name) async {
     return userDataSource.updateName(name: name);
   }

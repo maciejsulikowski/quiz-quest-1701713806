@@ -15,7 +15,7 @@ class HomeState {
     this.searchedList = const [],
     this.list = const [
       {
-        'id': 1,
+        'id': 0,
         'name': 'Films',
         'image': 'images/movie.png',
         'total_category': 'total_films_points',
@@ -27,7 +27,7 @@ class HomeState {
         )
       },
       {
-        'id': 2,
+        'id': 1,
         'name': 'Games',
         'image': 'images/games.png',
         'total_category': 'total_games_points',
@@ -36,6 +36,18 @@ class HomeState {
         'hard_category': 'games_hard_points',
         'page': FirstQuizPageGames(
           image: 'images/games.png',
+        )
+      },
+      {
+        'id': 2,
+        'name': 'General',
+        'image': 'images/book.png',
+        'total_category': 'total_general_points',
+        'easy_category': 'general_easy_points',
+        'medium_category': 'general_medium_points',
+        'hard_category': 'general_hard_points',
+        'page': FirstQuizPageGeneral(
+          image: 'images/book.png',
         )
       },
       {

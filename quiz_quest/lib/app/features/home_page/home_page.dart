@@ -11,6 +11,7 @@ import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/cubit/films_
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/first_quiz_page_films.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/easy_films_quiz_page/second_easy_quiz_page_films.dart';
 import 'package:quiz_quest/app/features/quiz_pages/games_quiz_pages/first_quiz_page_games.dart';
+import 'package:quiz_quest/app/features/quiz_pages/general_quiz_pages/first_quiz_page_general.dart';
 import 'package:quiz_quest/app/features/quiz_pages/geography_quiz_pages/first_quiz_page_geography.dart';
 import 'package:quiz_quest/app/features/quiz_pages/history_quiz_pages/first_quiz_page_history.dart';
 import 'package:quiz_quest/app/features/quiz_pages/music_quiz_pages/first_quiz_page_music.dart';
@@ -112,6 +113,18 @@ class _QuizzPageState extends State<QuizzPage> {
     },
     {
       'id': 2,
+      'name': 'General',
+      'image': 'images/book.png',
+      'total_category': 'total_general_points',
+      'easy_category': 'general_easy_points',
+      'medium_category': 'general_medium_points',
+      'hard_category': 'general_hard_points',
+      'page': const FirstQuizPageGeneral(
+        image: 'images/book.png',
+      )
+    },
+    {
+      'id': 3,
       'name': 'Geography',
       'image': 'images/geography.png',
       'total_category': 'total_geography_points',
@@ -123,7 +136,7 @@ class _QuizzPageState extends State<QuizzPage> {
       )
     },
     {
-      'id': 3,
+      'id': 4,
       'name': 'History',
       'image': 'images/history.png',
       'total_category': 'total_history_points',
@@ -135,7 +148,7 @@ class _QuizzPageState extends State<QuizzPage> {
       )
     },
     {
-      'id': 4,
+      'id': 5,
       'name': 'Music',
       'image': 'images/music.png',
       'total_category': 'total_music_points',
@@ -147,7 +160,7 @@ class _QuizzPageState extends State<QuizzPage> {
       )
     },
     {
-      'id': 5,
+      'id': 6,
       'name': 'Nature',
       'image': 'images/nature.png',
       'total_category': 'total_nature_points',
@@ -159,7 +172,7 @@ class _QuizzPageState extends State<QuizzPage> {
       )
     },
     {
-      'id': 6,
+      'id': 7,
       'name': 'Sport',
       'image': 'images/ball.png',
       'total_category': 'total_sports_points',
@@ -171,7 +184,7 @@ class _QuizzPageState extends State<QuizzPage> {
       )
     },
     {
-      'id': 7,
+      'id': 8,
       'name': 'TV',
       'image': 'images/tv.png',
       'total_category': 'total_tv_points',
@@ -180,7 +193,6 @@ class _QuizzPageState extends State<QuizzPage> {
       'hard_category': 'tv_hard_points',
       'page': const FirstQuizPageTV(
         image: 'images/tv.png',
-     
       )
     },
   ];

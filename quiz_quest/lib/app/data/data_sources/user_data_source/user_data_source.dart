@@ -111,6 +111,10 @@ class UserDataSource {
         'tv_easy_points': 0,
         'tv_medium_points': 0,
         'tv_hard_points': 0,
+        'total_general_points': 0,
+        'general_easy_points': 0,
+        'general_medium_points': 0,
+        'general_hard_points': 0,
       },
     );
   }

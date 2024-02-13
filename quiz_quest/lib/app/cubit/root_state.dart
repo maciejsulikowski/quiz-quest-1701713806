@@ -2,7 +2,7 @@ part of 'root_cubit.dart';
 
 @immutable
 class RootState {
-  const RootState({
+   RootState({
     this.user,
     required this.status,
     this.errorMessage,
@@ -11,6 +11,6 @@ class RootState {
 
   final User? user;
   final Status status;
-  final String? errorMessage;
+  String? errorMessage;
   final String? passwordMessage;
 }

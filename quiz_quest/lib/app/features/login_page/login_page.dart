@@ -15,6 +15,7 @@ class LoginPage extends StatefulWidget {
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -119,6 +120,24 @@ class _LoginPageState extends State<LoginPage> {
                           borderRadius: BorderRadius.circular(20))),
                 ),
               ),
+              if (isCreatingAccount == true) ...[
+                const SizedBox(
+                  height: 20,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  child: TextField(
+                    obscureText: true,
+                    controller: widget.confirmPasswordController,
+                    style: GoogleFonts.aBeeZee(color: Colors.white),
+                    decoration: InputDecoration(
+                        hintText: 'Confirm Password',
+                        hintStyle: GoogleFonts.aBeeZee(color: Colors.white),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20))),
+                  ),
+                ),
+              ],
               const SizedBox(
                 height: 20,
               ),
@@ -155,11 +174,43 @@ class _LoginPageState extends State<LoginPage> {
                             );
                       }
 
-                      if (isCreatingAccount == true) {
+                      if (isCreatingAccount == true &&
+                          widget.passwordController.text ==
+                              widget.confirmPasswordController.text) {
                         context.read<RootCubit>().createAccount(
                               widget.emailController.text,
                               widget.passwordController.text,
                             );
+                      } else if (isCreatingAccount == true &&
+                          widget.passwordController.text !=
+                              widget.confirmPasswordController.text) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            behavior: SnackBarBehavior.floating,
+                            backgroundColor: Colors.red,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            content: const Padding(
+                              padding: EdgeInsets.all(8),
+                              child: Row(
+                                children: [
+                                  Icon(Icons.error, color: Colors.white),
+                                  SizedBox(width: 8),
+                                  Expanded(
+                                    child: Text(
+                                      'Passwords are different, set the right passwords.',
+                                      style: TextStyle(color: Colors.white),
+                                      softWrap: true,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+
+                        return;
                       }
                     },
                     style: ElevatedButton.styleFrom(

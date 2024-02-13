@@ -15,7 +15,7 @@ class HomeState {
     this.searchedList = const [],
     this.list = const [
       {
-        'id': 1,
+        'id': 0,
         'name': 'Films',
         'image': 'images/movie.png',
         'total_category': 'total_films_points',
@@ -27,7 +27,7 @@ class HomeState {
         )
       },
       {
-        'id': 2,
+        'id': 1,
         'name': 'Games',
         'image': 'images/games.png',
         'total_category': 'total_games_points',
@@ -36,9 +36,18 @@ class HomeState {
         'hard_category': 'games_hard_points',
         'page': FirstQuizPageGames(
           image: 'images/games.png',
-          // easyCategory: 'games_easy_points',
-          // mediumCategory: 'games_medium_points',
-          // hardCategory: 'games_hard_points',
+        )
+      },
+      {
+        'id': 2,
+        'name': 'General',
+        'image': 'images/book.png',
+        'total_category': 'total_general_points',
+        'easy_category': 'general_easy_points',
+        'medium_category': 'general_medium_points',
+        'hard_category': 'general_hard_points',
+        'page': FirstQuizPageGeneral(
+          image: 'images/book.png',
         )
       },
       {
@@ -51,9 +60,6 @@ class HomeState {
         'hard_category': 'geography_hard_points',
         'page': FirstQuizPageGeography(
           image: 'images/geography.png',
-          easyCategory: 'geography_easy_points',
-          mediumCategory: 'geography_medium_points',
-          hardCategory: 'geography_hard_points',
         )
       },
       {
@@ -66,9 +72,6 @@ class HomeState {
         'hard_category': 'history_hard_points',
         'page': FirstQuizPageHistory(
           image: 'images/history.png',
-          easyCategory: 'history_easy_points',
-          mediumCategory: 'history_medium_points',
-          hardCategory: 'history_hard_points',
         )
       },
       {
@@ -81,9 +84,6 @@ class HomeState {
         'hard_category': 'music_hard_points',
         'page': FirstQuizPageMusic(
           image: 'images/music.png',
-          easyCategory: 'music_easy_points',
-          mediumCategory: 'music_medium_points',
-          hardCategory: 'music_hard_points',
         )
       },
       {
@@ -96,9 +96,6 @@ class HomeState {
         'hard_category': 'nature_hard_points',
         'page': FirstQuizPageNature(
           image: 'images/nature.png',
-          easyCategory: 'nature_easy_points',
-          mediumCategory: 'nature_medium_points',
-          hardCategory: 'nature_hard_points',
         )
       },
       {
@@ -110,10 +107,7 @@ class HomeState {
         'medium_category': 'sport_medium_points',
         'hard_category': 'sport_hard_points',
         'page': FirstQuizPageSport(
-          image: 'images/nature.png',
-          easyCategory: 'sport_easy_points',
-          mediumCategory: 'sport_medium_points',
-          hardCategory: 'sport_hard_points',
+          image: 'images/ball.png',
         )
       },
       {
@@ -126,9 +120,6 @@ class HomeState {
         'hard_category': 'tv_hard_points',
         'page': FirstQuizPageTV(
           image: 'images/tv.png',
-          easyCategory: 'tv_easy_points',
-          mediumCategory: 'tv_medium_points',
-          hardCategory: 'tv_hard_points',
         )
       },
     ],

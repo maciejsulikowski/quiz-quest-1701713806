@@ -5,7 +5,7 @@ class SportState {
     this.sportsQuizModel,
     this.isLoading = false,
     this.status = Status.initial,
-    this.error,
+    this.error, 
   });
 
   final bool isLoading;

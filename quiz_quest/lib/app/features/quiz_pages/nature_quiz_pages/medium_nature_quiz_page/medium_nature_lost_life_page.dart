@@ -1,0 +1,152 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:quiz_quest/app/core/enums.dart';
+import 'package:quiz_quest/app/data/data_sources/quiz_data_source/quiz_categories_data_source.dart';
+import 'package:quiz_quest/app/domain/repositories/quiz_repository/quiz_repository.dart';
+import 'package:quiz_quest/app/features/home_page/home_page.dart';
+import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/easy_films_quiz_page/easy_question_quiz_page.dart';
+import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/first_quiz_page_films.dart';
+import 'package:quiz_quest/app/features/quiz_pages/games_quiz_pages/easy_games_quiz_page/easy_question_quiz_page.dart';
+import 'package:quiz_quest/app/features/quiz_pages/geography_quiz_pages/easy_geography_quiz_page/easy_question_quiz_page.dart';
+import 'package:quiz_quest/app/features/quiz_pages/history_quiz_pages/easy_history_quiz_page/easy_question_quiz_page.dart';
+import 'package:quiz_quest/app/features/quiz_pages/music_quiz_pages/easy_music_quiz_page/easy_question_quiz_page.dart';
+import 'package:quiz_quest/app/features/quiz_pages/nature_quiz_pages/easy_nature_quiz_page/easy_question_quiz_page.dart';
+import 'package:quiz_quest/app/features/quiz_pages/nature_quiz_pages/medium_nature_quiz_page/medium_question_quiz_page.dart';
+
+class MediumNatureLostLifePage extends StatefulWidget {
+  const MediumNatureLostLifePage({
+    required this.goodAnswers,
+    super.key,
+  });
+
+  final int goodAnswers;
+
+  @override
+  State<MediumNatureLostLifePage> createState() => _MediumNatureLostLifePageState();
+}
+
+class _MediumNatureLostLifePageState extends State<MediumNatureLostLifePage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: ResumePage(goodAnswers: mediumNatureGoodAnswers),
+    );
+  }
+}
+
+class ResumePage extends StatelessWidget {
+  const ResumePage({
+    required this.goodAnswers,
+    super.key,
+  });
+
+  final int goodAnswers;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            Color.fromARGB(255, 10, 58, 214),
+            Color.fromARGB(255, 22, 20, 129),
+          ],
+          begin: Alignment.centerLeft,
+          end: Alignment.centerRight,
+        ),
+      ),
+      child: ListView(
+        children: [
+          const SizedBox(
+            height: 30,
+          ),
+          Center(
+            child: Text(
+              'Auch! 💔',
+              style: GoogleFonts.aBeeZee(
+                  fontSize: 46,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
+          const SizedBox(
+            height: 30,
+          ),
+          TextWidget(text: 'You scored: ${goodAnswers * 10} points 💎'),
+          const SizedBox(
+            height: 30,
+          ),
+          const TextWidget(text: 'Try beat your record: points 💎'),
+          const SizedBox(
+            height: 30,
+          ),
+          const TextWidget(text: 'Your lives are over, try again!'),
+          const SizedBox(
+            height: 30,
+          ),
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 20),
+            decoration: BoxDecoration(
+                gradient: const LinearGradient(
+                  colors: [
+                    Color.fromRGBO(143, 165, 255, 1),
+                    Color.fromRGBO(10, 53, 132, 1),
+                  ],
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                ),
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(25.0),
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    spreadRadius: 4,
+                    blurRadius: 10,
+                    offset: const Offset(0, 3),
+                  )
+                ]),
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).popUntil((route) => route.isFirst);
+              },
+              style: ElevatedButton.styleFrom(
+                  minimumSize: const Size.fromHeight(50),
+                  backgroundColor: Colors.transparent,
+                  shadowColor: Colors.transparent),
+              child: Text('''Back to Home Page''',
+                  style: GoogleFonts.aBeeZee(
+                    fontSize: 24,
+                    color: Colors.white,
+                  )),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class TextWidget extends StatelessWidget {
+  const TextWidget({
+    required this.text,
+    super.key,
+  });
+
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.only(left: 16),
+      child: Text(
+        text,
+        style: GoogleFonts.aBeeZee(
+          fontSize: 24,
+          color: Colors.white,
+        ),
+      ),
+    );
+  }
+}

@@ -1,6 +1,7 @@
 import 'package:quiz_quest/app/data/data_sources/quiz_data_source/quiz_categories_data_source.dart';
 import 'package:quiz_quest/app/domain/models/films_model/films_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/games_model/games_quiz_model.dart';
+import 'package:quiz_quest/app/domain/models/general_model/general_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/geography_model/geography_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/history_model/history_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/music_model/music_quiz_model.dart';
@@ -12,6 +13,8 @@ class QuizRepository {
   QuizRepository(this.quizCategoriesDataSource);
 
   final QuizCategoriesDataSource quizCategoriesDataSource;
+
+//films
 
   Future<FilmsQuizModel?> getEasyFilmsData() async {
     final json = await quizCategoriesDataSource.getEasyFilmCategory();
@@ -43,6 +46,8 @@ class QuizRepository {
     return FilmsQuizModel.fromJson(json);
   }
 
+//games
+
   Future<GamesQuizModel?> getEasyGamesData() async {
     final json = await quizCategoriesDataSource.getEasyGamesCategory();
 
@@ -73,15 +78,7 @@ class QuizRepository {
     return GamesQuizModel.fromJson(json);
   }
 
-  Future<MusicQuizModel?> getMusicData() async {
-    final json = await quizCategoriesDataSource.getEasyMusicCategory();
-
-    if (json == null) {
-      return null;
-    }
-
-    return MusicQuizModel.fromJson(json);
-  }
+//geo
 
   Future<GeographyQuizModel?> getEasyGeographyData() async {
     final json = await quizCategoriesDataSource.getEasyGeographyCategory();
@@ -93,6 +90,28 @@ class QuizRepository {
     return GeographyQuizModel.fromJson(json);
   }
 
+  Future<GeographyQuizModel?> getMediumGeographyData() async {
+    final json = await quizCategoriesDataSource.getMediumGeographyCategory();
+
+    if (json == null) {
+      return null;
+    }
+
+    return GeographyQuizModel.fromJson(json);
+  }
+
+  Future<GeographyQuizModel?> getHardGeographyData() async {
+    final json = await quizCategoriesDataSource.getHardGeographyCategory();
+
+    if (json == null) {
+      return null;
+    }
+
+    return GeographyQuizModel.fromJson(json);
+  }
+
+  //history
+
   Future<HistoryQuizModel?> getEasyHistoryData() async {
     final json = await quizCategoriesDataSource.getEasyHistoryCategory();
 
@@ -103,7 +122,61 @@ class QuizRepository {
     return HistoryQuizModel.fromJson(json);
   }
 
-  Future<NatureQuizModel?> getNatureData() async {
+  Future<HistoryQuizModel?> getMediumHistoryData() async {
+    final json = await quizCategoriesDataSource.getMediumHistoryCategory();
+
+    if (json == null) {
+      return null;
+    }
+
+    return HistoryQuizModel.fromJson(json);
+  }
+
+  Future<HistoryQuizModel?> getHardHistoryData() async {
+    final json = await quizCategoriesDataSource.getHardHistoryCategory();
+
+    if (json == null) {
+      return null;
+    }
+
+    return HistoryQuizModel.fromJson(json);
+  }
+
+  //music
+
+  Future<MusicQuizModel?> getEasyMusicData() async {
+    final json = await quizCategoriesDataSource.getEasyMusicCategory();
+
+    if (json == null) {
+      return null;
+    }
+
+    return MusicQuizModel.fromJson(json);
+  }
+
+  Future<MusicQuizModel?> getMediumMusicData() async {
+    final json = await quizCategoriesDataSource.getMediumMusicCategory();
+
+    if (json == null) {
+      return null;
+    }
+
+    return MusicQuizModel.fromJson(json);
+  }
+
+  Future<MusicQuizModel?> getHardMusicData() async {
+    final json = await quizCategoriesDataSource.getHardMusicCategory();
+
+    if (json == null) {
+      return null;
+    }
+
+    return MusicQuizModel.fromJson(json);
+  }
+
+  //nature
+
+  Future<NatureQuizModel?> getEasyNatureData() async {
     final json = await quizCategoriesDataSource.getEasyNatureCategory();
 
     if (json == null) {
@@ -113,7 +186,28 @@ class QuizRepository {
     return NatureQuizModel.fromJson(json);
   }
 
-  Future<SportsQuizModel?> getEasySportsData() async {
+  Future<NatureQuizModel?> getMediumNatureData() async {
+    final json = await quizCategoriesDataSource.getMediumNatureCategory();
+
+    if (json == null) {
+      return null;
+    }
+
+    return NatureQuizModel.fromJson(json);
+  }
+
+  Future<NatureQuizModel?> getHardNatureData() async {
+    final json = await quizCategoriesDataSource.getHardNatureCategory();
+
+    if (json == null) {
+      return null;
+    }
+
+    return NatureQuizModel.fromJson(json);
+  }
+
+  //sport
+  Future<SportsQuizModel?> getEasySportData() async {
     final json = await quizCategoriesDataSource.getEasySportCategory();
 
     if (json == null) {
@@ -123,7 +217,28 @@ class QuizRepository {
     return SportsQuizModel.fromJson(json);
   }
 
-  Future<TVQuizModel?> getTVData() async {
+  Future<SportsQuizModel?> getMediumSportData() async {
+    final json = await quizCategoriesDataSource.getMediumSportCategory();
+
+    if (json == null) {
+      return null;
+    }
+
+    return SportsQuizModel.fromJson(json);
+  }
+
+  Future<SportsQuizModel?> getHardSportData() async {
+    final json = await quizCategoriesDataSource.getHardSportCategory();
+
+    if (json == null) {
+      return null;
+    }
+
+    return SportsQuizModel.fromJson(json);
+  }
+
+  //tv
+  Future<TVQuizModel?> getEasyTVData() async {
     final json = await quizCategoriesDataSource.getEasyTVCategory();
 
     if (json == null) {
@@ -131,5 +246,56 @@ class QuizRepository {
     }
 
     return TVQuizModel.fromJson(json);
+  }
+
+  Future<TVQuizModel?> getMediumTVData() async {
+    final json = await quizCategoriesDataSource.getMediumTVCategory();
+
+    if (json == null) {
+      return null;
+    }
+
+    return TVQuizModel.fromJson(json);
+  }
+
+  Future<TVQuizModel?> getHardTVData() async {
+    final json = await quizCategoriesDataSource.getHardTVCategory();
+
+    if (json == null) {
+      return null;
+    }
+
+    return TVQuizModel.fromJson(json);
+  }
+
+  //genral
+  Future<GeneralQuizModel?> getEasyGeneralData() async {
+    final json = await quizCategoriesDataSource.getEasyGeneralCategory();
+
+    if (json == null) {
+      return null;
+    }
+
+    return GeneralQuizModel.fromJson(json);
+  }
+
+  Future<GeneralQuizModel?> getMediumGeneralData() async {
+    final json = await quizCategoriesDataSource.getMediumGeneralCategory();
+
+    if (json == null) {
+      return null;
+    }
+
+    return GeneralQuizModel.fromJson(json);
+  }
+
+  Future<GeneralQuizModel?> getHardGeneralData() async {
+    final json = await quizCategoriesDataSource.getHardGeneralCategory();
+
+    if (json == null) {
+      return null;
+    }
+
+    return GeneralQuizModel.fromJson(json);
   }
 }

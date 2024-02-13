@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:quiz_quest/app/data/data_sources/user_data_source/user_data_source.dart';
-import 'package:quiz_quest/app/domain/models/points_model/points_model.dart';
 import 'package:quiz_quest/app/domain/models/user_model/user_model.dart';
 
 class UserRepository {
@@ -50,6 +49,16 @@ class UserRepository {
         },
         {
           'id': 3,
+          'total': doc['general_easy_points'] +
+                  doc['general_medium_points'] +
+                  doc['general_hard_points'] ??
+              0,
+          'easy': doc['general_easy_points'] ?? 0,
+          'medium': doc['general_medium_points'] ?? 0,
+          'hard': doc['general_hard_points'] ?? 0,
+        },
+        {
+          'id': 4,
           'total': doc['geography_easy_points'] +
                   doc['geography_medium_points'] +
                   doc['geography_hard_points'] ??
@@ -59,7 +68,7 @@ class UserRepository {
           'hard': doc['geography_hard_points'] ?? 0,
         },
         {
-          'id': 4,
+          'id': 5,
           'total': doc['history_easy_points'] +
                   doc['history_medium_points'] +
                   doc['history_hard_points'] ??
@@ -69,7 +78,7 @@ class UserRepository {
           'hard': doc['history_hard_points'] ?? 0,
         },
         {
-          'id': 5,
+          'id': 6,
           'total': doc['music_easy_points'] +
                   doc['music_medium_points'] +
                   doc['music_hard_points'] ??
@@ -79,7 +88,7 @@ class UserRepository {
           'hard': doc['music_hard_points'] ?? 0,
         },
         {
-          'id': 6,
+          'id': 7,
           'total': doc['nature_easy_points'] +
                   doc['nature_medium_points'] +
                   doc['nature_hard_points'] ??
@@ -89,7 +98,7 @@ class UserRepository {
           'hard': doc['nature_hard_points'] ?? 0,
         },
         {
-          'id': 7,
+          'id': 8,
           'total': doc['sport_easy_points'] +
                   doc['sport_medium_points'] +
                   doc['sport_hard_points'] ??
@@ -99,7 +108,7 @@ class UserRepository {
           'hard': doc['sport_hard_points'] ?? 0,
         },
         {
-          'id': 8,
+          'id': 9,
           'total': doc['tv_easy_points'] +
                   doc['tv_medium_points'] +
                   doc['tv_hard_points'] ??
@@ -146,6 +155,98 @@ class UserRepository {
     return userDataSource.updateHardFilmPoints(hardFilmsPoints);
   }
 
+  //geo
+  Future<void> updateEasyGeographyPoints(int easyGeographyPoints) async {
+    return userDataSource.updateEasyGeographyPoints(easyGeographyPoints);
+  }
+
+  Future<void> updateMediumGeographyPoints(int mediumGeographyPoints) async {
+    return userDataSource.updateMediumGeographyPoints(mediumGeographyPoints);
+  }
+
+  Future<void> updateHardGeographyPoints(int hardGeographyPoints) async {
+    return userDataSource.updateHardGeographyPoints(hardGeographyPoints);
+  }
+
+  //history
+  Future<void> updateEasyHistoryPoints(int easyHistoryPoints) async {
+    return userDataSource.updateEasyHistoryPoints(easyHistoryPoints);
+  }
+
+  Future<void> updateMediumHistoryPoints(int mediumHistoryPoints) async {
+    return userDataSource.updateMediumHistoryPoints(mediumHistoryPoints);
+  }
+
+  Future<void> updateHardHistoryPoints(int hardHistoryPoints) async {
+    return userDataSource.updateHardHistoryPoints(hardHistoryPoints);
+  }
+
+  //music
+  Future<void> updateEasyMusicPoints(int easyMusicPoints) async {
+    return userDataSource.updateEasyMusicPoints(easyMusicPoints);
+  }
+
+  Future<void> updateMediumMusicPoints(int mediumMusicPoints) async {
+    return userDataSource.updateMediumMusicPoints(mediumMusicPoints);
+  }
+
+  Future<void> updateHardMusicPoints(int hardMusicPoints) async {
+    return userDataSource.updateHardMusicPoints(hardMusicPoints);
+  }
+
+  //nature
+  Future<void> updateEasyNaturePoints(int easyNaturePoints) async {
+    return userDataSource.updateEasyNaturePoints(easyNaturePoints);
+  }
+
+  Future<void> updateMediumNaturePoints(int mediumNaturePoints) async {
+    return userDataSource.updateMediumNaturePoints(mediumNaturePoints);
+  }
+
+  Future<void> updateHardNaturePoints(int hardNaturePoints) async {
+    return userDataSource.updateHardNaturePoints(hardNaturePoints);
+  }
+
+  //sport
+  Future<void> updateEasySportPoints(int easySportPoints) async {
+    return userDataSource.updateEasySportPoints(easySportPoints);
+  }
+
+  Future<void> updateMediumSportPoints(int mediumSportPoints) async {
+    return userDataSource.updateMediumSportPoints(mediumSportPoints);
+  }
+
+  Future<void> updateHardSportPoints(int hardSportPoints) async {
+    return userDataSource.updateHardSportPoints(hardSportPoints);
+  }
+
+  //tv
+  Future<void> updateEasyTVPoints(int easyTVPoints) async {
+    return userDataSource.updateEasyTvPoints(easyTVPoints);
+  }
+
+  Future<void> updateMediumTVPoints(int mediumTVPoints) async {
+    return userDataSource.updateMediumTvPoints(mediumTVPoints);
+  }
+
+  Future<void> updateHardTVPoints(int hardTVPoints) async {
+    return userDataSource.updateHardTvPoints(hardTVPoints);
+  }
+
+  //general
+  Future<void> updateEasyGeneralPoints(int easyGeneralPoints) async {
+    return userDataSource.updateEasyGeneralPoints(easyGeneralPoints);
+  }
+
+  Future<void> updateMediumGeneralPoints(int mediumGeneralPoints) async {
+    return userDataSource.updateMediumGeneralPoints(mediumGeneralPoints);
+  }
+
+  Future<void> updateHardGeneralPoints(int hardGeneralPoints) async {
+    return userDataSource.updateHardGeneralPoints(hardGeneralPoints);
+  }
+
+  //-----user-----//
   Future<void> updateName(String name) async {
     return userDataSource.updateName(name: name);
   }

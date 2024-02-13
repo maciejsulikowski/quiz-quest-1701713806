@@ -18,6 +18,7 @@ class UserRepository {
         imageURL: doc['image_url'],
         gender: doc['gender'],
         favouriteCategory: doc['favourite_categories'],
+        isUserNew: doc['is_user_new'],
       );
     });
   }
@@ -266,28 +267,8 @@ class UserRepository {
   Future<void> updateCategory(String category) async {
     return userDataSource.updateCategory(category: category);
   }
+
+  Future<void> changeUserBool() async {
+    return userDataSource.changeUserBool();
+  }
 }
-
-// class PointsModel {
-//   PointsModel({
-//     required this.totalPoints,
-//     required this.filmsCategoryPoints,
-//     required this.gamesCategoryPoints,
-//     required this.geographyCategoryPoints,
-//     required this.historyCategoryPoints,
-//     required this.musicCategoryPoints,
-//     required this.natureCategoryPoints,
-//     required this.sportCategoryPoints,
-//     required this.tvCategoryPoints,
-//   });
-
-//   final int totalPoints;
-//   final Map<int, Map<String, int>> filmsCategoryPoints;
-//   final Map<int, Map<String, int>> gamesCategoryPoints;
-//   final Map<int, Map<String, int>> geographyCategoryPoints;
-//   final Map<int, Map<String, int>> historyCategoryPoints;
-//   final Map<int, Map<String, int>> musicCategoryPoints;
-//   final Map<int, Map<String, int>> natureCategoryPoints;
-//   final Map<int, Map<String, int>> sportCategoryPoints;
-//   final Map<int, Map<String, int>> tvCategoryPoints;
-// }

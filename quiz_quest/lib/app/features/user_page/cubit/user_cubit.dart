@@ -164,6 +164,29 @@ class UserCubit extends Cubit<UserState> {
     }
   }
 
+  Future<void> changeUserBool() async {
+    emit(UserState(
+      status: Status.loading,
+    ));
+
+    try {
+      await userRepository.changeUserBool();
+      emit(
+        UserState(
+          status: Status.success,
+          isSaved: true,
+        ),
+      );
+    } catch (error) {
+      emit(
+        UserState(
+          status: Status.error,
+          errorMessage: error.toString(),
+        ),
+      );
+    }
+  }
+
   @override
   Future<void> close() {
     streamSubscription?.cancel();

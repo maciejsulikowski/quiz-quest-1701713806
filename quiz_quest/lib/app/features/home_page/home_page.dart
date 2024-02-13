@@ -19,6 +19,7 @@ import 'package:quiz_quest/app/features/quiz_pages/music_quiz_pages/first_quiz_p
 import 'package:quiz_quest/app/features/quiz_pages/nature_quiz_pages/first_quiz_page_nature.dart';
 import 'package:quiz_quest/app/features/quiz_pages/sports_quiz_pages/first_quiz_page_sport.dart';
 import 'package:quiz_quest/app/features/quiz_pages/tv_quiz_pages/first_quiz_page_tv.dart';
+import 'package:quiz_quest/app/features/user_page/cubit/user_cubit.dart';
 import 'package:quiz_quest/app/features/user_page/user_account.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -29,7 +30,7 @@ class HomePage extends StatefulWidget {
   });
 
   final User user;
-  bool isNewUser = true;
+  // bool isNewUser = true;
   @override
   State<HomePage> createState() => _HomePageState();
 }
@@ -59,27 +60,34 @@ class _HomePageState extends State<HomePage> {
             ),
           ]),
       body: SafeArea(
-        child: Builder(builder: (context) {
-          if (widget.isNewUser) {
-            return FirstPageAfterRegistration(
-              isNewUser: widget.isNewUser,
-              setUserOld: (value) {
-                setState(() {
-                  widget.isNewUser = value;
-                });
-              },
-            );
-          } else {
-            if (currentIndex == 0) {
-              return QuizzPage(
-                user: widget.user,
-              );
-            }
-            return UserAccount(
-              user: widget.user,
-            );
-          }
-        }),
+        child: BlocProvider(
+          create: (context) =>
+              UserCubit(UserRepository(UserDataSource()))..start(),
+          child: BlocBuilder<UserCubit, UserState>(
+            builder: (context, state) {
+              if (state.userModel != null &&
+                  state.userModel!.isUserNew == true) {
+                return FirstPageAfterRegistration(
+                  isNewUser: state.userModel!.isUserNew,
+                  setUserOld: (value) {
+                    setState(() {
+                      state.userModel!.isUserNew = value;
+                    });
+                  },
+                );
+              } else {
+                if (currentIndex == 0) {
+                  return QuizzPage(
+                    user: widget.user,
+                  );
+                }
+                return UserAccount(
+                  user: widget.user,
+                );
+              }
+            },
+          ),
+        ),
       ),
     );
   }
@@ -413,7 +421,6 @@ class _QuizzPageState extends State<QuizzPage> {
                                     ['total'] ??
                                 0,
                         nextPage: state.list[index]['page'],
-                        // allCategoryPoints: allCategoryPoints,
                       );
                     },
                   ),
@@ -422,7 +429,6 @@ class _QuizzPageState extends State<QuizzPage> {
               ],
             ),
           );
-          // });
         },
       ),
     );

@@ -979,7 +979,7 @@ class UserDataSource {
         .doc(userID)
         .set(
       {
-        'is_user_new': true,
+        'is_user_new': false,
       },
       SetOptions(merge: true),
     );

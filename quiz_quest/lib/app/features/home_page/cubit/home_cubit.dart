@@ -23,8 +23,10 @@ import 'package:quiz_quest/app/features/quiz_pages/nature_quiz_pages/cubit/natur
 import 'package:quiz_quest/app/features/quiz_pages/nature_quiz_pages/first_quiz_page_nature.dart';
 import 'package:quiz_quest/app/features/quiz_pages/sports_quiz_pages/first_quiz_page_sport.dart';
 import 'package:quiz_quest/app/features/quiz_pages/tv_quiz_pages/first_quiz_page_tv.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'home_state.dart';
+part 'home_cubit.freezed.dart';
 
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit(this.userRepository) : super(HomeState());

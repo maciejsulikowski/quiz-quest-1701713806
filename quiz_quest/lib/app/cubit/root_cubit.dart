@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -8,6 +8,7 @@ import 'package:quiz_quest/app/core/enums.dart';
 import 'package:quiz_quest/app/domain/repositories/user_repository/user_repository.dart';
 
 part 'root_state.dart';
+part 'root_cubit.freezed.dart';
 
 class RootCubit extends Cubit<RootState> {
   RootCubit(this.userRepository)

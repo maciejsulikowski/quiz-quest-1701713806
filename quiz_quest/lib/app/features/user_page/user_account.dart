@@ -210,7 +210,7 @@ class _UserWidgetState extends State<UserWidget> {
                   child: imageController.text.isEmpty
                       ? const Icon(
                           Icons.photo_camera,
-                          color: Colors.black,
+                          color: Colors.grey,
                           size: 40,
                         )
                       : null,
@@ -393,7 +393,7 @@ class _UserWidgetState extends State<UserWidget> {
                           _showSnackbar('Changes are saved succesfully');
                         }
                       : null,
-                ),
+                ),  
               ),
               enabled: enableEditing,
             ),

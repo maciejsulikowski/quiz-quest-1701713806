@@ -22,6 +22,7 @@ import 'package:quiz_quest/app/features/quiz_pages/tv_quiz_pages/first_quiz_page
 import 'package:quiz_quest/app/features/user_page/cubit/user_cubit.dart';
 import 'package:quiz_quest/app/features/user_page/user_account.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:super_tooltip/super_tooltip.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({
@@ -59,7 +60,7 @@ class _HomePageState extends State<HomePage> {
                                 icon: Icon(
                                   Icons.quiz,
                                 ),
-                                label: 'Quizz'),
+                                label: 'Quiz'),
                             BottomNavigationBarItem(
                               icon: Icon(Icons.person),
                               label: 'My Account',
@@ -227,6 +228,7 @@ class _QuizzPageState extends State<QuizzPage> {
 
   final controller = TextEditingController();
   late List<dynamic> categoryList;
+  final toolController = SuperTooltipController();
 
   @override
   void initState() {
@@ -292,9 +294,41 @@ class _QuizzPageState extends State<QuizzPage> {
                               color: Colors.white,
                               fontWeight: FontWeight.bold),
                         ),
-                        const CircleAvatar(
-                          child: Icon(Icons.question_mark),
-                        )
+                        GestureDetector(
+                          onTap: () async {
+                            await toolController.showTooltip();
+                          },
+                          child: SuperTooltip(
+                            showBarrier: true,
+                            controller: toolController,
+                            content: const Text(
+                              '''Hello 👋 If you want to start the game, just click on a category in "Quiz". If you want to change your personal information, you can click "My Account". I hope you have fun with this app 😄''',
+                              softWrap: true,
+                              style: TextStyle(
+                                color: Colors.black,
+                              ),
+                            ),
+                            child: Container(
+                              width: 40.0,
+                              height: 40.0,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                gradient: const LinearGradient(
+                                  colors: [
+                                    Color.fromARGB(255, 59, 102, 244),
+                                    Color.fromARGB(255, 8, 5, 214),
+                                  ],
+                                  begin: Alignment.centerLeft,
+                                  end: Alignment.centerRight,
+                                ),
+                              ),
+                              child: const Icon(
+                                Icons.question_mark,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),

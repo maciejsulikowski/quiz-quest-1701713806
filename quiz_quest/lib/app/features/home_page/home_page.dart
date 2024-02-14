@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:curved_labeled_navigation_bar/curved_navigation_bar.dart';
+import 'package:curved_labeled_navigation_bar/curved_navigation_bar_item.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -48,21 +50,21 @@ class _HomePageState extends State<HomePage> {
             bottomNavigationBar:
                 state.userModel != null && state.userModel!.isUserNew == true
                     ? null
-                    : BottomNavigationBar(
-                        currentIndex: currentIndex,
+                    : CurvedNavigationBar(
+                        backgroundColor: Colors.indigo,
                         onTap: (newIndex) {
                           setState(() {
                             currentIndex = newIndex;
                           });
                         },
                         items: const [
-                            BottomNavigationBarItem(
-                                icon: Icon(
+                            CurvedNavigationBarItem(
+                                child: Icon(
                                   Icons.quiz,
                                 ),
                                 label: 'Quiz'),
-                            BottomNavigationBarItem(
-                              icon: Icon(Icons.person),
+                            CurvedNavigationBarItem(
+                              child: Icon(Icons.person),
                               label: 'My Account',
                             ),
                           ]),
@@ -302,7 +304,7 @@ class _QuizzPageState extends State<QuizzPage> {
                             showBarrier: true,
                             controller: toolController,
                             content: const Text(
-                              '''Hello 👋 If you want to start the game, just click on a category in "Quiz". If you want to change your personal information, you can click "My Account". I hope you have fun with this app 😄''',
+                              '''Hello 👋 If you want to start the game, just click on a category in "Quiz". You can share your total points with other people next to result, just click the icon. If you want to change your personal information, you can click "My Account". I hope you will have fun with this app 😄''',
                               softWrap: true,
                               style: TextStyle(
                                 color: Colors.black,

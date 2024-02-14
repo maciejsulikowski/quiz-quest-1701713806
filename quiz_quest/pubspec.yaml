@@ -32,6 +32,8 @@ dependencies:
   firebase_storage: ^11.6.0
   share_plus: ^7.2.2
   super_tooltip: ^2.0.7
+  curved_navigation_bar_with_label: ^2.1.4
+  curved_labeled_navigation_bar: ^2.0.2
   
 dev_dependencies:
   flutter_test:

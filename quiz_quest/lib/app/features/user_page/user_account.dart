@@ -302,10 +302,9 @@ class _UserWidgetState extends State<UserWidget> {
                   label: Text(
                     'Logout',
                     style: GoogleFonts.aBeeZee(
-                      fontSize: 28,
-                      color: Colors.white,
-                      fontStyle: FontStyle.italic,
-                    ),
+                        fontSize: 26,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
                   ),
                   icon: const Icon(
                     Icons.logout,
@@ -393,7 +392,7 @@ class _UserWidgetState extends State<UserWidget> {
                           _showSnackbar('Changes are saved succesfully');
                         }
                       : null,
-                ),  
+                ),
               ),
               enabled: enableEditing,
             ),

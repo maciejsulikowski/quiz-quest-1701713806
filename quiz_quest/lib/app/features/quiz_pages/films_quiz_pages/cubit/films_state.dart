@@ -19,7 +19,7 @@ class FilmsState with _$FilmsState {
   factory FilmsState({
     FilmsQuizModel? filmsQuizModel,
     @Default(Status.initial) Status status,
-    @Default(false)bool? isLoading,
+    @Default(false) bool? isLoading,
     String? error,
   }) = _FilmsState;
 }

@@ -4,8 +4,10 @@ import 'package:quiz_quest/app/core/enums.dart';
 import 'package:quiz_quest/app/domain/models/geography_model/geography_quiz_model.dart';
 import 'package:quiz_quest/app/domain/repositories/quiz_repository/quiz_repository.dart';
 import 'package:quiz_quest/app/domain/repositories/user_repository/user_repository.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'geography_state.dart';
+part 'geography_cubit.freezed.dart';
 
 class GeographyCubit extends Cubit<GeographyState> {
   GeographyCubit(this.quizRepository, this.userRepository)

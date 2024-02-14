@@ -5,8 +5,10 @@ import 'package:quiz_quest/app/data/data_sources/quiz_data_source/quiz_categorie
 import 'package:quiz_quest/app/domain/models/general_model/general_quiz_model.dart';
 import 'package:quiz_quest/app/domain/repositories/quiz_repository/quiz_repository.dart';
 import 'package:quiz_quest/app/domain/repositories/user_repository/user_repository.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'general_state.dart';
+part 'general_cubit.freezed.dart';
 
 class GeneralCubit extends Cubit<GeneralState> {
   GeneralCubit(this.quizRepository, this.userRepository)

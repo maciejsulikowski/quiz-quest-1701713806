@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lottie/lottie.dart';
-import 'package:quiz_quest/app/core/enums.dart';
-import 'package:quiz_quest/app/cubit/root_cubit.dart';
-import 'package:quiz_quest/app/features/home_page/cubit/home_cubit.dart';
-import 'package:quiz_quest/app/features/home_page/home_page.dart';
-import 'package:quiz_quest/app/features/login_page/forgot_password_page.dart';
+
 import 'package:quiz_quest/app/features/user_page/cubit/user_cubit.dart';
 
 class FirstPageAfterRegistration extends StatefulWidget {
@@ -15,9 +10,6 @@ class FirstPageAfterRegistration extends StatefulWidget {
     required this.setUserOld,
     super.key,
   });
-
-  final nameController = TextEditingController();
-  final surnameController = TextEditingController();
 
   bool isNewUser;
   Function(bool) setUserOld;
@@ -28,6 +20,8 @@ class FirstPageAfterRegistration extends StatefulWidget {
 
 class _FirstPageAfterRegistrationState
     extends State<FirstPageAfterRegistration> {
+  var nameController = TextEditingController();
+  var surnameController = TextEditingController();
   var errorMessage = '';
 
   @override
@@ -88,7 +82,12 @@ class _FirstPageAfterRegistrationState
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10.0),
               child: TextField(
-                controller: widget.nameController,
+                onChanged: (value) {
+                  setState(() {
+                    nameController.text = value;
+                  });
+                },
+                controller: nameController,
                 style: GoogleFonts.aBeeZee(color: Colors.white),
                 decoration: InputDecoration(
                     hintText: 'Name',
@@ -103,8 +102,12 @@ class _FirstPageAfterRegistrationState
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10.0),
               child: TextField(
-                obscureText: true,
-                controller: widget.surnameController,
+                onChanged: (value) {
+                  setState(() {
+                    surnameController.text = value;
+                  });
+                },
+                controller: surnameController,
                 style: GoogleFonts.aBeeZee(color: Colors.white),
                 decoration: InputDecoration(
                     hintText: 'Surname',
@@ -141,11 +144,18 @@ class _FirstPageAfterRegistrationState
               child: Directionality(
                 textDirection: TextDirection.rtl,
                 child: ElevatedButton.icon(
-                  onPressed: () async {
-                    setState(() {
-                      context.read<UserCubit>().changeUserBool();
-                    });
-                  },
+                  onPressed: nameController.text.isEmpty ||
+                          surnameController.text.isEmpty
+                      ? null
+                      : () {
+                          context
+                              .read<UserCubit>()
+                              .updateName(nameController.text);
+                          context
+                              .read<UserCubit>()
+                              .updateSurname(surnameController.text);
+                          context.read<UserCubit>().changeUserBool();
+                        },
                   style: ElevatedButton.styleFrom(
                       minimumSize: const Size.fromHeight(50),
                       backgroundColor: Colors.transparent,
@@ -167,9 +177,7 @@ class _FirstPageAfterRegistrationState
             ),
             TextButton(
                 onPressed: () async {
-                  setState(() {
-                    context.read<UserCubit>().changeUserBool();
-                  });
+                  context.read<UserCubit>().changeUserBool();
                 },
                 child: Text('''I'll do it later''',
                     style: GoogleFonts.aBeeZee(

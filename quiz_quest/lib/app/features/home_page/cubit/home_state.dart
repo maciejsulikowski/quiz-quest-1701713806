@@ -2,6 +2,7 @@ part of 'home_cubit.dart';
 
 class HomeState {
   HomeState({
+    
     this.sportsModel,
     this.filmsModel,
     this.gamesModel,
@@ -126,6 +127,7 @@ class HomeState {
     this.categoryPoints = const [],
     this.totalPoints = 0,
     this.totalCategoryPoints = 0,
+    this.isSaved = false,
   });
 
   final SportsQuizModel? sportsModel;
@@ -143,4 +145,5 @@ class HomeState {
   final List<Map<String, int>> categoryPoints;
   final int totalPoints;
   final int totalCategoryPoints;
+  final bool isSaved;
 }

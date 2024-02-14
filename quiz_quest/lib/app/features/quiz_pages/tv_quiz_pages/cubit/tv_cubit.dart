@@ -4,8 +4,10 @@ import 'package:quiz_quest/app/core/enums.dart';
 import 'package:quiz_quest/app/domain/models/tv_model/tv_quiz_model.dart';
 import 'package:quiz_quest/app/domain/repositories/quiz_repository/quiz_repository.dart';
 import 'package:quiz_quest/app/domain/repositories/user_repository/user_repository.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'tv_state.dart';
+part 'tv_cubit.freezed.dart';
 
 class TVCubit extends Cubit<TVState> {
   TVCubit(this.quizRepository, this.userRepository) : super(TVState());

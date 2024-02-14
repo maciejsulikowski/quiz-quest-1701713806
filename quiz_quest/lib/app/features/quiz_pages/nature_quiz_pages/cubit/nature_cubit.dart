@@ -4,8 +4,11 @@ import 'package:quiz_quest/app/core/enums.dart';
 import 'package:quiz_quest/app/domain/models/nature_model/nature_quiz_model.dart';
 import 'package:quiz_quest/app/domain/repositories/quiz_repository/quiz_repository.dart';
 import 'package:quiz_quest/app/domain/repositories/user_repository/user_repository.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'nature_state.dart';
+part 'nature_cubit.freezed.dart';
+
 
 class NatureCubit extends Cubit<NatureState> {
   NatureCubit(this.quizRepository, this.userRepository) : super(NatureState());

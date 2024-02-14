@@ -4,8 +4,11 @@ import 'package:quiz_quest/app/core/enums.dart';
 import 'package:quiz_quest/app/domain/models/sports_model/sports_quiz_model.dart';
 import 'package:quiz_quest/app/domain/repositories/quiz_repository/quiz_repository.dart';
 import 'package:quiz_quest/app/domain/repositories/user_repository/user_repository.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'sport_state.dart';
+part 'sport_cubit.freezed.dart';
+
 
 class SportCubit extends Cubit<SportState> {
   SportCubit(this.quizRepository, this.userRepository) : super(SportState());

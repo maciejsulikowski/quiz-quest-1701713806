@@ -1,4 +1,5 @@
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -127,7 +128,7 @@ class _MediumQuestionGeneralQuizPageState
     return Scaffold(
       body: BlocProvider(
         create: (context) => GeneralCubit(
-            QuizRepository(QuizCategoriesDataSource()),
+            QuizRepository(QuizCategoriesRetrofitDataSource(Dio())),
             UserRepository(UserDataSource()))
           ..getMediumGeneralCategory(),
         child: BlocListener<GeneralCubit, GeneralState>(
@@ -536,8 +537,8 @@ class _AnswerButtonState extends State<AnswerButton> {
             .updateMediumGeneralPoints(mediumGeneralGoodAnswers);
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) =>
-                MediumGeneralLostLifePage(goodAnswers: mediumGeneralGoodAnswers),
+            builder: (context) => MediumGeneralLostLifePage(
+                goodAnswers: mediumGeneralGoodAnswers),
           ),
         );
       }

@@ -1,4 +1,5 @@
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -136,7 +137,7 @@ class _HardQuestionTvQuizPageState extends State<HardQuestionTvQuizPage> {
 
     return Scaffold(
       body: BlocProvider(
-        create: (context) => TVCubit(QuizRepository(QuizCategoriesDataSource()),
+        create: (context) => TVCubit(QuizRepository(QuizCategoriesRetrofitDataSource(Dio())),
             UserRepository(UserDataSource()))
           ..getHardTVCategory(),
         child: BlocListener<TVCubit, TVState>(

@@ -1,4 +1,5 @@
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -132,7 +133,7 @@ class _EasyQuestionSportQuizPageState extends State<EasyQuestionSportQuizPage> {
     return Scaffold(
       body: BlocProvider(
         create: (context) => SportCubit(
-            QuizRepository(QuizCategoriesDataSource()),
+            QuizRepository(QuizCategoriesRetrofitDataSource(Dio())),
             UserRepository(UserDataSource()))
           ..getEasySportsCategory(),
         child: BlocListener<SportCubit, SportState>(

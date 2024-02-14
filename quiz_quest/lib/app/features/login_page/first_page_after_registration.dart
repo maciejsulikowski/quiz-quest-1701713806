@@ -49,18 +49,41 @@ class _FirstPageAfterRegistrationState
             const SizedBox(height: 20),
             Center(
               child: Text(
-                'Login Page',
+                'Hello 👋',
                 style: GoogleFonts.aBeeZee(
                     fontSize: 34,
                     color: Colors.white,
                     fontWeight: FontWeight.bold),
               ),
             ),
+            const SizedBox(
+              height: 20,
+            ),
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 20),
-              width: double.infinity,
-              height: 250,
-              child: Lottie.asset('images/quiz_animation.json'),
+              child: Text(
+                'Welcome to QuizQuest! 🤴',
+                style: GoogleFonts.aBeeZee(
+                    fontSize: 26,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 20),
+              child: Text(
+                'Please enter your name and surname for better experience...',
+                style: GoogleFonts.aBeeZee(
+                    fontSize: 22,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+            const SizedBox(
+              height: 20,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10.0),
@@ -127,7 +150,7 @@ class _FirstPageAfterRegistrationState
                       minimumSize: const Size.fromHeight(50),
                       backgroundColor: Colors.transparent,
                       shadowColor: Colors.transparent),
-                  label: Text('Start your quizzes',
+                  label: Text('Start quizzing',
                       style: GoogleFonts.aBeeZee(
                         fontSize: 24,
                         color: Colors.white,
@@ -142,6 +165,17 @@ class _FirstPageAfterRegistrationState
             const SizedBox(
               height: 10,
             ),
+            TextButton(
+                onPressed: () async {
+                  setState(() {
+                    context.read<UserCubit>().changeUserBool();
+                  });
+                },
+                child: Text('''I'll do it later''',
+                    style: GoogleFonts.aBeeZee(
+                      fontSize: 18,
+                      color: Colors.white,
+                    ))),
           ],
         ),
       ),

@@ -30,7 +30,6 @@ class HomePage extends StatefulWidget {
   });
 
   final User user;
-  // bool isNewUser = true;
   @override
   State<HomePage> createState() => _HomePageState();
 }
@@ -40,54 +39,61 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-          currentIndex: currentIndex,
-          onTap: (newIndex) {
-            setState(() {
-              currentIndex = newIndex;
-            });
-          },
-          items: const [
-            BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.quiz,
-                ),
-                label: 'Quizz'),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label: 'My Account',
+    return BlocProvider(
+      create: (context) => UserCubit(UserRepository(UserDataSource()))..start(),
+      child: BlocBuilder<UserCubit, UserState>(
+        builder: (context, state) {
+          return Scaffold(
+            bottomNavigationBar:
+                state.userModel != null && state.userModel!.isUserNew == true
+                    ? null
+                    : BottomNavigationBar(
+                        currentIndex: currentIndex,
+                        onTap: (newIndex) {
+                          setState(() {
+                            currentIndex = newIndex;
+                          });
+                        },
+                        items: const [
+                            BottomNavigationBarItem(
+                                icon: Icon(
+                                  Icons.quiz,
+                                ),
+                                label: 'Quizz'),
+                            BottomNavigationBarItem(
+                              icon: Icon(Icons.person),
+                              label: 'My Account',
+                            ),
+                          ]),
+            body: SafeArea(
+              child: BlocBuilder<UserCubit, UserState>(
+                builder: (context, state) {
+                  if (state.userModel != null &&
+                      state.userModel!.isUserNew == true) {
+                    return FirstPageAfterRegistration(
+                      isNewUser: state.userModel!.isUserNew,
+                      setUserOld: (value) {
+                        setState(() {
+                          state.userModel!.isUserNew = value;
+                        });
+                      },
+                    );
+                  } else {
+                    if (currentIndex == 0) {
+                      return QuizzPage(
+                        userName: state.userModel?.name ?? 'user',
+                        user: widget.user,
+                      );
+                    }
+                    return UserAccount(
+                      user: widget.user,
+                    );
+                  }
+                },
+              ),
             ),
-          ]),
-      body: SafeArea(
-        child: BlocProvider(
-          create: (context) =>
-              UserCubit(UserRepository(UserDataSource()))..start(),
-          child: BlocBuilder<UserCubit, UserState>(
-            builder: (context, state) {
-              if (state.userModel != null &&
-                  state.userModel!.isUserNew == true) {
-                return FirstPageAfterRegistration(
-                  isNewUser: state.userModel!.isUserNew,
-                  setUserOld: (value) {
-                    setState(() {
-                      state.userModel!.isUserNew = value;
-                    });
-                  },
-                );
-              } else {
-                if (currentIndex == 0) {
-                  return QuizzPage(
-                    user: widget.user,
-                  );
-                }
-                return UserAccount(
-                  user: widget.user,
-                );
-              }
-            },
-          ),
-        ),
+          );
+        },
       ),
     );
   }
@@ -96,10 +102,12 @@ class _HomePageState extends State<HomePage> {
 class QuizzPage extends StatefulWidget {
   const QuizzPage({
     this.user,
+    this.userName,
     super.key,
   });
 
   final User? user;
+  final String? userName;
 
   @override
   State<QuizzPage> createState() => _QuizzPageState();
@@ -271,7 +279,7 @@ class _QuizzPageState extends State<QuizzPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Hi user 👋',
+                        'Hi ${widget.userName} 👋',
                         style: GoogleFonts.aBeeZee(
                             fontSize: 24,
                             color: Colors.white,

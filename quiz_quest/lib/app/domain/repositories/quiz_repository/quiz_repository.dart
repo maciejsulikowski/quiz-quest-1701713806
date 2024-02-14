@@ -10,40 +10,24 @@ import 'package:quiz_quest/app/domain/models/sports_model/sports_quiz_model.dart
 import 'package:quiz_quest/app/domain/models/tv_model/tv_quiz_model.dart';
 
 class QuizRepository {
-  QuizRepository(this.quizCategoriesDataSource);
+  QuizRepository(
+     this.quizCategoriesRetrofitDataSource);
 
-  final QuizCategoriesDataSource quizCategoriesDataSource;
+  // final QuizCategoriesDataSource quizCategoriesDataSource;
+  final QuizCategoriesRetrofitDataSource quizCategoriesRetrofitDataSource;
 
 //films
 
   Future<FilmsQuizModel?> getEasyFilmsData() async {
-    final json = await quizCategoriesDataSource.getEasyFilmCategory();
-
-    if (json == null) {
-      return null;
-    }
-
-    return FilmsQuizModel.fromJson(json);
+    return quizCategoriesRetrofitDataSource.getEasyFilmCategory();
   }
 
   Future<FilmsQuizModel?> getMediumFilmsData() async {
-    final json = await quizCategoriesDataSource.getMediumFilmCategory();
-
-    if (json == null) {
-      return null;
-    }
-
-    return FilmsQuizModel.fromJson(json);
+    return quizCategoriesRetrofitDataSource.getMediumFilmCategory();
   }
 
   Future<FilmsQuizModel?> getHardFilmsData() async {
-    final json = await quizCategoriesDataSource.getHardFilmCategory();
-
-    if (json == null) {
-      return null;
-    }
-
-    return FilmsQuizModel.fromJson(json);
+    return quizCategoriesRetrofitDataSource.getHardFilmCategory();
   }
 
 //games

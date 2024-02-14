@@ -536,7 +536,7 @@ class _AnswerButtonState extends State<AnswerButton> {
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) =>
-                EasyMusicLostLifePage(goodAnswers: easyMusicGoodAnswers),
+                EasyLostLifePage(goodAnswers: easyMusicGoodAnswers),
           ),
         );
       }

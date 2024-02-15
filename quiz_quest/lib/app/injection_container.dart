@@ -19,6 +19,9 @@ import 'package:quiz_quest/app/features/user_page/cubit/user_cubit.dart';
 
 final getIt = GetIt.instance;
 
+// @InjectableInit()
+// void configureDependencies() => getIt.init();
+
 void configureDependencies() {
   //Bloc
   getIt.registerFactory(() => HomeCubit(getIt()));

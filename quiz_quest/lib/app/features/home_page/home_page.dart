@@ -349,6 +349,7 @@ class _QuizzPageState extends State<QuizzPage> {
                               color: Colors.white,
                               fontWeight: FontWeight.bold),
                         ),
+                        const RankingWidget()
                       ],
                     ),
                   ),
@@ -482,6 +483,35 @@ class _QuizzPageState extends State<QuizzPage> {
             );
           },
         ),
+      ),
+    );
+  }
+}
+
+class RankingWidget extends StatelessWidget {
+  const RankingWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {},
+      child: Container(
+        height: 40,
+        width: 40,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          gradient: const LinearGradient(
+            colors: [
+              Color.fromARGB(255, 59, 102, 244),
+              Color.fromARGB(255, 8, 5, 214),
+            ],
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+          ),
+        ),
+        child: const Center(child: Text('🏆')),
       ),
     );
   }

@@ -18,6 +18,7 @@ import 'package:quiz_quest/app/features/quiz_pages/games_quiz_pages/cubit/games_
 import 'package:quiz_quest/app/features/quiz_pages/games_quiz_pages/easy_games_quiz_page/easy_games_lost_life_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/games_quiz_pages/hard_games_quiz_page/hard_games_lost_life_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/quiz_countdown_timer/quiz_countdown_timer.dart';
+import 'package:quiz_quest/app/injection_container.dart';
 
 class HardQuestionGamesQuizPage extends StatefulWidget {
   const HardQuestionGamesQuizPage({
@@ -115,9 +116,7 @@ class _HardQuestionGamesQuizPageState extends State<HardQuestionGamesQuizPage> {
 
     return Scaffold(
       body: BlocProvider(
-        create: (context) => GamesCubit(
-            QuizRepository(QuizCategoriesRetrofitDataSource(Dio())),
-            UserRepository(UserDataSource()))
+        create: (context) => getIt<GamesCubit>()
           ..getHardGamesCategory(),
         child: BlocListener<GamesCubit, GamesState>(
           listener: (context, state) async {

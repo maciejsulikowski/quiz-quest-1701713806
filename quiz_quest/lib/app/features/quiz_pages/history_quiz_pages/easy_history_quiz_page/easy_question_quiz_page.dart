@@ -23,6 +23,7 @@ import 'package:quiz_quest/app/features/quiz_pages/history_quiz_pages/cubit/hist
 import 'package:quiz_quest/app/features/quiz_pages/history_quiz_pages/easy_history_quiz_page/easy_history_lost_life_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/history_quiz_pages/easy_history_quiz_page/resume_easy_history_question_quiz_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/quiz_countdown_timer/quiz_countdown_timer.dart';
+import 'package:quiz_quest/app/injection_container.dart';
 
 class EasyQuestionHistoryQuizPage extends StatefulWidget {
   const EasyQuestionHistoryQuizPage({
@@ -122,9 +123,7 @@ class _EasyQuestionHistoryQuizPageState
 
     return Scaffold(
       body: BlocProvider(
-        create: (context) => HistoryCubit(
-            QuizRepository(QuizCategoriesRetrofitDataSource(Dio())),
-            UserRepository(UserDataSource()))
+        create: (context) => getIt<HistoryCubit>()
           ..getEasyHistoryCategory(),
         child: BlocListener<HistoryCubit, HistoryState>(
           listener: (context, state) async {

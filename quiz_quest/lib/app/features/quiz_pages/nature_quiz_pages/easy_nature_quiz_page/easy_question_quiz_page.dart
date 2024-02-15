@@ -31,6 +31,7 @@ import 'package:quiz_quest/app/features/quiz_pages/nature_quiz_pages/cubit/natur
 import 'package:quiz_quest/app/features/quiz_pages/nature_quiz_pages/easy_nature_quiz_page/easy_nature_lost_life_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/nature_quiz_pages/easy_nature_quiz_page/resume_easy_nature_question_quiz_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/quiz_countdown_timer/quiz_countdown_timer.dart';
+import 'package:quiz_quest/app/injection_container.dart';
 
 class EasyQuestionNatureQuizPage extends StatefulWidget {
   const EasyQuestionNatureQuizPage({
@@ -128,9 +129,7 @@ class _EasyQuestionNatureQuizPageState extends State<EasyQuestionNatureQuizPage>
 
     return Scaffold(
       body: BlocProvider(
-        create: (context) => NatureCubit(
-            QuizRepository(QuizCategoriesRetrofitDataSource(Dio())),
-            UserRepository(UserDataSource()))
+        create: (context) => getIt<NatureCubit>()
           ..getEasyNatureCategory(),
         child: BlocListener<NatureCubit, NatureState>(
           listener: (context, state) async {

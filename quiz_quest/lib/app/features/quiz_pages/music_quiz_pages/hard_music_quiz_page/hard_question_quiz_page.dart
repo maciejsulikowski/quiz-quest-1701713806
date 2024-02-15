@@ -31,6 +31,7 @@ import 'package:quiz_quest/app/features/quiz_pages/music_quiz_pages/hard_music_q
 import 'package:quiz_quest/app/features/quiz_pages/music_quiz_pages/medium_music_quiz_page/medium_music_lost_life_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/music_quiz_pages/medium_music_quiz_page/resume_medium_music_question_quiz_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/quiz_countdown_timer/quiz_countdown_timer.dart';
+import 'package:quiz_quest/app/injection_container.dart';
 
 class HardQuestionMusicQuizPage extends StatefulWidget {
   const HardQuestionMusicQuizPage({
@@ -129,9 +130,7 @@ class HardQuestionMusicQuizPageState
 
     return Scaffold(
       body: BlocProvider(
-        create: (context) => MusicCubit(
-            QuizRepository(QuizCategoriesRetrofitDataSource(Dio())),
-            UserRepository(UserDataSource()))
+        create: (context) => getIt<MusicCubit>()
           ..getHardMusicCategory(),
         child: BlocListener<MusicCubit, MusicState>(
           listener: (context, state) async {

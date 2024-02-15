@@ -20,6 +20,7 @@ import 'package:quiz_quest/app/features/quiz_pages/geography_quiz_pages/cubit/ge
 import 'package:quiz_quest/app/features/quiz_pages/geography_quiz_pages/easy_geography_quiz_page/easy_geography_lost_life_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/geography_quiz_pages/easy_geography_quiz_page/resume_easy_geography_question_quiz_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/quiz_countdown_timer/quiz_countdown_timer.dart';
+import 'package:quiz_quest/app/injection_container.dart';
 
 class EasyQuestionGeographyQuizPage extends StatefulWidget {
   const EasyQuestionGeographyQuizPage({
@@ -119,10 +120,8 @@ class _EasyQuestionGeographyQuizPageState
 
     return Scaffold(
       body: BlocProvider(
-        create: (context) => GeographyCubit(
-            QuizRepository(QuizCategoriesRetrofitDataSource(Dio())),
-            UserRepository(UserDataSource()))
-          ..getEasyGeographyCategory(),
+        create: (context) =>
+            getIt<GeographyCubit>()..getEasyGeographyCategory(),
         child: BlocListener<GeographyCubit, GeographyState>(
           listener: (context, state) async {
             if (state.status == Status.error) {

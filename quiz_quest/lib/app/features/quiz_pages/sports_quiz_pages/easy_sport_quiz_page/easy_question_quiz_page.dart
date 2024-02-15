@@ -35,6 +35,7 @@ import 'package:quiz_quest/app/features/quiz_pages/quiz_countdown_timer/quiz_cou
 import 'package:quiz_quest/app/features/quiz_pages/sports_quiz_pages/cubit/sport_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/sports_quiz_pages/easy_sport_quiz_page/easy_sport_lost_life_quiz_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/sports_quiz_pages/easy_sport_quiz_page/resume_easy_sport_question_quiz_page.dart';
+import 'package:quiz_quest/app/injection_container.dart';
 
 class EasyQuestionSportQuizPage extends StatefulWidget {
   const EasyQuestionSportQuizPage({
@@ -132,9 +133,7 @@ class _EasyQuestionSportQuizPageState extends State<EasyQuestionSportQuizPage> {
 
     return Scaffold(
       body: BlocProvider(
-        create: (context) => SportCubit(
-            QuizRepository(QuizCategoriesRetrofitDataSource(Dio())),
-            UserRepository(UserDataSource()))
+        create: (context) => getIt<SportCubit>()
           ..getEasySportsCategory(),
         child: BlocListener<SportCubit, SportState>(
           listener: (context, state) async {

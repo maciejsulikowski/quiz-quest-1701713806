@@ -41,6 +41,7 @@ import 'package:quiz_quest/app/features/quiz_pages/tv_quiz_pages/easy_tv_quiz_pa
 import 'package:quiz_quest/app/features/quiz_pages/tv_quiz_pages/easy_tv_quiz_page/resume_easy_tv_question_quiz_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/tv_quiz_pages/medium_tv_quiz_page/medium_tv_lost_life_quiz_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/tv_quiz_pages/medium_tv_quiz_page/resume_medium_tv_question_quiz_page.dart';
+import 'package:quiz_quest/app/injection_container.dart';
 
 class MediumQuestionTvQuizPage extends StatefulWidget {
   const MediumQuestionTvQuizPage({
@@ -48,7 +49,8 @@ class MediumQuestionTvQuizPage extends StatefulWidget {
   });
 
   @override
-  State<MediumQuestionTvQuizPage> createState() => _MediumQuestionTvQuizPageState();
+  State<MediumQuestionTvQuizPage> createState() =>
+      _MediumQuestionTvQuizPageState();
 }
 
 final controller = CountDownController();
@@ -137,9 +139,7 @@ class _MediumQuestionTvQuizPageState extends State<MediumQuestionTvQuizPage> {
 
     return Scaffold(
       body: BlocProvider(
-        create: (context) => TVCubit(QuizRepository(QuizCategoriesRetrofitDataSource(Dio())),
-            UserRepository(UserDataSource()))
-          ..getMediumTVCategory(),
+        create: (context) => getIt<TVCubit>()..getMediumTVCategory(),
         child: BlocListener<TVCubit, TVState>(
           listener: (context, state) async {
             if (state.status == Status.error) {

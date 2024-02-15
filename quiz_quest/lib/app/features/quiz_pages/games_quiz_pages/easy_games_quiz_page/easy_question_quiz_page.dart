@@ -16,6 +16,7 @@ import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/easy_films_q
 import 'package:quiz_quest/app/features/quiz_pages/games_quiz_pages/cubit/games_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/games_quiz_pages/easy_games_quiz_page/easy_games_lost_life_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/quiz_countdown_timer/quiz_countdown_timer.dart';
+import 'package:quiz_quest/app/injection_container.dart';
 
 class EasyQuestionGamesQuizPage extends StatefulWidget {
   const EasyQuestionGamesQuizPage({
@@ -113,10 +114,7 @@ class _EasyQuestionGamesQuizPageState extends State<EasyQuestionGamesQuizPage> {
 
     return Scaffold(
       body: BlocProvider(
-        create: (context) => GamesCubit(
-            QuizRepository(QuizCategoriesRetrofitDataSource(Dio())),
-            UserRepository(UserDataSource()))
-          ..getEasyGamesCategory(),
+        create: (context) => getIt<GamesCubit>()..getEasyGamesCategory(),
         child: BlocListener<GamesCubit, GamesState>(
           listener: (context, state) async {
             if (state.status == Status.error) {
@@ -538,7 +536,9 @@ class _AnswerButtonState extends State<AnswerButton> {
         .replaceAll('&aacute;', '')
         .replaceAll('&ntilde;', '')
         .replaceAll('&amp;', '')
-        .replaceAll('&rsquo;', '');
+        .replaceAll('&rsquo;', '')
+        .replaceAll('&eacute;', '')
+        .replaceAll('&iuml;', '');
 
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20),

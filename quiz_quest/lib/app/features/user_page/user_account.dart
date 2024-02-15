@@ -13,6 +13,7 @@ import 'package:quiz_quest/app/domain/models/user_model/user_model.dart';
 import 'package:quiz_quest/app/domain/repositories/user_repository/user_repository.dart';
 import 'package:quiz_quest/app/features/login_page/login_page.dart';
 import 'package:quiz_quest/app/features/user_page/cubit/user_cubit.dart';
+import 'package:quiz_quest/app/injection_container.dart';
 
 class UserAccount extends StatefulWidget {
   const UserAccount({
@@ -30,7 +31,7 @@ class _UserAccountState extends State<UserAccount> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => UserCubit(UserRepository(UserDataSource()))..start(),
+      create: (context) => getIt<UserCubit>()..start(),
       child: BlocListener<UserCubit, UserState>(
         listener: (context, state) {
           if (state.isSaved) {

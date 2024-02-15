@@ -27,6 +27,7 @@ import 'package:quiz_quest/app/features/quiz_pages/music_quiz_pages/cubit/music_
 import 'package:quiz_quest/app/features/quiz_pages/music_quiz_pages/easy_music_quiz_page/easy_music_lost_life_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/music_quiz_pages/easy_music_quiz_page/resume_easy_music_question_quiz_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/quiz_countdown_timer/quiz_countdown_timer.dart';
+import 'package:quiz_quest/app/injection_container.dart';
 
 class EasyQuestionMusicQuizPage extends StatefulWidget {
   const EasyQuestionMusicQuizPage({
@@ -53,8 +54,7 @@ String threeLives = '❤️❤️❤️';
 String twoLives = ' ❤️❤️';
 String oneLive = ' ❤️';
 
-class _EasyQuestionMusicQuizPageState
-    extends State<EasyQuestionMusicQuizPage> {
+class _EasyQuestionMusicQuizPageState extends State<EasyQuestionMusicQuizPage> {
   int currentIndex = 0;
   late List currentAnswers;
 
@@ -85,8 +85,7 @@ class _EasyQuestionMusicQuizPageState
 
   void generateAnswers(MusicQuizModel? musicQuizModel) {
     if (musicQuizModel != null && !answerGenerated) {
-      final correctAnswer =
-          musicQuizModel.results[currentIndex].correctAnswer;
+      final correctAnswer = musicQuizModel.results[currentIndex].correctAnswer;
 
       final incorrectAnswers =
           musicQuizModel.results[currentIndex].incorrectAnswers;
@@ -126,10 +125,7 @@ class _EasyQuestionMusicQuizPageState
 
     return Scaffold(
       body: BlocProvider(
-        create: (context) => MusicCubit(
-            QuizRepository(QuizCategoriesRetrofitDataSource(Dio())),
-            UserRepository(UserDataSource()))
-          ..getEasyMusicCategory(),
+        create: (context) => getIt<MusicCubit>()..getEasyMusicCategory(),
         child: BlocListener<MusicCubit, MusicState>(
           listener: (context, state) async {
             if (state.status == Status.error) {
@@ -249,8 +245,7 @@ class _EasyQuestionMusicQuizPageState
                           if (easyMusicBadAnswers == 3) {
                             context
                                 .read<MusicCubit>()
-                                .updateEasyMusicPoints(
-                                    easyMusicGoodAnswers);
+                                .updateEasyMusicPoints(easyMusicGoodAnswers);
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (context) => EasyMusicLostLifePage(
@@ -341,8 +336,7 @@ class _EasyQuestionMusicQuizPageState
                                       setState(() {
                                         isButtonClicked = value;
                                         if (value = currentAnswers[index] ==
-                                            musicQuizModel
-                                                .results[currentIndex]
+                                            musicQuizModel.results[currentIndex]
                                                 .correctAnswer) {
                                           ringColor = Colors.green;
                                         } else {
@@ -357,8 +351,7 @@ class _EasyQuestionMusicQuizPageState
                                       });
                                     },
                                     isCorrectAnswer: currentAnswers[index] ==
-                                            musicQuizModel
-                                                .results[currentIndex]
+                                            musicQuizModel.results[currentIndex]
                                                 .correctAnswer
                                         ? true
                                         : false,
@@ -390,8 +383,7 @@ class _EasyQuestionMusicQuizPageState
                                                 ? () {
                                                     setState(() {
                                                       if (currentIndex ==
-                                                          musicQuizModel
-                                                                  .results
+                                                          musicQuizModel.results
                                                                   .length -
                                                               1) {
                                                         Navigator.of(context)
@@ -531,13 +523,11 @@ class _AnswerButtonState extends State<AnswerButton> {
       widget.colorFunction(Colors.red, widget.index);
       easyMusicBadAnswers += 1;
       if (easyMusicBadAnswers == 3) {
-        context
-            .read<MusicCubit>()
-            .updateEasyMusicPoints(easyMusicGoodAnswers);
+        context.read<MusicCubit>().updateEasyMusicPoints(easyMusicGoodAnswers);
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) =>
-                EasyLostLifePage(goodAnswers: easyMusicGoodAnswers),
+                EasyMusicLostLifePage(goodAnswers: easyMusicGoodAnswers),
           ),
         );
       }

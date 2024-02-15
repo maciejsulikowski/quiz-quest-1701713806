@@ -16,6 +16,7 @@ import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/medium_films
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/medium_films_quiz_page/resume_medium_question_quiz_page.dart';
 
 import 'package:quiz_quest/app/features/quiz_pages/quiz_countdown_timer/quiz_countdown_timer.dart';
+import 'package:quiz_quest/app/injection_container.dart';
 
 class HardQuestionQuizPage extends StatefulWidget {
   const HardQuestionQuizPage({
@@ -110,9 +111,7 @@ class _HardQuestionQuizPageState extends State<HardQuestionQuizPage> {
 
     return Scaffold(
       body: BlocProvider(
-        create: (context) => FilmsCubit(
-            QuizRepository(QuizCategoriesRetrofitDataSource(Dio())),
-            UserRepository(UserDataSource()))
+        create: (context) => getIt<FilmsCubit>()
           ..getHardFilmsCategory(),
         child: BlocListener<FilmsCubit, FilmsState>(
           listener: (context, state) async {

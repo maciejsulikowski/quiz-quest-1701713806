@@ -13,6 +13,7 @@ import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/cubit/films_
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/easy_films_quiz_page/easy_lost_life_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/easy_films_quiz_page/resume_easy_question_quiz_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/quiz_countdown_timer/quiz_countdown_timer.dart';
+import 'package:quiz_quest/app/injection_container.dart';
 
 class EasyQuestionQuizPage extends StatefulWidget {
   const EasyQuestionQuizPage({
@@ -109,9 +110,7 @@ class _EasyQuestionQuizPageState extends State<EasyQuestionQuizPage> {
 
     return Scaffold(
       body: BlocProvider(
-        create: (context) => FilmsCubit(
-            QuizRepository(QuizCategoriesRetrofitDataSource(Dio())),
-            UserRepository(UserDataSource()))
+        create: (context) => getIt<FilmsCubit>()
           ..getEasyFilmsCategory(),
         child: BlocListener<FilmsCubit, FilmsState>(
           listener: (context, state) async {

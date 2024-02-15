@@ -41,6 +41,7 @@ import 'package:quiz_quest/app/features/quiz_pages/tv_quiz_pages/easy_tv_quiz_pa
 import 'package:quiz_quest/app/features/quiz_pages/tv_quiz_pages/easy_tv_quiz_page/resume_easy_tv_question_quiz_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/tv_quiz_pages/hard_tv_quiz_page/hard_tv_lost_life_quiz_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/tv_quiz_pages/hard_tv_quiz_page/resume_hard_tv_question_quiz_page.dart';
+import 'package:quiz_quest/app/injection_container.dart';
 
 class HardQuestionTvQuizPage extends StatefulWidget {
   const HardQuestionTvQuizPage({
@@ -137,8 +138,7 @@ class _HardQuestionTvQuizPageState extends State<HardQuestionTvQuizPage> {
 
     return Scaffold(
       body: BlocProvider(
-        create: (context) => TVCubit(QuizRepository(QuizCategoriesRetrofitDataSource(Dio())),
-            UserRepository(UserDataSource()))
+        create: (context) => getIt<TVCubit>()
           ..getHardTVCategory(),
         child: BlocListener<TVCubit, TVState>(
           listener: (context, state) async {

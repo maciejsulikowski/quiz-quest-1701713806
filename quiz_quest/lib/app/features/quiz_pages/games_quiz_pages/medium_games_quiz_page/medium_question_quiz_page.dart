@@ -18,6 +18,7 @@ import 'package:quiz_quest/app/features/quiz_pages/games_quiz_pages/cubit/games_
 import 'package:quiz_quest/app/features/quiz_pages/games_quiz_pages/easy_games_quiz_page/easy_games_lost_life_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/games_quiz_pages/medium_games_quiz_page/medium_games_lost_life_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/quiz_countdown_timer/quiz_countdown_timer.dart';
+import 'package:quiz_quest/app/injection_container.dart';
 
 class MediumQuestionGamesQuizPage extends StatefulWidget {
   const MediumQuestionGamesQuizPage({
@@ -44,7 +45,8 @@ String threeLives = '❤️❤️❤️';
 String twoLives = ' ❤️❤️';
 String oneLive = ' ❤️';
 
-class _MediumQuestionGamesQuizPageState extends State<MediumQuestionGamesQuizPage> {
+class _MediumQuestionGamesQuizPageState
+    extends State<MediumQuestionGamesQuizPage> {
   int currentIndex = 0;
   late List currentAnswers;
 
@@ -115,10 +117,7 @@ class _MediumQuestionGamesQuizPageState extends State<MediumQuestionGamesQuizPag
 
     return Scaffold(
       body: BlocProvider(
-        create: (context) => GamesCubit(
-            QuizRepository(QuizCategoriesRetrofitDataSource(Dio())),
-            UserRepository(UserDataSource()))
-          ..getMediumGamesCategory(),
+        create: (context) => getIt<GamesCubit>()..getMediumGamesCategory(),
         child: BlocListener<GamesCubit, GamesState>(
           listener: (context, state) async {
             if (state.status == Status.error) {
@@ -236,9 +235,8 @@ class _MediumQuestionGamesQuizPageState extends State<MediumQuestionGamesQuizPag
                           isButtonDisabled = true;
                           isTimeUp = true;
                           if (mediumGamesBadAnswers == 3) {
-                            context
-                                .read<GamesCubit>()
-                                .updateMediumGamesPoints(mediumGamesGoodAnswers);
+                            context.read<GamesCubit>().updateMediumGamesPoints(
+                                mediumGamesGoodAnswers);
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (context) => MediumGamesLostLifePage(
@@ -516,7 +514,9 @@ class _AnswerButtonState extends State<AnswerButton> {
       widget.colorFunction(Colors.red, widget.index);
       mediumGamesBadAnswers += 1;
       if (mediumGamesBadAnswers == 3) {
-        context.read<GamesCubit>().updateMediumGamesPoints(mediumGamesGoodAnswers);
+        context
+            .read<GamesCubit>()
+            .updateMediumGamesPoints(mediumGamesGoodAnswers);
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) =>

@@ -23,6 +23,7 @@ import 'package:quiz_quest/app/features/quiz_pages/sports_quiz_pages/first_quiz_
 import 'package:quiz_quest/app/features/quiz_pages/tv_quiz_pages/first_quiz_page_tv.dart';
 import 'package:quiz_quest/app/features/user_page/cubit/user_cubit.dart';
 import 'package:quiz_quest/app/features/user_page/user_account.dart';
+import 'package:quiz_quest/app/injection_container.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:super_tooltip/super_tooltip.dart';
 
@@ -43,7 +44,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => UserCubit(UserRepository(UserDataSource()))..start(),
+      create: (context) => getIt<UserCubit>()..start(),
       child: BlocBuilder<UserCubit, UserState>(
         builder: (context, state) {
           return Scaffold(
@@ -252,8 +253,7 @@ class _QuizzPageState extends State<QuizzPage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          HomeCubit(UserRepository(UserDataSource()))..getPointsData(),
+      create: (context) => getIt<HomeCubit>()..getPointsData(),
       child: BlocListener<UserCubit, UserState>(
         listener: (context, state) {
           if (state.isSaved) {

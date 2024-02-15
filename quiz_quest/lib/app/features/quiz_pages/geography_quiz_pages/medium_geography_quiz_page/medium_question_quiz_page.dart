@@ -20,6 +20,7 @@ import 'package:quiz_quest/app/features/quiz_pages/geography_quiz_pages/cubit/ge
 import 'package:quiz_quest/app/features/quiz_pages/geography_quiz_pages/medium_geography_quiz_page/medium_geography_lost_life_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/geography_quiz_pages/medium_geography_quiz_page/resume_medium_geography_question_quiz_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/quiz_countdown_timer/quiz_countdown_timer.dart';
+import 'package:quiz_quest/app/injection_container.dart';
 
 class MediumQuestionGeographyQuizPage extends StatefulWidget {
   const MediumQuestionGeographyQuizPage({
@@ -119,9 +120,7 @@ class _MediumQuestionGeographyQuizPageState
 
     return Scaffold(
       body: BlocProvider(
-        create: (context) => GeographyCubit(
-            QuizRepository(QuizCategoriesRetrofitDataSource(Dio())),
-            UserRepository(UserDataSource()))
+        create: (context) => getIt<GeographyCubit>()
           ..getMediumGeographyCategory(),
         child: BlocListener<GeographyCubit, GeographyState>(
           listener: (context, state) async {

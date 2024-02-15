@@ -31,84 +31,63 @@ import 'package:quiz_quest/app/injection_container.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:super_tooltip/super_tooltip.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({
-    required this.user,
+class DetailsQuizzWidget extends StatelessWidget {
+  const DetailsQuizzWidget({
+    required this.name,
+    required this.image,
+    required this.categoryPoints,
     super.key,
   });
 
-  final User user;
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  var currentIndex = 0;
+  final String name;
+  final String image;
+  final int categoryPoints;
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getIt<UserCubit>()..start(),
-      child: BlocBuilder<UserCubit, UserState>(
-        builder: (context, state) {
-          return Scaffold(
-            bottomNavigationBar:
-                state.userModel != null && state.userModel!.isUserNew == true
-                    ? null
-                    : CurvedNavigationBar(
-                        backgroundColor: Colors.indigo,
-                        onTap: (newIndex) {
-                          setState(() {
-                            currentIndex = newIndex;
-                          });
-                        },
-                        items: const [
-                            CurvedNavigationBarItem(
-                                child: Icon(
-                                  Icons.quiz,
-                                ),
-                                label: 'Quiz'),
-                            CurvedNavigationBarItem(
-                              child: Icon(Icons.person),
-                              label: 'My Account',
-                            ),
-                          ]),
-            body: SafeArea(
-              child: BlocBuilder<UserCubit, UserState>(
-                builder: (context, state) {
-                  if (state.userModel != null &&
-                      state.userModel!.isUserNew == true) {
-                    return FirstPageAfterRegistration(
-                      isNewUser: state.userModel!.isUserNew,
-                      setUserOld: (value) {
-                        setState(() {
-                          state.userModel!.isUserNew = value;
-                        });
-                      },
-                    );
-                  } else {
-                    if (currentIndex == 0) {
-                      return QuizzWidget(
-                        userName: state.userModel?.name ?? 'user',
-                        user: widget.user,
-                      );
-                    }
-                    return UserAccount(
-                      user: widget.user,
-                    );
-                  }
-                },
-              ),
+    return Container(
+      width: 150,
+      height: 150,
+      padding: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        gradient: const LinearGradient(
+          colors: [
+            Color.fromARGB(255, 94, 128, 239),
+            Color.fromARGB(255, 76, 75, 167),
+          ],
+          begin: Alignment.centerLeft,
+          end: Alignment.centerRight,
+        ),
+      ),
+      child: Column(
+        children: [
+          Expanded(
+            child: Text(
+              name,
+              style: GoogleFonts.aBeeZee(
+                  fontSize: 20,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold),
+              textAlign: TextAlign.center,
             ),
-          );
-        },
+          ),
+          Expanded(
+            child: Text(
+              'Points: $categoryPoints💎',
+              style: GoogleFonts.aBeeZee(
+                  fontSize: 18,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold),
+              textAlign: TextAlign.center,
+            ),
+          ),
+          CircleAvatar(
+            backgroundImage: AssetImage(image),
+            radius: 35,
+          )
+        ],
       ),
     );
   }
 }
-
-
-
-
-
-

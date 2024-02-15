@@ -9,6 +9,8 @@ import 'package:quiz_quest/app/core/enums.dart';
 import 'package:quiz_quest/app/data/data_sources/user_data_source/user_data_source.dart';
 import 'package:quiz_quest/app/domain/repositories/user_repository/user_repository.dart';
 import 'package:quiz_quest/app/features/home_page/cubit/home_cubit.dart';
+import 'package:quiz_quest/app/features/home_page/information_widget/information_widget.dart';
+import 'package:quiz_quest/app/features/home_page/ranking_widget/ranking_widget.dart';
 import 'package:quiz_quest/app/features/login_page/first_page_after_registration.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/cubit/films_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/first_quiz_page_films.dart';
@@ -296,41 +298,7 @@ class _QuizzPageState extends State<QuizzPage> {
                               color: Colors.white,
                               fontWeight: FontWeight.bold),
                         ),
-                        GestureDetector(
-                          onTap: () async {
-                            await toolController.showTooltip();
-                          },
-                          child: SuperTooltip(
-                            showBarrier: true,
-                            controller: toolController,
-                            content: const Text(
-                              '''Hello 👋 If you want to start the game, just click on a category in "Quiz". You can share your total points with other people next to result, just click the icon. If you want to change your personal information, you can click "My Account". I hope you will have fun with this app 😄''',
-                              softWrap: true,
-                              style: TextStyle(
-                                color: Colors.black,
-                              ),
-                            ),
-                            child: Container(
-                              width: 40.0,
-                              height: 40.0,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                gradient: const LinearGradient(
-                                  colors: [
-                                    Color.fromARGB(255, 59, 102, 244),
-                                    Color.fromARGB(255, 8, 5, 214),
-                                  ],
-                                  begin: Alignment.centerLeft,
-                                  end: Alignment.centerRight,
-                                ),
-                              ),
-                              child: const Icon(
-                                Icons.question_mark,
-                                color: Colors.black,
-                              ),
-                            ),
-                          ),
-                        ),
+                        InformationWidget(toolController: toolController),
                       ],
                     ),
                   ),
@@ -488,34 +456,7 @@ class _QuizzPageState extends State<QuizzPage> {
   }
 }
 
-class RankingWidget extends StatelessWidget {
-  const RankingWidget({
-    super.key,
-  });
 
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {},
-      child: Container(
-        height: 40,
-        width: 40,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          gradient: const LinearGradient(
-            colors: [
-              Color.fromARGB(255, 59, 102, 244),
-              Color.fromARGB(255, 8, 5, 214),
-            ],
-            begin: Alignment.centerLeft,
-            end: Alignment.centerRight,
-          ),
-        ),
-        child: const Center(child: Text('🏆')),
-      ),
-    );
-  }
-}
 
 class QuizzCategoryWidget extends StatelessWidget {
   const QuizzCategoryWidget({

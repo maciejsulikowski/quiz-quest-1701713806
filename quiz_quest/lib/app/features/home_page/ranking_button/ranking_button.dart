@@ -9,10 +9,7 @@ import 'package:quiz_quest/app/core/enums.dart';
 import 'package:quiz_quest/app/data/data_sources/user_data_source/user_data_source.dart';
 import 'package:quiz_quest/app/domain/repositories/user_repository/user_repository.dart';
 import 'package:quiz_quest/app/features/home_page/cubit/home_cubit.dart';
-import 'package:quiz_quest/app/features/home_page/details_quiz_widget/details_quiz_widget.dart';
-import 'package:quiz_quest/app/features/home_page/information_widget/information_widget.dart';
-import 'package:quiz_quest/app/features/home_page/list_of_categories/list_of_categories.dart';
-import 'package:quiz_quest/app/features/home_page/quiz_widget/quiz_widget.dart';
+import 'package:quiz_quest/app/features/home_page/ranking_widget/ranking_widget.dart';
 import 'package:quiz_quest/app/features/login_page/first_page_after_registration.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/cubit/films_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/first_quiz_page_films.dart';
@@ -31,45 +28,33 @@ import 'package:quiz_quest/app/injection_container.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:super_tooltip/super_tooltip.dart';
 
-
-class QuizzCategoryWidget extends StatelessWidget {
-  const QuizzCategoryWidget({
-    required this.easyCategory,
-    required this.mediumCategory,
-    required this.hardCategory,
-    required this.name,
-    required this.image,
-    required this.categoryPoints,
-    required this.nextPage,
+class RankingButton extends StatelessWidget {
+  const RankingButton({
     super.key,
   });
 
-  final String name;
-  final String image;
-  final dynamic easyCategory;
-  final dynamic mediumCategory;
-  final dynamic hardCategory;
-  final int categoryPoints;
-  final Widget nextPage;
-
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return GestureDetector(
       onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => nextPage,
-            settings: RouteSettings(
-              arguments: [
-                easyCategory,
-                mediumCategory,
-                hardCategory,
-              ],
-            )));
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => const RankingWidget()));
       },
-      child: DetailsQuizzWidget(
-        categoryPoints: categoryPoints,
-        name: name,
-        image: image,
+      child: Container(
+        height: 40,
+        width: 40,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          gradient: const LinearGradient(
+            colors: [
+              Color.fromARGB(255, 59, 102, 244),
+              Color.fromARGB(255, 8, 5, 214),
+            ],
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+          ),
+        ),
+        child: const Center(child: Text('🏆')),
       ),
     );
   }

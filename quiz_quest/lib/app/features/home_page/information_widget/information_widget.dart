@@ -9,7 +9,6 @@ import 'package:quiz_quest/app/core/enums.dart';
 import 'package:quiz_quest/app/data/data_sources/user_data_source/user_data_source.dart';
 import 'package:quiz_quest/app/domain/repositories/user_repository/user_repository.dart';
 import 'package:quiz_quest/app/features/home_page/cubit/home_cubit.dart';
-import 'package:quiz_quest/app/features/home_page/ranking_widget/ranking_widget.dart';
 import 'package:quiz_quest/app/features/login_page/first_page_after_registration.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/cubit/films_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/first_quiz_page_films.dart';

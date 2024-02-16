@@ -13,7 +13,7 @@ import 'package:quiz_quest/app/features/home_page/home_page.dart';
 import 'package:quiz_quest/app/features/home_page/information_widget/information_widget.dart';
 import 'package:quiz_quest/app/features/home_page/list_of_categories/list_of_categories.dart';
 import 'package:quiz_quest/app/features/home_page/quiz_category_widget/quiz_category_widget.dart';
-import 'package:quiz_quest/app/features/home_page/ranking_widget/ranking_widget.dart';
+import 'package:quiz_quest/app/features/home_page/ranking_button/ranking_button.dart';
 import 'package:quiz_quest/app/features/login_page/first_page_after_registration.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/cubit/films_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/first_quiz_page_films.dart';
@@ -133,7 +133,7 @@ class _QuizzWidgetState extends State<QuizzWidget> {
                               color: Colors.white,
                               fontWeight: FontWeight.bold),
                         ),
-                        const RankingWidget()
+                        const RankingButton()
                       ],
                     ),
                   ),

@@ -13,9 +13,7 @@ class _QuizCategoriesRetrofitDataSource
   _QuizCategoriesRetrofitDataSource(
     this._dio, {
     this.baseUrl,
-  }) {
-    baseUrl ??= 'https://opentdb.com';
-  }
+  });
 
   final Dio _dio;
 

@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
 import 'package:quiz_quest/app/domain/models/films_model/films_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/games_model/games_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/general_model/general_quiz_model.dart';
@@ -11,9 +12,11 @@ import 'package:quiz_quest/app/domain/models/tv_model/tv_quiz_model.dart';
 import 'package:retrofit/retrofit.dart';
 part 'quiz_categories_data_source.g.dart';
 
-@RestApi(baseUrl: 'https://opentdb.com')
+@injectable
+@RestApi()
 abstract class QuizCategoriesRetrofitDataSource {
-  factory QuizCategoriesRetrofitDataSource(Dio dio, {String baseUrl}) =
+  @factoryMethod
+  factory QuizCategoriesRetrofitDataSource(Dio dio) =
       _QuizCategoriesRetrofitDataSource;
 
   @GET('/api.php?amount=10&category=11&difficulty=easy&type=multiple')
@@ -52,7 +55,7 @@ abstract class QuizCategoriesRetrofitDataSource {
   Future<HistoryQuizModel> getMediumHistoryCategory();
   @GET('/api.php?amount=10&category=23&difficulty=hard&type=multiple')
   Future<HistoryQuizModel> getHardHistoryCategory();
-   @GET('/api.php?amount=10&category=21&difficulty=easy&type=multiple')
+  @GET('/api.php?amount=10&category=21&difficulty=easy&type=multiple')
   Future<SportsQuizModel> getEasySportCategory();
   @GET('/api.php?amount=10&category=21&difficulty=medium&type=multiple')
   Future<SportsQuizModel> getMediumSportCategory();
@@ -70,7 +73,6 @@ abstract class QuizCategoriesRetrofitDataSource {
   Future<GeneralQuizModel> getMediumGeneralCategory();
   @GET('/api.php?amount=10&category=9&difficulty=hard&type=multiple')
   Future<GeneralQuizModel> getHardGeneralCategory();
-
 }
 
 // class QuizCategoriesDataSource {

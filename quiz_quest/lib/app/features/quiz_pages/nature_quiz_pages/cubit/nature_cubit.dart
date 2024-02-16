@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 import 'package:quiz_quest/app/core/enums.dart';
 import 'package:quiz_quest/app/domain/models/nature_model/nature_quiz_model.dart';
@@ -10,6 +11,8 @@ part 'nature_state.dart';
 part 'nature_cubit.freezed.dart';
 
 
+
+@injectable
 class NatureCubit extends Cubit<NatureState> {
   NatureCubit(this.quizRepository, this.userRepository) : super(NatureState());
 

@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 import 'package:quiz_quest/app/core/enums.dart';
 import 'package:quiz_quest/app/domain/models/geography_model/geography_quiz_model.dart';
@@ -9,6 +10,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'geography_state.dart';
 part 'geography_cubit.freezed.dart';
 
+
+@injectable
 class GeographyCubit extends Cubit<GeographyState> {
   GeographyCubit(this.quizRepository, this.userRepository)
       : super(GeographyState());

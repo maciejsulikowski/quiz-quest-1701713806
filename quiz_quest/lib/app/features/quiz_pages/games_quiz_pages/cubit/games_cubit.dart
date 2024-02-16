@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 import 'package:quiz_quest/app/core/enums.dart';
 import 'package:quiz_quest/app/domain/models/games_model/games_quiz_model.dart';
@@ -8,7 +9,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'games_state.dart';
 part 'games_cubit.freezed.dart';
-
+@injectable
 class GamesCubit extends Cubit<GamesState> {
   GamesCubit(this.quizRepository, this.userRepository) : super(GamesState());
 

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:bloc/bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 import 'package:quiz_quest/app/core/enums.dart';
 import 'package:quiz_quest/app/domain/models/user_model/user_model.dart';
@@ -9,6 +10,7 @@ import 'package:quiz_quest/app/domain/repositories/user_repository/user_reposito
 part 'user_state.dart';
 part 'user_cubit.freezed.dart';
 
+@injectable
 class UserCubit extends Cubit<UserState> {
   UserCubit(this.userRepository)
       : super(

@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 import 'package:quiz_quest/app/core/enums.dart';
 import 'package:quiz_quest/app/domain/models/tv_model/tv_quiz_model.dart';
@@ -9,6 +10,9 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'tv_state.dart';
 part 'tv_cubit.freezed.dart';
 
+
+
+@injectable
 class TVCubit extends Cubit<TVState> {
   TVCubit(this.quizRepository, this.userRepository) : super(TVState());
 

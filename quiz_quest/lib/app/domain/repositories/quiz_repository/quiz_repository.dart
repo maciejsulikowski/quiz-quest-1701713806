@@ -1,3 +1,4 @@
+import 'package:injectable/injectable.dart';
 import 'package:quiz_quest/app/data/data_sources/quiz_data_source/quiz_categories_data_source.dart';
 import 'package:quiz_quest/app/domain/models/films_model/films_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/games_model/games_quiz_model.dart';
@@ -9,6 +10,8 @@ import 'package:quiz_quest/app/domain/models/nature_model/nature_quiz_model.dart
 import 'package:quiz_quest/app/domain/models/sports_model/sports_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/tv_model/tv_quiz_model.dart';
 
+
+@injectable
 class QuizRepository {
   QuizRepository(
      this.quizCategoriesRetrofitDataSource);

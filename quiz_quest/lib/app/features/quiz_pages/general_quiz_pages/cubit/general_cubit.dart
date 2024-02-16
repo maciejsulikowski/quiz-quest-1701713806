@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 import 'package:quiz_quest/app/core/enums.dart';
 import 'package:quiz_quest/app/data/data_sources/quiz_data_source/quiz_categories_data_source.dart';
@@ -10,6 +11,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'general_state.dart';
 part 'general_cubit.freezed.dart';
 
+
+@injectable
 class GeneralCubit extends Cubit<GeneralState> {
   GeneralCubit(this.quizRepository, this.userRepository)
       : super(GeneralState());

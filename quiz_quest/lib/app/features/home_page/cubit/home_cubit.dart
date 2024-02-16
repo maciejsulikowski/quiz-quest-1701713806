@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 import 'package:quiz_quest/app/core/enums.dart';
 import 'package:quiz_quest/app/domain/models/films_model/films_quiz_model.dart';
@@ -28,14 +29,15 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'home_state.dart';
 part 'home_cubit.freezed.dart';
 
+@injectable
 class HomeCubit extends Cubit<HomeState> {
-  HomeCubit(this.userRepository) : super(HomeState());
+  HomeCubit(this.userRepository) : super(const HomeState());
 
   final UserRepository userRepository;
   StreamSubscription? streamSubscription;
 
   Future<void> getPointsData() async {
-    emit(HomeState(
+    emit(const HomeState(
       status: Status.loading,
     ));
 

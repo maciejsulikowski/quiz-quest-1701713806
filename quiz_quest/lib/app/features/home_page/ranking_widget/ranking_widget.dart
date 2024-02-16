@@ -64,72 +64,81 @@ class RankingWidgetState extends State<RankingWidget> {
         ),
         child: ListView(
           children: [
-            const SizedBox(
-              height: 30,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Ranking',
-                    style: GoogleFonts.aBeeZee(
-                        fontSize: 24,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ],
+            Center(
+              child: Text(
+                'Ranking',
+                style: GoogleFonts.aBeeZee(
+                    fontSize: 24,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold),
               ),
-            ),
-            const SizedBox(
-              height: 10,
             ),
             const SizedBox(height: 30),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 32.0),
-              child: Container(
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                    gradient: const LinearGradient(
-                      colors: [
-                        Color.fromARGB(255, 94, 128, 239),
-                        Color.fromARGB(255, 76, 75, 167),
-                      ],
-                      begin: Alignment.centerLeft,
-                      end: Alignment.centerRight,
-                    ),
-                    borderRadius: BorderRadius.circular(20),
-                    color: Colors.red),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Total Points: ',
-                      style: GoogleFonts.aBeeZee(
-                          fontSize: 26,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold),
-                      textAlign: TextAlign.center,
-                    ),
-                    IconButton(
-                        onPressed: () {
-                          String message =
-                              'In QuizQuest you scored Total Points: ! Congratulations!';
-                          Share.share(message);
-                        },
-                        icon: const Icon(
-                          Icons.share,
-                          color: Colors.white54,
-                        ))
-                  ],
-                ),
-              ),
+            const UserRecord(
+              id: '1',
+              user: 'Maciek',
+              points: '200',
+            ),
+            const UserRecord(
+              id: '2',
+              user: 'Michał',
+              points: '100',
             ),
             const SizedBox(height: 30),
           ],
         ),
       ),
+    );
+  }
+}
+
+class UserRecord extends StatelessWidget {
+  const UserRecord({
+    required this.id,
+    required this.user,
+    required this.points,
+    super.key,
+  });
+
+  final String id;
+  final String user;
+  final String points;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          TextRanking(
+            text: id,
+          ),
+          TextRanking(
+            text: user,
+          ),
+          TextRanking(
+            text: 'Points: $points💎',
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class TextRanking extends StatelessWidget {
+  const TextRanking({
+    required this.text,
+    super.key,
+  });
+
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      style: GoogleFonts.aBeeZee(
+          fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
     );
   }
 }

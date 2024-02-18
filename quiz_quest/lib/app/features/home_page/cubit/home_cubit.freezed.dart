@@ -33,6 +33,7 @@ mixin _$HomeState {
   int get totalPoints => throw _privateConstructorUsedError;
   int get totalCategoryPoints => throw _privateConstructorUsedError;
   bool get isSaved => throw _privateConstructorUsedError;
+  bool get arePointsSaved => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HomeStateCopyWith<HomeState> get copyWith =>
@@ -60,7 +61,8 @@ abstract class $HomeStateCopyWith<$Res> {
       List<Map<String, int>> categoryPoints,
       int totalPoints,
       int totalCategoryPoints,
-      bool isSaved});
+      bool isSaved,
+      bool arePointsSaved});
 
   $SportsQuizModelCopyWith<$Res>? get sportsModel;
   $FilmsQuizModelCopyWith<$Res>? get filmsModel;
@@ -101,6 +103,7 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
     Object? totalPoints = null,
     Object? totalCategoryPoints = null,
     Object? isSaved = null,
+    Object? arePointsSaved = null,
   }) {
     return _then(_value.copyWith(
       sportsModel: freezed == sportsModel
@@ -166,6 +169,10 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
       isSaved: null == isSaved
           ? _value.isSaved
           : isSaved // ignore: cast_nullable_to_non_nullable
+              as bool,
+      arePointsSaved: null == arePointsSaved
+          ? _value.arePointsSaved
+          : arePointsSaved // ignore: cast_nullable_to_non_nullable
               as bool,
     ) as $Val);
   }
@@ -291,7 +298,8 @@ abstract class _$$HomeStateImplCopyWith<$Res>
       List<Map<String, int>> categoryPoints,
       int totalPoints,
       int totalCategoryPoints,
-      bool isSaved});
+      bool isSaved,
+      bool arePointsSaved});
 
   @override
   $SportsQuizModelCopyWith<$Res>? get sportsModel;
@@ -338,6 +346,7 @@ class __$$HomeStateImplCopyWithImpl<$Res>
     Object? totalPoints = null,
     Object? totalCategoryPoints = null,
     Object? isSaved = null,
+    Object? arePointsSaved = null,
   }) {
     return _then(_$HomeStateImpl(
       sportsModel: freezed == sportsModel
@@ -403,6 +412,10 @@ class __$$HomeStateImplCopyWithImpl<$Res>
       isSaved: null == isSaved
           ? _value.isSaved
           : isSaved // ignore: cast_nullable_to_non_nullable
+              as bool,
+      arePointsSaved: null == arePointsSaved
+          ? _value.arePointsSaved
+          : arePointsSaved // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -518,7 +531,8 @@ class _$HomeStateImpl implements _HomeState {
       final List<Map<String, int>> categoryPoints = const [],
       this.totalPoints = 0,
       this.totalCategoryPoints = 0,
-      this.isSaved = false})
+      this.isSaved = false,
+      this.arePointsSaved = false})
       : _searchedList = searchedList,
         _list = list,
         _categoryPoints = categoryPoints;
@@ -580,10 +594,13 @@ class _$HomeStateImpl implements _HomeState {
   @override
   @JsonKey()
   final bool isSaved;
+  @override
+  @JsonKey()
+  final bool arePointsSaved;
 
   @override
   String toString() {
-    return 'HomeState(sportsModel: $sportsModel, filmsModel: $filmsModel, gamesModel: $gamesModel, musicModel: $musicModel, geographyModel: $geographyModel, historyModel: $historyModel, natureModel: $natureModel, tvModel: $tvModel, status: $status, errorMessage: $errorMessage, searchedList: $searchedList, list: $list, categoryPoints: $categoryPoints, totalPoints: $totalPoints, totalCategoryPoints: $totalCategoryPoints, isSaved: $isSaved)';
+    return 'HomeState(sportsModel: $sportsModel, filmsModel: $filmsModel, gamesModel: $gamesModel, musicModel: $musicModel, geographyModel: $geographyModel, historyModel: $historyModel, natureModel: $natureModel, tvModel: $tvModel, status: $status, errorMessage: $errorMessage, searchedList: $searchedList, list: $list, categoryPoints: $categoryPoints, totalPoints: $totalPoints, totalCategoryPoints: $totalCategoryPoints, isSaved: $isSaved, arePointsSaved: $arePointsSaved)';
   }
 
   @override
@@ -618,7 +635,9 @@ class _$HomeStateImpl implements _HomeState {
                 other.totalPoints == totalPoints) &&
             (identical(other.totalCategoryPoints, totalCategoryPoints) ||
                 other.totalCategoryPoints == totalCategoryPoints) &&
-            (identical(other.isSaved, isSaved) || other.isSaved == isSaved));
+            (identical(other.isSaved, isSaved) || other.isSaved == isSaved) &&
+            (identical(other.arePointsSaved, arePointsSaved) ||
+                other.arePointsSaved == arePointsSaved));
   }
 
   @override
@@ -639,7 +658,8 @@ class _$HomeStateImpl implements _HomeState {
       const DeepCollectionEquality().hash(_categoryPoints),
       totalPoints,
       totalCategoryPoints,
-      isSaved);
+      isSaved,
+      arePointsSaved);
 
   @JsonKey(ignore: true)
   @override
@@ -665,7 +685,8 @@ abstract class _HomeState implements HomeState {
       final List<Map<String, int>> categoryPoints,
       final int totalPoints,
       final int totalCategoryPoints,
-      final bool isSaved}) = _$HomeStateImpl;
+      final bool isSaved,
+      final bool arePointsSaved}) = _$HomeStateImpl;
 
   @override
   SportsQuizModel? get sportsModel;
@@ -699,6 +720,8 @@ abstract class _HomeState implements HomeState {
   int get totalCategoryPoints;
   @override
   bool get isSaved;
+  @override
+  bool get arePointsSaved;
   @override
   @JsonKey(ignore: true)
   _$$HomeStateImplCopyWith<_$HomeStateImpl> get copyWith =>

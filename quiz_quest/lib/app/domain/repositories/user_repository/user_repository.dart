@@ -133,6 +133,10 @@ class UserRepository {
     return userDataSource.setEmptyPoints();
   }
 
+  Future<void> setRankingPointsAndName(int totalPoints) async {
+    return userDataSource.updateRankingScoreAndName(totalPoints);
+  }
+
 //games
   Future<void> updateEasyGamesPoints(int easyGamesPoints) async {
     return userDataSource.updateEasyGamesPoints(easyGamesPoints);

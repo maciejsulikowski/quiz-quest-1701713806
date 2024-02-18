@@ -2,8 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
 
-
-
 @injectable
 class UserDataSource {
   Stream<Map<String, dynamic>> getUserData() {
@@ -48,6 +46,21 @@ class UserDataSource {
         return {};
       }
     });
+  }
+
+  Future<void> updateRankingScoreAndName(int totalPoints) async {
+    final userID = FirebaseAuth.instance.currentUser?.uid;
+    if (userID == null) {
+      throw Exception('User is not logged in');
+    }
+    await FirebaseFirestore.instance
+        .collection('history')
+        .doc('Wyc0goFZbzh2bsfG6WkQ')
+        .set(
+      {
+        'points': totalPoints,
+      },
+    );
   }
 
   Future<void> setEmptyAccount() async {

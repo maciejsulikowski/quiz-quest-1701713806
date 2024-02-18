@@ -44,49 +44,56 @@ class RankingWidget extends StatefulWidget {
 class RankingWidgetState extends State<RankingWidget> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        iconTheme: const IconThemeData(color: Colors.white),
-      ),
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              Color.fromARGB(255, 10, 58, 214),
-              Color.fromARGB(255, 22, 20, 129),
-            ],
-            begin: Alignment.centerLeft,
-            end: Alignment.centerRight,
-          ),
-        ),
-        child: ListView(
-          children: [
-            Center(
-              child: Text(
-                'Ranking',
-                style: GoogleFonts.aBeeZee(
-                    fontSize: 24,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold),
+    return BlocProvider(
+      create: (context) => getIt<HomeCubit>()..getPointsData(),
+      child: BlocBuilder<HomeCubit, HomeState>(
+        builder: (context, state) {
+          return Scaffold(
+            extendBodyBehindAppBar: true,
+            appBar: AppBar(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              iconTheme: const IconThemeData(color: Colors.white),
+            ),
+            body: Container(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    Color.fromARGB(255, 10, 58, 214),
+                    Color.fromARGB(255, 22, 20, 129),
+                  ],
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                ),
+              ),
+              child: ListView(
+                children: [
+                  Center(
+                    child: Text(
+                      'Total Ranking',
+                      style: GoogleFonts.aBeeZee(
+                          fontSize: 24,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  const SizedBox(height: 30),
+                  const UserRecord(
+                    id: '1',
+                    user: 'Maciek',
+                    points: 200,
+                  ),
+                  UserRecord(
+                    id: '2',
+                    user: 'Michał',
+                    points: state.totalPoints,
+                  ),
+                  const SizedBox(height: 30),
+                ],
               ),
             ),
-            const SizedBox(height: 30),
-            const UserRecord(
-              id: '1',
-              user: 'Maciek',
-              points: '200',
-            ),
-            const UserRecord(
-              id: '2',
-              user: 'Michał',
-              points: '100',
-            ),
-            const SizedBox(height: 30),
-          ],
-        ),
+          );
+        },
       ),
     );
   }
@@ -102,7 +109,7 @@ class UserRecord extends StatelessWidget {
 
   final String id;
   final String user;
-  final String points;
+  final int points;
 
   @override
   Widget build(BuildContext context) {

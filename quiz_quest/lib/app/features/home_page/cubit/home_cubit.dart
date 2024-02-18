@@ -46,6 +46,7 @@ class HomeCubit extends Cubit<HomeState> {
       for (var element in points) {
         totalPoints += element['total']!;
       }
+
       emit(HomeState(
         categoryPoints: points,
         totalPoints: totalPoints,

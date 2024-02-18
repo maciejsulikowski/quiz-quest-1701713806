@@ -129,6 +129,7 @@ class HomeState with _$HomeState {
     @Default(0) int totalPoints,
     @Default(0) int totalCategoryPoints,
     @Default(false) bool isSaved,
+    @Default(false) bool arePointsSaved,
   }) = _HomeState;
 }
 

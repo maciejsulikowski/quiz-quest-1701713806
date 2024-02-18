@@ -42,6 +42,19 @@ class UserCubit extends Cubit<UserState> {
       });
   }
 
+  Future<void> updateScoreAndName(int totalPoints) async {
+    try {
+      await userRepository.setRankingPointsAndName(totalPoints);
+    } catch (error) {
+      emit(
+        UserState(
+          status: Status.error,
+          errorMessage: error.toString(),
+        ),
+      );
+    }
+  }
+
   Future<void> updateName(
     String name,
   ) async {

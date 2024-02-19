@@ -6,7 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quiz_quest/app/core/enums.dart';
+import 'package:quiz_quest/app/data/data_sources/ranking_data_source/ranking_data_source.dart';
 import 'package:quiz_quest/app/data/data_sources/user_data_source/user_data_source.dart';
+import 'package:quiz_quest/app/domain/repositories/ranking_respository/ranking_repository.dart';
 import 'package:quiz_quest/app/domain/repositories/user_repository/user_repository.dart';
 import 'package:quiz_quest/app/features/home_page/cubit/home_cubit.dart';
 import 'package:quiz_quest/app/features/home_page/home_page.dart';
@@ -14,6 +16,7 @@ import 'package:quiz_quest/app/features/home_page/information_widget/information
 import 'package:quiz_quest/app/features/home_page/list_of_categories/list_of_categories.dart';
 import 'package:quiz_quest/app/features/home_page/quiz_category_widget/quiz_category_widget.dart';
 import 'package:quiz_quest/app/features/home_page/ranking_button/ranking_button.dart';
+import 'package:quiz_quest/app/features/home_page/ranking_widget/cubit/ranking_cubit.dart';
 import 'package:quiz_quest/app/features/login_page/first_page_after_registration.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/cubit/films_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/first_quiz_page_films.dart';
@@ -45,8 +48,9 @@ class RankingWidgetState extends State<RankingWidget> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<HomeCubit>()..getPointsData(),
-      child: BlocBuilder<HomeCubit, HomeState>(
+      create: (context) => RankingCubit(RankingRepository(RankingDataSource()))
+        ..getRankingData(),
+      child: BlocBuilder<RankingCubit, RankingState>(
         builder: (context, state) {
           return Scaffold(
             extendBodyBehindAppBar: true,
@@ -66,30 +70,20 @@ class RankingWidgetState extends State<RankingWidget> {
                   end: Alignment.centerRight,
                 ),
               ),
-              child: ListView(
-                children: [
-                  Center(
-                    child: Text(
-                      'Total Ranking',
-                      style: GoogleFonts.aBeeZee(
-                          fontSize: 24,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  const SizedBox(height: 30),
-                  const UserRecord(
-                    id: '1',
-                    user: 'Maciek',
-                    points: 200,
-                  ),
-                  UserRecord(
-                    id: '2',
-                    user: 'Michał',
-                    points: state.totalPoints,
-                  ),
-                  const SizedBox(height: 30),
-                ],
+              child: ListView.builder(
+                itemCount: state.rankingModel?.length ?? 0,
+                itemBuilder: (context, index) {
+                  final userRecord = state.rankingModel?[index];
+                  if (userRecord != null) {
+                    return UserRecord(
+                      id: index.toString(),
+                      user: userRecord.userName,
+                      points: userRecord.points,
+                    );
+                  } else {
+                    return const SizedBox(); // Placeholder
+                  }
+                },
               ),
             ),
           );

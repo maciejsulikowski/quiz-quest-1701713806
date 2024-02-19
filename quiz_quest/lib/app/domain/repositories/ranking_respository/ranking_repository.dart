@@ -1,6 +1,8 @@
+import 'package:injectable/injectable.dart';
 import 'package:quiz_quest/app/data/data_sources/ranking_data_source/ranking_data_source.dart';
 import 'package:quiz_quest/app/domain/models/ranking_model/ranking_model.dart';
 
+@injectable
 class RankingRepository {
   RankingRepository(this.rankingDataSource);
 
@@ -15,5 +17,9 @@ class RankingRepository {
               userName: data['user_name']))
           .toList();
     });
+  }
+
+  Future<void> setEmptyRankingPoints() async {
+    return rankingDataSource.setEmptyRankingPoints();
   }
 }

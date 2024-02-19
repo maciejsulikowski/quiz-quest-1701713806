@@ -48,21 +48,6 @@ class UserDataSource {
     });
   }
 
-  Future<void> updateRankingScoreAndName(int totalPoints) async {
-    final userID = FirebaseAuth.instance.currentUser?.uid;
-    if (userID == null) {
-      throw Exception('User is not logged in');
-    }
-    await FirebaseFirestore.instance
-        .collection('history')
-        .doc('Wyc0goFZbzh2bsfG6WkQ')
-        .set(
-      {
-        'points': totalPoints,
-      },
-    );
-  }
-
   Future<void> setEmptyAccount() async {
     final userID = FirebaseAuth.instance.currentUser?.uid;
     if (userID == null) {
@@ -127,6 +112,8 @@ class UserDataSource {
       },
     );
   }
+
+ 
 
   Future<void> updateEasyFilmPoints(int newEasyFilmPoints) async {
     final userID = FirebaseAuth.instance.currentUser?.uid;

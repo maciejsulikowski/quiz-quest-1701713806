@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 import 'package:quiz_quest/app/core/enums.dart';
 import 'package:quiz_quest/app/domain/models/ranking_model/ranking_model.dart';
@@ -8,6 +9,7 @@ import 'package:quiz_quest/app/domain/repositories/ranking_respository/ranking_r
 
 part 'ranking_state.dart';
 
+@injectable
 class RankingCubit extends Cubit<RankingState> {
   RankingCubit(this.rankingRepository) : super(RankingState());
 

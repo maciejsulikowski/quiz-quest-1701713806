@@ -48,8 +48,7 @@ class RankingWidgetState extends State<RankingWidget> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => RankingCubit(RankingRepository(RankingDataSource()))
-        ..getRankingData(),
+      create: (context) => getIt<RankingCubit>()..getRankingData(),
       child: BlocBuilder<RankingCubit, RankingState>(
         builder: (context, state) {
           return Scaffold(
@@ -70,20 +69,36 @@ class RankingWidgetState extends State<RankingWidget> {
                   end: Alignment.centerRight,
                 ),
               ),
-              child: ListView.builder(
-                itemCount: state.rankingModel?.length ?? 0,
-                itemBuilder: (context, index) {
-                  final userRecord = state.rankingModel?[index];
-                  if (userRecord != null) {
-                    return UserRecord(
-                      id: index.toString(),
-                      user: userRecord.userName,
-                      points: userRecord.points,
-                    );
-                  } else {
-                    return const SizedBox(); // Placeholder
-                  }
-                },
+              child: SafeArea(
+                child: Column(
+                  children: [
+                    Text(
+                      'Ranking',
+                      style: GoogleFonts.aBeeZee(
+                          fontSize: 20,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 30),
+                    Expanded(
+                      child: ListView.builder(
+                        itemCount: state.rankingModel?.length ?? 0,
+                        itemBuilder: (context, index) {
+                          final userRecord = state.rankingModel?[index];
+                          if (userRecord != null) {
+                            return UserRecord(
+                              id: (index + 1).toString(),
+                              user: userRecord.userName,
+                              points: userRecord.points,
+                            );
+                          } else {
+                            return const SizedBox();
+                          }
+                        },
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           );

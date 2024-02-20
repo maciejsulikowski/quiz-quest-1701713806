@@ -22,10 +22,8 @@ class RankingCubit extends Cubit<RankingState> {
     ));
 
     streamSubscription = rankingRepository.getRanking().listen((data) {
-      // int totalPoints = 0;
-      // for (var element in points) {
-      //   totalPoints += element['total']!;
-      // }
+      int totalPoints = 0;
+      
 
       emit(RankingState(
         rankingModel: data,

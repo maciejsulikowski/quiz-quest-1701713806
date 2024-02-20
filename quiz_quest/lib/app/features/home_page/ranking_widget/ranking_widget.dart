@@ -89,7 +89,7 @@ class RankingWidgetState extends State<RankingWidget> {
                             return UserRecord(
                               id: (index + 1).toString(),
                               user: userRecord.userName,
-                              points: userRecord.points,
+                              points: userRecord.totalPoints,
                             );
                           } else {
                             return const SizedBox();
@@ -122,20 +122,24 @@ class UserRecord extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      title: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          TextRanking(
-            text: id,
-          ),
-          TextRanking(
-            text: user,
-          ),
-          TextRanking(
-            text: 'Points: $points💎',
-          ),
-        ],
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: ListTile(
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            TextRanking(
+              text: id,
+            ),
+            TextRanking(
+              text: user,
+            ),
+            TextRanking(
+              text: 'Points: $points💎',
+            ),
+          ],
+        ),
       ),
     );
   }

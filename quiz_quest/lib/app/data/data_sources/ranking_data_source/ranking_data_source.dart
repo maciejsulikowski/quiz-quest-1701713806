@@ -12,7 +12,6 @@ class RankingDataSource {
 
     return FirebaseFirestore.instance
         .collection('history')
-        .orderBy('points', descending: true)
         .snapshots()
         .map((querySnapshot) {
       final rankingData = <Map<String, dynamic>>[];

@@ -36,22 +36,4 @@ class RankingCubit extends Cubit<RankingState> {
         );
       });
   }
-
-  // Future<void> updateRankingName(String name) async {
-  //   try {
-  //     await userRepository.updateRankingName(name);
-  //     emit(
-  //       RankingState(
-  //         status: Status.success,
-  //       ),
-  //     );
-  //   } catch (error) {
-  //     emit(
-  //       RankingState(
-  //         status: Status.error,
-  //         errorMessage: error.toString(),
-  //       ),
-  //     );
-  //   }
-  // }
 }

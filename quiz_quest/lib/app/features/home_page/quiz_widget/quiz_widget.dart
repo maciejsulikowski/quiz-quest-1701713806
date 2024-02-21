@@ -133,7 +133,7 @@ class _QuizzWidgetState extends State<QuizzWidget> {
                               color: Colors.white,
                               fontWeight: FontWeight.bold),
                         ),
-                        const RankingButton()
+                        RankingButton(user: widget.user)
                       ],
                     ),
                   ),

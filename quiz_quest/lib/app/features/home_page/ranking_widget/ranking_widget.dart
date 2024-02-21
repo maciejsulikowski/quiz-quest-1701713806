@@ -37,8 +37,11 @@ import 'package:super_tooltip/super_tooltip.dart';
 
 class RankingWidget extends StatefulWidget {
   const RankingWidget({
+    required this.user,
     super.key,
   });
+
+  final User? user;
 
   @override
   State<RankingWidget> createState() => RankingWidgetState();
@@ -85,12 +88,20 @@ class RankingWidgetState extends State<RankingWidget> {
                         itemCount: state.rankingModel?.length ?? 0,
                         itemBuilder: (context, index) {
                           final userRecord = state.rankingModel?[index];
+                          final userId = state.rankingModel?[index].userID;
+
                           if (userRecord != null) {
-                            return UserRecord(
-                              id: (index + 1).toString(),
-                              user: userRecord.userName,
-                              points: userRecord.totalPoints,
-                            );
+                            return userId == widget.user!.uid
+                                ? UserRecord2(
+                                    id: (index + 1).toString(),
+                                    user: userRecord.userName,
+                                    points: userRecord.totalPoints,
+                                  )
+                                : UserRecord(
+                                    id: (index + 1).toString(),
+                                    user: userRecord.userName,
+                                    points: userRecord.totalPoints,
+                                  );
                           } else {
                             return const SizedBox();
                           }
@@ -134,6 +145,46 @@ class UserRecord extends StatelessWidget {
             ),
             TextRanking(
               text: user,
+            ),
+            TextRanking(
+              text: 'Points: $points💎',
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class UserRecord2 extends StatelessWidget {
+  const UserRecord2({
+    required this.id,
+    required this.user,
+    required this.points,
+    super.key,
+  });
+
+  final String id;
+  final String user;
+  final int points;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: ListTile(
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            TextRanking(
+              text: id,
+            ),
+            Container(
+              color: Colors.black,
+              child: TextRanking(
+                text: user,
+              ),
             ),
             TextRanking(
               text: 'Points: $points💎',

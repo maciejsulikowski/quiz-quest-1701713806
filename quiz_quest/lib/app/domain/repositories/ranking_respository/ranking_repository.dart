@@ -14,7 +14,31 @@ class RankingRepository {
           .map((data) => RankingModel(
               totalPoints: data['films_easy_points'] +
                   data['films_medium_points'] +
-                  data['films_hard_points'],
+                  data['films_hard_points'] +
+                  data['games_easy_points'] +
+                  data['games_medium_points'] +
+                  data['games_hard_points'] +
+                  data['general_easy_points'] +
+                  data['general_medium_points'] +
+                  data['general_hard_points'] +
+                  data['geography_easy_points'] +
+                  data['geography_medium_points'] +
+                  data['geography_hard_points'] +
+                  data['music_easy_points'] +
+                  data['music_medium_points'] +
+                  data['music_hard_points'] +
+                  data['history_easy_points'] +
+                  data['history_medium_points'] +
+                  data['history_hard_points'] +
+                  data['nature_easy_points'] +
+                  data['nature_medium_points'] +
+                  data['nature_hard_points'] +
+                  data['sport_easy_points'] +
+                  data['sport_medium_points'] +
+                  data['sport_hard_points'] +
+                  data['tv_easy_points'] +
+                  data['tv_medium_points'] +
+                  data['tv_hard_points'],
               filmsEPoints: data['films_easy_points'],
               filmsMPoints: data['films_medium_points'],
               filmsHPoints: data['films_hard_points'],
@@ -47,8 +71,6 @@ class RankingRepository {
           .toList();
     });
   }
-
-  
 
   Future<void> setEmptyRankingPoints() async {
     return rankingDataSource.setEmptyRankingPoints();

@@ -30,15 +30,18 @@ import 'package:super_tooltip/super_tooltip.dart';
 
 class RankingButton extends StatelessWidget {
   const RankingButton({
+    required this.user,
     super.key,
   });
+
+  final User? user;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => const RankingWidget()));
+        Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) =>  RankingWidget(user: user)));
       },
       child: Container(
         height: 40,

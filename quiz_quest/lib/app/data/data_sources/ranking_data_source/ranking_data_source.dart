@@ -24,8 +24,6 @@ class RankingDataSource {
     });
   }
 
-  
-
   Future<void> setEmptyRankingPoints() async {
     final userID = FirebaseAuth.instance.currentUser?.uid;
     if (userID == null) {

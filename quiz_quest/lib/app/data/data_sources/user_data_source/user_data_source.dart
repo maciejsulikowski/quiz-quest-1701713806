@@ -113,8 +113,6 @@ class UserDataSource {
     );
   }
 
- 
-
   Future<void> updateEasyFilmPoints(int newEasyFilmPoints) async {
     final userID = FirebaseAuth.instance.currentUser?.uid;
     if (userID == null) {
@@ -869,6 +867,21 @@ class UserDataSource {
         'general_hard_points': newGeneralPoints,
       });
     }
+  }
+
+  Future<void> updateRankingName({
+    required String? name,
+  }) async {
+    final userID = FirebaseAuth.instance.currentUser?.uid;
+    if (userID == null) {
+      throw Exception('User is not logged in');
+    }
+    await FirebaseFirestore.instance.collection('history').doc(userID).set(
+      {
+        'user_name': name,
+      },
+      SetOptions(merge: true),
+    );
   }
 
   Future<void> updateName({

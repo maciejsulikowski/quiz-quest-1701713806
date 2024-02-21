@@ -22,9 +22,6 @@ class RankingCubit extends Cubit<RankingState> {
     ));
 
     streamSubscription = rankingRepository.getRanking().listen((data) {
-      int totalPoints = 0;
-      
-
       emit(RankingState(
         rankingModel: data,
         status: Status.success,
@@ -39,4 +36,22 @@ class RankingCubit extends Cubit<RankingState> {
         );
       });
   }
+
+  // Future<void> updateRankingName(String name) async {
+  //   try {
+  //     await userRepository.updateRankingName(name);
+  //     emit(
+  //       RankingState(
+  //         status: Status.success,
+  //       ),
+  //     );
+  //   } catch (error) {
+  //     emit(
+  //       RankingState(
+  //         status: Status.error,
+  //         errorMessage: error.toString(),
+  //       ),
+  //     );
+  //   }
+  // }
 }

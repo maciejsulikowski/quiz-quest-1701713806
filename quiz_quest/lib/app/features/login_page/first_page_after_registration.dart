@@ -153,6 +153,9 @@ class _FirstPageAfterRegistrationState
                               .updateName(nameController.text);
                           context
                               .read<UserCubit>()
+                              .updateRankingName(nameController.text);
+                          context
+                              .read<UserCubit>()
                               .updateSurname(surnameController.text);
                           context.read<UserCubit>().changeUserBool();
                         },

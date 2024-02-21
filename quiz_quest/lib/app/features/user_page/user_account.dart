@@ -243,6 +243,8 @@ class _UserWidgetState extends State<UserWidget> {
             'Name',
             (text) async {
               await context.read<UserCubit>().updateName(text);
+              // ignore: use_build_context_synchronously
+              await context.read<UserCubit>().updateRankingName(text);
             },
           ),
           buildTextField(

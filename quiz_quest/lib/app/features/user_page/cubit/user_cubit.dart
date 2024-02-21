@@ -5,6 +5,7 @@ import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 import 'package:quiz_quest/app/core/enums.dart';
 import 'package:quiz_quest/app/domain/models/user_model/user_model.dart';
+import 'package:quiz_quest/app/domain/repositories/ranking_respository/ranking_repository.dart';
 import 'package:quiz_quest/app/domain/repositories/user_repository/user_repository.dart';
 
 part 'user_state.dart';
@@ -12,12 +13,13 @@ part 'user_cubit.freezed.dart';
 
 @injectable
 class UserCubit extends Cubit<UserState> {
-  UserCubit(this.userRepository)
+  UserCubit(this.userRepository, this.rankingRepository)
       : super(
           UserState(),
         );
 
   final UserRepository userRepository;
+  final RankingRepository rankingRepository;
 
   StreamSubscription? streamSubscription;
 
@@ -40,6 +42,25 @@ class UserCubit extends Cubit<UserState> {
           ),
         );
       });
+  }
+
+  Future<void> updateRankingName(String name) async {
+    try {
+      await userRepository.updateRankingName(name);
+      emit(
+        UserState(
+          status: Status.success,
+          isSaved: true,
+        ),
+      );
+    } catch (error) {
+      emit(
+        UserState(
+          status: Status.error,
+          errorMessage: error.toString(),
+        ),
+      );
+    }
   }
 
   Future<void> updateName(

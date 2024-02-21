@@ -252,6 +252,11 @@ class UserRepository {
   }
 
   //-----user-----//
+
+  Future<void> updateRankingName(String name) async {
+    return userDataSource.updateRankingName(name: name);
+  }
+
   Future<void> updateName(String name) async {
     return userDataSource.updateName(name: name);
   }

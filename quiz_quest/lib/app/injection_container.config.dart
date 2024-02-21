@@ -92,7 +92,10 @@ extension GetItInjectableX on _i1.GetIt {
           gh<_i10.QuizRepository>(),
           gh<_i6.UserRepository>(),
         ));
-    gh.factory<_i15.UserCubit>(() => _i15.UserCubit(gh<_i6.UserRepository>()));
+    gh.factory<_i15.UserCubit>(() => _i15.UserCubit(
+          gh<_i6.UserRepository>(),
+          gh<_i4.RankingRepository>(),
+        ));
     gh.factory<_i16.FilmsCubit>(() => _i16.FilmsCubit(
           gh<_i10.QuizRepository>(),
           gh<_i6.UserRepository>(),

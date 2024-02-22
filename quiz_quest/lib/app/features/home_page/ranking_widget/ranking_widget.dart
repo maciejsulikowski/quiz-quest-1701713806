@@ -54,6 +54,8 @@ class RankingWidgetState extends State<RankingWidget> {
       create: (context) => getIt<RankingCubit>()..getRankingData(),
       child: BlocBuilder<RankingCubit, RankingState>(
         builder: (context, state) {
+          state.rankingModel
+              ?.sort((a, b) => b.totalPoints.compareTo(a.totalPoints));
           return Scaffold(
             extendBodyBehindAppBar: true,
             appBar: AppBar(

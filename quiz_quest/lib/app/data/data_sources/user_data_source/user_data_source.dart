@@ -113,6 +113,25 @@ class UserDataSource {
     );
   }
 
+  Future<void> updateEasyFilmRankingPoints(int newEasyFilmPoints) async {
+    final userID = FirebaseAuth.instance.currentUser?.uid;
+    if (userID == null) {
+      throw Exception('User is not logged in');
+    }
+    final userData =
+        await FirebaseFirestore.instance.collection('users').doc(userID).get();
+
+    final easyFilmsPoints = userData['films_easy_points'] ?? 0;
+
+    final newEasyPoints = newEasyFilmPoints * 10;
+
+    if (newEasyPoints > easyFilmsPoints) {
+      await FirebaseFirestore.instance.collection('users').doc(userID).update({
+        'films_easy_points': newEasyPoints,
+      });
+    }
+  }
+
   Future<void> updateEasyFilmPoints(int newEasyFilmPoints) async {
     final userID = FirebaseAuth.instance.currentUser?.uid;
     if (userID == null) {

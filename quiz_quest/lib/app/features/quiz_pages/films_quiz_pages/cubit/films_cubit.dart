@@ -75,21 +75,6 @@ class FilmsCubit extends Cubit<FilmsState> {
     }
   }
 
-Future<void> updateEasyFilmsRankingPoints(int easyFilmsPoints) async {
-    try {
-      await userRepository.updateEasyFilmsRankingPoints(easyFilmsPoints);
-
-      emit(FilmsState(
-        status: Status.success,
-      ));
-    } catch (error) {
-      emit(FilmsState(
-        status: Status.error,
-        error: error.toString(),
-      ));
-    }
-  }
-
   Future<void> updateEasyFilmsPoints(int easyFilmsPoints) async {
     try {
       await userRepository.updateEasyFilmsPoints(easyFilmsPoints);

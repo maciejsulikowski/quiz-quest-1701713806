@@ -51,4 +51,34 @@ class RankingCubit extends Cubit<RankingState> {
       ));
     }
   }
+
+  Future<void> updateMediumFilmsRankingPoints(int mediumFilmsPoints) async {
+    try {
+      await rankingRepository.updateMediumFilmsRankingPoints(mediumFilmsPoints);
+
+      emit(RankingState(
+        status: Status.success,
+      ));
+    } catch (error) {
+      emit(RankingState(
+        status: Status.error,
+        errorMessage: error.toString(),
+      ));
+    }
+  }
+
+  Future<void> updateHardFilmsRankingPoints(int hardFilmsPoints) async {
+    try {
+      await rankingRepository.updateHardFilmsRankingPoints(hardFilmsPoints);
+
+      emit(RankingState(
+        status: Status.success,
+      ));
+    } catch (error) {
+      emit(RankingState(
+        status: Status.error,
+        errorMessage: error.toString(),
+      ));
+    }
+  }
 }

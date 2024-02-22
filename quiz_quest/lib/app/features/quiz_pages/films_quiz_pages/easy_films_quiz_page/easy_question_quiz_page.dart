@@ -195,7 +195,7 @@ class _EasyQuestionQuizPageState extends State<EasyQuestionQuizPage> {
                             ),
                             Expanded(
                               child: Text(
-                                'Score: //${easyFilmsGoodAnswers * 10}',
+                                'Score: ${easyFilmsGoodAnswers * 10}',
                                 style: GoogleFonts.aBeeZee(
                                     fontSize: 20,
                                     color: Colors.white,

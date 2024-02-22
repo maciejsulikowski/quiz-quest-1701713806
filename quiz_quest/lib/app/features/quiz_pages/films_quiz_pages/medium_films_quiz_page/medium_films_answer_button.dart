@@ -9,6 +9,7 @@ import 'package:quiz_quest/app/data/data_sources/user_data_source/user_data_sour
 import 'package:quiz_quest/app/domain/models/films_model/films_quiz_model.dart';
 import 'package:quiz_quest/app/domain/repositories/quiz_repository/quiz_repository.dart';
 import 'package:quiz_quest/app/domain/repositories/user_repository/user_repository.dart';
+import 'package:quiz_quest/app/features/home_page/ranking_widget/cubit/ranking_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/cubit/films_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/medium_films_quiz_page/medium_films_question_widget.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/medium_films_quiz_page/medium_lost_life_page.dart';
@@ -69,6 +70,9 @@ class _MediumFilmsAnswerButtonState extends State<MediumFilmsAnswerButton> {
         context
             .read<FilmsCubit>()
             .updateMediumFilmsPoints(mediumFilmsGoodAnswers);
+            context
+            .read<RankingCubit>()
+            .updateMediumFilmsRankingPoints(mediumFilmsGoodAnswers);
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) =>

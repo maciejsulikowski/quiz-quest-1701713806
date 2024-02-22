@@ -11,6 +11,7 @@ import 'package:quiz_quest/app/domain/models/games_model/games_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/geography_model/geography_quiz_model.dart';
 import 'package:quiz_quest/app/domain/repositories/quiz_repository/quiz_repository.dart';
 import 'package:quiz_quest/app/domain/repositories/user_repository/user_repository.dart';
+import 'package:quiz_quest/app/features/home_page/ranking_widget/cubit/ranking_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/cubit/films_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/medium_films_quiz_page/medium_lost_life_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/medium_films_quiz_page/resume_medium_question_quiz_page.dart';
@@ -123,9 +124,16 @@ class _HardQuestionGeographyQuizPageState
     const int duration = 3;
 
     return Scaffold(
-      body: BlocProvider(
-        create: (context) => getIt<GeographyCubit>()
-          ..getHardGeographyCategory(),
+      body: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) =>
+                getIt<GeographyCubit>()..getHardGeographyCategory(),
+          ),
+          BlocProvider(
+            create: (context) => getIt<RankingCubit>(),
+          ),
+        ],
         child: BlocListener<GeographyCubit, GeographyState>(
           listener: (context, state) async {
             if (state.status == Status.error) {
@@ -247,11 +255,14 @@ class _HardQuestionGeographyQuizPageState
                                 .read<GeographyCubit>()
                                 .updateHardGeographyPoints(
                                     hardGeographyGoodAnswers);
+                            context
+                                .read<RankingCubit>()
+                                .updateHardGeographyRankingPoints(
+                                    hardGeographyGoodAnswers);
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                builder: (context) =>
-                                    HardGeographyLostLifePage(
-                                        goodAnswers: hardGeographyGoodAnswers),
+                                builder: (context) => HardGeographyLostLifePage(
+                                    goodAnswers: hardGeographyGoodAnswers),
                               ),
                             );
                           }
@@ -453,7 +464,3 @@ class _HardQuestionGeographyQuizPageState
     );
   }
 }
-
-
-
-

@@ -10,6 +10,7 @@ import 'package:quiz_quest/app/domain/models/films_model/films_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/games_model/games_quiz_model.dart';
 import 'package:quiz_quest/app/domain/repositories/quiz_repository/quiz_repository.dart';
 import 'package:quiz_quest/app/domain/repositories/user_repository/user_repository.dart';
+import 'package:quiz_quest/app/features/home_page/ranking_widget/cubit/ranking_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/cubit/films_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/easy_films_quiz_page/easy_lost_life_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/easy_films_quiz_page/resume_easy_question_quiz_page.dart';
@@ -19,7 +20,6 @@ import 'package:quiz_quest/app/features/quiz_pages/games_quiz_pages/easy_games_q
 import 'package:quiz_quest/app/features/quiz_pages/games_quiz_pages/easy_games_quiz_page/easy_question_quiz_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/quiz_countdown_timer/quiz_countdown_timer.dart';
 import 'package:quiz_quest/app/injection_container.dart';
-
 
 class EasyGamesAnswerButton extends StatefulWidget {
   EasyGamesAnswerButton({
@@ -67,6 +67,9 @@ class _EasyGamesAnswerButtonState extends State<EasyGamesAnswerButton> {
       easyGamesBadAnswers += 1;
       if (easyGamesBadAnswers == 3) {
         context.read<GamesCubit>().updateEasyGamesPoints(easyGamesGoodAnswers);
+        context
+            .read<RankingCubit>()
+            .updateEasyGamesRankingPoints(easyGamesGoodAnswers);
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) =>

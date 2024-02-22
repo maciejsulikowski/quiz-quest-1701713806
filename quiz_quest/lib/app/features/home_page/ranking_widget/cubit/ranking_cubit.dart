@@ -81,4 +81,49 @@ class RankingCubit extends Cubit<RankingState> {
       ));
     }
   }
+
+  Future<void> updateEasyGamesRankingPoints(int easyGamesPoints) async {
+    try {
+      await rankingRepository.updateEasyGamesRankingPoints(easyGamesPoints);
+
+      emit(RankingState(
+        status: Status.success,
+      ));
+    } catch (error) {
+      emit(RankingState(
+        status: Status.error,
+        errorMessage: error.toString(),
+      ));
+    }
+  }
+
+  Future<void> updateMediumGamesRankingPoints(int mediumGamesPoints) async {
+    try {
+      await rankingRepository.updateMediumGamesRankingPoints(mediumGamesPoints);
+
+      emit(RankingState(
+        status: Status.success,
+      ));
+    } catch (error) {
+      emit(RankingState(
+        status: Status.error,
+        errorMessage: error.toString(),
+      ));
+    }
+  }
+
+  Future<void> updateHardGamesRankingPoints(int hardGamesPoints) async {
+    try {
+      await rankingRepository.updateHardGamesRankingPoints(hardGamesPoints);
+
+      emit(RankingState(
+        status: Status.success,
+      ));
+    } catch (error) {
+      emit(RankingState(
+        status: Status.error,
+        errorMessage: error.toString(),
+      ));
+    }
+  }
 }

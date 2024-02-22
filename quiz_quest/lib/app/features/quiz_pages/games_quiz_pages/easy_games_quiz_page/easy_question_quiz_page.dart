@@ -10,6 +10,7 @@ import 'package:quiz_quest/app/domain/models/films_model/films_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/games_model/games_quiz_model.dart';
 import 'package:quiz_quest/app/domain/repositories/quiz_repository/quiz_repository.dart';
 import 'package:quiz_quest/app/domain/repositories/user_repository/user_repository.dart';
+import 'package:quiz_quest/app/features/home_page/ranking_widget/cubit/ranking_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/cubit/films_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/easy_films_quiz_page/easy_lost_life_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/easy_films_quiz_page/resume_easy_question_quiz_page.dart';
@@ -115,8 +116,15 @@ class _EasyQuestionGamesQuizPageState extends State<EasyQuestionGamesQuizPage> {
     const int duration = 3;
 
     return Scaffold(
-      body: BlocProvider(
-        create: (context) => getIt<GamesCubit>()..getEasyGamesCategory(),
+      body: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => getIt<GamesCubit>()..getEasyGamesCategory(),
+          ),
+          BlocProvider(
+            create: (context) => getIt<RankingCubit>(),
+          ),
+        ],
         child: BlocListener<GamesCubit, GamesState>(
           listener: (context, state) async {
             if (state.status == Status.error) {
@@ -237,6 +245,9 @@ class _EasyQuestionGamesQuizPageState extends State<EasyQuestionGamesQuizPage> {
                             context
                                 .read<GamesCubit>()
                                 .updateEasyGamesPoints(easyGamesGoodAnswers);
+                                context
+                                .read<RankingCubit>()
+                                .updateEasyGamesRankingPoints(easyGamesGoodAnswers);
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (context) => EasyGamesLostLifePage(
@@ -439,5 +450,3 @@ class _EasyQuestionGamesQuizPageState extends State<EasyQuestionGamesQuizPage> {
     );
   }
 }
-
-

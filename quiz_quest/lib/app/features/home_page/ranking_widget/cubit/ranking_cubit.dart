@@ -218,4 +218,53 @@ class RankingCubit extends Cubit<RankingState> {
       ));
     }
   }
+
+   Future<void> updateEasyHistoryRankingPoints(int easyHistoryPoints) async {
+    try {
+      await rankingRepository
+          .updateEasyHistoryRankingPoints(easyHistoryPoints);
+
+      emit(RankingState(
+        status: Status.success,
+      ));
+    } catch (error) {
+      emit(RankingState(
+        status: Status.error,
+        errorMessage: error.toString(),
+      ));
+    }
+  }
+
+  Future<void> updateMediumHistoryRankingPoints(
+      int mediumHistoryPoints) async {
+    try {
+      await rankingRepository
+          .updateMediumHistoryRankingPoints(mediumHistoryPoints);
+
+      emit(RankingState(
+        status: Status.success,
+      ));
+    } catch (error) {
+      emit(RankingState(
+        status: Status.error,
+        errorMessage: error.toString(),
+      ));
+    }
+  }
+
+  Future<void> updateHardHistoryRankingPoints(int hardHistoryPoints) async {
+    try {
+      await rankingRepository
+          .updateHardHistoryRankingPoints(hardHistoryPoints);
+
+      emit(RankingState(
+        status: Status.success,
+      ));
+    } catch (error) {
+      emit(RankingState(
+        status: Status.error,
+        errorMessage: error.toString(),
+      ));
+    }
+  }
 }

@@ -37,7 +37,7 @@ class RankingCubit extends Cubit<RankingState> {
       });
   }
 
-   Future<void> updateEasyFilmsRankingPoints(int easyFilmsPoints) async {
+  Future<void> updateEasyFilmsRankingPoints(int easyFilmsPoints) async {
     try {
       await rankingRepository.updateEasyFilmsRankingPoints(easyFilmsPoints);
 
@@ -115,6 +115,98 @@ class RankingCubit extends Cubit<RankingState> {
   Future<void> updateHardGamesRankingPoints(int hardGamesPoints) async {
     try {
       await rankingRepository.updateHardGamesRankingPoints(hardGamesPoints);
+
+      emit(RankingState(
+        status: Status.success,
+      ));
+    } catch (error) {
+      emit(RankingState(
+        status: Status.error,
+        errorMessage: error.toString(),
+      ));
+    }
+  }
+
+  Future<void> updateEasyGeneralRankingPoints(int easyGeneralPoints) async {
+    try {
+      await rankingRepository.updateEasyGeneralRankingPoints(easyGeneralPoints);
+
+      emit(RankingState(
+        status: Status.success,
+      ));
+    } catch (error) {
+      emit(RankingState(
+        status: Status.error,
+        errorMessage: error.toString(),
+      ));
+    }
+  }
+
+  Future<void> updateMediumGeneralRankingPoints(int mediumGeneralPoints) async {
+    try {
+      await rankingRepository
+          .updateMediumGeneralRankingPoints(mediumGeneralPoints);
+
+      emit(RankingState(
+        status: Status.success,
+      ));
+    } catch (error) {
+      emit(RankingState(
+        status: Status.error,
+        errorMessage: error.toString(),
+      ));
+    }
+  }
+
+  Future<void> updateHardGeneralRankingPoints(int hardGeneralPoints) async {
+    try {
+      await rankingRepository.updateHardGeneralRankingPoints(hardGeneralPoints);
+
+      emit(RankingState(
+        status: Status.success,
+      ));
+    } catch (error) {
+      emit(RankingState(
+        status: Status.error,
+        errorMessage: error.toString(),
+      ));
+    }
+  }
+
+  Future<void> updateEasyGeographyRankingPoints(int easyGeographyPoints) async {
+    try {
+      await rankingRepository.updateEasyGeographyRankingPoints(easyGeographyPoints);
+
+      emit(RankingState(
+        status: Status.success,
+      ));
+    } catch (error) {
+      emit(RankingState(
+        status: Status.error,
+        errorMessage: error.toString(),
+      ));
+    }
+  }
+
+  Future<void> updateMediumGeographyRankingPoints(int mediumGeographyPoints) async {
+    try {
+      await rankingRepository
+          .updateMediumGeographyRankingPoints(mediumGeographyPoints);
+
+      emit(RankingState(
+        status: Status.success,
+      ));
+    } catch (error) {
+      emit(RankingState(
+        status: Status.error,
+        errorMessage: error.toString(),
+      ));
+    }
+  }
+
+  Future<void> updateHardGeographyRankingPoints(int hardGeographyPoints) async {
+    try {
+      await rankingRepository.updateHardGeographyRankingPoints(hardGeographyPoints);
 
       emit(RankingState(
         status: Status.success,

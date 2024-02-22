@@ -12,6 +12,7 @@ import 'package:quiz_quest/app/domain/models/general_model/general_quiz_model.da
 import 'package:quiz_quest/app/domain/models/geography_model/geography_quiz_model.dart';
 import 'package:quiz_quest/app/domain/repositories/quiz_repository/quiz_repository.dart';
 import 'package:quiz_quest/app/domain/repositories/user_repository/user_repository.dart';
+import 'package:quiz_quest/app/features/home_page/ranking_widget/cubit/ranking_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/cubit/films_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/easy_films_quiz_page/easy_lost_life_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/easy_films_quiz_page/resume_easy_question_quiz_page.dart';
@@ -125,9 +126,16 @@ class _EasyQuestionGeneralQuizPageState
     const int duration = 3;
 
     return Scaffold(
-      body: BlocProvider(
-        create: (context) => getIt<GeneralCubit>()
-          ..getEasyGeneralCategory(),
+      body: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) =>
+                getIt<GeneralCubit>()..getEasyGeneralCategory(),
+          ),
+          BlocProvider(
+            create: (context) => getIt<RankingCubit>(),
+          ),
+        ],
         child: BlocListener<GeneralCubit, GeneralState>(
           listener: (context, state) async {
             if (state.status == Status.error) {
@@ -248,6 +256,10 @@ class _EasyQuestionGeneralQuizPageState
                             context
                                 .read<GeneralCubit>()
                                 .updateEasyGeneralPoints(
+                                    easyGeneralGoodAnswers);
+                            context
+                                .read<RankingCubit>()
+                                .updateEasyGeneralRankingPoints(
                                     easyGeneralGoodAnswers);
                             Navigator.of(context).push(
                               MaterialPageRoute(
@@ -454,6 +466,3 @@ class _EasyQuestionGeneralQuizPageState
     );
   }
 }
-
-
-

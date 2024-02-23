@@ -14,6 +14,7 @@ import 'package:quiz_quest/app/domain/models/music_model/music_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/nature_model/nature_quiz_model.dart';
 import 'package:quiz_quest/app/domain/repositories/quiz_repository/quiz_repository.dart';
 import 'package:quiz_quest/app/domain/repositories/user_repository/user_repository.dart';
+import 'package:quiz_quest/app/features/home_page/ranking_widget/cubit/ranking_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/cubit/films_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/easy_films_quiz_page/easy_lost_life_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/easy_films_quiz_page/resume_easy_question_quiz_page.dart';
@@ -60,7 +61,8 @@ String threeLives = '❤️❤️❤️';
 String twoLives = ' ❤️❤️';
 String oneLive = ' ❤️';
 
-class _EasyQuestionNatureQuizPageState extends State<EasyQuestionNatureQuizPage> {
+class _EasyQuestionNatureQuizPageState
+    extends State<EasyQuestionNatureQuizPage> {
   int currentIndex = 0;
   late List currentAnswers;
 
@@ -130,9 +132,15 @@ class _EasyQuestionNatureQuizPageState extends State<EasyQuestionNatureQuizPage>
     const int duration = 3;
 
     return Scaffold(
-      body: BlocProvider(
-        create: (context) => getIt<NatureCubit>()
-          ..getEasyNatureCategory(),
+      body: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => getIt<NatureCubit>()..getEasyNatureCategory(),
+          ),
+          BlocProvider(
+            create: (context) => getIt<RankingCubit>(),
+          ),
+        ],
         child: BlocListener<NatureCubit, NatureState>(
           listener: (context, state) async {
             if (state.status == Status.error) {
@@ -253,6 +261,10 @@ class _EasyQuestionNatureQuizPageState extends State<EasyQuestionNatureQuizPage>
                             context
                                 .read<NatureCubit>()
                                 .updateEasyNaturePoints(easyNatureGoodAnswers);
+                            context
+                                .read<RankingCubit>()
+                                .updateEasyNatureRankingPoints(
+                                    easyNatureGoodAnswers);
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (context) => EasyNatureLostLifePage(
@@ -343,7 +355,8 @@ class _EasyQuestionNatureQuizPageState extends State<EasyQuestionNatureQuizPage>
                                       setState(() {
                                         isButtonClicked = value;
                                         if (value = currentAnswers[index] ==
-                                            natureQuizModel.results[currentIndex]
+                                            natureQuizModel
+                                                .results[currentIndex]
                                                 .correctAnswer) {
                                           ringColor = Colors.green;
                                         } else {
@@ -358,7 +371,8 @@ class _EasyQuestionNatureQuizPageState extends State<EasyQuestionNatureQuizPage>
                                       });
                                     },
                                     isCorrectAnswer: currentAnswers[index] ==
-                                            natureQuizModel.results[currentIndex]
+                                            natureQuizModel
+                                                .results[currentIndex]
                                                 .correctAnswer
                                         ? true
                                         : false,
@@ -390,7 +404,8 @@ class _EasyQuestionNatureQuizPageState extends State<EasyQuestionNatureQuizPage>
                                                 ? () {
                                                     setState(() {
                                                       if (currentIndex ==
-                                                          natureQuizModel.results
+                                                          natureQuizModel
+                                                                  .results
                                                                   .length -
                                                               1) {
                                                         Navigator.of(context)
@@ -455,6 +470,3 @@ class _EasyQuestionNatureQuizPageState extends State<EasyQuestionNatureQuizPage>
     );
   }
 }
-
-
-

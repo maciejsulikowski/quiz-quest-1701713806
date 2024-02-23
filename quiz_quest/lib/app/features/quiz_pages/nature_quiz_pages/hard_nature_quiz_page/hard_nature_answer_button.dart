@@ -14,6 +14,7 @@ import 'package:quiz_quest/app/domain/models/music_model/music_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/nature_model/nature_quiz_model.dart';
 import 'package:quiz_quest/app/domain/repositories/quiz_repository/quiz_repository.dart';
 import 'package:quiz_quest/app/domain/repositories/user_repository/user_repository.dart';
+import 'package:quiz_quest/app/features/home_page/ranking_widget/cubit/ranking_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/cubit/films_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/easy_films_quiz_page/easy_lost_life_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/easy_films_quiz_page/resume_easy_question_quiz_page.dart';
@@ -37,6 +38,7 @@ import 'package:quiz_quest/app/features/quiz_pages/nature_quiz_pages/medium_natu
 import 'package:quiz_quest/app/features/quiz_pages/nature_quiz_pages/medium_nature_quiz_page/resume_medium_nature_question_quiz_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/quiz_countdown_timer/quiz_countdown_timer.dart';
 import 'package:quiz_quest/app/injection_container.dart';
+
 class HardNatureAnswerButton extends StatefulWidget {
   HardNatureAnswerButton({
     required this.answer,
@@ -85,6 +87,9 @@ class _HardNatureAnswerButtonState extends State<HardNatureAnswerButton> {
         context
             .read<NatureCubit>()
             .updateHardNaturePoints(hardNatureGoodAnswers);
+        context
+            .read<RankingCubit>()
+            .updateHardNatureRankingPoints(hardNatureGoodAnswers);
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) =>

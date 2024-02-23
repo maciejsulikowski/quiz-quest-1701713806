@@ -14,6 +14,7 @@ import 'package:quiz_quest/app/domain/models/music_model/music_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/nature_model/nature_quiz_model.dart';
 import 'package:quiz_quest/app/domain/repositories/quiz_repository/quiz_repository.dart';
 import 'package:quiz_quest/app/domain/repositories/user_repository/user_repository.dart';
+import 'package:quiz_quest/app/features/home_page/ranking_widget/cubit/ranking_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/cubit/films_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/easy_films_quiz_page/easy_lost_life_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/easy_films_quiz_page/resume_easy_question_quiz_page.dart';
@@ -133,9 +134,16 @@ class _MediumQuestionNatureQuizPageState
     const int duration = 3;
 
     return Scaffold(
-      body: BlocProvider(
-        create: (context) => getIt<NatureCubit>()
-          ..getMediumNatureCategory(),
+      body: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) =>
+                getIt<NatureCubit>()..getMediumNatureCategory(),
+          ),
+          BlocProvider(
+            create: (context) => getIt<RankingCubit>(),
+          ),
+        ],
         child: BlocListener<NatureCubit, NatureState>(
           listener: (context, state) async {
             if (state.status == Status.error) {
@@ -255,7 +263,12 @@ class _MediumQuestionNatureQuizPageState
                           if (mediumNatureBadAnswers == 3) {
                             context
                                 .read<NatureCubit>()
-                                .updateMediumNaturePoints(mediumNatureGoodAnswers);
+                                .updateMediumNaturePoints(
+                                    mediumNatureGoodAnswers);
+                            context
+                                .read<RankingCubit>()
+                                .updateMediumNatureRankingPoints(
+                                    mediumNatureGoodAnswers);
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (context) => MediumNatureLostLifePage(
@@ -461,6 +474,3 @@ class _MediumQuestionNatureQuizPageState
     );
   }
 }
-
-
-

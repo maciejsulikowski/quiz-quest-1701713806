@@ -358,4 +358,94 @@ class RankingCubit extends Cubit<RankingState> {
       ));
     }
   }
+
+  Future<void> updateEasySportRankingPoints(int easySportPoints) async {
+    try {
+      await rankingRepository.updateEasySportRankingPoints(easySportPoints);
+
+      emit(RankingState(
+        status: Status.success,
+      ));
+    } catch (error) {
+      emit(RankingState(
+        status: Status.error,
+        errorMessage: error.toString(),
+      ));
+    }
+  }
+
+  Future<void> updateMediumSportRankingPoints(int mediumSportPoints) async {
+    try {
+      await rankingRepository.updateMediumSportRankingPoints(mediumSportPoints);
+
+      emit(RankingState(
+        status: Status.success,
+      ));
+    } catch (error) {
+      emit(RankingState(
+        status: Status.error,
+        errorMessage: error.toString(),
+      ));
+    }
+  }
+
+  Future<void> updateHardSportRankingPoints(int hardSportPoints) async {
+    try {
+      await rankingRepository.updateHardSportRankingPoints(hardSportPoints);
+
+      emit(RankingState(
+        status: Status.success,
+      ));
+    } catch (error) {
+      emit(RankingState(
+        status: Status.error,
+        errorMessage: error.toString(),
+      ));
+    }
+  }
+
+  Future<void> updateEasyTVRankingPoints(int easyTVPoints) async {
+    try {
+      await rankingRepository.updateEasyTVRankingPoints(easyTVPoints);
+
+      emit(RankingState(
+        status: Status.success,
+      ));
+    } catch (error) {
+      emit(RankingState(
+        status: Status.error,
+        errorMessage: error.toString(),
+      ));
+    }
+  }
+
+  Future<void> updateMediumTVRankingPoints(int mediumTVPoints) async {
+    try {
+      await rankingRepository.updateMediumTVRankingPoints(mediumTVPoints);
+
+      emit(RankingState(
+        status: Status.success,
+      ));
+    } catch (error) {
+      emit(RankingState(
+        status: Status.error,
+        errorMessage: error.toString(),
+      ));
+    }
+  }
+
+  Future<void> updateHardTVRankingPoints(int hardTVPoints) async {
+    try {
+      await rankingRepository.updateHardTVRankingPoints(hardTVPoints);
+
+      emit(RankingState(
+        status: Status.success,
+      ));
+    } catch (error) {
+      emit(RankingState(
+        status: Status.error,
+        errorMessage: error.toString(),
+      ));
+    }
+  }
 }

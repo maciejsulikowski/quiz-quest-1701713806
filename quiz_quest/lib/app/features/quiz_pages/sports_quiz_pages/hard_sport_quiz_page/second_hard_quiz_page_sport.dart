@@ -73,7 +73,6 @@ class QuizzPage extends StatelessWidget {
       ),
       child: ListView(
         children: [
-          
           Center(
             child: CircleAvatar(
               radius: 35,

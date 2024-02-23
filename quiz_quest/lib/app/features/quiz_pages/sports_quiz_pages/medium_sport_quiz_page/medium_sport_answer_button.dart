@@ -15,6 +15,7 @@ import 'package:quiz_quest/app/domain/models/nature_model/nature_quiz_model.dart
 import 'package:quiz_quest/app/domain/models/sports_model/sports_quiz_model.dart';
 import 'package:quiz_quest/app/domain/repositories/quiz_repository/quiz_repository.dart';
 import 'package:quiz_quest/app/domain/repositories/user_repository/user_repository.dart';
+import 'package:quiz_quest/app/features/home_page/ranking_widget/cubit/ranking_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/cubit/films_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/easy_films_quiz_page/easy_lost_life_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/easy_films_quiz_page/resume_easy_question_quiz_page.dart';
@@ -39,6 +40,7 @@ import 'package:quiz_quest/app/features/quiz_pages/sports_quiz_pages/medium_spor
 import 'package:quiz_quest/app/features/quiz_pages/sports_quiz_pages/medium_sport_quiz_page/medium_sport_lost_life_quiz_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/sports_quiz_pages/medium_sport_quiz_page/resume_medium_sport_question_quiz_page.dart';
 import 'package:quiz_quest/app/injection_container.dart';
+
 class MediumSportAnswerButton extends StatefulWidget {
   MediumSportAnswerButton({
     required this.answer,
@@ -88,6 +90,9 @@ class _MediumSportAnswerButtonState extends State<MediumSportAnswerButton> {
         context
             .read<SportCubit>()
             .updateMediumSportsPoints(mediumSportGoodAnswers);
+        context
+            .read<RankingCubit>()
+            .updateMediumSportRankingPoints(mediumSportGoodAnswers);
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) =>

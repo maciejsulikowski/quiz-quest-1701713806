@@ -175,7 +175,8 @@ class RankingCubit extends Cubit<RankingState> {
 
   Future<void> updateEasyGeographyRankingPoints(int easyGeographyPoints) async {
     try {
-      await rankingRepository.updateEasyGeographyRankingPoints(easyGeographyPoints);
+      await rankingRepository
+          .updateEasyGeographyRankingPoints(easyGeographyPoints);
 
       emit(RankingState(
         status: Status.success,
@@ -188,7 +189,8 @@ class RankingCubit extends Cubit<RankingState> {
     }
   }
 
-  Future<void> updateMediumGeographyRankingPoints(int mediumGeographyPoints) async {
+  Future<void> updateMediumGeographyRankingPoints(
+      int mediumGeographyPoints) async {
     try {
       await rankingRepository
           .updateMediumGeographyRankingPoints(mediumGeographyPoints);
@@ -206,23 +208,8 @@ class RankingCubit extends Cubit<RankingState> {
 
   Future<void> updateHardGeographyRankingPoints(int hardGeographyPoints) async {
     try {
-      await rankingRepository.updateHardGeographyRankingPoints(hardGeographyPoints);
-
-      emit(RankingState(
-        status: Status.success,
-      ));
-    } catch (error) {
-      emit(RankingState(
-        status: Status.error,
-        errorMessage: error.toString(),
-      ));
-    }
-  }
-
-   Future<void> updateEasyHistoryRankingPoints(int easyHistoryPoints) async {
-    try {
       await rankingRepository
-          .updateEasyHistoryRankingPoints(easyHistoryPoints);
+          .updateHardGeographyRankingPoints(hardGeographyPoints);
 
       emit(RankingState(
         status: Status.success,
@@ -235,8 +222,22 @@ class RankingCubit extends Cubit<RankingState> {
     }
   }
 
-  Future<void> updateMediumHistoryRankingPoints(
-      int mediumHistoryPoints) async {
+  Future<void> updateEasyHistoryRankingPoints(int easyHistoryPoints) async {
+    try {
+      await rankingRepository.updateEasyHistoryRankingPoints(easyHistoryPoints);
+
+      emit(RankingState(
+        status: Status.success,
+      ));
+    } catch (error) {
+      emit(RankingState(
+        status: Status.error,
+        errorMessage: error.toString(),
+      ));
+    }
+  }
+
+  Future<void> updateMediumHistoryRankingPoints(int mediumHistoryPoints) async {
     try {
       await rankingRepository
           .updateMediumHistoryRankingPoints(mediumHistoryPoints);
@@ -254,8 +255,52 @@ class RankingCubit extends Cubit<RankingState> {
 
   Future<void> updateHardHistoryRankingPoints(int hardHistoryPoints) async {
     try {
-      await rankingRepository
-          .updateHardHistoryRankingPoints(hardHistoryPoints);
+      await rankingRepository.updateHardHistoryRankingPoints(hardHistoryPoints);
+
+      emit(RankingState(
+        status: Status.success,
+      ));
+    } catch (error) {
+      emit(RankingState(
+        status: Status.error,
+        errorMessage: error.toString(),
+      ));
+    }
+  }
+
+  Future<void> updateEasyMusicRankingPoints(int easyMusicPoints) async {
+    try {
+      await rankingRepository.updateEasyMusicRankingPoints(easyMusicPoints);
+
+      emit(RankingState(
+        status: Status.success,
+      ));
+    } catch (error) {
+      emit(RankingState(
+        status: Status.error,
+        errorMessage: error.toString(),
+      ));
+    }
+  }
+
+  Future<void> updateMediumMusicRankingPoints(int mediumMusicPoints) async {
+    try {
+      await rankingRepository.updateMediumMusicRankingPoints(mediumMusicPoints);
+
+      emit(RankingState(
+        status: Status.success,
+      ));
+    } catch (error) {
+      emit(RankingState(
+        status: Status.error,
+        errorMessage: error.toString(),
+      ));
+    }
+  }
+
+  Future<void> updateHardMusicRankingPoints(int hardMusicPoints) async {
+    try {
+      await rankingRepository.updateHardMusicRankingPoints(hardMusicPoints);
 
       emit(RankingState(
         status: Status.success,

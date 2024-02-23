@@ -13,6 +13,7 @@ import 'package:quiz_quest/app/domain/models/history_model/history_quiz_model.da
 import 'package:quiz_quest/app/domain/models/music_model/music_quiz_model.dart';
 import 'package:quiz_quest/app/domain/repositories/quiz_repository/quiz_repository.dart';
 import 'package:quiz_quest/app/domain/repositories/user_repository/user_repository.dart';
+import 'package:quiz_quest/app/features/home_page/ranking_widget/cubit/ranking_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/cubit/films_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/easy_films_quiz_page/easy_lost_life_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/easy_films_quiz_page/resume_easy_question_quiz_page.dart';
@@ -129,8 +130,15 @@ class MediumQuestionMusicQuizPageState
     const int duration = 3;
 
     return Scaffold(
-      body: BlocProvider(
-        create: (context) => getIt<MusicCubit>()..getMediumMusicCategory(),
+      body: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => getIt<MusicCubit>()..getMediumMusicCategory(),
+          ),
+          BlocProvider(
+            create: (context) => getIt<RankingCubit>(),
+          ),
+        ],
         child: BlocListener<MusicCubit, MusicState>(
           listener: (context, state) async {
             if (state.status == Status.error) {
@@ -250,6 +258,10 @@ class MediumQuestionMusicQuizPageState
                           if (mediumMusicBadAnswers == 3) {
                             context.read<MusicCubit>().updateMediumMusicPoints(
                                 mediumMusicGoodAnswers);
+                            context
+                                .read<RankingCubit>()
+                                .updateMediumMusicRankingPoints(
+                                    mediumMusicGoodAnswers);
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (context) => MediumMusicLostLifePage(

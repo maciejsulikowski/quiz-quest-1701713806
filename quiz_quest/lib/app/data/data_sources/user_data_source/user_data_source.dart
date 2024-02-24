@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:injectable/injectable.dart';
 
+@injectable
 class UserDataSource {
   Stream<Map<String, dynamic>> getUserData() {
     final userID = FirebaseAuth.instance.currentUser?.uid;
@@ -63,6 +65,7 @@ class UserDataSource {
         'gender': '',
         'favourite_categories': '',
         'image_url': '',
+        'is_user_new': true,
       },
     );
   }
@@ -79,44 +82,54 @@ class UserDataSource {
         .doc(userID)
         .set(
       {
-        'total_films_points': 0,
         'films_easy_points': 0,
         'films_medium_points': 0,
         'films_hard_points': 0,
-        'total_games_points': 0,
         'games_easy_points': 0,
         'games_medium_points': 0,
         'games_hard_points': 0,
-        'total_geography_points': 0,
         'geography_easy_points': 0,
         'geography_medium_points': 0,
         'geography_hard_points': 0,
-        'total_history_points': 0,
         'history_easy_points': 0,
         'history_medium_points': 0,
         'history_hard_points': 0,
-        'total_music_points': 0,
         'music_easy_points': 0,
         'music_medium_points': 0,
         'music_hard_points': 0,
-        'total_nature_points': 0,
         'nature_easy_points': 0,
         'nature_medium_points': 0,
         'nature_hard_points': 0,
-        'total_sports_points': 0,
         'sport_easy_points': 0,
         'sport_medium_points': 0,
         'sport_hard_points': 0,
-        'total_tv_points': 0,
         'tv_easy_points': 0,
         'tv_medium_points': 0,
         'tv_hard_points': 0,
-        'total_general_points': 0,
         'general_easy_points': 0,
         'general_medium_points': 0,
         'general_hard_points': 0,
       },
     );
+  }
+
+  Future<void> updateEasyFilmRankingPoints(int newEasyFilmPoints) async {
+    final userID = FirebaseAuth.instance.currentUser?.uid;
+    if (userID == null) {
+      throw Exception('User is not logged in');
+    }
+    final userData =
+        await FirebaseFirestore.instance.collection('users').doc(userID).get();
+
+    final easyFilmsPoints = userData['films_easy_points'] ?? 0;
+
+    final newEasyPoints = newEasyFilmPoints * 10;
+
+    if (newEasyPoints > easyFilmsPoints) {
+      await FirebaseFirestore.instance.collection('users').doc(userID).update({
+        'films_easy_points': newEasyPoints,
+      });
+    }
   }
 
   Future<void> updateEasyFilmPoints(int newEasyFilmPoints) async {
@@ -161,7 +174,7 @@ class UserDataSource {
 
     final mediumFilmsPoints = userData['films_medium_points'] ?? 0;
 
-    final newMediumPoints = newMediumFilmPoints * 10;
+    final newMediumPoints = newMediumFilmPoints * 20;
 
     if (newMediumPoints > mediumFilmsPoints) {
       await FirebaseFirestore.instance
@@ -189,7 +202,7 @@ class UserDataSource {
 
     final hardFilmsPoints = userData['films_hard_points'] ?? 0;
 
-    final newHardPoints = newHardFilmPoints * 10;
+    final newHardPoints = newHardFilmPoints * 30;
 
     if (newHardPoints > hardFilmsPoints) {
       await FirebaseFirestore.instance
@@ -245,7 +258,7 @@ class UserDataSource {
 
     final mediumGamesPoints = userData['games_medium_points'] ?? 0;
 
-    final newGamesPoints = newMediumGamesPoints * 10;
+    final newGamesPoints = newMediumGamesPoints * 20;
 
     if (newGamesPoints > mediumGamesPoints) {
       await FirebaseFirestore.instance
@@ -273,7 +286,7 @@ class UserDataSource {
 
     final hardGamesPoints = userData['games_hard_points'] ?? 0;
 
-    final newGamesPoints = newHardGamesPoints * 10;
+    final newGamesPoints = newHardGamesPoints * 30;
 
     if (newGamesPoints > hardGamesPoints) {
       await FirebaseFirestore.instance
@@ -329,7 +342,7 @@ class UserDataSource {
 
     final mediumGeographyPoints = userData['geography_medium_points'] ?? 0;
 
-    final newGeographyPoints = newMediumGeographyPoints * 10;
+    final newGeographyPoints = newMediumGeographyPoints * 20;
 
     if (newGeographyPoints > mediumGeographyPoints) {
       await FirebaseFirestore.instance
@@ -357,7 +370,7 @@ class UserDataSource {
 
     final hardGeographyPoints = userData['geography_hard_points'] ?? 0;
 
-    final newGeographyPoints = newHardGeographyPoints * 10;
+    final newGeographyPoints = newHardGeographyPoints * 30;
 
     if (newGeographyPoints > hardGeographyPoints) {
       await FirebaseFirestore.instance
@@ -413,7 +426,7 @@ class UserDataSource {
 
     final mediumHistoryPoints = userData['history_medium_points'] ?? 0;
 
-    final newHistoryPoints = newMediumHistoryPoints * 10;
+    final newHistoryPoints = newMediumHistoryPoints * 20;
 
     if (newHistoryPoints > mediumHistoryPoints) {
       await FirebaseFirestore.instance
@@ -441,7 +454,7 @@ class UserDataSource {
 
     final hardHistoryPoints = userData['history_hard_points'] ?? 0;
 
-    final newHistoryPoints = newHardHistoryPoints * 10;
+    final newHistoryPoints = newHardHistoryPoints * 30;
 
     if (newHistoryPoints > hardHistoryPoints) {
       await FirebaseFirestore.instance
@@ -497,7 +510,7 @@ class UserDataSource {
 
     final mediumMusicPoints = userData['music_medium_points'] ?? 0;
 
-    final newMusicPoints = newMediumMusicPoints * 10;
+    final newMusicPoints = newMediumMusicPoints * 20;
 
     if (newMusicPoints > mediumMusicPoints) {
       await FirebaseFirestore.instance
@@ -525,7 +538,7 @@ class UserDataSource {
 
     final hardMusicPoints = userData['music_hard_points'] ?? 0;
 
-    final newMusicPoints = newHardMusicPoints * 10;
+    final newMusicPoints = newHardMusicPoints * 30;
 
     if (newMusicPoints > hardMusicPoints) {
       await FirebaseFirestore.instance
@@ -581,7 +594,7 @@ class UserDataSource {
 
     final mediumNaturePoints = userData['nature_medium_points'] ?? 0;
 
-    final newNaturePoints = newMediumNaturePoints * 10;
+    final newNaturePoints = newMediumNaturePoints * 20;
 
     if (newNaturePoints > mediumNaturePoints) {
       await FirebaseFirestore.instance
@@ -609,7 +622,7 @@ class UserDataSource {
 
     final hardNaturePoints = userData['nature_hard_points'] ?? 0;
 
-    final newNaturePoints = newHardNaturePoints * 10;
+    final newNaturePoints = newHardNaturePoints * 30;
 
     if (newNaturePoints > hardNaturePoints) {
       await FirebaseFirestore.instance
@@ -665,7 +678,7 @@ class UserDataSource {
 
     final mediumSportPoints = userData['sport_medium_points'] ?? 0;
 
-    final newSportPoints = newMediumSportPoints * 10;
+    final newSportPoints = newMediumSportPoints * 20;
 
     if (newSportPoints > mediumSportPoints) {
       await FirebaseFirestore.instance
@@ -693,7 +706,7 @@ class UserDataSource {
 
     final hardSportPoints = userData['sport_hard_points'] ?? 0;
 
-    final newSportPoints = newHardSportPoints * 10;
+    final newSportPoints = newHardSportPoints * 30;
 
     if (newSportPoints > hardSportPoints) {
       await FirebaseFirestore.instance
@@ -749,7 +762,7 @@ class UserDataSource {
 
     final mediumTvPoints = userData['tv_medium_points'] ?? 0;
 
-    final newTvPoints = newMediumTvPoints * 10;
+    final newTvPoints = newMediumTvPoints * 20;
 
     if (newTvPoints > mediumTvPoints) {
       await FirebaseFirestore.instance
@@ -777,7 +790,7 @@ class UserDataSource {
 
     final hardTvPoints = userData['tv_hard_points'] ?? 0;
 
-    final newTvPoints = newHardTvPoints * 10;
+    final newTvPoints = newHardTvPoints * 30;
 
     if (newTvPoints > hardTvPoints) {
       await FirebaseFirestore.instance
@@ -833,7 +846,7 @@ class UserDataSource {
 
     final mediumGeneralPoints = userData['general_medium_points'] ?? 0;
 
-    final newGeneralPoints = newMediumGeneralPoints * 10;
+    final newGeneralPoints = newMediumGeneralPoints * 20;
 
     if (newGeneralPoints > mediumGeneralPoints) {
       await FirebaseFirestore.instance
@@ -861,7 +874,7 @@ class UserDataSource {
 
     final hardGeneralPoints = userData['general_hard_points'] ?? 0;
 
-    final newGeneralPoints = newHardGeneralPoints * 10;
+    final newGeneralPoints = newHardGeneralPoints * 30;
 
     if (newGeneralPoints > hardGeneralPoints) {
       await FirebaseFirestore.instance
@@ -873,6 +886,21 @@ class UserDataSource {
         'general_hard_points': newGeneralPoints,
       });
     }
+  }
+
+  Future<void> updateRankingName({
+    required String? name,
+  }) async {
+    final userID = FirebaseAuth.instance.currentUser?.uid;
+    if (userID == null) {
+      throw Exception('User is not logged in');
+    }
+    await FirebaseFirestore.instance.collection('history').doc(userID).set(
+      {
+        'user_name': name,
+      },
+      SetOptions(merge: true),
+    );
   }
 
   Future<void> updateName({
@@ -970,6 +998,24 @@ class UserDataSource {
         .set(
       {
         'image_url': imageURL,
+      },
+      SetOptions(merge: true),
+    );
+  }
+
+  Future<void> changeUserBool() async {
+    final userID = FirebaseAuth.instance.currentUser?.uid;
+    if (userID == null) {
+      throw Exception('User is not logged in');
+    }
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userID)
+        .collection('user_profile')
+        .doc(userID)
+        .set(
+      {
+        'is_user_new': false,
       },
       SetOptions(merge: true),
     );

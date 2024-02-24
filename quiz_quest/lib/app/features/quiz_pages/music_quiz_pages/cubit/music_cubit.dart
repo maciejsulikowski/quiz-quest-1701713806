@@ -1,12 +1,17 @@
 import 'package:bloc/bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 import 'package:quiz_quest/app/core/enums.dart';
 import 'package:quiz_quest/app/domain/models/music_model/music_quiz_model.dart';
 import 'package:quiz_quest/app/domain/repositories/quiz_repository/quiz_repository.dart';
 import 'package:quiz_quest/app/domain/repositories/user_repository/user_repository.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'music_state.dart';
+part 'music_cubit.freezed.dart';
 
+
+@injectable
 class MusicCubit extends Cubit<MusicState> {
   MusicCubit(this.quizRepository, this.userRepository) : super(MusicState());
 

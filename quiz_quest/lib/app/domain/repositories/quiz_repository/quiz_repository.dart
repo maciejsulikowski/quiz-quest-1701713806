@@ -1,3 +1,4 @@
+import 'package:injectable/injectable.dart';
 import 'package:quiz_quest/app/data/data_sources/quiz_data_source/quiz_categories_data_source.dart';
 import 'package:quiz_quest/app/domain/models/films_model/films_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/games_model/games_quiz_model.dart';
@@ -9,293 +10,279 @@ import 'package:quiz_quest/app/domain/models/nature_model/nature_quiz_model.dart
 import 'package:quiz_quest/app/domain/models/sports_model/sports_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/tv_model/tv_quiz_model.dart';
 
-class QuizRepository {
-  QuizRepository(this.quizCategoriesDataSource);
 
-  final QuizCategoriesDataSource quizCategoriesDataSource;
+@injectable
+class QuizRepository {
+  QuizRepository(
+     this.quizCategoriesRetrofitDataSource);
+
+  // final QuizCategoriesRetrofitDataSource quizCategoriesRetrofitDataSource;
+  final QuizCategoriesRetrofitDataSource quizCategoriesRetrofitDataSource;
 
 //films
 
   Future<FilmsQuizModel?> getEasyFilmsData() async {
-    final json = await quizCategoriesDataSource.getEasyFilmCategory();
-
-    if (json == null) {
-      return null;
-    }
-
-    return FilmsQuizModel.fromJson(json);
+    return quizCategoriesRetrofitDataSource.getEasyFilmCategory();
   }
 
   Future<FilmsQuizModel?> getMediumFilmsData() async {
-    final json = await quizCategoriesDataSource.getMediumFilmCategory();
-
-    if (json == null) {
-      return null;
-    }
-
-    return FilmsQuizModel.fromJson(json);
+    return quizCategoriesRetrofitDataSource.getMediumFilmCategory();
   }
 
   Future<FilmsQuizModel?> getHardFilmsData() async {
-    final json = await quizCategoriesDataSource.getHardFilmCategory();
-
-    if (json == null) {
-      return null;
-    }
-
-    return FilmsQuizModel.fromJson(json);
+    return quizCategoriesRetrofitDataSource.getHardFilmCategory();
   }
 
 //games
 
   Future<GamesQuizModel?> getEasyGamesData() async {
-    final json = await quizCategoriesDataSource.getEasyGamesCategory();
+   return quizCategoriesRetrofitDataSource.getEasyGamesCategory();
 
-    if (json == null) {
-      return null;
-    }
+    // if (json == null) {
+    //   return null;
+    // }
 
-    return GamesQuizModel.fromJson(json);
+    // return GamesQuizModel.fromJson(json);
   }
 
   Future<GamesQuizModel?> getMediumGamesData() async {
-    final json = await quizCategoriesDataSource.getMediumGamesCategory();
+    return quizCategoriesRetrofitDataSource.getMediumGamesCategory();
 
-    if (json == null) {
-      return null;
-    }
+    // if (json == null) {
+    //   return null;
+    // }
 
-    return GamesQuizModel.fromJson(json);
+    // return GamesQuizModel.fromJson(json);
   }
 
   Future<GamesQuizModel?> getHardGamesData() async {
-    final json = await quizCategoriesDataSource.getHardGamesCategory();
+    return quizCategoriesRetrofitDataSource.getHardGamesCategory();
 
-    if (json == null) {
-      return null;
-    }
+    // if (json == null) {
+    //   return null;
+    // }
 
-    return GamesQuizModel.fromJson(json);
+    // return GamesQuizModel.fromJson(json);
   }
 
 //geo
 
   Future<GeographyQuizModel?> getEasyGeographyData() async {
-    final json = await quizCategoriesDataSource.getEasyGeographyCategory();
+    return quizCategoriesRetrofitDataSource.getEasyGeographyCategory();
 
-    if (json == null) {
-      return null;
-    }
+    // if (json == null) {
+    //   return null;
+    // }
 
-    return GeographyQuizModel.fromJson(json);
+    // return GeographyQuizModel.fromJson(json);
   }
 
   Future<GeographyQuizModel?> getMediumGeographyData() async {
-    final json = await quizCategoriesDataSource.getMediumGeographyCategory();
+    return quizCategoriesRetrofitDataSource.getMediumGeographyCategory();
 
-    if (json == null) {
-      return null;
-    }
+    // if (json == null) {
+    //   return null;
+    // }
 
-    return GeographyQuizModel.fromJson(json);
+    // return GeographyQuizModel.fromJson(json);
   }
 
   Future<GeographyQuizModel?> getHardGeographyData() async {
-    final json = await quizCategoriesDataSource.getHardGeographyCategory();
+    return quizCategoriesRetrofitDataSource.getHardGeographyCategory();
 
-    if (json == null) {
-      return null;
-    }
+    // if (json == null) {
+    //   return null;
+    // }
 
-    return GeographyQuizModel.fromJson(json);
+    // return GeographyQuizModel.fromJson(json);
   }
 
   //history
 
   Future<HistoryQuizModel?> getEasyHistoryData() async {
-    final json = await quizCategoriesDataSource.getEasyHistoryCategory();
+    return quizCategoriesRetrofitDataSource.getEasyHistoryCategory();
 
-    if (json == null) {
-      return null;
-    }
+    // if (json == null) {
+    //   return null;
+    // }
 
-    return HistoryQuizModel.fromJson(json);
+    // return HistoryQuizModel.fromJson(json);
   }
 
   Future<HistoryQuizModel?> getMediumHistoryData() async {
-    final json = await quizCategoriesDataSource.getMediumHistoryCategory();
+    return quizCategoriesRetrofitDataSource.getMediumHistoryCategory();
 
-    if (json == null) {
-      return null;
-    }
+    // if (json == null) {
+    //   return null;
+    // }
 
-    return HistoryQuizModel.fromJson(json);
+    // return HistoryQuizModel.fromJson(json);
   }
 
   Future<HistoryQuizModel?> getHardHistoryData() async {
-    final json = await quizCategoriesDataSource.getHardHistoryCategory();
+    return quizCategoriesRetrofitDataSource.getHardHistoryCategory();
 
-    if (json == null) {
-      return null;
-    }
+    // if (json == null) {
+    //   return null;
+    // }
 
-    return HistoryQuizModel.fromJson(json);
+    // return HistoryQuizModel.fromJson(json);
   }
 
   //music
 
   Future<MusicQuizModel?> getEasyMusicData() async {
-    final json = await quizCategoriesDataSource.getEasyMusicCategory();
+    return quizCategoriesRetrofitDataSource.getEasyMusicCategory();
 
-    if (json == null) {
-      return null;
-    }
+    // if (json == null) {
+    //   return null;
+    // }
 
-    return MusicQuizModel.fromJson(json);
+    // return MusicQuizModel.fromJson(json);
   }
 
   Future<MusicQuizModel?> getMediumMusicData() async {
-    final json = await quizCategoriesDataSource.getMediumMusicCategory();
+    return quizCategoriesRetrofitDataSource.getMediumMusicCategory();
 
-    if (json == null) {
-      return null;
-    }
+    // if (json == null) {
+    //   return null;
+    // }
 
-    return MusicQuizModel.fromJson(json);
+    // return MusicQuizModel.fromJson(json);
   }
 
   Future<MusicQuizModel?> getHardMusicData() async {
-    final json = await quizCategoriesDataSource.getHardMusicCategory();
+    return quizCategoriesRetrofitDataSource.getHardMusicCategory();
 
-    if (json == null) {
-      return null;
-    }
+    // if (json == null) {
+    //   return null;
+    // }
 
-    return MusicQuizModel.fromJson(json);
+    // return MusicQuizModel.fromJson(json);
   }
 
   //nature
 
   Future<NatureQuizModel?> getEasyNatureData() async {
-    final json = await quizCategoriesDataSource.getEasyNatureCategory();
+    return quizCategoriesRetrofitDataSource.getEasyNatureCategory();
 
-    if (json == null) {
-      return null;
-    }
+    // if (json == null) {
+    //   return null;
+    // }
 
-    return NatureQuizModel.fromJson(json);
+    // return NatureQuizModel.fromJson(json);
   }
 
   Future<NatureQuizModel?> getMediumNatureData() async {
-    final json = await quizCategoriesDataSource.getMediumNatureCategory();
+    return quizCategoriesRetrofitDataSource.getMediumNatureCategory();
 
-    if (json == null) {
-      return null;
-    }
+    // if (json == null) {
+    //   return null;
+    // }
 
-    return NatureQuizModel.fromJson(json);
+    // return NatureQuizModel.fromJson(json);
   }
 
   Future<NatureQuizModel?> getHardNatureData() async {
-    final json = await quizCategoriesDataSource.getHardNatureCategory();
+    return quizCategoriesRetrofitDataSource.getHardNatureCategory();
 
-    if (json == null) {
-      return null;
-    }
+    // if (json == null) {
+    //   return null;
+    // }
 
-    return NatureQuizModel.fromJson(json);
+    // return NatureQuizModel.fromJson(json);
   }
 
   //sport
   Future<SportsQuizModel?> getEasySportData() async {
-    final json = await quizCategoriesDataSource.getEasySportCategory();
+    return quizCategoriesRetrofitDataSource.getEasySportCategory();
 
-    if (json == null) {
-      return null;
-    }
+    // if (json == null) {
+    //   return null;
+    // }
 
-    return SportsQuizModel.fromJson(json);
+    // return SportsQuizModel.fromJson(json);
   }
 
   Future<SportsQuizModel?> getMediumSportData() async {
-    final json = await quizCategoriesDataSource.getMediumSportCategory();
+    return quizCategoriesRetrofitDataSource.getMediumSportCategory();
 
-    if (json == null) {
-      return null;
-    }
+    // if (json == null) {
+    //   return null;
+    // }
 
-    return SportsQuizModel.fromJson(json);
+    // return SportsQuizModel.fromJson(json);
   }
 
   Future<SportsQuizModel?> getHardSportData() async {
-    final json = await quizCategoriesDataSource.getHardSportCategory();
+    return quizCategoriesRetrofitDataSource.getHardSportCategory();
 
-    if (json == null) {
-      return null;
-    }
+    // if (json == null) {
+    //   return null;
+    // }
 
-    return SportsQuizModel.fromJson(json);
+    // return SportsQuizModel.fromJson(json);
   }
 
   //tv
   Future<TVQuizModel?> getEasyTVData() async {
-    final json = await quizCategoriesDataSource.getEasyTVCategory();
+    return quizCategoriesRetrofitDataSource.getEasyTVCategory();
 
-    if (json == null) {
-      return null;
-    }
+    // if (json == null) {
+    //   return null;
+    // }
 
-    return TVQuizModel.fromJson(json);
+    // return TVQuizModel.fromJson(json);
   }
 
   Future<TVQuizModel?> getMediumTVData() async {
-    final json = await quizCategoriesDataSource.getMediumTVCategory();
+    return quizCategoriesRetrofitDataSource.getMediumTVCategory();
 
-    if (json == null) {
-      return null;
-    }
+    // if (json == null) {
+    //   return null;
+    // }
 
-    return TVQuizModel.fromJson(json);
+    // return TVQuizModel.fromJson(json);
   }
 
   Future<TVQuizModel?> getHardTVData() async {
-    final json = await quizCategoriesDataSource.getHardTVCategory();
+    return quizCategoriesRetrofitDataSource.getHardTVCategory();
 
-    if (json == null) {
-      return null;
-    }
+    // if (json == null) {
+    //   return null;
+    // }
 
-    return TVQuizModel.fromJson(json);
+    // return TVQuizModel.fromJson(json);
   }
 
   //genral
   Future<GeneralQuizModel?> getEasyGeneralData() async {
-    final json = await quizCategoriesDataSource.getEasyGeneralCategory();
+    return quizCategoriesRetrofitDataSource.getEasyGeneralCategory();
 
-    if (json == null) {
-      return null;
-    }
+    // if (json == null) {
+    //   return null;
+    // }
 
-    return GeneralQuizModel.fromJson(json);
+    // return GeneralQuizModel.fromJson(json);
   }
 
   Future<GeneralQuizModel?> getMediumGeneralData() async {
-    final json = await quizCategoriesDataSource.getMediumGeneralCategory();
+    return quizCategoriesRetrofitDataSource.getMediumGeneralCategory();
 
-    if (json == null) {
-      return null;
-    }
+    // if (json == null) {
+    //   return null;
+    // }
 
-    return GeneralQuizModel.fromJson(json);
+    // return GeneralQuizModel.fromJson(json);
   }
 
   Future<GeneralQuizModel?> getHardGeneralData() async {
-    final json = await quizCategoriesDataSource.getHardGeneralCategory();
+    return quizCategoriesRetrofitDataSource.getHardGeneralCategory();
 
-    if (json == null) {
-      return null;
-    }
+    // if (json == null) {
+    //   return null;
+    // }
 
-    return GeneralQuizModel.fromJson(json);
+    // return GeneralQuizModel.fromJson(json);
   }
 }

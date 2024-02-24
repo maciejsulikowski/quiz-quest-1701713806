@@ -5,6 +5,7 @@ class UserModel {
     required this.imageURL,
     required this.gender,
     required this.favouriteCategory,
+    required this.isUserNew,
   });
 
   final String name;
@@ -12,4 +13,5 @@ class UserModel {
   final String imageURL;
   final String gender;
   final String favouriteCategory;
+  bool isUserNew;
 }

@@ -13,6 +13,7 @@ import 'package:quiz_quest/app/domain/models/user_model/user_model.dart';
 import 'package:quiz_quest/app/domain/repositories/user_repository/user_repository.dart';
 import 'package:quiz_quest/app/features/login_page/login_page.dart';
 import 'package:quiz_quest/app/features/user_page/cubit/user_cubit.dart';
+import 'package:quiz_quest/app/injection_container.dart';
 
 class UserAccount extends StatefulWidget {
   const UserAccount({
@@ -30,7 +31,7 @@ class _UserAccountState extends State<UserAccount> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => UserCubit(UserRepository(UserDataSource()))..start(),
+      create: (context) => getIt<UserCubit>()..start(),
       child: BlocListener<UserCubit, UserState>(
         listener: (context, state) {
           if (state.isSaved) {
@@ -210,7 +211,7 @@ class _UserWidgetState extends State<UserWidget> {
                   child: imageController.text.isEmpty
                       ? const Icon(
                           Icons.photo_camera,
-                          color: Colors.black,
+                          color: Colors.grey,
                           size: 40,
                         )
                       : null,
@@ -242,6 +243,8 @@ class _UserWidgetState extends State<UserWidget> {
             'Name',
             (text) async {
               await context.read<UserCubit>().updateName(text);
+              // ignore: use_build_context_synchronously
+              await context.read<UserCubit>().updateRankingName(text);
             },
           ),
           buildTextField(
@@ -302,10 +305,9 @@ class _UserWidgetState extends State<UserWidget> {
                   label: Text(
                     'Logout',
                     style: GoogleFonts.aBeeZee(
-                      fontSize: 28,
-                      color: Colors.white,
-                      fontStyle: FontStyle.italic,
-                    ),
+                        fontSize: 26,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
                   ),
                   icon: const Icon(
                     Icons.logout,

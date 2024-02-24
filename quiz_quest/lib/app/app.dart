@@ -7,6 +7,7 @@ import 'package:quiz_quest/app/domain/repositories/user_repository/user_reposito
 import 'package:quiz_quest/app/features/home_page/home_page.dart';
 import 'package:quiz_quest/app/features/login_page/login_page.dart';
 import 'package:quiz_quest/app/features/welcome_page/welcome_page.dart';
+import 'package:quiz_quest/app/injection_container.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => RootCubit(UserRepository(UserDataSource()))..start(),
+      create: (context) => getIt<RootCubit>()..start(),
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(

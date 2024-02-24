@@ -1,8 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:injectable/injectable.dart';
 import 'package:quiz_quest/app/data/data_sources/user_data_source/user_data_source.dart';
 import 'package:quiz_quest/app/domain/models/user_model/user_model.dart';
 
+
+@injectable
 class UserRepository {
   UserRepository(this.userDataSource);
 
@@ -18,6 +21,7 @@ class UserRepository {
         imageURL: doc['image_url'],
         gender: doc['gender'],
         favouriteCategory: doc['favourite_categories'],
+        isUserNew: doc['is_user_new'],
       );
     });
   }
@@ -129,6 +133,7 @@ class UserRepository {
     return userDataSource.setEmptyPoints();
   }
 
+
 //games
   Future<void> updateEasyGamesPoints(int easyGamesPoints) async {
     return userDataSource.updateEasyGamesPoints(easyGamesPoints);
@@ -143,6 +148,11 @@ class UserRepository {
   }
 
 //films
+
+  Future<void> updateEasyFilmsRankingPoints(int easyFilmsPoints) async {
+    return userDataSource.updateEasyFilmRankingPoints(easyFilmsPoints);
+  }
+
   Future<void> updateEasyFilmsPoints(int easyFilmsPoints) async {
     return userDataSource.updateEasyFilmPoints(easyFilmsPoints);
   }
@@ -247,6 +257,11 @@ class UserRepository {
   }
 
   //-----user-----//
+
+  Future<void> updateRankingName(String name) async {
+    return userDataSource.updateRankingName(name: name);
+  }
+
   Future<void> updateName(String name) async {
     return userDataSource.updateName(name: name);
   }
@@ -266,28 +281,8 @@ class UserRepository {
   Future<void> updateCategory(String category) async {
     return userDataSource.updateCategory(category: category);
   }
+
+  Future<void> changeUserBool() async {
+    return userDataSource.changeUserBool();
+  }
 }
-
-// class PointsModel {
-//   PointsModel({
-//     required this.totalPoints,
-//     required this.filmsCategoryPoints,
-//     required this.gamesCategoryPoints,
-//     required this.geographyCategoryPoints,
-//     required this.historyCategoryPoints,
-//     required this.musicCategoryPoints,
-//     required this.natureCategoryPoints,
-//     required this.sportCategoryPoints,
-//     required this.tvCategoryPoints,
-//   });
-
-//   final int totalPoints;
-//   final Map<int, Map<String, int>> filmsCategoryPoints;
-//   final Map<int, Map<String, int>> gamesCategoryPoints;
-//   final Map<int, Map<String, int>> geographyCategoryPoints;
-//   final Map<int, Map<String, int>> historyCategoryPoints;
-//   final Map<int, Map<String, int>> musicCategoryPoints;
-//   final Map<int, Map<String, int>> natureCategoryPoints;
-//   final Map<int, Map<String, int>> sportCategoryPoints;
-//   final Map<int, Map<String, int>> tvCategoryPoints;
-// }

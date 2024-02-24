@@ -1,4 +1,5 @@
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,6 +15,7 @@ import 'package:quiz_quest/app/domain/models/nature_model/nature_quiz_model.dart
 import 'package:quiz_quest/app/domain/models/sports_model/sports_quiz_model.dart';
 import 'package:quiz_quest/app/domain/repositories/quiz_repository/quiz_repository.dart';
 import 'package:quiz_quest/app/domain/repositories/user_repository/user_repository.dart';
+import 'package:quiz_quest/app/features/home_page/ranking_widget/cubit/ranking_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/cubit/films_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/easy_films_quiz_page/easy_lost_life_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/easy_films_quiz_page/resume_easy_question_quiz_page.dart';
@@ -34,8 +36,11 @@ import 'package:quiz_quest/app/features/quiz_pages/quiz_countdown_timer/quiz_cou
 import 'package:quiz_quest/app/features/quiz_pages/sports_quiz_pages/cubit/sport_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/sports_quiz_pages/easy_sport_quiz_page/easy_sport_lost_life_quiz_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/sports_quiz_pages/easy_sport_quiz_page/resume_easy_sport_question_quiz_page.dart';
+import 'package:quiz_quest/app/features/quiz_pages/sports_quiz_pages/medium_sport_quiz_page/medium_sport_answer_button.dart';
 import 'package:quiz_quest/app/features/quiz_pages/sports_quiz_pages/medium_sport_quiz_page/medium_sport_lost_life_quiz_page.dart';
+import 'package:quiz_quest/app/features/quiz_pages/sports_quiz_pages/medium_sport_quiz_page/medium_sport_question_widget.dart';
 import 'package:quiz_quest/app/features/quiz_pages/sports_quiz_pages/medium_sport_quiz_page/resume_medium_sport_question_quiz_page.dart';
+import 'package:quiz_quest/app/injection_container.dart';
 
 class MediumQuestionSportQuizPage extends StatefulWidget {
   const MediumQuestionSportQuizPage({
@@ -133,11 +138,15 @@ class _MediumQuestionSportQuizPageState
     const int duration = 3;
 
     return Scaffold(
-      body: BlocProvider(
-        create: (context) => SportCubit(
-            QuizRepository(QuizCategoriesDataSource()),
-            UserRepository(UserDataSource()))
-          ..getMediumSportsCategory(),
+      body: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => getIt<SportCubit>()..getMediumSportsCategory(),
+          ),
+          BlocProvider(
+            create: (context) => getIt<RankingCubit>(),
+          ),
+        ],
         child: BlocListener<SportCubit, SportState>(
           listener: (context, state) async {
             if (state.status == Status.error) {
@@ -212,7 +221,7 @@ class _MediumQuestionSportQuizPageState
                             ),
                             Expanded(
                               child: Text(
-                                'Score: ${mediumSportGoodAnswers * 10}',
+                                'Score: ${mediumSportGoodAnswers * 20}',
                                 style: GoogleFonts.aBeeZee(
                                     fontSize: 20,
                                     color: Colors.white,
@@ -255,9 +264,12 @@ class _MediumQuestionSportQuizPageState
                           isButtonDisabled = true;
                           isTimeUp = true;
                           if (mediumSportBadAnswers == 3) {
+                            context.read<SportCubit>().updateMediumSportsPoints(
+                                mediumSportGoodAnswers);
                             context
-                                .read<SportCubit>()
-                                .updateMediumSportsPoints(mediumSportGoodAnswers);
+                                .read<RankingCubit>()
+                                .updateMediumSportRankingPoints(
+                                    mediumSportGoodAnswers);
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (context) => MediumSportLostLifePage(
@@ -290,7 +302,7 @@ class _MediumQuestionSportQuizPageState
                             return Column(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                QuestionWidget(
+                                MediumSportQuestionWidget(
                                   question: sportsQuizModel
                                       .results[currentIndex].question,
                                 ),
@@ -336,7 +348,7 @@ class _MediumQuestionSportQuizPageState
                                 for (int index = 0;
                                     index < currentAnswers.length;
                                     index++) ...[
-                                  AnswerButton(
+                                  MediumSportAnswerButton(
                                     isTimeUp: isTimeUp,
                                     duration: duration,
                                     isButtonDisabled: (value) {
@@ -457,153 +469,6 @@ class _MediumQuestionSportQuizPageState
                 ),
               );
             },
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class QuestionWidget extends StatelessWidget {
-  const QuestionWidget({
-    required this.question,
-    super.key,
-  });
-
-  final String question;
-
-  @override
-  Widget build(BuildContext context) {
-    final modifiedQuestion = question
-        .replaceAll('&quot;', '')
-        .replaceAll('&#039;', '')
-        .replaceAll('&aacute;', '')
-        .replaceAll('&ntilde;', '')
-        .replaceAll('&amp;', '')
-        .replaceAll('&rsquo;', '');
-
-    return Center(
-      child: Text(
-        modifiedQuestion,
-        style: GoogleFonts.aBeeZee(
-            fontSize: 24, color: Colors.white, fontWeight: FontWeight.bold),
-        textAlign: TextAlign.center,
-      ),
-    );
-  }
-}
-
-class AnswerButton extends StatefulWidget {
-  AnswerButton({
-    required this.answer,
-    required this.controller,
-    required this.isCorrectAnswer,
-    required this.colorFunction,
-    required this.isButtonClicked,
-    required this.isButtonDisabled,
-    required this.textcolor,
-    required this.index,
-    required this.duration,
-    required this.isTimeUp,
-  });
-
-  final String answer;
-  final CountDownController controller;
-  final bool isCorrectAnswer;
-
-  int duration;
-  bool isTimeUp;
-  Function(Color, int) colorFunction;
-  final Function(bool) isButtonClicked;
-  final Function(bool) isButtonDisabled;
-  Color textcolor;
-  final int index;
-
-  @override
-  State<AnswerButton> createState() => _AnswerButtonState();
-}
-
-class _AnswerButtonState extends State<AnswerButton> {
-  void onPressed() {
-    if (isButtonDisabled) {
-      return;
-    }
-
-    widget.controller.pause();
-
-    if (widget.isCorrectAnswer) {
-      widget.colorFunction(Colors.green, widget.index);
-      mediumSportGoodAnswers += 1;
-    } else {
-      widget.colorFunction(Colors.red, widget.index);
-      mediumSportBadAnswers += 1;
-      if (mediumSportBadAnswers == 3) {
-        context
-            .read<SportCubit>()
-            .updateMediumSportsPoints(mediumSportGoodAnswers);
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) =>
-                MediumSportLostLifePage(goodAnswers: mediumSportGoodAnswers),
-          ),
-        );
-      }
-    }
-    setState(() {
-      widget.textcolor = widget.isCorrectAnswer ? Colors.green : Colors.red;
-    });
-    widget.isButtonClicked(true);
-    widget.isButtonDisabled(true);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final modifiedAnswer = widget.answer
-        .replaceAll('&quot;', '')
-        .replaceAll('&#039;', '')
-        .replaceAll('&aacute;', '')
-        .replaceAll('&ntilde;', '')
-        .replaceAll('&amp;', '')
-        .replaceAll('&rsquo;', '')
-        .replaceAll('&ocirc;', '');
-
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 20),
-      decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          colors: [
-            Color.fromRGBO(11, 22, 65, 1),
-            Color.fromRGBO(9, 77, 203, 1),
-          ],
-          begin: Alignment.centerLeft,
-          end: Alignment.centerRight,
-        ),
-        borderRadius: const BorderRadius.all(
-          Radius.circular(6.0),
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            spreadRadius: 4,
-            blurRadius: 10,
-            offset: const Offset(0, 3),
-          )
-        ],
-      ),
-      child: ElevatedButton(
-        onPressed: onPressed,
-        style: ElevatedButton.styleFrom(
-          minimumSize: const Size.fromHeight(50),
-          backgroundColor: Colors.transparent,
-          shadowColor: Colors.transparent,
-        ),
-        child: Text(
-          modifiedAnswer,
-          style: GoogleFonts.aBeeZee(
-            fontSize: 24,
-            color: widget.isTimeUp && widget.isCorrectAnswer
-                ? Colors.green
-                : widget.textcolor,
           ),
         ),
       ),

@@ -1,17 +1,21 @@
 import 'dart:async';
-
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 import 'package:quiz_quest/app/core/enums.dart';
+import 'package:quiz_quest/app/domain/repositories/ranking_respository/ranking_repository.dart';
 import 'package:quiz_quest/app/domain/repositories/user_repository/user_repository.dart';
 
 part 'root_state.dart';
+part 'root_cubit.freezed.dart';
 
+@injectable
 class RootCubit extends Cubit<RootState> {
-  RootCubit(this.userRepository)
-      : super(const RootState(
+  RootCubit(this.userRepository, this.rankingRepository)
+      : super(RootState(
           user: null,
           status: Status.loading,
           errorMessage: '',
@@ -19,10 +23,11 @@ class RootCubit extends Cubit<RootState> {
 
   StreamSubscription? streamSubscription;
   UserRepository userRepository;
+  RankingRepository rankingRepository;
 
   Future<void> start() async {
     emit(
-      const RootState(
+      RootState(
         user: null,
         status: Status.loading,
         errorMessage: '',
@@ -57,7 +62,7 @@ class RootCubit extends Cubit<RootState> {
   }
 
   Future<void> signInAccount(String email, String password) async {
-    emit(const RootState(
+    emit(RootState(
       status: Status.loading,
     ));
 
@@ -67,7 +72,7 @@ class RootCubit extends Cubit<RootState> {
         password: password,
       );
       emit(
-        const RootState(
+        RootState(
           status: Status.success,
         ),
       );
@@ -101,7 +106,7 @@ class RootCubit extends Cubit<RootState> {
   }
 
   Future<void> createAccount(String email, String password) async {
-    emit(const RootState(
+    emit(RootState(
       status: Status.loading,
     ));
 
@@ -112,8 +117,9 @@ class RootCubit extends Cubit<RootState> {
       );
       await userRepository.setEmptyAccount();
       await userRepository.setEmptyPoints();
+      await rankingRepository.setEmptyRankingPoints();
       emit(
-        const RootState(
+        RootState(
           status: Status.success,
         ),
       );
@@ -123,6 +129,7 @@ class RootCubit extends Cubit<RootState> {
         case "invalid-email":
           errorMessage = 'Invalid email format.';
           break;
+
         case "email-already-in-use":
           errorMessage = 'An account with this email address already exists.';
           break;
@@ -152,7 +159,7 @@ class RootCubit extends Cubit<RootState> {
   Future<void> forgotPassword(String email) async {
     try {
       await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
-      emit(const RootState(
+      emit(RootState(
           status: Status.error, errorMessage: 'Password has been sent'));
     } on FirebaseAuthException catch (e) {
       String errorMessage = '';

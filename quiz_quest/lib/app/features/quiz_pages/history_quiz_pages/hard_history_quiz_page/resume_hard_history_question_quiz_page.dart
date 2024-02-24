@@ -51,7 +51,7 @@ class ResumePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final record = goodAnswers * 10;
+    final record = goodAnswers * 30;
 
     return Container(
       decoration: const BoxDecoration(

@@ -1,13 +1,17 @@
 import 'package:bloc/bloc.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
+import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 import 'package:quiz_quest/app/core/enums.dart';
 import 'package:quiz_quest/app/domain/models/films_model/films_quiz_model.dart';
 import 'package:quiz_quest/app/domain/repositories/quiz_repository/quiz_repository.dart';
 import 'package:quiz_quest/app/domain/repositories/user_repository/user_repository.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'films_state.dart';
+part 'films_cubit.freezed.dart';
 
+@injectable
 class FilmsCubit extends Cubit<FilmsState> {
   FilmsCubit(this.quizRepository, this.userRepository) : super(FilmsState());
 

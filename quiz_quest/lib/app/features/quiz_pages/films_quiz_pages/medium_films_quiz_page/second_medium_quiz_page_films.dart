@@ -26,6 +26,12 @@ class _SecondMediumQuizPageFilmsState extends State<SecondMediumQuizPageFilms> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        iconTheme: const IconThemeData(color: Colors.white),
+      ),
       body: QuizzPage(
         image: widget.image,
         mediumCategory: widget.mediumCategory,
@@ -59,9 +65,6 @@ class QuizzPage extends StatelessWidget {
       ),
       child: ListView(
         children: [
-          const SizedBox(
-            height: 30,
-          ),
           Center(
             child: CircleAvatar(
               radius: 35,
@@ -103,7 +106,7 @@ class QuizzPage extends StatelessWidget {
           const SizedBox(
             height: 30,
           ),
-          const TextWidget(text: '1 good answer = 10 points 💎'),
+          const TextWidget(text: '1 good answer = 20 points 💎'),
           const SizedBox(
             height: 30,
           ),

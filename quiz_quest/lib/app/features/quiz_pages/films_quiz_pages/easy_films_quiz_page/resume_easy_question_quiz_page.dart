@@ -78,7 +78,6 @@ class ResumePage extends StatelessWidget {
             height: 30,
           ),
           TextWidget(text: 'You scored: $record points 💎'),
-          
           const SizedBox(
             height: 30,
           ),

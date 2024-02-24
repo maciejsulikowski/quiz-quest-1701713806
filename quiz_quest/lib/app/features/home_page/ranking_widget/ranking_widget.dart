@@ -78,9 +78,9 @@ class RankingWidgetState extends State<RankingWidget> {
                 child: Column(
                   children: [
                     Text(
-                      'Ranking',
+                      'Ranking 🏆',
                       style: GoogleFonts.aBeeZee(
-                          fontSize: 20,
+                          fontSize: 30,
                           color: Colors.white,
                           fontWeight: FontWeight.bold),
                     ),
@@ -93,15 +93,18 @@ class RankingWidgetState extends State<RankingWidget> {
                           final userId = state.rankingModel?[index].userID;
 
                           if (userRecord != null) {
+                            final userName = userRecord.userName;
                             return userId == widget.user!.uid
                                 ? UserRecord2(
                                     id: (index + 1).toString(),
-                                    user: userRecord.userName,
+                                    user:
+                                        userName.isNotEmpty ? userName : '???',
                                     points: userRecord.totalPoints,
                                   )
                                 : UserRecord(
                                     id: (index + 1).toString(),
-                                    user: userRecord.userName,
+                                    user:
+                                        userName.isNotEmpty ? userName : '???',
                                     points: userRecord.totalPoints,
                                   );
                           } else {
@@ -136,23 +139,41 @@ class UserRecord extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 20),
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: ListTile(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            TextRanking(
-              text: id,
-            ),
-            TextRanking(
-              text: user,
-            ),
-            TextRanking(
-              text: 'Points: $points💎',
-            ),
-          ],
-        ),
+      margin: const EdgeInsets.symmetric(horizontal: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      child: Stack(
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 20.0),
+                  child: TextRanking(
+                    text: id,
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 2,
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 10.0),
+                  child: TextRanking(
+                    text: user,
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 3,
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 10.0),
+                  child: TextRanking(
+                    text: 'Points: $points💎',
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -173,26 +194,42 @@ class UserRecord2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 20),
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: ListTile(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            TextRanking(
-              text: id,
-            ),
-            Container(
-              color: Colors.black,
-              child: TextRanking(
-                text: user,
+      color: Colors.amber[700],
+      margin: const EdgeInsets.symmetric(horizontal: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      child: Stack(
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 20.0),
+                  child: TextRanking(
+                    text: id,
+                  ),
+                ),
               ),
-            ),
-            TextRanking(
-              text: 'Points: $points💎',
-            ),
-          ],
-        ),
+              Expanded(
+                flex: 2,
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 10.0),
+                  child: TextRanking(
+                    text: user,
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 3,
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 10.0),
+                  child: TextRanking(
+                    text: 'Points: $points💎',
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

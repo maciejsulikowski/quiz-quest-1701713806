@@ -107,12 +107,14 @@ class _QuizzWidgetState extends State<QuizzWidget> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          'Hello ${widget.userName} 👋',
-                          style: GoogleFonts.aBeeZee(
-                              fontSize: 24,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold),
+                        Expanded(
+                          child: Text(
+                            'Hello ${widget.userName} 👋',
+                            style: GoogleFonts.aBeeZee(
+                                fontSize: 24,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
                         ),
                         InformationWidget(toolController: toolController),
                       ],

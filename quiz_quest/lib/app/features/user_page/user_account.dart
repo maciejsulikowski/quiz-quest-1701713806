@@ -12,6 +12,7 @@ import 'package:quiz_quest/app/data/data_sources/user_data_source/user_data_sour
 import 'package:quiz_quest/app/domain/models/user_model/user_model.dart';
 import 'package:quiz_quest/app/domain/repositories/user_repository/user_repository.dart';
 import 'package:quiz_quest/app/features/login_page/login_page.dart';
+import 'package:quiz_quest/app/features/user_page/achievements/achievements_widget.dart';
 import 'package:quiz_quest/app/features/user_page/cubit/user_cubit.dart';
 import 'package:quiz_quest/app/injection_container.dart';
 
@@ -226,16 +227,60 @@ class _UserWidgetState extends State<UserWidget> {
             ),
           ),
           const SizedBox(
-            height: 15,
+            height: 10,
           ),
           Center(
             child: Text(
               'Profile',
               style: GoogleFonts.aBeeZee(
-                fontSize: 40,
+                fontSize: 30,
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
               ),
+            ),
+          ),
+          SizedBox(height: 10),
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 20),
+            decoration: BoxDecoration(
+                gradient: const LinearGradient(
+                  colors: [
+                    Color.fromRGBO(143, 165, 255, 1),
+                    Color.fromRGBO(10, 53, 132, 1),
+                  ],
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                ),
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(25.0),
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    spreadRadius: 4,
+                    blurRadius: 10,
+                    offset: const Offset(0, 3),
+                  )
+                ]),
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => AchievementsPage(
+                            user: widget.user,
+                          )),
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                  minimumSize: const Size.fromHeight(50),
+                  backgroundColor: Colors.transparent,
+                  shadowColor: Colors.transparent),
+              child: Text('Achievements',
+                  style: GoogleFonts.aBeeZee(
+                    fontSize: 24,
+                    color: Colors.white,
+                  )),
             ),
           ),
           buildTextField(
@@ -270,51 +315,47 @@ class _UserWidgetState extends State<UserWidget> {
             },
           ),
           const SizedBox(
-            height: 15,
+            height: 1,
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 26),
-            child: Container(
-              decoration: BoxDecoration(
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 20),
+            decoration: BoxDecoration(
                 gradient: const LinearGradient(
                   colors: [
-                    Color.fromARGB(255, 94, 128, 239),
-                    Color.fromARGB(255, 76, 75, 167),
+                    Color.fromRGBO(143, 165, 255, 1),
+                    Color.fromRGBO(10, 53, 132, 1),
                   ],
                   begin: Alignment.centerLeft,
                   end: Alignment.centerRight,
                 ),
-                borderRadius: BorderRadius.circular(20),
-                color: Colors.red,
-              ),
-              child: Directionality(
-                textDirection: TextDirection.rtl,
-                child: ElevatedButton.icon(
-                  onPressed: () {
-                    context.read<RootCubit>().signOut();
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => LoginPage()),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: const Size.fromHeight(50),
-                    backgroundColor: Colors.transparent,
-                    shadowColor: Colors.transparent,
-                  ),
-                  label: Text(
-                    'Logout',
-                    style: GoogleFonts.aBeeZee(
-                        fontSize: 26,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  icon: const Icon(
-                    Icons.logout,
-                    color: Colors.white,
-                  ),
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(25.0),
                 ),
-              ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    spreadRadius: 4,
+                    blurRadius: 10,
+                    offset: const Offset(0, 3),
+                  )
+                ]),
+            child: ElevatedButton(
+              onPressed: () {
+                context.read<RootCubit>().signOut();
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => LoginPage()),
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                  minimumSize: const Size.fromHeight(50),
+                  backgroundColor: Colors.transparent,
+                  shadowColor: Colors.transparent),
+              child: Text('Logout',
+                  style: GoogleFonts.aBeeZee(
+                    fontSize: 24,
+                    color: Colors.white,
+                  )),
             ),
           ),
         ],

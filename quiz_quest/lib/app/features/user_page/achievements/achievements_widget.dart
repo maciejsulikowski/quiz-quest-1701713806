@@ -73,14 +73,11 @@ class _AchievementsWidgetState extends State<AchievementsWidget> {
       child: ListView(
         children: [
           const SizedBox(
-            height: 30,
-          ),
-          const SizedBox(
             height: 10,
           ),
           Center(
             child: Text(
-              'Profile',
+              'Your Achievements',
               style: GoogleFonts.aBeeZee(
                 fontSize: 30,
                 color: Colors.white,
@@ -88,46 +85,307 @@ class _AchievementsWidgetState extends State<AchievementsWidget> {
               ),
             ),
           ),
-          SizedBox(height: 10),
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 20),
-            decoration: BoxDecoration(
-                gradient: const LinearGradient(
-                  colors: [
-                    Color.fromRGBO(143, 165, 255, 1),
-                    Color.fromRGBO(10, 53, 132, 1),
-                  ],
-                  begin: Alignment.centerLeft,
-                  end: Alignment.centerRight,
-                ),
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(25.0),
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
-                    spreadRadius: 4,
-                    blurRadius: 10,
-                    offset: const Offset(0, 3),
-                  )
-                ]),
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              style: ElevatedButton.styleFrom(
-                  minimumSize: const Size.fromHeight(50),
-                  backgroundColor: Colors.transparent,
-                  shadowColor: Colors.transparent),
-              child: Text('Back',
-                  style: GoogleFonts.aBeeZee(
-                    fontSize: 24,
-                    color: Colors.white,
-                  )),
-            ),
+          const SizedBox(height: 10),
+          AchievementContainer(
+            achievementWidget: FirstAchievement(),
           ),
+          const SizedBox(height: 10),
+          AchievementContainer(
+            achievementWidget: SecondAchievement(),
+          ),
+          const SizedBox(height: 10),
+          AchievementContainer(
+            achievementWidget: ThirdAchievement(),
+          ),
+          const SizedBox(height: 10),
+          AchievementContainer(
+            achievementWidget: FourthAchievement(),
+          ),
+          const SizedBox(height: 10),
+          AchievementContainer(
+            achievementWidget: FifthAchievement(),
+          ),
+          const SizedBox(height: 10),
+          AchievementContainer(
+            achievementWidget: SixthAchievement(),
+          ),
+          const SizedBox(height: 10),
         ],
       ),
     );
+  }
+}
+
+class AchievementContainer extends StatelessWidget {
+  const AchievementContainer({
+    required this.achievementWidget,
+    super.key,
+  });
+
+  final Widget achievementWidget;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        decoration: BoxDecoration(
+            gradient: const LinearGradient(
+              colors: [
+                Color.fromRGBO(115, 115, 116, 1),
+                Color.fromRGBO(49, 51, 55, 1),
+              ],
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+            ),
+            borderRadius: const BorderRadius.all(
+              Radius.circular(25.0),
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.1),
+                spreadRadius: 4,
+                blurRadius: 10,
+                offset: const Offset(0, 3),
+              )
+            ]),
+        height: 90,
+        width: double.infinity,
+        margin: const EdgeInsets.symmetric(horizontal: 20),
+        child: achievementWidget);
+  }
+}
+
+class SecondAchievement extends StatelessWidget {
+  const SecondAchievement({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        const Padding(
+          padding: EdgeInsets.only(left: 10.0),
+          child: AchievementImageWidget(
+            image: 'images/2.png',
+          ),
+        ),
+        const SizedBox(
+          width: 5,
+        ),
+        const Expanded(
+            child: AchievementTextWidget(text: 'You scored 500 points!')),
+        const SizedBox(
+          width: 5,
+        ),
+        Container(
+          height: 20,
+          width: 20,
+          color: Colors.white,
+          margin: const EdgeInsets.only(right: 10),
+        )
+      ],
+    );
+  }
+}
+
+class FirstAchievement extends StatelessWidget {
+  const FirstAchievement({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        const Padding(
+          padding: EdgeInsets.only(left: 10.0),
+          child: AchievementImageWidget(
+            image: 'images/1.png',
+          ),
+        ),
+        const SizedBox(
+          width: 5,
+        ),
+        const Expanded(
+            child: AchievementTextWidget(
+                text: 'You scored your first 100 points!')),
+        const SizedBox(
+          width: 5,
+        ),
+        Container(
+          height: 20,
+          width: 20,
+          color: Colors.white,
+          margin: const EdgeInsets.only(right: 10),
+        )
+      ],
+    );
+  }
+}
+
+class ThirdAchievement extends StatelessWidget {
+  const ThirdAchievement({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        const Padding(
+          padding: EdgeInsets.only(left: 10.0),
+          child: AchievementImageWidget(
+            image: 'images/3.png',
+          ),
+        ),
+        const SizedBox(
+          width: 5,
+        ),
+        const Expanded(
+            child: AchievementTextWidget(text: 'You scored 1000 points!')),
+        const SizedBox(
+          width: 5,
+        ),
+        Container(
+          height: 20,
+          width: 20,
+          color: Colors.white,
+          margin: const EdgeInsets.only(right: 10),
+        )
+      ],
+    );
+  }
+}
+
+class FourthAchievement extends StatelessWidget {
+  const FourthAchievement({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        const Padding(
+          padding: EdgeInsets.only(left: 10.0),
+          child: AchievementImageWidget(
+            image: 'images/4.png',
+          ),
+        ),
+        const SizedBox(
+          width: 5,
+        ),
+        const Expanded(
+            child: AchievementTextWidget(text: 'You scored 2000 points!')),
+        const SizedBox(
+          width: 5,
+        ),
+        Container(
+          height: 20,
+          width: 20,
+          color: Colors.white,
+          margin: const EdgeInsets.only(right: 10),
+        )
+      ],
+    );
+  }
+}
+
+class FifthAchievement extends StatelessWidget {
+  const FifthAchievement({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        const Padding(
+          padding: EdgeInsets.only(left: 10.0),
+          child: AchievementImageWidget(
+            image: 'images/5.png',
+          ),
+        ),
+        const SizedBox(
+          width: 5,
+        ),
+        const Expanded(
+            child: AchievementTextWidget(text: 'You scored 5000 points!')),
+        const SizedBox(
+          width: 5,
+        ),
+        Container(
+          height: 20,
+          width: 20,
+          color: Colors.white,
+          margin: const EdgeInsets.only(right: 10),
+        )
+      ],
+    );
+  }
+}
+
+class SixthAchievement extends StatelessWidget {
+  const SixthAchievement({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        const Padding(
+          padding: EdgeInsets.only(left: 10.0),
+          child: AchievementImageWidget(
+            image: 'images/6.png',
+          ),
+        ),
+        const SizedBox(
+          width: 5,
+        ),
+        const Expanded(
+            child: AchievementTextWidget(text: 'You scored 10000 points!')),
+        const SizedBox(
+          width: 5,
+        ),
+        Container(
+          height: 20,
+          width: 20,
+          color: Colors.white,
+          margin: const EdgeInsets.only(right: 10),
+        )
+      ],
+    );
+  }
+}
+
+class AchievementImageWidget extends StatelessWidget {
+  const AchievementImageWidget({
+    required this.image,
+    super.key,
+  });
+
+  final String image;
+
+  @override
+  Widget build(BuildContext context) {
+    return CircleAvatar(
+      radius: 35,
+      backgroundImage: AssetImage(image),
+    );
+  }
+}
+
+class AchievementTextWidget extends StatelessWidget {
+  const AchievementTextWidget({
+    required this.text,
+    super.key,
+  });
+
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(text);
   }
 }

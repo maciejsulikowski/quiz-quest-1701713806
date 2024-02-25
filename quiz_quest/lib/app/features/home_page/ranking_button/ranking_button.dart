@@ -41,13 +41,13 @@ class RankingButton extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) =>  RankingWidget(user: user)));
+            MaterialPageRoute(builder: (context) => RankingWidget(user: user)));
       },
       child: Container(
-        height: 40,
-        width: 40,
+        height: 50,
+        width: 50,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(30),
           gradient: const LinearGradient(
             colors: [
               Color.fromARGB(255, 59, 102, 244),
@@ -57,7 +57,11 @@ class RankingButton extends StatelessWidget {
             end: Alignment.centerRight,
           ),
         ),
-        child: const Center(child: Text('🏆')),
+        child: const Center(
+            child: Text(
+          '🏆',
+          style: TextStyle(fontSize: 20),
+        )),
       ),
     );
   }

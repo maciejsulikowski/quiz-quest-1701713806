@@ -315,7 +315,7 @@ class _UserWidgetState extends State<UserWidget> {
             },
           ),
           const SizedBox(
-            height: 1,
+            height: 10,
           ),
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 20),
@@ -357,6 +357,9 @@ class _UserWidgetState extends State<UserWidget> {
                     color: Colors.white,
                   )),
             ),
+          ),
+          SizedBox(
+            height: 10,
           ),
         ],
       ),

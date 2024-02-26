@@ -86,27 +86,27 @@ class _AchievementsWidgetState extends State<AchievementsWidget> {
             ),
           ),
           const SizedBox(height: 10),
-          AchievementContainer(
+          const AchievementContainer(
             achievementWidget: FirstAchievement(),
           ),
           const SizedBox(height: 10),
-          AchievementContainer(
+          const AchievementContainer(
             achievementWidget: SecondAchievement(),
           ),
           const SizedBox(height: 10),
-          AchievementContainer(
+          const AchievementContainer(
             achievementWidget: ThirdAchievement(),
           ),
           const SizedBox(height: 10),
-          AchievementContainer(
+          const AchievementContainer(
             achievementWidget: FourthAchievement(),
           ),
           const SizedBox(height: 10),
-          AchievementContainer(
+          const AchievementContainer(
             achievementWidget: FifthAchievement(),
           ),
           const SizedBox(height: 10),
-          AchievementContainer(
+          const AchievementContainer(
             achievementWidget: SixthAchievement(),
           ),
           const SizedBox(height: 10),
@@ -154,10 +154,29 @@ class AchievementContainer extends StatelessWidget {
   }
 }
 
-class SecondAchievement extends StatelessWidget {
+class SecondAchievement extends StatefulWidget {
   const SecondAchievement({
     super.key,
   });
+
+  @override
+  State<SecondAchievement> createState() => _SecondAchievementState();
+}
+
+class _SecondAchievementState extends State<SecondAchievement> {
+  void toogleBox() {
+    if (secondColor == Colors.green) {
+      setState(() {
+        secondColor = Colors.white;
+      });
+    } else {
+      setState(() {
+        secondColor = Colors.green;
+      });
+    }
+  }
+
+  Color secondColor = Colors.green;
 
   @override
   Widget build(BuildContext context) {
@@ -177,21 +196,46 @@ class SecondAchievement extends StatelessWidget {
         const SizedBox(
           width: 5,
         ),
-        Container(
-          height: 20,
-          width: 20,
-          color: Colors.white,
-          margin: const EdgeInsets.only(right: 10),
+        InkWell(
+          onTap: () {
+            toogleBox();
+          },
+          child: Container(
+              height: 20,
+              width: 20,
+              color: secondColor,
+              margin: const EdgeInsets.only(right: 10),
+              child:
+                  Center(child: Text(secondColor == Colors.green ? '✔' : ''))),
         )
       ],
     );
   }
 }
 
-class FirstAchievement extends StatelessWidget {
+class FirstAchievement extends StatefulWidget {
   const FirstAchievement({
     super.key,
   });
+
+  @override
+  State<FirstAchievement> createState() => _FirstAchievementState();
+}
+
+class _FirstAchievementState extends State<FirstAchievement> {
+  void toogleBox() {
+    if (secondColor == Colors.green) {
+      setState(() {
+        secondColor = Colors.white;
+      });
+    } else {
+      setState(() {
+        secondColor = Colors.green;
+      });
+    }
+  }
+
+  Color secondColor = Colors.green;
 
   @override
   Widget build(BuildContext context) {
@@ -212,11 +256,17 @@ class FirstAchievement extends StatelessWidget {
         const SizedBox(
           width: 5,
         ),
-        Container(
-          height: 20,
-          width: 20,
-          color: Colors.white,
-          margin: const EdgeInsets.only(right: 10),
+        InkWell(
+          onTap: () {
+            toogleBox();
+          },
+          child: Container(
+              height: 20,
+              width: 20,
+              color: secondColor,
+              margin: const EdgeInsets.only(right: 10),
+              child:
+                  Center(child: Text(secondColor == Colors.green ? '✔' : ''))),
         )
       ],
     );

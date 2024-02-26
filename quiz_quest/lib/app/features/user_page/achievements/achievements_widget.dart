@@ -166,7 +166,7 @@ class SecondAchievement extends StatelessWidget {
         const Padding(
           padding: EdgeInsets.only(left: 10.0),
           child: AchievementImageWidget(
-            image: 'images/2.png',
+            image: 'images/2-removebg-preview.png',
           ),
         ),
         const SizedBox(
@@ -200,7 +200,7 @@ class FirstAchievement extends StatelessWidget {
         const Padding(
           padding: EdgeInsets.only(left: 10.0),
           child: AchievementImageWidget(
-            image: 'images/1.png',
+            image: 'images/1-removebg-preview.png',
           ),
         ),
         const SizedBox(
@@ -235,7 +235,7 @@ class ThirdAchievement extends StatelessWidget {
         const Padding(
           padding: EdgeInsets.only(left: 10.0),
           child: AchievementImageWidget(
-            image: 'images/3.png',
+            image: 'images/3-removebg-preview.png',
           ),
         ),
         const SizedBox(
@@ -269,7 +269,7 @@ class FourthAchievement extends StatelessWidget {
         const Padding(
           padding: EdgeInsets.only(left: 10.0),
           child: AchievementImageWidget(
-            image: 'images/4.png',
+            image: 'images/4-removebg-preview.png',
           ),
         ),
         const SizedBox(
@@ -303,7 +303,7 @@ class FifthAchievement extends StatelessWidget {
         const Padding(
           padding: EdgeInsets.only(left: 10.0),
           child: AchievementImageWidget(
-            image: 'images/5.png',
+            image: 'images/5-removebg-preview.png',
           ),
         ),
         const SizedBox(
@@ -337,7 +337,7 @@ class SixthAchievement extends StatelessWidget {
         const Padding(
           padding: EdgeInsets.only(left: 10.0),
           child: AchievementImageWidget(
-            image: 'images/6.png',
+            image: 'images/6-removebg-preview.png',
           ),
         ),
         const SizedBox(
@@ -370,6 +370,7 @@ class AchievementImageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CircleAvatar(
+      backgroundColor: Colors.transparent,
       radius: 35,
       backgroundImage: AssetImage(image),
     );
@@ -386,6 +387,13 @@ class AchievementTextWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(text);
+    return Text(
+      text,
+      style: GoogleFonts.aBeeZee(
+        fontSize: 14,
+        color: Colors.white,
+        fontWeight: FontWeight.bold,
+      ),
+    );
   }
 }

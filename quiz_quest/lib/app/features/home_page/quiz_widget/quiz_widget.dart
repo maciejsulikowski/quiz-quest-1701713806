@@ -142,22 +142,6 @@ class _QuizzWidgetState extends State<QuizzWidget> {
                   const SizedBox(
                     height: 10,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          '''Achievements:''',
-                          style: GoogleFonts.aBeeZee(
-                              fontSize: 24,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        RankingButton(user: widget.user)
-                      ],
-                    ),
-                  ),
                   const SizedBox(height: 30),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 32.0),
@@ -197,6 +181,86 @@ class _QuizzWidgetState extends State<QuizzWidget> {
                               ))
                         ],
                       ),
+                    ),
+                  ),
+                  const SizedBox(height: 30),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          '''Achievements:''',
+                          style: GoogleFonts.aBeeZee(
+                              fontSize: 24,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        const Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            CircleAvatar(
+                              backgroundColor: Colors.transparent,
+                              radius: 35,
+                              backgroundImage:
+                                  AssetImage('images/1-removebg-preview.png'),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            CircleAvatar(
+                              backgroundColor: Colors.transparent,
+                              radius: 35,
+                              backgroundImage:
+                                  AssetImage('images/2-removebg-preview.png'),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            CircleAvatar(
+                              backgroundColor: Colors.transparent,
+                              radius: 35,
+                              backgroundImage:
+                                  AssetImage('images/3-removebg-preview.png'),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        const Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            CircleAvatar(
+                              backgroundColor: Colors.transparent,
+                              radius: 35,
+                              backgroundImage:
+                                  AssetImage('images/4-removebg-preview.png'),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            CircleAvatar(
+                              backgroundColor: Colors.transparent,
+                              radius: 35,
+                              backgroundImage:
+                                  AssetImage('images/5-removebg-preview.png'),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            CircleAvatar(
+                              backgroundColor: Colors.transparent,
+                              radius: 35,
+                              backgroundImage:
+                                  AssetImage('images/6-removebg-preview.png'),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
                   const SizedBox(height: 30),

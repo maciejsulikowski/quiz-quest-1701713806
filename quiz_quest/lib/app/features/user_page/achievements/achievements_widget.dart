@@ -224,18 +224,18 @@ class FirstAchievement extends StatefulWidget {
 
 class _FirstAchievementState extends State<FirstAchievement> {
   void toogleBox() {
-    if (secondColor == Colors.green) {
+    if (firstColor == Colors.green) {
       setState(() {
-        secondColor = Colors.white;
+        firstColor = Colors.white;
       });
     } else {
       setState(() {
-        secondColor = Colors.green;
+        firstColor = Colors.green;
       });
     }
   }
 
-  Color secondColor = Colors.green;
+  Color firstColor = Colors.green;
 
   @override
   Widget build(BuildContext context) {
@@ -263,10 +263,10 @@ class _FirstAchievementState extends State<FirstAchievement> {
           child: Container(
               height: 20,
               width: 20,
-              color: secondColor,
+              color: firstColor,
               margin: const EdgeInsets.only(right: 10),
               child:
-                  Center(child: Text(secondColor == Colors.green ? '✔' : ''))),
+                  Center(child: Text(firstColor == Colors.green ? '✔' : ''))),
         )
       ],
     );

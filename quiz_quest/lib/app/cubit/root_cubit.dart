@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 import 'package:quiz_quest/app/core/enums.dart';
+import 'package:quiz_quest/app/domain/repositories/achievement_repository/achievement_repository.dart';
 import 'package:quiz_quest/app/domain/repositories/ranking_respository/ranking_repository.dart';
 import 'package:quiz_quest/app/domain/repositories/user_repository/user_repository.dart';
 
@@ -14,7 +15,8 @@ part 'root_cubit.freezed.dart';
 
 @injectable
 class RootCubit extends Cubit<RootState> {
-  RootCubit(this.userRepository, this.rankingRepository)
+  RootCubit(
+      this.userRepository, this.rankingRepository, this.achievementRepository)
       : super(RootState(
           user: null,
           status: Status.loading,
@@ -24,6 +26,7 @@ class RootCubit extends Cubit<RootState> {
   StreamSubscription? streamSubscription;
   UserRepository userRepository;
   RankingRepository rankingRepository;
+  AchievementRepository achievementRepository;
 
   Future<void> start() async {
     emit(
@@ -118,6 +121,7 @@ class RootCubit extends Cubit<RootState> {
       await userRepository.setEmptyAccount();
       await userRepository.setEmptyPoints();
       await rankingRepository.setEmptyRankingPoints();
+      await achievementRepository.setFalseAchievements();
       emit(
         RootState(
           status: Status.success,

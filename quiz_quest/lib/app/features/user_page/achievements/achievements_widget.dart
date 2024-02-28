@@ -8,10 +8,13 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'package:quiz_quest/app/cubit/root_cubit.dart';
+import 'package:quiz_quest/app/data/data_sources/achievements_data_source/achievements_data_source.dart';
 import 'package:quiz_quest/app/data/data_sources/user_data_source/user_data_source.dart';
 import 'package:quiz_quest/app/domain/models/user_model/user_model.dart';
+import 'package:quiz_quest/app/domain/repositories/achievement_repository/achievement_repository.dart';
 import 'package:quiz_quest/app/domain/repositories/user_repository/user_repository.dart';
 import 'package:quiz_quest/app/features/login_page/login_page.dart';
+import 'package:quiz_quest/app/features/user_page/achievements/cubit/achievements_cubit.dart';
 import 'package:quiz_quest/app/features/user_page/cubit/user_cubit.dart';
 import 'package:quiz_quest/app/injection_container.dart';
 
@@ -59,58 +62,90 @@ class AchievementsWidget extends StatefulWidget {
 class _AchievementsWidgetState extends State<AchievementsWidget> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            Color.fromARGB(255, 10, 58, 214),
-            Color.fromARGB(255, 22, 20, 129),
-          ],
-          begin: Alignment.centerLeft,
-          end: Alignment.centerRight,
-        ),
-      ),
-      child: ListView(
-        children: [
-          const SizedBox(
-            height: 10,
-          ),
-          Center(
-            child: Text(
-              'Your Achievements',
-              style: GoogleFonts.aBeeZee(
-                fontSize: 30,
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
+    return BlocProvider(
+      create: (context) => AchievementsCubit(
+          AchievementRepository(achievementDataSource: AchievementDataSource()))
+        ..getAchievements(),
+      child: BlocBuilder<AchievementsCubit, AchievementsState>(
+        builder: (context, state) {
+          return Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Color.fromARGB(255, 10, 58, 214),
+                  Color.fromARGB(255, 22, 20, 129),
+                ],
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
               ),
             ),
-          ),
-          const SizedBox(height: 10),
-          const AchievementContainer(
-            achievementWidget: FirstAchievement(),
-          ),
-          const SizedBox(height: 10),
-          const AchievementContainer(
-            achievementWidget: SecondAchievement(),
-          ),
-          const SizedBox(height: 10),
-          const AchievementContainer(
-            achievementWidget: ThirdAchievement(),
-          ),
-          const SizedBox(height: 10),
-          const AchievementContainer(
-            achievementWidget: FourthAchievement(),
-          ),
-          const SizedBox(height: 10),
-          const AchievementContainer(
-            achievementWidget: FifthAchievement(),
-          ),
-          const SizedBox(height: 10),
-          const AchievementContainer(
-            achievementWidget: SixthAchievement(),
-          ),
-          const SizedBox(height: 10),
-        ],
+            child: ListView(
+              children: [
+                const SizedBox(
+                  height: 10,
+                ),
+                Center(
+                  child: Text(
+                    'Your Achievements',
+                    style: GoogleFonts.aBeeZee(
+                      fontSize: 30,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 10),
+                if (state.achievementModel != null)
+                  AchievementContainer(
+                    achievementWidget: FirstAchievement(
+                        firstAchievement:
+                            state.achievementModel!.isFirstAchievementReady),
+                  ),
+                const SizedBox(height: 10),
+                if (state.achievementModel != null)
+                  AchievementContainer(
+                    achievementWidget: SecondAchievement(
+                      secondAchievement:
+                          state.achievementModel!.isSecondAchievementReady,
+                    ),
+                  ),
+                const SizedBox(height: 10),
+                if (state.achievementModel != null)
+                  AchievementContainer(
+                    achievementWidget: ThirdAchievement(
+                      thirdAchievement:
+                          state.achievementModel!.isThirdAchievementReady,
+                    ),
+                  ),
+                const SizedBox(height: 10),
+                if (state.achievementModel != null)
+                  AchievementContainer(
+                    achievementWidget: FourthAchievement(
+                      fourthAchievement:
+                          state.achievementModel!.isFourthAchievementReady,
+                    ),
+                  ),
+                const SizedBox(height: 10),
+                if (state.achievementModel != null)
+                  AchievementContainer(
+                    achievementWidget: FifthAchievement(
+                      fifthAchievement:
+                          state.achievementModel!.isFifthAchievementReady,
+                    ),
+                  ),
+                const SizedBox(height: 10),
+                if (state.achievementModel != null)
+                  AchievementContainer(
+                    achievementWidget: SixthAchievement(
+                      sixthAchievement:
+                          state.achievementModel!.isSixthAchievementReady,
+                    ),
+                  ),
+                const SizedBox(height: 10),
+              ],
+            ),
+          );
+        },
       ),
     );
   }
@@ -155,27 +190,18 @@ class AchievementContainer extends StatelessWidget {
 }
 
 class SecondAchievement extends StatefulWidget {
-  const SecondAchievement({
+  SecondAchievement({
+    required this.secondAchievement,
     super.key,
   });
+
+  bool secondAchievement;
 
   @override
   State<SecondAchievement> createState() => _SecondAchievementState();
 }
 
 class _SecondAchievementState extends State<SecondAchievement> {
-  void toogleBox() {
-    if (secondColor == Colors.green) {
-      setState(() {
-        secondColor = Colors.white;
-      });
-    } else {
-      setState(() {
-        secondColor = Colors.green;
-      });
-    }
-  }
-
   Color secondColor = Colors.green;
 
   @override
@@ -197,13 +223,13 @@ class _SecondAchievementState extends State<SecondAchievement> {
           width: 5,
         ),
         InkWell(
-          onTap: () {
-            toogleBox();
-          },
+          onTap: () {},
           child: Container(
               height: 20,
               width: 20,
-              color: secondColor,
+              color: widget.secondAchievement == false
+                  ? secondColor = Colors.white
+                  : secondColor = Colors.green,
               margin: const EdgeInsets.only(right: 10),
               child:
                   Center(child: Text(secondColor == Colors.green ? '✔' : ''))),
@@ -214,27 +240,18 @@ class _SecondAchievementState extends State<SecondAchievement> {
 }
 
 class FirstAchievement extends StatefulWidget {
-  const FirstAchievement({
+  FirstAchievement({
+    required this.firstAchievement,
     super.key,
   });
+
+  bool firstAchievement;
 
   @override
   State<FirstAchievement> createState() => _FirstAchievementState();
 }
 
 class _FirstAchievementState extends State<FirstAchievement> {
-  void toogleBox() {
-    if (firstColor == Colors.green) {
-      setState(() {
-        firstColor = Colors.white;
-      });
-    } else {
-      setState(() {
-        firstColor = Colors.green;
-      });
-    }
-  }
-
   Color firstColor = Colors.green;
 
   @override
@@ -257,13 +274,13 @@ class _FirstAchievementState extends State<FirstAchievement> {
           width: 5,
         ),
         InkWell(
-          onTap: () {
-            toogleBox();
-          },
+          onTap: () {},
           child: Container(
               height: 20,
               width: 20,
-              color: firstColor,
+              color: widget.firstAchievement == false
+                  ? firstColor = Colors.white
+                  : firstColor = Colors.green,
               margin: const EdgeInsets.only(right: 10),
               child:
                   Center(child: Text(firstColor == Colors.green ? '✔' : ''))),
@@ -273,11 +290,20 @@ class _FirstAchievementState extends State<FirstAchievement> {
   }
 }
 
-class ThirdAchievement extends StatelessWidget {
-  const ThirdAchievement({
+class ThirdAchievement extends StatefulWidget {
+  ThirdAchievement({
+    required this.thirdAchievement,
     super.key,
   });
 
+  bool thirdAchievement;
+
+  @override
+  State<ThirdAchievement> createState() => _ThirdAchievementState();
+}
+
+class _ThirdAchievementState extends State<ThirdAchievement> {
+  Color thirdColor = Colors.green;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -297,21 +323,32 @@ class ThirdAchievement extends StatelessWidget {
           width: 5,
         ),
         Container(
-          height: 20,
-          width: 20,
-          color: Colors.white,
-          margin: const EdgeInsets.only(right: 10),
-        )
+            height: 20,
+            width: 20,
+            color: widget.thirdAchievement == false
+                ? thirdColor = Colors.white
+                : thirdColor = Colors.green,
+            margin: const EdgeInsets.only(right: 10),
+            child: Center(child: Text(thirdColor == Colors.green ? '✔' : ''))),
       ],
     );
   }
 }
 
-class FourthAchievement extends StatelessWidget {
-  const FourthAchievement({
+class FourthAchievement extends StatefulWidget {
+  FourthAchievement({
+    required this.fourthAchievement,
     super.key,
   });
 
+  bool fourthAchievement;
+
+  @override
+  State<FourthAchievement> createState() => _FourthAchievementState();
+}
+
+class _FourthAchievementState extends State<FourthAchievement> {
+  Color fourthColor = Colors.green;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -331,21 +368,32 @@ class FourthAchievement extends StatelessWidget {
           width: 5,
         ),
         Container(
-          height: 20,
-          width: 20,
-          color: Colors.white,
-          margin: const EdgeInsets.only(right: 10),
-        )
+            height: 20,
+            width: 20,
+            color: widget.fourthAchievement == false
+                ? fourthColor = Colors.white
+                : fourthColor = Colors.green,
+            margin: const EdgeInsets.only(right: 10),
+            child: Center(child: Text(fourthColor == Colors.green ? '✔' : ''))),
       ],
     );
   }
 }
 
-class FifthAchievement extends StatelessWidget {
-  const FifthAchievement({
+class FifthAchievement extends StatefulWidget {
+  FifthAchievement({
+    required this.fifthAchievement,
     super.key,
   });
 
+  bool fifthAchievement;
+
+  @override
+  State<FifthAchievement> createState() => _FifthAchievementState();
+}
+
+class _FifthAchievementState extends State<FifthAchievement> {
+  Color fifthColor = Colors.green;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -365,21 +413,31 @@ class FifthAchievement extends StatelessWidget {
           width: 5,
         ),
         Container(
-          height: 20,
-          width: 20,
-          color: Colors.white,
-          margin: const EdgeInsets.only(right: 10),
-        )
+            height: 20,
+            width: 20,
+            color: widget.fifthAchievement == false
+                ? fifthColor = Colors.white
+                : fifthColor = Colors.green,
+            margin: const EdgeInsets.only(right: 10),
+            child: Center(child: Text(fifthColor == Colors.green ? '✔' : ''))),
       ],
     );
   }
 }
 
-class SixthAchievement extends StatelessWidget {
-  const SixthAchievement({
+class SixthAchievement extends StatefulWidget {
+  SixthAchievement({
+    required this.sixthAchievement,
     super.key,
   });
+  bool sixthAchievement;
 
+  @override
+  State<SixthAchievement> createState() => _SixthAchievementState();
+}
+
+class _SixthAchievementState extends State<SixthAchievement> {
+  Color sixthColor = Colors.green;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -399,11 +457,13 @@ class SixthAchievement extends StatelessWidget {
           width: 5,
         ),
         Container(
-          height: 20,
-          width: 20,
-          color: Colors.white,
-          margin: const EdgeInsets.only(right: 10),
-        )
+            height: 20,
+            width: 20,
+            color: widget.sixthAchievement == false
+                ? sixthColor = Colors.white
+                : sixthColor = Colors.green,
+            margin: const EdgeInsets.only(right: 10),
+            child: Center(child: Text(sixthColor == Colors.green ? '✔' : ''))),
       ],
     );
   }

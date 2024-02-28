@@ -4,6 +4,26 @@ import 'package:injectable/injectable.dart';
 
 @injectable
 class AchievementDataSource {
+  Stream<Map<String, dynamic>> getAchievementsData() {
+    final userID = FirebaseAuth.instance.currentUser?.uid;
+    if (userID == null) {
+      throw Exception('User is not logged in');
+    }
+
+    return FirebaseFirestore.instance
+        .collection('achievements')
+        .doc(userID)
+        .snapshots()
+        .map((docSnapshot) {
+      if (docSnapshot.exists) {
+        final data = docSnapshot.data() ?? {};
+        return data;
+      } else {
+        return {};
+      }
+    });
+  }
+
   Future<void> setFalseAchievements() async {
     final userID = FirebaseAuth.instance.currentUser?.uid;
     if (userID == null) {

@@ -39,6 +39,4 @@ class AchievementsCubit extends Cubit<AchievementsState> {
             );
           });
   }
-
-  
 }

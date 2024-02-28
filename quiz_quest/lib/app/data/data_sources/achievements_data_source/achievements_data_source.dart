@@ -49,7 +49,7 @@ class AchievementDataSource {
     }
     await FirebaseFirestore.instance.collection('achievements').doc(userID).set(
       {
-        'is_first_achievement_ready': false,
+        'is_first_achievement_ready': true,
       },
       SetOptions(merge: true),
     );
@@ -62,7 +62,7 @@ class AchievementDataSource {
     }
     await FirebaseFirestore.instance.collection('achievements').doc(userID).set(
       {
-        'is_second_achievement_ready': false,
+        'is_second_achievement_ready': true,
       },
       SetOptions(merge: true),
     );
@@ -75,7 +75,7 @@ class AchievementDataSource {
     }
     await FirebaseFirestore.instance.collection('achievements').doc(userID).set(
       {
-        'is_third_achievement_ready': false,
+        'is_third_achievement_ready': true,
       },
       SetOptions(merge: true),
     );
@@ -88,7 +88,7 @@ class AchievementDataSource {
     }
     await FirebaseFirestore.instance.collection('achievements').doc(userID).set(
       {
-        'is_fourth_achievement_ready': false,
+        'is_fourth_achievement_ready': true,
       },
       SetOptions(merge: true),
     );
@@ -101,7 +101,7 @@ class AchievementDataSource {
     }
     await FirebaseFirestore.instance.collection('achievements').doc(userID).set(
       {
-        'is_fifth_achievement_ready': false,
+        'is_fifth_achievement_ready': true,
       },
       SetOptions(merge: true),
     );
@@ -114,7 +114,7 @@ class AchievementDataSource {
     }
     await FirebaseFirestore.instance.collection('achievements').doc(userID).set(
       {
-        'is_sixth_achievement_ready': false,
+        'is_sixth_achievement_ready': true,
       },
       SetOptions(merge: true),
     );

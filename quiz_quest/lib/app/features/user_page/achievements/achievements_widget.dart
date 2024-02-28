@@ -63,9 +63,7 @@ class _AchievementsWidgetState extends State<AchievementsWidget> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AchievementsCubit(
-          AchievementRepository(achievementDataSource: AchievementDataSource()))
-        ..getAchievements(),
+      create: (context) => getIt<AchievementsCubit>()..getAchievements(),
       child: BlocBuilder<AchievementsCubit, AchievementsState>(
         builder: (context, state) {
           return Container(
@@ -222,18 +220,14 @@ class _SecondAchievementState extends State<SecondAchievement> {
         const SizedBox(
           width: 5,
         ),
-        InkWell(
-          onTap: () {},
-          child: Container(
-              height: 20,
-              width: 20,
-              color: widget.secondAchievement == false
-                  ? secondColor = Colors.white
-                  : secondColor = Colors.green,
-              margin: const EdgeInsets.only(right: 10),
-              child:
-                  Center(child: Text(secondColor == Colors.green ? '✔' : ''))),
-        )
+        Container(
+            height: 20,
+            width: 20,
+            color: widget.secondAchievement == false
+                ? secondColor = Colors.white
+                : secondColor = Colors.green,
+            margin: const EdgeInsets.only(right: 10),
+            child: Center(child: Text(secondColor == Colors.green ? '✔' : '')))
       ],
     );
   }
@@ -273,18 +267,14 @@ class _FirstAchievementState extends State<FirstAchievement> {
         const SizedBox(
           width: 5,
         ),
-        InkWell(
-          onTap: () {},
-          child: Container(
-              height: 20,
-              width: 20,
-              color: widget.firstAchievement == false
-                  ? firstColor = Colors.white
-                  : firstColor = Colors.green,
-              margin: const EdgeInsets.only(right: 10),
-              child:
-                  Center(child: Text(firstColor == Colors.green ? '✔' : ''))),
-        )
+        Container(
+            height: 20,
+            width: 20,
+            color: widget.firstAchievement == false
+                ? firstColor = Colors.white
+                : firstColor = Colors.green,
+            margin: const EdgeInsets.only(right: 10),
+            child: Center(child: Text(firstColor == Colors.green ? '✔' : '')))
       ],
     );
   }

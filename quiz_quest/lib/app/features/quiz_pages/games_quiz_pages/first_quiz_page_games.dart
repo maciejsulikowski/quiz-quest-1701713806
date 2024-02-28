@@ -14,6 +14,7 @@ import 'package:quiz_quest/app/features/quiz_pages/games_quiz_pages/easy_games_q
 import 'package:quiz_quest/app/features/quiz_pages/games_quiz_pages/hard_games_quiz_page/second_hard_quiz_page_games.dart';
 import 'package:quiz_quest/app/features/quiz_pages/games_quiz_pages/medium_games_quiz_page/medium_question_quiz_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/games_quiz_pages/medium_games_quiz_page/second_medium_quiz_page_games.dart';
+import 'package:quiz_quest/app/injection_container.dart';
 
 class FirstQuizPageGames extends StatefulWidget {
   const FirstQuizPageGames({
@@ -129,7 +130,7 @@ class EasyDifficultButton extends StatelessWidget {
     final dynamic mediumCategory = ModalRoute.of(context)?.settings.arguments;
     final dynamic category = mediumCategory[0];
     return BlocProvider(
-      create: (context) => HomeCubit(UserRepository(UserDataSource())),
+      create: (context) => getIt<HomeCubit>(),
       child: BlocBuilder<HomeCubit, HomeState>(
         builder: (context, state) {
           return Container(

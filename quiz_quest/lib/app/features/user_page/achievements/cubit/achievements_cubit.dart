@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 import 'package:quiz_quest/app/core/enums.dart';
 import 'package:quiz_quest/app/domain/models/achievements_model/achievements_model.dart';
@@ -8,6 +9,7 @@ import 'package:quiz_quest/app/domain/repositories/achievement_repository/achiev
 
 part 'achievements_state.dart';
 
+@injectable
 class AchievementsCubit extends Cubit<AchievementsState> {
   AchievementsCubit(this.achievementRepository) : super(AchievementsState());
 
@@ -37,4 +39,6 @@ class AchievementsCubit extends Cubit<AchievementsState> {
             );
           });
   }
+
+  
 }

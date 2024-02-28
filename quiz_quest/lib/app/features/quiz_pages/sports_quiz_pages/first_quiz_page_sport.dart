@@ -29,6 +29,7 @@ import 'package:quiz_quest/app/features/quiz_pages/nature_quiz_pages/medium_natu
 import 'package:quiz_quest/app/features/quiz_pages/sports_quiz_pages/easy_sport_quiz_page/second_easy_quiz_page_sport.dart';
 import 'package:quiz_quest/app/features/quiz_pages/sports_quiz_pages/hard_sport_quiz_page/second_hard_quiz_page_sport.dart';
 import 'package:quiz_quest/app/features/quiz_pages/sports_quiz_pages/medium_sport_quiz_page/second_medium_quiz_page_sport.dart';
+import 'package:quiz_quest/app/injection_container.dart';
 
 class FirstQuizPageSport extends StatefulWidget {
   const FirstQuizPageSport({
@@ -143,7 +144,7 @@ class EasyDifficultButton extends StatelessWidget {
     final dynamic mediumCategory = ModalRoute.of(context)?.settings.arguments;
     final dynamic category = mediumCategory[0];
     return BlocProvider(
-      create: (context) => HomeCubit(UserRepository(UserDataSource())),
+      create: (context) => getIt<HomeCubit>(),
       child: BlocBuilder<HomeCubit, HomeState>(
         builder: (context, state) {
           return Container(

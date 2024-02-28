@@ -50,6 +50,7 @@ class _QuizzWidgetState extends State<QuizzWidget> {
   final controller = TextEditingController();
   late List<dynamic> categoryList;
   final toolController = SuperTooltipController();
+  bool isFirstAchievementCompleted = false;
 
   @override
   void initState() {
@@ -83,7 +84,13 @@ class _QuizzWidgetState extends State<QuizzWidget> {
           ),
           BlocListener<HomeCubit, HomeState>(
             listener: (context, state) {
-              // TODO: implement listener
+              if (!isFirstAchievementCompleted && 100 <= state.totalPoints) {
+                isFirstAchievementCompleted = true;
+                context.read<HomeCubit>().changeFirstAchievement();
+                if (state.isSaved) {
+                  context.read<HomeCubit>().getPointsData();
+                }
+              }
             },
           ),
         ],

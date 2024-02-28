@@ -20,6 +20,7 @@ import 'package:quiz_quest/app/features/quiz_pages/geography_quiz_pages/medium_g
 import 'package:quiz_quest/app/features/quiz_pages/history_quiz_pages/easy_history_quiz_page/second_easy_quiz_page_history.dart';
 import 'package:quiz_quest/app/features/quiz_pages/history_quiz_pages/hard_history_quiz_page/second_hard_quiz_page_history.dart';
 import 'package:quiz_quest/app/features/quiz_pages/history_quiz_pages/medium_history_quiz_page/second_medium_quiz_page_history.dart';
+import 'package:quiz_quest/app/injection_container.dart';
 
 class FirstQuizPageHistory extends StatefulWidget {
   const FirstQuizPageHistory({
@@ -134,7 +135,7 @@ class EasyDifficultButton extends StatelessWidget {
     final dynamic mediumCategory = ModalRoute.of(context)?.settings.arguments;
     final dynamic category = mediumCategory[0];
     return BlocProvider(
-      create: (context) => HomeCubit(UserRepository(UserDataSource())),
+      create: (context) => getIt<HomeCubit>(),
       child: BlocBuilder<HomeCubit, HomeState>(
         builder: (context, state) {
           return Container(

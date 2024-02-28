@@ -72,12 +72,21 @@ class _QuizzWidgetState extends State<QuizzWidget> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => getIt<HomeCubit>()..getPointsData(),
-      child: BlocListener<UserCubit, UserState>(
-        listener: (context, state) {
-          if (state.isSaved) {
-            context.read<UserCubit>().start();
-          }
-        },
+      child: MultiBlocListener(
+        listeners: [
+          BlocListener<UserCubit, UserState>(
+            listener: (context, state) {
+              if (state.isSaved) {
+                context.read<UserCubit>().start();
+              }
+            },
+          ),
+          BlocListener<HomeCubit, HomeState>(
+            listener: (context, state) {
+              // TODO: implement listener
+            },
+          ),
+        ],
         child: BlocBuilder<HomeCubit, HomeState>(
           builder: (context, state) {
             final allPoints = state.totalPoints;

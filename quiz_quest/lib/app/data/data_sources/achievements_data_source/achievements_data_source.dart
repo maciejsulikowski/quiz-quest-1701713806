@@ -41,4 +41,82 @@ class AchievementDataSource {
       },
     );
   }
+
+  Future<void> changeFirstAchievement() async {
+    final userID = FirebaseAuth.instance.currentUser?.uid;
+    if (userID == null) {
+      throw Exception('User is not logged in');
+    }
+    await FirebaseFirestore.instance.collection('achievements').doc(userID).set(
+      {
+        'is_first_achievement_ready': false,
+      },
+      SetOptions(merge: true),
+    );
+  }
+
+  Future<void> changeSecondAchievement() async {
+    final userID = FirebaseAuth.instance.currentUser?.uid;
+    if (userID == null) {
+      throw Exception('User is not logged in');
+    }
+    await FirebaseFirestore.instance.collection('achievements').doc(userID).set(
+      {
+        'is_second_achievement_ready': false,
+      },
+      SetOptions(merge: true),
+    );
+  }
+
+  Future<void> changeThirdAchievement() async {
+    final userID = FirebaseAuth.instance.currentUser?.uid;
+    if (userID == null) {
+      throw Exception('User is not logged in');
+    }
+    await FirebaseFirestore.instance.collection('achievements').doc(userID).set(
+      {
+        'is_third_achievement_ready': false,
+      },
+      SetOptions(merge: true),
+    );
+  }
+
+  Future<void> changeFourthAchievement() async {
+    final userID = FirebaseAuth.instance.currentUser?.uid;
+    if (userID == null) {
+      throw Exception('User is not logged in');
+    }
+    await FirebaseFirestore.instance.collection('achievements').doc(userID).set(
+      {
+        'is_fourth_achievement_ready': false,
+      },
+      SetOptions(merge: true),
+    );
+  }
+
+  Future<void> changeFifthAchievement() async {
+    final userID = FirebaseAuth.instance.currentUser?.uid;
+    if (userID == null) {
+      throw Exception('User is not logged in');
+    }
+    await FirebaseFirestore.instance.collection('achievements').doc(userID).set(
+      {
+        'is_fifth_achievement_ready': false,
+      },
+      SetOptions(merge: true),
+    );
+  }
+
+  Future<void> changeSixthAchievement() async {
+    final userID = FirebaseAuth.instance.currentUser?.uid;
+    if (userID == null) {
+      throw Exception('User is not logged in');
+    }
+    await FirebaseFirestore.instance.collection('achievements').doc(userID).set(
+      {
+        'is_sixth_achievement_ready': false,
+      },
+      SetOptions(merge: true),
+    );
+  }
 }

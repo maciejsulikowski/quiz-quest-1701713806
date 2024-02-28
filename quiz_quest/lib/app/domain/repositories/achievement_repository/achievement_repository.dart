@@ -27,4 +27,28 @@ class AchievementRepository {
   Future<void> setFalseAchievements() async {
     return achievementDataSource.setFalseAchievements();
   }
+
+  Future<void> changeFirstAchievement() async {
+    return achievementDataSource.changeFirstAchievement();
+  }
+
+  Future<void> changeSecondAchievement() async {
+    return achievementDataSource.changeSecondAchievement();
+  }
+
+  Future<void> changeThirdAchievement() async {
+    return achievementDataSource.changeThirdAchievement();
+  }
+
+  Future<void> changeFourthAchievement() async {
+    return achievementDataSource.changeFourthAchievement();
+  }
+
+  Future<void> changeFifthAchievement() async {
+    return achievementDataSource.changeFifthAchievement();
+  }
+
+  Future<void> changeSixthAchievement() async {
+    return achievementDataSource.changeSixthAchievement();
+  }
 }

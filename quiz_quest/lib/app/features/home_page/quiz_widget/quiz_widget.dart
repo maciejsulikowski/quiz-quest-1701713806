@@ -209,7 +209,7 @@ class _QuizzWidgetState extends State<QuizzWidget> {
                   ),
                   const SizedBox(height: 30),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 32.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: Container(
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
@@ -234,16 +234,18 @@ class _QuizzWidgetState extends State<QuizzWidget> {
                                 fontWeight: FontWeight.bold),
                             textAlign: TextAlign.center,
                           ),
-                          IconButton(
-                              onPressed: () {
-                                String message =
-                                    'In QuizQuest you scored Total Points: $allPoints💎! Congratulations!';
-                                Share.share(message);
-                              },
-                              icon: const Icon(
-                                Icons.share,
-                                color: Colors.white54,
-                              ))
+                          allPoints != 0
+                              ? IconButton(
+                                  onPressed: () {
+                                    String message =
+                                        'In QuizQuest you scored Total Points: $allPoints💎! Congratulations!';
+                                    Share.share(message);
+                                  },
+                                  icon: const Icon(
+                                    Icons.share,
+                                    color: Colors.white54,
+                                  ))
+                              : const SizedBox.shrink(),
                         ],
                       ),
                     ),

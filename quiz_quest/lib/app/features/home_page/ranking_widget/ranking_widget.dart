@@ -8,6 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:quiz_quest/app/core/enums.dart';
 import 'package:quiz_quest/app/data/data_sources/ranking_data_source/ranking_data_source.dart';
 import 'package:quiz_quest/app/data/data_sources/user_data_source/user_data_source.dart';
+import 'package:quiz_quest/app/domain/models/ranking_model/ranking_model.dart';
 import 'package:quiz_quest/app/domain/repositories/ranking_respository/ranking_repository.dart';
 import 'package:quiz_quest/app/domain/repositories/user_repository/user_repository.dart';
 import 'package:quiz_quest/app/features/home_page/cubit/home_cubit.dart';
@@ -54,8 +55,15 @@ class RankingWidgetState extends State<RankingWidget> {
       create: (context) => getIt<RankingCubit>()..getRankingData(),
       child: BlocBuilder<RankingCubit, RankingState>(
         builder: (context, state) {
-          state.rankingModel
-              ?.sort((a, b) => b.totalPoints.compareTo(a.totalPoints));
+          List<RankingModel>? modifiedList = state.rankingModel?.toList();
+
+          // Sprawdzenie czy lista została skopiowana i czy nie jest pusta
+          if (modifiedList != null && modifiedList.isNotEmpty) {
+            // Posortowanie skopiowanej listy
+            modifiedList.sort((a, b) => b.totalPoints.compareTo(a.totalPoints));
+          }
+          // state.rankingModel
+          //     ?.sort((a, b) => b.totalPoints.compareTo(a.totalPoints));
           return Scaffold(
             extendBodyBehindAppBar: true,
             appBar: AppBar(
@@ -89,8 +97,8 @@ class RankingWidgetState extends State<RankingWidget> {
                       child: ListView.builder(
                         itemCount: state.rankingModel?.length ?? 0,
                         itemBuilder: (context, index) {
-                          final userRecord = state.rankingModel?[index];
-                          final userId = state.rankingModel?[index].userID;
+                          final userRecord = modifiedList?[index];
+                          final userId = modifiedList?[index].userID;
 
                           if (userRecord != null) {
                             final userName = userRecord.userName;
@@ -124,7 +132,7 @@ class RankingWidgetState extends State<RankingWidget> {
   }
 }
 
-class UserRecord extends StatelessWidget {
+class UserRecord extends StatefulWidget {
   const UserRecord({
     required this.id,
     required this.user,
@@ -136,6 +144,11 @@ class UserRecord extends StatelessWidget {
   final String user;
   final int points;
 
+  @override
+  State<UserRecord> createState() => _UserRecordState();
+}
+
+class _UserRecordState extends State<UserRecord> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -149,7 +162,7 @@ class UserRecord extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.only(left: 20.0),
                   child: TextRanking(
-                    text: id,
+                    text: widget.id,
                   ),
                 ),
               ),
@@ -158,7 +171,7 @@ class UserRecord extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.only(right: 10.0),
                   child: TextRanking(
-                    text: user,
+                    text: widget.user,
                   ),
                 ),
               ),
@@ -167,7 +180,7 @@ class UserRecord extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.only(right: 10.0),
                   child: TextRanking(
-                    text: 'Points: $points💎',
+                    text: 'Points: ${widget.points}💎',
                   ),
                 ),
               ),
@@ -179,7 +192,7 @@ class UserRecord extends StatelessWidget {
   }
 }
 
-class UserRecord2 extends StatelessWidget {
+class UserRecord2 extends StatefulWidget {
   const UserRecord2({
     required this.id,
     required this.user,
@@ -191,6 +204,11 @@ class UserRecord2 extends StatelessWidget {
   final String user;
   final int points;
 
+  @override
+  State<UserRecord2> createState() => _UserRecord2State();
+}
+
+class _UserRecord2State extends State<UserRecord2> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -205,7 +223,7 @@ class UserRecord2 extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.only(left: 20.0),
                   child: TextRanking(
-                    text: id,
+                    text: widget.id,
                   ),
                 ),
               ),
@@ -214,7 +232,7 @@ class UserRecord2 extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.only(right: 10.0),
                   child: TextRanking(
-                    text: user,
+                    text: widget.user,
                   ),
                 ),
               ),
@@ -223,7 +241,7 @@ class UserRecord2 extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.only(right: 10.0),
                   child: TextRanking(
-                    text: 'Points: $points💎',
+                    text: 'Points: ${widget.points}💎',
                   ),
                 ),
               ),
@@ -235,7 +253,7 @@ class UserRecord2 extends StatelessWidget {
   }
 }
 
-class TextRanking extends StatelessWidget {
+class TextRanking extends StatefulWidget {
   const TextRanking({
     required this.text,
     super.key,
@@ -244,9 +262,14 @@ class TextRanking extends StatelessWidget {
   final String text;
 
   @override
+  State<TextRanking> createState() => _TextRankingState();
+}
+
+class _TextRankingState extends State<TextRanking> {
+  @override
   Widget build(BuildContext context) {
     return Text(
-      text,
+      widget.text,
       style: GoogleFonts.aBeeZee(
           fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
     );

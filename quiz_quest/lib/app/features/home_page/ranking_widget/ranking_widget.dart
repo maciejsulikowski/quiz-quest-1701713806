@@ -18,6 +18,8 @@ import 'package:quiz_quest/app/features/home_page/list_of_categories/list_of_cat
 import 'package:quiz_quest/app/features/home_page/quiz_category_widget/quiz_category_widget.dart';
 import 'package:quiz_quest/app/features/home_page/ranking_button/ranking_button.dart';
 import 'package:quiz_quest/app/features/home_page/ranking_widget/cubit/ranking_cubit.dart';
+import 'package:quiz_quest/app/features/home_page/ranking_widget/user_records_widgets/first_user_record.dart';
+import 'package:quiz_quest/app/features/home_page/ranking_widget/user_records_widgets/second_user_record.dart';
 import 'package:quiz_quest/app/features/login_page/first_page_after_registration.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/cubit/films_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/first_quiz_page_films.dart';
@@ -57,9 +59,7 @@ class RankingWidgetState extends State<RankingWidget> {
         builder: (context, state) {
           List<RankingModel>? modifiedList = state.rankingModel?.toList();
 
-          // Sprawdzenie czy lista została skopiowana i czy nie jest pusta
           if (modifiedList != null && modifiedList.isNotEmpty) {
-            // Posortowanie skopiowanej listy
             modifiedList.sort((a, b) => b.totalPoints.compareTo(a.totalPoints));
           }
           // state.rankingModel
@@ -128,150 +128,6 @@ class RankingWidgetState extends State<RankingWidget> {
           );
         },
       ),
-    );
-  }
-}
-
-class UserRecord extends StatefulWidget {
-  const UserRecord({
-    required this.id,
-    required this.user,
-    required this.points,
-    super.key,
-  });
-
-  final String id;
-  final String user;
-  final int points;
-
-  @override
-  State<UserRecord> createState() => _UserRecordState();
-}
-
-class _UserRecordState extends State<UserRecord> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 10),
-      padding: const EdgeInsets.symmetric(horizontal: 10),
-      child: Stack(
-        children: [
-          Row(
-            children: [
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 20.0),
-                  child: TextRanking(
-                    text: widget.id,
-                  ),
-                ),
-              ),
-              Expanded(
-                flex: 2,
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 10.0),
-                  child: TextRanking(
-                    text: widget.user,
-                  ),
-                ),
-              ),
-              Expanded(
-                flex: 3,
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 10.0),
-                  child: TextRanking(
-                    text: 'Points: ${widget.points}💎',
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class UserRecord2 extends StatefulWidget {
-  const UserRecord2({
-    required this.id,
-    required this.user,
-    required this.points,
-    super.key,
-  });
-
-  final String id;
-  final String user;
-  final int points;
-
-  @override
-  State<UserRecord2> createState() => _UserRecord2State();
-}
-
-class _UserRecord2State extends State<UserRecord2> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.amber[700],
-      margin: const EdgeInsets.symmetric(horizontal: 10),
-      padding: const EdgeInsets.symmetric(horizontal: 10),
-      child: Stack(
-        children: [
-          Row(
-            children: [
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 20.0),
-                  child: TextRanking(
-                    text: widget.id,
-                  ),
-                ),
-              ),
-              Expanded(
-                flex: 2,
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 10.0),
-                  child: TextRanking(
-                    text: widget.user,
-                  ),
-                ),
-              ),
-              Expanded(
-                flex: 3,
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 10.0),
-                  child: TextRanking(
-                    text: 'Points: ${widget.points}💎',
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class TextRanking extends StatefulWidget {
-  const TextRanking({
-    required this.text,
-    super.key,
-  });
-
-  final String text;
-
-  @override
-  State<TextRanking> createState() => _TextRankingState();
-}
-
-class _TextRankingState extends State<TextRanking> {
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      widget.text,
-      style: GoogleFonts.aBeeZee(
-          fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
     );
   }
 }

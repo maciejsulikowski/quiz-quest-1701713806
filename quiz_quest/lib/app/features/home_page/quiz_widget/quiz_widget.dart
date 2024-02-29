@@ -50,6 +50,13 @@ class _QuizzWidgetState extends State<QuizzWidget> {
   final controller = TextEditingController();
   late List<dynamic> categoryList;
   final toolController = SuperTooltipController();
+  bool isFirstAchievementCompleted = false;
+  bool isSecondAchievementCompleted = false;
+  bool isThirdAchievementCompleted = false;
+  bool isFourthAchievementCompleted = false;
+  bool isFifthAchievementCompleted = false;
+  bool isSixthAchievementCompleted = false;
+  bool isAchievementSnackBarDisplayed = false;
 
   @override
   void initState() {
@@ -72,12 +79,70 @@ class _QuizzWidgetState extends State<QuizzWidget> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => getIt<HomeCubit>()..getPointsData(),
-      child: BlocListener<UserCubit, UserState>(
-        listener: (context, state) {
-          if (state.isSaved) {
-            context.read<UserCubit>().start();
-          }
-        },
+      child: MultiBlocListener(
+        listeners: [
+          BlocListener<UserCubit, UserState>(
+            listener: (context, state) {
+              if (state.isSaved) {
+                context.read<UserCubit>().start();
+              }
+            },
+          ),
+          BlocListener<HomeCubit, HomeState>(
+            listener: (context, state) {
+              if (!isFirstAchievementCompleted && 100 <= state.totalPoints) {
+                isFirstAchievementCompleted = true;
+
+                context.read<HomeCubit>().changeFirstAchievement();
+              } else if (!isSecondAchievementCompleted &&
+                  500 <= state.totalPoints) {
+                isSecondAchievementCompleted = true;
+                context.read<HomeCubit>().changeSecondAchievement();
+              } else if (!isThirdAchievementCompleted &&
+                  1000 <= state.totalPoints) {
+                isThirdAchievementCompleted = true;
+                context.read<HomeCubit>().changeThirdAchievement();
+              } else if (!isFourthAchievementCompleted &&
+                  2000 <= state.totalPoints) {
+                isFourthAchievementCompleted = true;
+                context.read<HomeCubit>().changeFourthAchievement();
+              } else if (!isFifthAchievementCompleted &&
+                  5000 <= state.totalPoints) {
+                isFifthAchievementCompleted = true;
+                context.read<HomeCubit>().changeFifthAchievement();
+              } else if (!isSixthAchievementCompleted &&
+                  10000 <= state.totalPoints) {
+                isSixthAchievementCompleted = true;
+                context.read<HomeCubit>().changeSixthAchievement();
+              }
+              // if (!isAchievementSnackBarDisplayed) {
+              //   isAchievementSnackBarDisplayed = true;
+              //   ScaffoldMessenger.of(context).showSnackBar(
+              //     SnackBar(
+              //       behavior: SnackBarBehavior.floating,
+              //       backgroundColor: Colors.green,
+              //       shape: RoundedRectangleBorder(
+              //         borderRadius: BorderRadius.circular(10),
+              //       ),
+              //       content: const Padding(
+              //         padding: EdgeInsets.all(8),
+              //         child: Row(
+              //           children: [
+              //             Icon(Icons.error, color: Colors.white),
+              //             SizedBox(width: 8),
+              //             Text(
+              //               'First Achievement! Great and keep going!',
+              //               style: TextStyle(color: Colors.white),
+              //             ),
+              //           ],
+              //         ),
+              //       ),
+              //     ),
+              //   );
+              // }
+            },
+          ),
+        ],
         child: BlocBuilder<HomeCubit, HomeState>(
           builder: (context, state) {
             final allPoints = state.totalPoints;
@@ -139,9 +204,12 @@ class _QuizzWidgetState extends State<QuizzWidget> {
                       ],
                     ),
                   ),
+                  const SizedBox(
+                    height: 10,
+                  ),
                   const SizedBox(height: 30),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 32.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: Container(
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
@@ -166,18 +234,112 @@ class _QuizzWidgetState extends State<QuizzWidget> {
                                 fontWeight: FontWeight.bold),
                             textAlign: TextAlign.center,
                           ),
-                          IconButton(
-                              onPressed: () {
-                                String message =
-                                    'In QuizQuest you scored Total Points: $allPoints💎! Congratulations!';
-                                Share.share(message);
-                              },
-                              icon: const Icon(
-                                Icons.share,
-                                color: Colors.white54,
-                              ))
+                          allPoints != 0
+                              ? IconButton(
+                                  onPressed: () {
+                                    String message =
+                                        'In QuizQuest you scored Total Points: $allPoints💎! Congratulations!';
+                                    Share.share(message);
+                                  },
+                                  icon: const Icon(
+                                    Icons.share,
+                                    color: Colors.white54,
+                                  ))
+                              : const SizedBox.shrink(),
                         ],
                       ),
+                    ),
+                  ),
+                  const SizedBox(height: 30),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          '''Achievements:''',
+                          style: GoogleFonts.aBeeZee(
+                              fontSize: 24,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            isFirstAchievementCompleted
+                                ? const CircleAvatar(
+                                    backgroundColor: Colors.transparent,
+                                    radius: 35,
+                                    backgroundImage: AssetImage(
+                                        'images/1-removebg-preview.png'),
+                                  )
+                                : const NoAchievementWidget(),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            isSecondAchievementCompleted
+                                ? const CircleAvatar(
+                                    backgroundColor: Colors.transparent,
+                                    radius: 35,
+                                    backgroundImage: AssetImage(
+                                        'images/2-removebg-preview.png'),
+                                  )
+                                : const NoAchievementWidget(),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            isThirdAchievementCompleted
+                                ? const CircleAvatar(
+                                    backgroundColor: Colors.transparent,
+                                    radius: 35,
+                                    backgroundImage: AssetImage(
+                                        'images/3-removebg-preview.png'),
+                                  )
+                                : const NoAchievementWidget(),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            isFourthAchievementCompleted
+                                ? const CircleAvatar(
+                                    backgroundColor: Colors.transparent,
+                                    radius: 35,
+                                    backgroundImage: AssetImage(
+                                        'images/4-removebg-preview.png'),
+                                  )
+                                : const NoAchievementWidget(),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            isFifthAchievementCompleted
+                                ? const CircleAvatar(
+                                    backgroundColor: Colors.transparent,
+                                    radius: 35,
+                                    backgroundImage: AssetImage(
+                                        'images/5-removebg-preview.png'),
+                                  )
+                                : const NoAchievementWidget(),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            isSixthAchievementCompleted
+                                ? const CircleAvatar(
+                                    backgroundColor: Colors.transparent,
+                                    radius: 35,
+                                    backgroundImage: AssetImage(
+                                        'images/6-removebg-preview.png'),
+                                  )
+                                : const NoAchievementWidget(),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
                   const SizedBox(height: 30),
@@ -270,6 +432,21 @@ class _QuizzWidgetState extends State<QuizzWidget> {
           },
         ),
       ),
+    );
+  }
+}
+
+class NoAchievementWidget extends StatelessWidget {
+  const NoAchievementWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return const CircleAvatar(
+      backgroundColor: Colors.transparent,
+      radius: 35,
+      backgroundImage: AssetImage('images/question_mark.png'),
     );
   }
 }

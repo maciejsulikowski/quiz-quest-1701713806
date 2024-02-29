@@ -13,6 +13,7 @@ import 'package:quiz_quest/app/domain/models/music_model/music_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/nature_model/nature_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/sports_model/sports_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/tv_model/tv_quiz_model.dart';
+import 'package:quiz_quest/app/domain/repositories/achievement_repository/achievement_repository.dart';
 import 'package:quiz_quest/app/domain/repositories/user_repository/user_repository.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/first_quiz_page_films.dart';
 import 'package:quiz_quest/app/features/quiz_pages/games_quiz_pages/first_quiz_page_games.dart';
@@ -31,8 +32,10 @@ part 'home_cubit.freezed.dart';
 
 @injectable
 class HomeCubit extends Cubit<HomeState> {
-  HomeCubit(this.userRepository) : super(const HomeState());
+  HomeCubit(this.userRepository, this.achievementRepository)
+      : super(const HomeState());
 
+  final AchievementRepository achievementRepository;
   final UserRepository userRepository;
   StreamSubscription? streamSubscription;
 
@@ -61,5 +64,125 @@ class HomeCubit extends Cubit<HomeState> {
           ),
         );
       });
+  }
+
+  Future<void> changeFirstAchievement() async {
+    try {
+      await achievementRepository.changeFirstAchievement();
+      emit(
+        const HomeState(
+          status: Status.success,
+          isSaved: true,
+        ),
+      );
+      getPointsData();
+    } catch (error) {
+      emit(
+        HomeState(
+          status: Status.error,
+          errorMessage: error.toString(),
+        ),
+      );
+    }
+  }
+
+  Future<void> changeSecondAchievement() async {
+    try {
+      await achievementRepository.changeSecondAchievement();
+      emit(
+        const HomeState(
+          status: Status.success,
+          isSaved: true,
+        ),
+      );
+      getPointsData();
+    } catch (error) {
+      emit(
+        HomeState(
+          status: Status.error,
+          errorMessage: error.toString(),
+        ),
+      );
+    }
+  }
+
+  Future<void> changeThirdAchievement() async {
+    try {
+      await achievementRepository.changeThirdAchievement();
+      emit(
+        const HomeState(
+          status: Status.success,
+          isSaved: true,
+        ),
+      );
+      getPointsData();
+    } catch (error) {
+      emit(
+        HomeState(
+          status: Status.error,
+          errorMessage: error.toString(),
+        ),
+      );
+    }
+  }
+
+  Future<void> changeFourthAchievement() async {
+    try {
+      await achievementRepository.changeFourthAchievement();
+      emit(
+        const HomeState(
+          status: Status.success,
+          isSaved: true,
+        ),
+      );
+      getPointsData();
+    } catch (error) {
+      emit(
+        HomeState(
+          status: Status.error,
+          errorMessage: error.toString(),
+        ),
+      );
+    }
+  }
+
+  Future<void> changeFifthAchievement() async {
+    try {
+      await achievementRepository.changeFifthAchievement();
+      emit(
+        const HomeState(
+          status: Status.success,
+          isSaved: true,
+        ),
+      );
+      getPointsData();
+    } catch (error) {
+      emit(
+        HomeState(
+          status: Status.error,
+          errorMessage: error.toString(),
+        ),
+      );
+    }
+  }
+
+  Future<void> changeSixthAchievement() async {
+    try {
+      await achievementRepository.changeSixthAchievement();
+      emit(
+        const HomeState(
+          status: Status.success,
+          isSaved: true,
+        ),
+      );
+      getPointsData();
+    } catch (error) {
+      emit(
+        HomeState(
+          status: Status.error,
+          errorMessage: error.toString(),
+        ),
+      );
+    }
   }
 }

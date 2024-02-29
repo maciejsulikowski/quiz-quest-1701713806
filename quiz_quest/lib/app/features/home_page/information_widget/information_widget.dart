@@ -52,10 +52,10 @@ class InformationWidget extends StatelessWidget {
           ),
         ),
         child: Container(
-          width: 40.0,
-          height: 40.0,
+          width: 50.0,
+          height: 50.0,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(30),
             gradient: const LinearGradient(
               colors: [
                 Color.fromARGB(255, 59, 102, 244),

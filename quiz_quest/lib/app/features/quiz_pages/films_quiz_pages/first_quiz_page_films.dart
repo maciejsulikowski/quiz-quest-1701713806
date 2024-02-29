@@ -10,6 +10,7 @@ import 'package:quiz_quest/app/features/home_page/cubit/home_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/easy_films_quiz_page/second_easy_quiz_page_films.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/hard_films_quiz_page/second_hard_quiz_page_films.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/medium_films_quiz_page/second_medium_quiz_page_films.dart';
+import 'package:quiz_quest/app/injection_container.dart';
 
 class FirstQuizPageFilms extends StatefulWidget {
   const FirstQuizPageFilms({
@@ -124,7 +125,7 @@ class EasyDifficultButton extends StatelessWidget {
     final dynamic easyCategory = ModalRoute.of(context)?.settings.arguments;
     final dynamic category = easyCategory[0];
     return BlocProvider(
-      create: (context) => HomeCubit(UserRepository(UserDataSource())),
+      create: (context) => getIt<HomeCubit>(),
       child: BlocBuilder<HomeCubit, HomeState>(
         builder: (context, state) {
           return Container(

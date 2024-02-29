@@ -104,7 +104,7 @@ class _HardQuestionTvQuizPageState extends State<HardQuestionTvQuizPage> {
 
   @override
   Widget build(BuildContext context) {
-    const int duration = 3;
+    const int duration = 21;
 
     return Scaffold(
       body: MultiBlocProvider(

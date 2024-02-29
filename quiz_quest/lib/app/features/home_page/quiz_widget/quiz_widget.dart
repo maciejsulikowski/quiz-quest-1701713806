@@ -94,32 +94,52 @@ class _QuizzWidgetState extends State<QuizzWidget> {
                 isFirstAchievementCompleted = true;
 
                 context.read<HomeCubit>().changeFirstAchievement();
-                if (!isAchievementSnackBarDisplayed) {
-                  isAchievementSnackBarDisplayed = true;
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      behavior: SnackBarBehavior.floating,
-                      backgroundColor: Colors.green,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      content: const Padding(
-                        padding: EdgeInsets.all(8),
-                        child: Row(
-                          children: [
-                            Icon(Icons.error, color: Colors.white),
-                            SizedBox(width: 8),
-                            Text(
-                              'First Achievement! Great and keep going!',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  );
-                }
+              } else if (!isSecondAchievementCompleted &&
+                  500 <= state.totalPoints) {
+                isSecondAchievementCompleted = true;
+                context.read<HomeCubit>().changeSecondAchievement();
+              } else if (!isThirdAchievementCompleted &&
+                  1000 <= state.totalPoints) {
+                isThirdAchievementCompleted = true;
+                context.read<HomeCubit>().changeThirdAchievement();
+              } else if (!isFourthAchievementCompleted &&
+                  2000 <= state.totalPoints) {
+                isFourthAchievementCompleted = true;
+                context.read<HomeCubit>().changeFourthAchievement();
+              } else if (!isFifthAchievementCompleted &&
+                  5000 <= state.totalPoints) {
+                isFifthAchievementCompleted = true;
+                context.read<HomeCubit>().changeFifthAchievement();
+              } else if (!isSixthAchievementCompleted &&
+                  10000 <= state.totalPoints) {
+                isSixthAchievementCompleted = true;
+                context.read<HomeCubit>().changeSixthAchievement();
               }
+              // if (!isAchievementSnackBarDisplayed) {
+              //   isAchievementSnackBarDisplayed = true;
+              //   ScaffoldMessenger.of(context).showSnackBar(
+              //     SnackBar(
+              //       behavior: SnackBarBehavior.floating,
+              //       backgroundColor: Colors.green,
+              //       shape: RoundedRectangleBorder(
+              //         borderRadius: BorderRadius.circular(10),
+              //       ),
+              //       content: const Padding(
+              //         padding: EdgeInsets.all(8),
+              //         child: Row(
+              //           children: [
+              //             Icon(Icons.error, color: Colors.white),
+              //             SizedBox(width: 8),
+              //             Text(
+              //               'First Achievement! Great and keep going!',
+              //               style: TextStyle(color: Colors.white),
+              //             ),
+              //           ],
+              //         ),
+              //       ),
+              //     ),
+              //   );
+              // }
             },
           ),
         ],

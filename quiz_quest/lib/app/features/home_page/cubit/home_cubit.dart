@@ -85,4 +85,104 @@ class HomeCubit extends Cubit<HomeState> {
       );
     }
   }
+
+  Future<void> changeSecondAchievement() async {
+    try {
+      await achievementRepository.changeSecondAchievement();
+      emit(
+        const HomeState(
+          status: Status.success,
+          isSaved: true,
+        ),
+      );
+      getPointsData();
+    } catch (error) {
+      emit(
+        HomeState(
+          status: Status.error,
+          errorMessage: error.toString(),
+        ),
+      );
+    }
+  }
+
+  Future<void> changeThirdAchievement() async {
+    try {
+      await achievementRepository.changeThirdAchievement();
+      emit(
+        const HomeState(
+          status: Status.success,
+          isSaved: true,
+        ),
+      );
+      getPointsData();
+    } catch (error) {
+      emit(
+        HomeState(
+          status: Status.error,
+          errorMessage: error.toString(),
+        ),
+      );
+    }
+  }
+
+  Future<void> changeFourthAchievement() async {
+    try {
+      await achievementRepository.changeFourthAchievement();
+      emit(
+        const HomeState(
+          status: Status.success,
+          isSaved: true,
+        ),
+      );
+      getPointsData();
+    } catch (error) {
+      emit(
+        HomeState(
+          status: Status.error,
+          errorMessage: error.toString(),
+        ),
+      );
+    }
+  }
+
+  Future<void> changeFifthAchievement() async {
+    try {
+      await achievementRepository.changeFifthAchievement();
+      emit(
+        const HomeState(
+          status: Status.success,
+          isSaved: true,
+        ),
+      );
+      getPointsData();
+    } catch (error) {
+      emit(
+        HomeState(
+          status: Status.error,
+          errorMessage: error.toString(),
+        ),
+      );
+    }
+  }
+
+  Future<void> changeSixthAchievement() async {
+    try {
+      await achievementRepository.changeSixthAchievement();
+      emit(
+        const HomeState(
+          status: Status.success,
+          isSaved: true,
+        ),
+      );
+      getPointsData();
+    } catch (error) {
+      emit(
+        HomeState(
+          status: Status.error,
+          errorMessage: error.toString(),
+        ),
+      );
+    }
+  }
 }

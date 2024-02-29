@@ -193,6 +193,7 @@ class _UserWidgetState extends State<UserWidget> {
                 setState(() {
                   isLoading = false;
                 });
+                // ignore: use_build_context_synchronously
                 context.read<UserCubit>().updateImage(imageURL);
               } catch (error) {
                 setState(() {
@@ -239,7 +240,7 @@ class _UserWidgetState extends State<UserWidget> {
               ),
             ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 20),
             decoration: BoxDecoration(
@@ -358,7 +359,7 @@ class _UserWidgetState extends State<UserWidget> {
                   )),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
         ],
@@ -435,8 +436,12 @@ class _UserWidgetState extends State<UserWidget> {
                   ),
                   onPressed: enableEditing
                       ? () async {
-                          await onPressed(controller.text, onUpdate);
-                          _showSnackbar('Changes are saved succesfully');
+                          if (controller.text.isNotEmpty) {
+                            await onPressed(controller.text, onUpdate);
+                            _showSnackbar('Changes are saved successfully');
+                          } else {
+                            _showSnackbar('The field cannot be empty!');
+                          }
                         }
                       : null,
                 ),

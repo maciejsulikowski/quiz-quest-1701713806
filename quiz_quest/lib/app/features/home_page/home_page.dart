@@ -81,7 +81,7 @@ class _HomePageState extends State<HomePage> {
                       isNewUser: state.userModel!.isUserNew,
                       setUserOld: (value) {
                         setState(() {
-                          state.userModel!.isUserNew = value;
+                          state.userModel!.isUserNew == value;
                         });
                       },
                     );
@@ -105,9 +105,3 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-
-
-
-
-
-

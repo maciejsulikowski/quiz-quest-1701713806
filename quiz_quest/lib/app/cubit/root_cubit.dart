@@ -1,17 +1,16 @@
 import 'dart:async';
-import 'package:freezed_annotation/freezed_annotation.dart';
+
 import 'package:bloc/bloc.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:meta/meta.dart';
 import 'package:quiz_quest/app/core/enums.dart';
 import 'package:quiz_quest/app/domain/repositories/achievement_repository/achievement_repository.dart';
 import 'package:quiz_quest/app/domain/repositories/ranking_respository/ranking_repository.dart';
 import 'package:quiz_quest/app/domain/repositories/user_repository/user_repository.dart';
 
-part 'root_state.dart';
 part 'root_cubit.freezed.dart';
+part 'root_state.dart';
 
 @injectable
 class RootCubit extends Cubit<RootState> {

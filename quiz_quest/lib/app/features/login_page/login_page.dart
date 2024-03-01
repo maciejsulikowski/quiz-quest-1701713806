@@ -4,9 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:quiz_quest/app/core/enums.dart';
 import 'package:quiz_quest/app/cubit/root_cubit.dart';
-import 'package:quiz_quest/app/features/home_page/cubit/home_cubit.dart';
 import 'package:quiz_quest/app/features/home_page/home_page.dart';
-import 'package:quiz_quest/app/features/login_page/first_page_after_registration.dart';
 import 'package:quiz_quest/app/features/login_page/forgot_password_page.dart';
 
 class LoginPage extends StatefulWidget {

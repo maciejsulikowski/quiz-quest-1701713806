@@ -1,8 +1,7 @@
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/easy_films_quiz_page/easy_question_quiz_page.dart';
 
+// ignore: must_be_immutable
 class CountDownTimer extends StatefulWidget {
   CountDownTimer({
     super.key,

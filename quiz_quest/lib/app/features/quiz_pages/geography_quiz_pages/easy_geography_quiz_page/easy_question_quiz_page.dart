@@ -1,22 +1,10 @@
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quiz_quest/app/core/enums.dart';
-import 'package:quiz_quest/app/data/data_sources/quiz_data_source/quiz_categories_data_source.dart';
-import 'package:quiz_quest/app/data/data_sources/user_data_source/user_data_source.dart';
-import 'package:quiz_quest/app/domain/models/films_model/films_quiz_model.dart';
-import 'package:quiz_quest/app/domain/models/games_model/games_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/geography_model/geography_quiz_model.dart';
-import 'package:quiz_quest/app/domain/repositories/quiz_repository/quiz_repository.dart';
-import 'package:quiz_quest/app/domain/repositories/user_repository/user_repository.dart';
 import 'package:quiz_quest/app/features/home_page/ranking_widget/cubit/ranking_cubit.dart';
-import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/cubit/films_cubit.dart';
-import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/easy_films_quiz_page/easy_lost_life_page.dart';
-import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/easy_films_quiz_page/resume_easy_question_quiz_page.dart';
-import 'package:quiz_quest/app/features/quiz_pages/games_quiz_pages/cubit/games_cubit.dart';
-import 'package:quiz_quest/app/features/quiz_pages/games_quiz_pages/easy_games_quiz_page/easy_games_lost_life_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/geography_quiz_pages/cubit/geography_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/geography_quiz_pages/easy_geography_quiz_page/easy_geography_anwer_button.dart';
 import 'package:quiz_quest/app/features/quiz_pages/geography_quiz_pages/easy_geography_quiz_page/easy_geography_lost_life_page.dart';
@@ -119,7 +107,7 @@ class _EasyQuestionGeographyQuizPageState
 
   @override
   Widget build(BuildContext context) {
-    const int duration = 3;
+    const int duration = 21;
 
     return Scaffold(
       body: MultiBlocProvider(

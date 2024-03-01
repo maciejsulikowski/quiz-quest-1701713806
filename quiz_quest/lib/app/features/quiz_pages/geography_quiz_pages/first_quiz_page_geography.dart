@@ -1,19 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:quiz_quest/app/core/enums.dart';
-import 'package:quiz_quest/app/data/data_sources/quiz_data_source/quiz_categories_data_source.dart';
-import 'package:quiz_quest/app/data/data_sources/user_data_source/user_data_source.dart';
-import 'package:quiz_quest/app/domain/repositories/quiz_repository/quiz_repository.dart';
-import 'package:quiz_quest/app/domain/repositories/user_repository/user_repository.dart';
 import 'package:quiz_quest/app/features/home_page/cubit/home_cubit.dart';
-import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/easy_films_quiz_page/second_easy_quiz_page_films.dart';
-import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/hard_films_quiz_page/second_hard_quiz_page_films.dart';
-import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/medium_films_quiz_page/second_medium_quiz_page_films.dart';
-import 'package:quiz_quest/app/features/quiz_pages/games_quiz_pages/easy_games_quiz_page/second_easy_quiz_page_games.dart';
-import 'package:quiz_quest/app/features/quiz_pages/games_quiz_pages/hard_games_quiz_page/second_hard_quiz_page_games.dart';
-import 'package:quiz_quest/app/features/quiz_pages/games_quiz_pages/medium_games_quiz_page/medium_question_quiz_page.dart';
-import 'package:quiz_quest/app/features/quiz_pages/games_quiz_pages/medium_games_quiz_page/second_medium_quiz_page_games.dart';
 import 'package:quiz_quest/app/features/quiz_pages/geography_quiz_pages/easy_geography_quiz_page/second_easy_quiz_page_geography.dart';
 import 'package:quiz_quest/app/features/quiz_pages/geography_quiz_pages/hard_geography_quiz_page/second_hard_quiz_page_geography.dart';
 import 'package:quiz_quest/app/features/quiz_pages/geography_quiz_pages/medium_geography_quiz_page/second_medium_quiz_page_geography.dart';
@@ -71,7 +59,6 @@ class QuizzPage extends StatelessWidget {
       ),
       child: ListView(
         children: [
-          
           Center(
             child: CircleAvatar(
               radius: 35,

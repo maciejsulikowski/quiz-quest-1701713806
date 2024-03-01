@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 import 'package:quiz_quest/app/core/enums.dart';
@@ -8,6 +9,7 @@ import 'package:quiz_quest/app/domain/models/achievements_model/achievements_mod
 import 'package:quiz_quest/app/domain/repositories/achievement_repository/achievement_repository.dart';
 
 part 'achievements_state.dart';
+part 'achievements_cubit.freezed.dart';
 
 @injectable
 class AchievementsCubit extends Cubit<AchievementsState> {

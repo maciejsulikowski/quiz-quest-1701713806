@@ -36,6 +36,8 @@ abstract class $UserStateCopyWith<$Res> {
       Status status,
       String? errorMessage,
       bool isSaved});
+
+  $UserModelCopyWith<$Res>? get userModel;
 }
 
 /// @nodoc
@@ -75,6 +77,18 @@ class _$UserStateCopyWithImpl<$Res, $Val extends UserState>
               as bool,
     ) as $Val);
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserModelCopyWith<$Res>? get userModel {
+    if (_value.userModel == null) {
+      return null;
+    }
+
+    return $UserModelCopyWith<$Res>(_value.userModel!, (value) {
+      return _then(_value.copyWith(userModel: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -90,6 +104,9 @@ abstract class _$$UserStateImplCopyWith<$Res>
       Status status,
       String? errorMessage,
       bool isSaved});
+
+  @override
+  $UserModelCopyWith<$Res>? get userModel;
 }
 
 /// @nodoc

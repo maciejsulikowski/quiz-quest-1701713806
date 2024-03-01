@@ -1,16 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:quiz_quest/app/core/enums.dart';
-import 'package:quiz_quest/app/data/data_sources/quiz_data_source/quiz_categories_data_source.dart';
-import 'package:quiz_quest/app/domain/repositories/quiz_repository/quiz_repository.dart';
-import 'package:quiz_quest/app/features/home_page/home_page.dart';
-import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/easy_films_quiz_page/easy_question_quiz_page.dart';
-import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/first_quiz_page_films.dart';
-import 'package:quiz_quest/app/features/quiz_pages/games_quiz_pages/easy_games_quiz_page/easy_question_quiz_page.dart';
-import 'package:quiz_quest/app/features/quiz_pages/geography_quiz_pages/easy_geography_quiz_page/easy_question_quiz_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/geography_quiz_pages/hard_geography_quiz_page/hard_question_quiz_page.dart';
-import 'package:quiz_quest/app/features/quiz_pages/geography_quiz_pages/medium_geography_quiz_page/medium_question_quiz_page.dart';
 
 class HardGeographyLostLifePage extends StatefulWidget {
   const HardGeographyLostLifePage({

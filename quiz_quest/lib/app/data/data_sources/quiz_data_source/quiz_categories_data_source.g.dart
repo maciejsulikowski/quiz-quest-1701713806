@@ -33,7 +33,7 @@ class _QuizCategoriesRetrofitDataSource
     )
             .compose(
               _dio.options,
-              '/api.php?amount=10&category=11&difficulty=easy&type=multiple',
+              '/api.php?amount=50&category=11&difficulty=easy&type=multiple',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -60,7 +60,7 @@ class _QuizCategoriesRetrofitDataSource
     )
             .compose(
               _dio.options,
-              '/api.php?amount=10&category=11&difficulty=medium&type=multiple',
+              '/api.php?amount=50&category=11&difficulty=medium&type=multiple',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -87,7 +87,7 @@ class _QuizCategoriesRetrofitDataSource
     )
             .compose(
               _dio.options,
-              '/api.php?amount=10&category=11&difficulty=hard&type=multiple',
+              '/api.php?amount=40&category=11&difficulty=hard&type=multiple',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -114,7 +114,7 @@ class _QuizCategoriesRetrofitDataSource
     )
             .compose(
               _dio.options,
-              '/api.php?amount=10&category=15&difficulty=easy&type=multiple',
+              '/api.php?amount=50&category=15&difficulty=easy&type=multiple',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -141,7 +141,7 @@ class _QuizCategoriesRetrofitDataSource
     )
             .compose(
               _dio.options,
-              '/api.php?amount=10&category=15&difficulty=medium&type=multiple',
+              '/api.php?amount=50&category=15&difficulty=medium&type=multiple',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -168,7 +168,7 @@ class _QuizCategoriesRetrofitDataSource
     )
             .compose(
               _dio.options,
-              '/api.php?amount=10&category=15&difficulty=hard&type=multiple',
+              '/api.php?amount=50&category=15&difficulty=hard&type=multiple',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -195,7 +195,7 @@ class _QuizCategoriesRetrofitDataSource
     )
             .compose(
               _dio.options,
-              '/api.php?amount=10&category=12&difficulty=easy&type=multiple',
+              '/api.php?amount=50&category=12&difficulty=easy&type=multiple',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -222,7 +222,7 @@ class _QuizCategoriesRetrofitDataSource
     )
             .compose(
               _dio.options,
-              '/api.php?amount=10&category=12&difficulty=medium&type=multiple',
+              '/api.php?amount=50&category=12&difficulty=medium&type=multiple',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -249,7 +249,7 @@ class _QuizCategoriesRetrofitDataSource
     )
             .compose(
               _dio.options,
-              '/api.php?amount=10&category=12&difficulty=hard&type=multiple',
+              '/api.php?amount=50&category=12&difficulty=hard&type=multiple',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -276,7 +276,7 @@ class _QuizCategoriesRetrofitDataSource
     )
             .compose(
               _dio.options,
-              '/api.php?amount=10&category=17&difficulty=easy&type=multiple',
+              '/api.php?amount=50&category=17&difficulty=easy&type=multiple',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -303,7 +303,7 @@ class _QuizCategoriesRetrofitDataSource
     )
             .compose(
               _dio.options,
-              '/api.php?amount=10&category=17&difficulty=medium&type=multiple',
+              '/api.php?amount=50&category=17&difficulty=medium&type=multiple',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -330,7 +330,7 @@ class _QuizCategoriesRetrofitDataSource
     )
             .compose(
               _dio.options,
-              '/api.php?amount=10&category=17&difficulty=hard&type=multiple',
+              '/api.php?amount=50&category=17&difficulty=hard&type=multiple',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -357,7 +357,7 @@ class _QuizCategoriesRetrofitDataSource
     )
             .compose(
               _dio.options,
-              '/api.php?amount=10&category=22&difficulty=easy&type=multiple',
+              '/api.php?amount=50&category=22&difficulty=easy&type=multiple',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -384,7 +384,7 @@ class _QuizCategoriesRetrofitDataSource
     )
             .compose(
               _dio.options,
-              '/api.php?amount=10&category=22&difficulty=medium&type=multiple',
+              '/api.php?amount=50&category=22&difficulty=medium&type=multiple',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -411,7 +411,7 @@ class _QuizCategoriesRetrofitDataSource
     )
             .compose(
               _dio.options,
-              '/api.php?amount=10&category=22&difficulty=hard&type=multiple',
+              '/api.php?amount=50&category=22&difficulty=hard&type=multiple',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -438,7 +438,7 @@ class _QuizCategoriesRetrofitDataSource
     )
             .compose(
               _dio.options,
-              '/api.php?amount=10&category=23&difficulty=easy&type=multiple',
+              '/api.php?amount=50&category=23&difficulty=easy&type=multiple',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -465,7 +465,7 @@ class _QuizCategoriesRetrofitDataSource
     )
             .compose(
               _dio.options,
-              '/api.php?amount=10&category=23&difficulty=medium&type=multiple',
+              '/api.php?amount=50&category=23&difficulty=medium&type=multiple',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -492,7 +492,7 @@ class _QuizCategoriesRetrofitDataSource
     )
             .compose(
               _dio.options,
-              '/api.php?amount=10&category=23&difficulty=hard&type=multiple',
+              '/api.php?amount=50&category=23&difficulty=hard&type=multiple',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -519,7 +519,7 @@ class _QuizCategoriesRetrofitDataSource
     )
             .compose(
               _dio.options,
-              '/api.php?amount=10&category=21&difficulty=easy&type=multiple',
+              '/api.php?amount=40&category=21&difficulty=easy&type=multiple',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -546,7 +546,7 @@ class _QuizCategoriesRetrofitDataSource
     )
             .compose(
               _dio.options,
-              '/api.php?amount=10&category=21&difficulty=medium&type=multiple',
+              '/api.php?amount=50&category=21&difficulty=medium&type=multiple',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -573,7 +573,7 @@ class _QuizCategoriesRetrofitDataSource
     )
             .compose(
               _dio.options,
-              '/api.php?amount=10&category=21&difficulty=hard&type=multiple',
+              '/api.php?amount=20&category=21&difficulty=hard&type=multiple',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -600,7 +600,7 @@ class _QuizCategoriesRetrofitDataSource
     )
             .compose(
               _dio.options,
-              '/api.php?amount=10&category=14&difficulty=easy&type=multiple',
+              '/api.php?amount=50&category=14&difficulty=easy&type=multiple',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -627,7 +627,7 @@ class _QuizCategoriesRetrofitDataSource
     )
             .compose(
               _dio.options,
-              '/api.php?amount=10&category=14&difficulty=medium&type=multiple',
+              '/api.php?amount=50&category=14&difficulty=medium&type=multiple',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -654,7 +654,7 @@ class _QuizCategoriesRetrofitDataSource
     )
             .compose(
               _dio.options,
-              '/api.php?amount=10&category=14&difficulty=hard&type=multiple',
+              '/api.php?amount=25&category=14&difficulty=hard&type=multiple',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -681,7 +681,7 @@ class _QuizCategoriesRetrofitDataSource
     )
             .compose(
               _dio.options,
-              '/api.php?amount=10&category=9&difficulty=easy&type=multiple',
+              '/api.php?amount=50&category=9&difficulty=easy&type=multiple',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -708,7 +708,7 @@ class _QuizCategoriesRetrofitDataSource
     )
             .compose(
               _dio.options,
-              '/api.php?amount=10&category=9&difficulty=medium&type=multiple',
+              '/api.php?amount=50&category=9&difficulty=medium&type=multiple',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -735,7 +735,7 @@ class _QuizCategoriesRetrofitDataSource
     )
             .compose(
               _dio.options,
-              '/api.php?amount=10&category=9&difficulty=hard&type=multiple',
+              '/api.php?amount=50&category=9&difficulty=hard&type=multiple',
               queryParameters: queryParameters,
               data: _data,
             )

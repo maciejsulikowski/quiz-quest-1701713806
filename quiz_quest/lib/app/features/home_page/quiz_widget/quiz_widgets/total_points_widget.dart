@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:share_plus/share_plus.dart';
 
-
 class TotalPointsWidget extends StatelessWidget {
   const TotalPointsWidget({
     super.key,
@@ -48,7 +47,7 @@ class TotalPointsWidget extends StatelessWidget {
                     },
                     icon: const Icon(
                       Icons.share,
-                      color: Colors.white54,
+                      color: Colors.white60,
                     ))
                 : const SizedBox.shrink(),
           ],

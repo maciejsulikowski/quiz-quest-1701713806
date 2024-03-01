@@ -7,7 +7,6 @@ import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/cubit/films_
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/hard_films_quiz_page/hard_lost_life_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/films_quiz_pages/hard_films_quiz_page/hard_question_quiz_page.dart';
 
-
 // ignore: must_be_immutable
 class HardFilmsAnswerButton extends StatefulWidget {
   HardFilmsAnswerButton({
@@ -83,7 +82,8 @@ class _HardFilmsAnswerButtonState extends State<HardFilmsAnswerButton> {
         .replaceAll('&rsquo;', '')
         .replaceAll('&rdquo;', '')
         .replaceAll('&ldquo;', '')
-        .replaceAll('&hellip;', '');
+        .replaceAll('&hellip;', '')
+        .replaceAll('&egrave;', '');
 
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20),

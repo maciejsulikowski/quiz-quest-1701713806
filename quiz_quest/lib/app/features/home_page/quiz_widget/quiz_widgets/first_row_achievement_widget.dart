@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quiz_quest/app/features/home_page/cubit/home_cubit.dart';
 import 'package:quiz_quest/app/features/home_page/quiz_widget/quiz_widgets/no_achievement_widget.dart';
 
 class FirstRowAchievementsWidget extends StatelessWidget {

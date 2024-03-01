@@ -74,31 +74,6 @@ class _QuizzWidgetState extends State<QuizzWidget> {
           // ),
           BlocListener<HomeCubit, HomeState>(
             listener: (context, state) {
-              // if (!isFirstAchievementCompleted && 100 <= state.totalPoints) {
-              //   isFirstAchievementCompleted = true;
-
-              //   context.read<HomeCubit>().changeFirstAchievement();
-              // } else if (!isSecondAchievementCompleted &&
-              //     500 <= state.totalPoints) {
-              //   isSecondAchievementCompleted = true;
-              //   context.read<HomeCubit>().changeSecondAchievement();
-              // } else if (!isThirdAchievementCompleted &&
-              //     1000 <= state.totalPoints) {
-              //   isThirdAchievementCompleted = true;
-              //   context.read<HomeCubit>().changeThirdAchievement();
-              // } else if (!isFourthAchievementCompleted &&
-              //     2000 <= state.totalPoints) {
-              //   isFourthAchievementCompleted = true;
-              //   context.read<HomeCubit>().changeFourthAchievement();
-              // } else if (!isFifthAchievementCompleted &&
-              //     5000 <= state.totalPoints) {
-              //   isFifthAchievementCompleted = true;
-              //   context.read<HomeCubit>().changeFifthAchievement();
-              // } else if (!isSixthAchievementCompleted &&
-              //     10000 <= state.totalPoints) {
-              //   isSixthAchievementCompleted = true;
-              //   context.read<HomeCubit>().changeSixthAchievement();
-              // }
               // if (!isAchievementSnackBarDisplayed) {
               //   isAchievementSnackBarDisplayed = true;
               //   ScaffoldMessenger.of(context).showSnackBar(
@@ -198,7 +173,7 @@ class _QuizzWidgetState extends State<QuizzWidget> {
                           height: 10,
                         ),
                         SecondRowAchievementWidget(
-                           totalPoints: allPoints,
+                            totalPoints: allPoints,
                             isFourthAchievementCompleted:
                                 isFourthAchievementCompleted,
                             isFifthAchievementCompleted:

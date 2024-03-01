@@ -37,7 +37,7 @@ class HomeCubit extends Cubit<HomeState> {
   StreamSubscription? streamSubscription;
 
   Future<void> getPointsData() async {
-    emit(state.copyWith(
+    emit(const HomeState(
       status: Status.loading,
     ));
 
@@ -47,7 +47,7 @@ class HomeCubit extends Cubit<HomeState> {
         totalPoints += element['total']!;
       }
 
-      emit(state.copyWith(
+      emit(HomeState(
         categoryPoints: points,
         totalPoints: totalPoints,
         status: Status.success,
@@ -55,7 +55,7 @@ class HomeCubit extends Cubit<HomeState> {
     })
       ..onError((error) {
         emit(
-          state.copyWith(
+          HomeState(
             status: Status.error,
             errorMessage: error.toString(),
           ),
@@ -67,14 +67,14 @@ class HomeCubit extends Cubit<HomeState> {
     try {
       await achievementRepository.changeFirstAchievement();
       emit(
-        state.copyWith(
+        const HomeState(
           status: Status.success,
           isSaved: true,
         ),
       );
     } catch (error) {
       emit(
-        state.copyWith(
+        HomeState(
           status: Status.error,
           errorMessage: error.toString(),
         ),
@@ -86,14 +86,14 @@ class HomeCubit extends Cubit<HomeState> {
     try {
       await achievementRepository.changeSecondAchievement();
       emit(
-        state.copyWith(
+        const HomeState(
           status: Status.success,
           isSaved: true,
         ),
       );
     } catch (error) {
       emit(
-        state.copyWith(
+        HomeState(
           status: Status.error,
           errorMessage: error.toString(),
         ),
@@ -105,14 +105,14 @@ class HomeCubit extends Cubit<HomeState> {
     try {
       await achievementRepository.changeThirdAchievement();
       emit(
-        state.copyWith(
+        const HomeState(
           status: Status.success,
           isSaved: true,
         ),
       );
     } catch (error) {
       emit(
-        state.copyWith(
+        HomeState(
           status: Status.error,
           errorMessage: error.toString(),
         ),
@@ -124,14 +124,14 @@ class HomeCubit extends Cubit<HomeState> {
     try {
       await achievementRepository.changeFourthAchievement();
       emit(
-        state.copyWith(
+        const HomeState(
           status: Status.success,
           isSaved: true,
         ),
       );
     } catch (error) {
       emit(
-        state.copyWith(
+        HomeState(
           status: Status.error,
           errorMessage: error.toString(),
         ),
@@ -143,14 +143,14 @@ class HomeCubit extends Cubit<HomeState> {
     try {
       await achievementRepository.changeFifthAchievement();
       emit(
-        state.copyWith(
+        const HomeState(
           status: Status.success,
           isSaved: true,
         ),
       );
     } catch (error) {
       emit(
-        state.copyWith(
+        HomeState(
           status: Status.error,
           errorMessage: error.toString(),
         ),
@@ -162,14 +162,14 @@ class HomeCubit extends Cubit<HomeState> {
     try {
       await achievementRepository.changeSixthAchievement();
       emit(
-        state.copyWith(
+        const HomeState(
           status: Status.success,
           isSaved: true,
         ),
       );
     } catch (error) {
       emit(
-        state.copyWith(
+        HomeState(
           status: Status.error,
           errorMessage: error.toString(),
         ),

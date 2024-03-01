@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:quiz_quest/app/features/home_page/cubit/home_cubit.dart';
 import 'package:quiz_quest/app/features/user_page/achievements/achievements_widgets/achievement_container.dart';
 import 'package:quiz_quest/app/features/user_page/achievements/achievements_widgets/fifth_achievement.dart';
 import 'package:quiz_quest/app/features/user_page/achievements/achievements_widgets/first_achievement.dart';
@@ -14,11 +15,8 @@ import 'package:quiz_quest/app/injection_container.dart';
 
 class AchievementsPage extends StatefulWidget {
   const AchievementsPage({
-    required this.user,
     super.key,
   });
-
-  final User? user;
 
   @override
   State<AchievementsPage> createState() => _AchievementsPageState();
@@ -34,20 +32,15 @@ class _AchievementsPageState extends State<AchievementsPage> {
         elevation: 0,
         iconTheme: const IconThemeData(color: Colors.white),
       ),
-      body: AchievementsWidget(
-        user: widget.user!,
-      ),
+      body: const AchievementsWidget(),
     );
   }
 }
 
 class AchievementsWidget extends StatefulWidget {
   const AchievementsWidget({
-    required this.user,
     super.key,
   });
-
-  final User? user;
 
   @override
   State<AchievementsWidget> createState() => _AchievementsWidgetState();
@@ -57,9 +50,11 @@ class _AchievementsWidgetState extends State<AchievementsWidget> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<AchievementsCubit>()..getAchievements(),
-      child: BlocBuilder<AchievementsCubit, AchievementsState>(
+      create: (context) => getIt<HomeCubit>()..getPointsData(),
+      child: BlocBuilder<HomeCubit, HomeState>(
         builder: (context, state) {
+          final allPoints = state.totalPoints;
+
           return Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
@@ -87,52 +82,39 @@ class _AchievementsWidgetState extends State<AchievementsWidget> {
                   ),
                 ),
                 const SizedBox(height: 10),
-                if (state.achievementModel != null)
-                  AchievementContainer(
-                    achievementWidget: FirstAchievement(
-                        firstAchievement:
-                            state.achievementModel!.isFirstAchievementReady),
-                  ),
+                AchievementContainer(
+                  achievementWidget: FirstAchievement(totalPoints: allPoints),
+                ),
                 const SizedBox(height: 10),
-                if (state.achievementModel != null)
-                  AchievementContainer(
-                    achievementWidget: SecondAchievement(
-                      secondAchievement:
-                          state.achievementModel!.isSecondAchievementReady,
-                    ),
+                AchievementContainer(
+                  achievementWidget: SecondAchievement(
+                    totalPoints: allPoints,
                   ),
+                ),
                 const SizedBox(height: 10),
-                if (state.achievementModel != null)
-                  AchievementContainer(
-                    achievementWidget: ThirdAchievement(
-                      thirdAchievement:
-                          state.achievementModel!.isThirdAchievementReady,
-                    ),
+                AchievementContainer(
+                  achievementWidget: ThirdAchievement(
+                    totalPoints: allPoints,
                   ),
+                ),
                 const SizedBox(height: 10),
-                if (state.achievementModel != null)
-                  AchievementContainer(
-                    achievementWidget: FourthAchievement(
-                      fourthAchievement:
-                          state.achievementModel!.isFourthAchievementReady,
-                    ),
+                AchievementContainer(
+                  achievementWidget: FourthAchievement(
+                    totalPoints: allPoints,
                   ),
+                ),
                 const SizedBox(height: 10),
-                if (state.achievementModel != null)
-                  AchievementContainer(
-                    achievementWidget: FifthAchievement(
-                      fifthAchievement:
-                          state.achievementModel!.isFifthAchievementReady,
-                    ),
+                AchievementContainer(
+                  achievementWidget: FifthAchievement(
+                    totalPoints: allPoints,
                   ),
+                ),
                 const SizedBox(height: 10),
-                if (state.achievementModel != null)
-                  AchievementContainer(
-                    achievementWidget: SixthAchievement(
-                      sixthAchievement:
-                          state.achievementModel!.isSixthAchievementReady,
-                    ),
+                AchievementContainer(
+                  achievementWidget: SixthAchievement(
+                    totalPoints: allPoints,
                   ),
+                ),
                 const SizedBox(height: 10),
               ],
             ),

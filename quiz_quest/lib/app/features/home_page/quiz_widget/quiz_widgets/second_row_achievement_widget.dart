@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_quest/app/features/home_page/quiz_widget/quiz_widgets/no_achievement_widget.dart';
+
 class SecondRowAchievementWidget extends StatelessWidget {
   const SecondRowAchievementWidget({
     super.key,
+    required this.totalPoints,
     required this.isFourthAchievementCompleted,
     required this.isFifthAchievementCompleted,
     required this.isSixthAchievementCompleted,
   });
 
+  final int totalPoints;
   final bool isFourthAchievementCompleted;
   final bool isFifthAchievementCompleted;
   final bool isSixthAchievementCompleted;
@@ -17,7 +20,7 @@ class SecondRowAchievementWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        isFourthAchievementCompleted
+        2000 <= totalPoints
             ? const CircleAvatar(
                 backgroundColor: Colors.transparent,
                 radius: 35,
@@ -27,7 +30,7 @@ class SecondRowAchievementWidget extends StatelessWidget {
         const SizedBox(
           width: 10,
         ),
-        isFifthAchievementCompleted
+        5000 <= totalPoints
             ? const CircleAvatar(
                 backgroundColor: Colors.transparent,
                 radius: 35,
@@ -37,7 +40,7 @@ class SecondRowAchievementWidget extends StatelessWidget {
         const SizedBox(
           width: 10,
         ),
-        isSixthAchievementCompleted
+        10000 <= totalPoints
             ? const CircleAvatar(
                 backgroundColor: Colors.transparent,
                 radius: 35,

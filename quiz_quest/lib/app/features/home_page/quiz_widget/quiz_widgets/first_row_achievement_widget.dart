@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_quest/app/features/home_page/quiz_widget/quiz_widgets/no_achievement_widget.dart';
+
 class FirstRowAchievementsWidget extends StatelessWidget {
   const FirstRowAchievementsWidget({
     super.key,
+    required this.totalPoints,
     required this.isFirstAchievementCompleted,
     required this.isSecondAchievementCompleted,
     required this.isThirdAchievementCompleted,
   });
 
+  final int totalPoints;
   final bool isFirstAchievementCompleted;
   final bool isSecondAchievementCompleted;
   final bool isThirdAchievementCompleted;
@@ -17,7 +20,7 @@ class FirstRowAchievementsWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        isFirstAchievementCompleted
+        100 <= totalPoints
             ? const CircleAvatar(
                 backgroundColor: Colors.transparent,
                 radius: 35,
@@ -27,7 +30,7 @@ class FirstRowAchievementsWidget extends StatelessWidget {
         const SizedBox(
           width: 10,
         ),
-        isSecondAchievementCompleted
+        500 <= totalPoints
             ? const CircleAvatar(
                 backgroundColor: Colors.transparent,
                 radius: 35,
@@ -37,7 +40,7 @@ class FirstRowAchievementsWidget extends StatelessWidget {
         const SizedBox(
           width: 10,
         ),
-        isThirdAchievementCompleted
+        1000 <= totalPoints
             ? const CircleAvatar(
                 backgroundColor: Colors.transparent,
                 radius: 35,

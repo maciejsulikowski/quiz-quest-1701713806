@@ -81,8 +81,10 @@ extension GetItInjectableX on _i1.GetIt {
       instanceName: 'BaseUrl',
     );
     gh.factory<_i8.UserDataSource>(() => _i8.UserDataSource());
-    gh.factory<_i9.UserRepository>(
-        () => _i9.UserRepository(gh<_i8.UserDataSource>()));
+    gh.factory<_i9.UserRepository>(() => _i9.UserRepository(
+          gh<_i8.UserDataSource>(),
+          gh<_i3.AchievementDataSource>(),
+        ));
     gh.lazySingleton<_i10.Dio>(
         () => registerModule.dio(gh<String>(instanceName: 'BaseUrl')));
     gh.factory<_i11.HomeCubit>(() => _i11.HomeCubit(

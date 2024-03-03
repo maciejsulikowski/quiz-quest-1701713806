@@ -12,7 +12,8 @@ import 'package:quiz_quest/app/features/home_page/quiz_widget/quiz_widgets/hello
 import 'package:quiz_quest/app/features/home_page/quiz_widget/quiz_widgets/lets_play_widget.dart';
 import 'package:quiz_quest/app/features/home_page/quiz_widget/quiz_widgets/second_row_achievement_widget.dart';
 import 'package:quiz_quest/app/features/home_page/quiz_widget/quiz_widgets/total_points_widget.dart';
-import 'package:quiz_quest/app/features/user_page/cubit/user_cubit.dart';
+import 'package:quiz_quest/app/features/user_page/achievements/cubit/achievements_cubit.dart';
+
 import 'package:quiz_quest/app/injection_container.dart';
 import 'package:super_tooltip/super_tooltip.dart';
 
@@ -61,51 +62,62 @@ class _QuizzWidgetState extends State<QuizzWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getIt<HomeCubit>()..getPointsData(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => getIt<HomeCubit>()
+            ..getPointsData()
+            ..getAchievements(),
+        ),
+      ],
       child: MultiBlocListener(
         listeners: [
-          // BlocListener<UserCubit, UserState>(
-          //   listener: (context, state) {
-          //     if (state.isSaved) {
-          //       context.read<UserCubit>().start();
-          //     }
-          //   },
-          // ),
-          BlocListener<HomeCubit, HomeState>(
-            listener: (context, state) {
-              // if (!isAchievementSnackBarDisplayed) {
-              //   isAchievementSnackBarDisplayed = true;
-              //   ScaffoldMessenger.of(context).showSnackBar(
-              //     SnackBar(
-              //       behavior: SnackBarBehavior.floating,
-              //       backgroundColor: Colors.green,
-              //       shape: RoundedRectangleBorder(
-              //         borderRadius: BorderRadius.circular(10),
-              //       ),
-              //       content: const Padding(
-              //         padding: EdgeInsets.all(8),
-              //         child: Row(
-              //           children: [
-              //             Icon(Icons.error, color: Colors.white),
-              //             SizedBox(width: 8),
-              //             Text(
-              //               'First Achievement! Great and keep going!',
-              //               style: TextStyle(color: Colors.white),
-              //             ),
-              //           ],
-              //         ),
-              //       ),
-              //     ),
-              //   );
-              // }
-            },
-          ),
+          BlocListener<HomeCubit, HomeState>(listener: (context, state) {
+            var achievementModel = state.achievementModel;
+            if (achievementModel != null) {
+              var firstAchievement =
+                  state.achievementModel?.isFirstAchievementReady;
+
+              print(firstAchievement);
+
+              if (state.status == Status.success) {
+                var totalPoints = state.totalPoints;
+
+                print(totalPoints);
+
+                if (firstAchievement == false && state.totalPoints >= 100) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      behavior: SnackBarBehavior.floating,
+                      backgroundColor: Colors.green,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      content: const Padding(
+                        padding: EdgeInsets.all(8),
+                        child: Row(
+                          children: [
+                            Icon(Icons.error, color: Colors.white),
+                            SizedBox(width: 8),
+                            Text(
+                              'First Achievement! Great and keep going!',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                  context.read<HomeCubit>().changeFirstAchievement();
+                }
+              }
+            }
+          }),
         ],
         child: BlocBuilder<HomeCubit, HomeState>(
           builder: (context, state) {
             final allPoints = state.totalPoints;
-
+            print(allPoints);
             if (state.status == Status.loading) {
               return const Center(child: CircularProgressIndicator());
             }

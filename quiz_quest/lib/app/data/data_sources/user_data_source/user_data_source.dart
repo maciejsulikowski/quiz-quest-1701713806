@@ -113,6 +113,26 @@ class UserDataSource {
     );
   }
 
+  Stream<Map<String, dynamic>> getAchievementsData() {
+    final userID = FirebaseAuth.instance.currentUser?.uid;
+    if (userID == null) {
+      throw Exception('User is not logged in');
+    }
+
+    return FirebaseFirestore.instance
+        .collection('achievements')
+        .doc(userID)
+        .snapshots()
+        .map((docSnapshot) {
+      if (docSnapshot.exists) {
+        final data = docSnapshot.data() ?? {};
+        return data;
+      } else {
+        return {};
+      }
+    });
+  }
+
   Future<void> updateEasyFilmRankingPoints(int newEasyFilmPoints) async {
     final userID = FirebaseAuth.instance.currentUser?.uid;
     if (userID == null) {

@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -10,7 +9,7 @@ import 'package:quiz_quest/app/features/user_page/achievements/achievements_widg
 import 'package:quiz_quest/app/features/user_page/achievements/achievements_widgets/second_achievement.dart';
 import 'package:quiz_quest/app/features/user_page/achievements/achievements_widgets/sixth_achievement.dart';
 import 'package:quiz_quest/app/features/user_page/achievements/achievements_widgets/third_achievement.dart';
-import 'package:quiz_quest/app/features/user_page/achievements/cubit/achievements_cubit.dart';
+
 import 'package:quiz_quest/app/injection_container.dart';
 
 class AchievementsPage extends StatefulWidget {

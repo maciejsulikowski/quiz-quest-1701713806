@@ -130,6 +130,7 @@ class HomeState with _$HomeState {
     @Default(0) int totalCategoryPoints,
     @Default(false) bool isSaved,
     @Default(false) bool arePointsSaved,
+    AchievementModel? achievementModel,
   }) = _HomeState;
 }
 

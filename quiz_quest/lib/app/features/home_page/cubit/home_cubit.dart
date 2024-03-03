@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:quiz_quest/app/core/enums.dart';
+import 'package:quiz_quest/app/domain/models/achievements_model/achievements_model.dart';
 import 'package:quiz_quest/app/domain/models/films_model/films_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/games_model/games_quiz_model.dart';
 import 'package:quiz_quest/app/domain/models/geography_model/geography_quiz_model.dart';
@@ -63,6 +64,35 @@ class HomeCubit extends Cubit<HomeState> {
       });
   }
 
+  void updateTotalPoints(int points) {
+    emit(state.copyWith(totalPoints: points));
+  }
+
+  Future<void> getAchievements() async {
+    emit(
+      const HomeState(
+        status: Status.loading,
+      ),
+    );
+
+    streamSubscription =
+        achievementRepository.getAchievementsModel().listen((achievements) {
+      emit(HomeState(
+        status: Status.success,
+        achievementModel: achievements,
+      ));
+      getPointsData();
+    })
+          ..onError((error) {
+            emit(
+              HomeState(
+                errorMessage: error.toString(),
+                status: Status.error,
+              ),
+            );
+          });
+  }
+
   Future<void> changeFirstAchievement() async {
     try {
       await achievementRepository.changeFirstAchievement();
@@ -92,7 +122,6 @@ class HomeCubit extends Cubit<HomeState> {
           isSaved: true,
         ),
       );
-      getPointsData();
     } catch (error) {
       emit(
         HomeState(
@@ -112,7 +141,6 @@ class HomeCubit extends Cubit<HomeState> {
           isSaved: true,
         ),
       );
-      getPointsData();
     } catch (error) {
       emit(
         HomeState(
@@ -132,7 +160,6 @@ class HomeCubit extends Cubit<HomeState> {
           isSaved: true,
         ),
       );
-      getPointsData();
     } catch (error) {
       emit(
         HomeState(
@@ -152,7 +179,6 @@ class HomeCubit extends Cubit<HomeState> {
           isSaved: true,
         ),
       );
-      getPointsData();
     } catch (error) {
       emit(
         HomeState(
@@ -172,7 +198,6 @@ class HomeCubit extends Cubit<HomeState> {
           isSaved: true,
         ),
       );
-      getPointsData();
     } catch (error) {
       emit(
         HomeState(

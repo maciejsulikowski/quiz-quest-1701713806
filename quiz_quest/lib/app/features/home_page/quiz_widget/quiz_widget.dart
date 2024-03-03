@@ -12,7 +12,8 @@ import 'package:quiz_quest/app/features/home_page/quiz_widget/quiz_widgets/hello
 import 'package:quiz_quest/app/features/home_page/quiz_widget/quiz_widgets/lets_play_widget.dart';
 import 'package:quiz_quest/app/features/home_page/quiz_widget/quiz_widgets/second_row_achievement_widget.dart';
 import 'package:quiz_quest/app/features/home_page/quiz_widget/quiz_widgets/total_points_widget.dart';
-import 'package:quiz_quest/app/features/user_page/cubit/user_cubit.dart';
+import 'package:quiz_quest/app/features/user_page/achievements/cubit/achievements_cubit.dart';
+
 import 'package:quiz_quest/app/injection_container.dart';
 import 'package:super_tooltip/super_tooltip.dart';
 
@@ -61,76 +62,62 @@ class _QuizzWidgetState extends State<QuizzWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getIt<HomeCubit>()..getPointsData(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => getIt<HomeCubit>()
+            ..getPointsData()
+            ..getAchievements(),
+        ),
+      ],
       child: MultiBlocListener(
         listeners: [
-          BlocListener<UserCubit, UserState>(
-            listener: (context, state) {
-              if (state.isSaved) {
-                context.read<UserCubit>().start();
-              }
-            },
-          ),
-          BlocListener<HomeCubit, HomeState>(
-            listener: (context, state) {
-              if (!isFirstAchievementCompleted && 100 <= state.totalPoints) {
-                isFirstAchievementCompleted = true;
+          BlocListener<HomeCubit, HomeState>(listener: (context, state) {
+            var achievementModel = state.achievementModel;
+            if (achievementModel != null) {
+              var firstAchievement =
+                  state.achievementModel?.isFirstAchievementReady;
 
-                context.read<HomeCubit>().changeFirstAchievement();
-              } else if (!isSecondAchievementCompleted &&
-                  500 <= state.totalPoints) {
-                isSecondAchievementCompleted = true;
-                context.read<HomeCubit>().changeSecondAchievement();
-              } else if (!isThirdAchievementCompleted &&
-                  1000 <= state.totalPoints) {
-                isThirdAchievementCompleted = true;
-                context.read<HomeCubit>().changeThirdAchievement();
-              } else if (!isFourthAchievementCompleted &&
-                  2000 <= state.totalPoints) {
-                isFourthAchievementCompleted = true;
-                context.read<HomeCubit>().changeFourthAchievement();
-              } else if (!isFifthAchievementCompleted &&
-                  5000 <= state.totalPoints) {
-                isFifthAchievementCompleted = true;
-                context.read<HomeCubit>().changeFifthAchievement();
-              } else if (!isSixthAchievementCompleted &&
-                  10000 <= state.totalPoints) {
-                isSixthAchievementCompleted = true;
-                context.read<HomeCubit>().changeSixthAchievement();
+              print(firstAchievement);
+
+              if (state.status == Status.success) {
+                var totalPoints = state.totalPoints;
+
+                print(totalPoints);
+
+                if (firstAchievement == false && state.totalPoints >= 100) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      behavior: SnackBarBehavior.floating,
+                      backgroundColor: Colors.green,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      content: const Padding(
+                        padding: EdgeInsets.all(8),
+                        child: Row(
+                          children: [
+                            Icon(Icons.error, color: Colors.white),
+                            SizedBox(width: 8),
+                            Text(
+                              'First Achievement! Great and keep going!',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                  context.read<HomeCubit>().changeFirstAchievement();
+                }
               }
-              // if (!isAchievementSnackBarDisplayed) {
-              //   isAchievementSnackBarDisplayed = true;
-              //   ScaffoldMessenger.of(context).showSnackBar(
-              //     SnackBar(
-              //       behavior: SnackBarBehavior.floating,
-              //       backgroundColor: Colors.green,
-              //       shape: RoundedRectangleBorder(
-              //         borderRadius: BorderRadius.circular(10),
-              //       ),
-              //       content: const Padding(
-              //         padding: EdgeInsets.all(8),
-              //         child: Row(
-              //           children: [
-              //             Icon(Icons.error, color: Colors.white),
-              //             SizedBox(width: 8),
-              //             Text(
-              //               'First Achievement! Great and keep going!',
-              //               style: TextStyle(color: Colors.white),
-              //             ),
-              //           ],
-              //         ),
-              //       ),
-              //     ),
-              //   );
-              // }
-            },
-          ),
+            }
+          }),
         ],
         child: BlocBuilder<HomeCubit, HomeState>(
           builder: (context, state) {
             final allPoints = state.totalPoints;
-
+            print(allPoints);
             if (state.status == Status.loading) {
               return const Center(child: CircularProgressIndicator());
             }
@@ -187,6 +174,7 @@ class _QuizzWidgetState extends State<QuizzWidget> {
                           height: 10,
                         ),
                         FirstRowAchievementsWidget(
+                            totalPoints: allPoints,
                             isFirstAchievementCompleted:
                                 isFirstAchievementCompleted,
                             isSecondAchievementCompleted:
@@ -197,6 +185,7 @@ class _QuizzWidgetState extends State<QuizzWidget> {
                           height: 10,
                         ),
                         SecondRowAchievementWidget(
+                            totalPoints: allPoints,
                             isFourthAchievementCompleted:
                                 isFourthAchievementCompleted,
                             isFifthAchievementCompleted:

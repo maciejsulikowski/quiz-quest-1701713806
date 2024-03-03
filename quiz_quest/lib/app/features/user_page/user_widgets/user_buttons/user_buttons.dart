@@ -44,7 +44,7 @@ class AchievementButton extends StatelessWidget {
             context,
             MaterialPageRoute(
                 builder: (context) => AchievementsPage(
-                      user: widget.user,
+                     
                     )),
           );
         },

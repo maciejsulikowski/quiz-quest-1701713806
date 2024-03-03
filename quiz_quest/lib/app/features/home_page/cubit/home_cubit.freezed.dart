@@ -34,6 +34,7 @@ mixin _$HomeState {
   int get totalCategoryPoints => throw _privateConstructorUsedError;
   bool get isSaved => throw _privateConstructorUsedError;
   bool get arePointsSaved => throw _privateConstructorUsedError;
+  AchievementModel? get achievementModel => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HomeStateCopyWith<HomeState> get copyWith =>
@@ -62,7 +63,8 @@ abstract class $HomeStateCopyWith<$Res> {
       int totalPoints,
       int totalCategoryPoints,
       bool isSaved,
-      bool arePointsSaved});
+      bool arePointsSaved,
+      AchievementModel? achievementModel});
 
   $SportsQuizModelCopyWith<$Res>? get sportsModel;
   $FilmsQuizModelCopyWith<$Res>? get filmsModel;
@@ -72,6 +74,7 @@ abstract class $HomeStateCopyWith<$Res> {
   $HistoryQuizModelCopyWith<$Res>? get historyModel;
   $NatureQuizModelCopyWith<$Res>? get natureModel;
   $TVQuizModelCopyWith<$Res>? get tvModel;
+  $AchievementModelCopyWith<$Res>? get achievementModel;
 }
 
 /// @nodoc
@@ -104,6 +107,7 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
     Object? totalCategoryPoints = null,
     Object? isSaved = null,
     Object? arePointsSaved = null,
+    Object? achievementModel = freezed,
   }) {
     return _then(_value.copyWith(
       sportsModel: freezed == sportsModel
@@ -174,6 +178,10 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
           ? _value.arePointsSaved
           : arePointsSaved // ignore: cast_nullable_to_non_nullable
               as bool,
+      achievementModel: freezed == achievementModel
+          ? _value.achievementModel
+          : achievementModel // ignore: cast_nullable_to_non_nullable
+              as AchievementModel?,
     ) as $Val);
   }
 
@@ -272,6 +280,18 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
       return _then(_value.copyWith(tvModel: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $AchievementModelCopyWith<$Res>? get achievementModel {
+    if (_value.achievementModel == null) {
+      return null;
+    }
+
+    return $AchievementModelCopyWith<$Res>(_value.achievementModel!, (value) {
+      return _then(_value.copyWith(achievementModel: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -299,7 +319,8 @@ abstract class _$$HomeStateImplCopyWith<$Res>
       int totalPoints,
       int totalCategoryPoints,
       bool isSaved,
-      bool arePointsSaved});
+      bool arePointsSaved,
+      AchievementModel? achievementModel});
 
   @override
   $SportsQuizModelCopyWith<$Res>? get sportsModel;
@@ -317,6 +338,8 @@ abstract class _$$HomeStateImplCopyWith<$Res>
   $NatureQuizModelCopyWith<$Res>? get natureModel;
   @override
   $TVQuizModelCopyWith<$Res>? get tvModel;
+  @override
+  $AchievementModelCopyWith<$Res>? get achievementModel;
 }
 
 /// @nodoc
@@ -347,6 +370,7 @@ class __$$HomeStateImplCopyWithImpl<$Res>
     Object? totalCategoryPoints = null,
     Object? isSaved = null,
     Object? arePointsSaved = null,
+    Object? achievementModel = freezed,
   }) {
     return _then(_$HomeStateImpl(
       sportsModel: freezed == sportsModel
@@ -417,6 +441,10 @@ class __$$HomeStateImplCopyWithImpl<$Res>
           ? _value.arePointsSaved
           : arePointsSaved // ignore: cast_nullable_to_non_nullable
               as bool,
+      achievementModel: freezed == achievementModel
+          ? _value.achievementModel
+          : achievementModel // ignore: cast_nullable_to_non_nullable
+              as AchievementModel?,
     ));
   }
 }
@@ -532,7 +560,8 @@ class _$HomeStateImpl implements _HomeState {
       this.totalPoints = 0,
       this.totalCategoryPoints = 0,
       this.isSaved = false,
-      this.arePointsSaved = false})
+      this.arePointsSaved = false,
+      this.achievementModel})
       : _searchedList = searchedList,
         _list = list,
         _categoryPoints = categoryPoints;
@@ -597,10 +626,12 @@ class _$HomeStateImpl implements _HomeState {
   @override
   @JsonKey()
   final bool arePointsSaved;
+  @override
+  final AchievementModel? achievementModel;
 
   @override
   String toString() {
-    return 'HomeState(sportsModel: $sportsModel, filmsModel: $filmsModel, gamesModel: $gamesModel, musicModel: $musicModel, geographyModel: $geographyModel, historyModel: $historyModel, natureModel: $natureModel, tvModel: $tvModel, status: $status, errorMessage: $errorMessage, searchedList: $searchedList, list: $list, categoryPoints: $categoryPoints, totalPoints: $totalPoints, totalCategoryPoints: $totalCategoryPoints, isSaved: $isSaved, arePointsSaved: $arePointsSaved)';
+    return 'HomeState(sportsModel: $sportsModel, filmsModel: $filmsModel, gamesModel: $gamesModel, musicModel: $musicModel, geographyModel: $geographyModel, historyModel: $historyModel, natureModel: $natureModel, tvModel: $tvModel, status: $status, errorMessage: $errorMessage, searchedList: $searchedList, list: $list, categoryPoints: $categoryPoints, totalPoints: $totalPoints, totalCategoryPoints: $totalCategoryPoints, isSaved: $isSaved, arePointsSaved: $arePointsSaved, achievementModel: $achievementModel)';
   }
 
   @override
@@ -637,7 +668,9 @@ class _$HomeStateImpl implements _HomeState {
                 other.totalCategoryPoints == totalCategoryPoints) &&
             (identical(other.isSaved, isSaved) || other.isSaved == isSaved) &&
             (identical(other.arePointsSaved, arePointsSaved) ||
-                other.arePointsSaved == arePointsSaved));
+                other.arePointsSaved == arePointsSaved) &&
+            (identical(other.achievementModel, achievementModel) ||
+                other.achievementModel == achievementModel));
   }
 
   @override
@@ -659,7 +692,8 @@ class _$HomeStateImpl implements _HomeState {
       totalPoints,
       totalCategoryPoints,
       isSaved,
-      arePointsSaved);
+      arePointsSaved,
+      achievementModel);
 
   @JsonKey(ignore: true)
   @override
@@ -686,7 +720,8 @@ abstract class _HomeState implements HomeState {
       final int totalPoints,
       final int totalCategoryPoints,
       final bool isSaved,
-      final bool arePointsSaved}) = _$HomeStateImpl;
+      final bool arePointsSaved,
+      final AchievementModel? achievementModel}) = _$HomeStateImpl;
 
   @override
   SportsQuizModel? get sportsModel;
@@ -722,6 +757,8 @@ abstract class _HomeState implements HomeState {
   bool get isSaved;
   @override
   bool get arePointsSaved;
+  @override
+  AchievementModel? get achievementModel;
   @override
   @JsonKey(ignore: true)
   _$$HomeStateImplCopyWith<_$HomeStateImpl> get copyWith =>

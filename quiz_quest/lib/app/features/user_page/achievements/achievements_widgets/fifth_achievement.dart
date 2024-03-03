@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_quest/app/features/user_page/achievements/achievements_widgets/image_and_text_achievement_widgets.dart';
 
-
 // ignore: must_be_immutable
 class FifthAchievement extends StatefulWidget {
   FifthAchievement({
-    required this.fifthAchievement,
+    required this.totalPoints,
     super.key,
   });
 
-  bool fifthAchievement;
+  int totalPoints;
 
   @override
   State<FifthAchievement> createState() => _FifthAchievementState();
@@ -38,9 +37,9 @@ class _FifthAchievementState extends State<FifthAchievement> {
         Container(
             height: 20,
             width: 20,
-            color: widget.fifthAchievement == false
-                ? fifthColor = Colors.white
-                : fifthColor = Colors.green,
+            color: widget.totalPoints >= 5000
+                ? fifthColor = Colors.green
+                : fifthColor = Colors.white,
             margin: const EdgeInsets.only(right: 10),
             child: Center(child: Text(fifthColor == Colors.green ? '✔' : ''))),
       ],

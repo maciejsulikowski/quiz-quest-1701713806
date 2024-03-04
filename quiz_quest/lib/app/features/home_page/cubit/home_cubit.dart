@@ -38,7 +38,7 @@ class HomeCubit extends Cubit<HomeState> {
   StreamSubscription? streamSubscription;
 
   Future<void> getPointsData() async {
-    emit(const HomeState(
+    emit(state.copyWith(
       status: Status.loading,
     ));
 
@@ -48,7 +48,7 @@ class HomeCubit extends Cubit<HomeState> {
         totalPoints += element['total']!;
       }
 
-      emit(HomeState(
+      emit(state.copyWith(
         categoryPoints: points,
         totalPoints: totalPoints,
         status: Status.success,
@@ -56,7 +56,7 @@ class HomeCubit extends Cubit<HomeState> {
     })
       ..onError((error) {
         emit(
-          HomeState(
+          state.copyWith(
             status: Status.error,
             errorMessage: error.toString(),
           ),
@@ -64,20 +64,16 @@ class HomeCubit extends Cubit<HomeState> {
       });
   }
 
-  void updateTotalPoints(int points) {
-    emit(state.copyWith(totalPoints: points));
-  }
-
   Future<void> getAchievements() async {
     emit(
-      const HomeState(
+      state.copyWith(
         status: Status.loading,
       ),
     );
 
     streamSubscription =
         achievementRepository.getAchievementsModel().listen((achievements) {
-      emit(HomeState(
+      emit(state.copyWith(
         status: Status.success,
         achievementModel: achievements,
       ));
@@ -85,7 +81,7 @@ class HomeCubit extends Cubit<HomeState> {
     })
           ..onError((error) {
             emit(
-              HomeState(
+              state.copyWith(
                 errorMessage: error.toString(),
                 status: Status.error,
               ),
@@ -97,7 +93,7 @@ class HomeCubit extends Cubit<HomeState> {
     try {
       await achievementRepository.changeFirstAchievement();
       emit(
-        const HomeState(
+        state.copyWith(
           status: Status.success,
           isSaved: true,
         ),
@@ -105,7 +101,7 @@ class HomeCubit extends Cubit<HomeState> {
       getPointsData();
     } catch (error) {
       emit(
-        HomeState(
+        state.copyWith(
           status: Status.error,
           errorMessage: error.toString(),
         ),
@@ -117,14 +113,15 @@ class HomeCubit extends Cubit<HomeState> {
     try {
       await achievementRepository.changeSecondAchievement();
       emit(
-        const HomeState(
+        state.copyWith(
           status: Status.success,
           isSaved: true,
         ),
       );
+      getPointsData();
     } catch (error) {
       emit(
-        HomeState(
+        state.copyWith(
           status: Status.error,
           errorMessage: error.toString(),
         ),
@@ -136,14 +133,15 @@ class HomeCubit extends Cubit<HomeState> {
     try {
       await achievementRepository.changeThirdAchievement();
       emit(
-        const HomeState(
+        state.copyWith(
           status: Status.success,
           isSaved: true,
         ),
       );
+      getPointsData();
     } catch (error) {
       emit(
-        HomeState(
+        state.copyWith(
           status: Status.error,
           errorMessage: error.toString(),
         ),
@@ -155,14 +153,15 @@ class HomeCubit extends Cubit<HomeState> {
     try {
       await achievementRepository.changeFourthAchievement();
       emit(
-        const HomeState(
+        state.copyWith(
           status: Status.success,
           isSaved: true,
         ),
       );
+      getPointsData();
     } catch (error) {
       emit(
-        HomeState(
+        state.copyWith(
           status: Status.error,
           errorMessage: error.toString(),
         ),
@@ -174,14 +173,15 @@ class HomeCubit extends Cubit<HomeState> {
     try {
       await achievementRepository.changeFifthAchievement();
       emit(
-        const HomeState(
+        state.copyWith(
           status: Status.success,
           isSaved: true,
         ),
       );
+      getPointsData();
     } catch (error) {
       emit(
-        HomeState(
+        state.copyWith(
           status: Status.error,
           errorMessage: error.toString(),
         ),
@@ -193,14 +193,15 @@ class HomeCubit extends Cubit<HomeState> {
     try {
       await achievementRepository.changeSixthAchievement();
       emit(
-        const HomeState(
+        state.copyWith(
           status: Status.success,
           isSaved: true,
         ),
       );
+      getPointsData();
     } catch (error) {
       emit(
-        HomeState(
+        state.copyWith(
           status: Status.error,
           errorMessage: error.toString(),
         ),

@@ -62,62 +62,191 @@ class _QuizzWidgetState extends State<QuizzWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) => getIt<HomeCubit>()
-            ..getPointsData()
-            ..getAchievements(),
-        ),
-      ],
-      child: MultiBlocListener(
-        listeners: [
-          BlocListener<HomeCubit, HomeState>(listener: (context, state) {
-            var achievementModel = state.achievementModel;
+    return BlocProvider(
+      create: (context) => getIt<HomeCubit>()
+        ..getAchievements()
+        ..getPointsData(),
+      child: BlocListener<HomeCubit, HomeState>(
+        listener: (context, state) {
+          var achievementModel = state.achievementModel;
+          // if (achievementModel != null && state.totalPoints != null) {
+          var firstAchievement =
+              state.achievementModel?.isFirstAchievementReady;
+          var secondAchievement =
+              state.achievementModel?.isSecondAchievementReady;
+          var thirdAchievement =
+              state.achievementModel?.isThirdAchievementReady;
+          var fourthAchievement =
+              state.achievementModel?.isFourthAchievementReady;
+          var fifthAchievement =
+              state.achievementModel?.isFifthAchievementReady;
+          var sixthAchievement =
+              state.achievementModel?.isSixthAchievementReady;
+
+          if (achievementModel != null) print('Bool $firstAchievement');
+          final totalPoints = state.totalPoints;
+          print('punkty $totalPoints');
+
+          if (firstAchievement == false && state.totalPoints >= 100) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                behavior: SnackBarBehavior.floating,
+                backgroundColor: Colors.green,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                content: const Padding(
+                  padding: EdgeInsets.all(8),
+                  child: Row(
+                    children: [
+                      Icon(Icons.error, color: Colors.white),
+                      SizedBox(width: 8),
+                      Text(
+                        'First Achievement! Great and keep going!',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            );
+            context.read<HomeCubit>().changeFirstAchievement();
+          } else if (secondAchievement == false && state.totalPoints >= 500) {
             if (achievementModel != null) {
-              var firstAchievement =
-                  state.achievementModel?.isFirstAchievementReady;
-
-              print(firstAchievement);
-
-              if (state.status == Status.success) {
-                var totalPoints = state.totalPoints;
-
-                print(totalPoints);
-
-                if (firstAchievement == false && state.totalPoints >= 100) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      behavior: SnackBarBehavior.floating,
-                      backgroundColor: Colors.green,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      content: const Padding(
-                        padding: EdgeInsets.all(8),
-                        child: Row(
-                          children: [
-                            Icon(Icons.error, color: Colors.white),
-                            SizedBox(width: 8),
-                            Text(
-                              'First Achievement! Great and keep going!',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ],
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  behavior: SnackBarBehavior.floating,
+                  backgroundColor: Colors.green,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  content: const Padding(
+                    padding: EdgeInsets.all(8),
+                    child: Row(
+                      children: [
+                        Icon(Icons.error, color: Colors.white),
+                        SizedBox(width: 8),
+                        Text(
+                          'Another Achievement! Great and keep going!',
+                          style: TextStyle(color: Colors.white),
                         ),
-                      ),
+                      ],
                     ),
-                  );
-                  context.read<HomeCubit>().changeFirstAchievement();
-                }
-              }
+                  ),
+                ),
+              );
             }
-          }),
-        ],
+            context.read<HomeCubit>().changeSecondAchievement();
+          } else if (thirdAchievement == false && state.totalPoints >= 1000) {
+            if (achievementModel != null) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  behavior: SnackBarBehavior.floating,
+                  backgroundColor: Colors.green,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  content: const Padding(
+                    padding: EdgeInsets.all(8),
+                    child: Row(
+                      children: [
+                        Icon(Icons.error, color: Colors.white),
+                        SizedBox(width: 8),
+                        Text(
+                          'Another Achievement! Great and keep going!',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              );
+            }
+            context.read<HomeCubit>().changeThirdAchievement();
+          } else if (fourthAchievement == false && state.totalPoints >= 2000) {
+            if (achievementModel != null) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  behavior: SnackBarBehavior.floating,
+                  backgroundColor: Colors.green,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  content: const Padding(
+                    padding: EdgeInsets.all(8),
+                    child: Row(
+                      children: [
+                        Icon(Icons.error, color: Colors.white),
+                        SizedBox(width: 8),
+                        Text(
+                          'Another Achievement! Great and keep going!',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              );
+            }
+            context.read<HomeCubit>().changeFourthAchievement();
+          } else if (fourthAchievement == false && state.totalPoints >= 5000) {
+            if (achievementModel != null) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  behavior: SnackBarBehavior.floating,
+                  backgroundColor: Colors.green,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  content: const Padding(
+                    padding: EdgeInsets.all(8),
+                    child: Row(
+                      children: [
+                        Icon(Icons.error, color: Colors.white),
+                        SizedBox(width: 8),
+                        Text(
+                          'Another Achievement! Great and keep going!',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              );
+            }
+            context.read<HomeCubit>().changeFifthAchievement();
+          } else if (sixthAchievement == false && state.totalPoints >= 10000) {
+            if (achievementModel != null) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  behavior: SnackBarBehavior.floating,
+                  backgroundColor: Colors.green,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  content: const Padding(
+                    padding: EdgeInsets.all(8),
+                    child: Row(
+                      children: [
+                        Icon(Icons.error, color: Colors.white),
+                        SizedBox(width: 8),
+                        Text(
+                          'Another Achievement! Great and keep going!',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              );
+            }
+            context.read<HomeCubit>().changeSixthAchievement();
+          }
+        },
         child: BlocBuilder<HomeCubit, HomeState>(
           builder: (context, state) {
             final allPoints = state.totalPoints;
-            print(allPoints);
+
             if (state.status == Status.loading) {
               return const Center(child: CircularProgressIndicator());
             }

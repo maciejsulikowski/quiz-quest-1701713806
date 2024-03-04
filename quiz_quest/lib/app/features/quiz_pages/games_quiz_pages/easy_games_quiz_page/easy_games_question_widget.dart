@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
-
-
-
 class EasyGamesQuestionWidget extends StatelessWidget {
   const EasyGamesQuestionWidget({
     required this.question,
@@ -21,7 +17,8 @@ class EasyGamesQuestionWidget extends StatelessWidget {
         .replaceAll('&aacute;', '')
         .replaceAll('&ntilde;', '')
         .replaceAll('&amp;', '')
-        .replaceAll('&rsquo;', '');
+        .replaceAll('&rsquo;', '')
+        .replaceAll('&Uuml;', '');
 
     return Center(
       child: Text(

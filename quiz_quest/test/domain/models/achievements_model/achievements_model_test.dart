@@ -2,7 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:quiz_quest/app/domain/models/achievements_model/achievements_model.dart';
 
 void main() {
-  test('test name', () {
+  test('should call model as instance of AchievementModel', () {
     final model = AchievementModel(
       userID: 'XXX',
       isFirstAchievementReady: false,

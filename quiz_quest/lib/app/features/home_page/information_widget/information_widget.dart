@@ -19,7 +19,7 @@ class InformationWidget extends StatelessWidget {
         showBarrier: true,
         controller: toolController,
         content: const Text(
-          '''Hello 👋 If you want to start the game, just click on a category in "Quiz". You can share your total points with other people next to result, just click the icon. If you want to change your personal information, you can click "My Account". I hope you will have fun with this app 😄''',
+          '''Hello! 👋 If you want to start the game, simply click on a category in the 'Quiz' section. You can share your total points with others by tapping the icon (assuming you've scored some points). To update your personal information, click on 'My Account'. You can track your ranking by tapping the 🏆 button. I hope you have a lot of fun with this app! 😄''',
           softWrap: true,
           style: TextStyle(
             color: Colors.black,

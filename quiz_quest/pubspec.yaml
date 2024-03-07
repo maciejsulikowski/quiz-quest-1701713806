@@ -49,6 +49,7 @@ dev_dependencies:
   freezed: ^2.4.5
   retrofit_generator: ^8.1.0
   injectable_generator: ^2.4.1
+  mocktail: ^1.0.3
 
 
 flutter:

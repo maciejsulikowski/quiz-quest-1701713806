@@ -66,7 +66,7 @@ void main() {
 
   group('getPoints', () {
     final streamController = StreamController<Map<String, dynamic>>();
-    
+
     test('should call getPoints() method', () {
       when(() => firstDataSource.getPointsData())
           .thenAnswer((_) => streamController.stream);
@@ -75,7 +75,6 @@ void main() {
 
       verify(() => firstDataSource.getPointsData()).called(1);
     });
-    
   });
 
   group('games', () {
@@ -338,5 +337,4 @@ void main() {
       verify(() => firstDataSource.updateHardGeneralPoints(0)).called(1);
     });
   });
- 
 }

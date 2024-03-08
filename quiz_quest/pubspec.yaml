@@ -50,6 +50,7 @@ dev_dependencies:
   retrofit_generator: ^8.1.0
   injectable_generator: ^2.4.1
   mocktail: ^1.0.3
+  bloc_test: ^9.1.6
 
 
 flutter:

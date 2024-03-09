@@ -2,10 +2,12 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:quiz_quest/app/core/enums.dart';
-import 'package:quiz_quest/app/domain/models/music_model/music_quiz_model.dart';
+import 'package:quiz_quest/app/domain/models/sports_model/sports_quiz_model.dart';
+import 'package:quiz_quest/app/domain/models/tv_model/tv_quiz_model.dart';
 import 'package:quiz_quest/app/domain/repositories/quiz_repository/quiz_repository.dart';
 import 'package:quiz_quest/app/domain/repositories/user_repository/user_repository.dart';
-import 'package:quiz_quest/app/features/quiz_pages/music_quiz_pages/cubit/music_cubit.dart';
+import 'package:quiz_quest/app/features/quiz_pages/sports_quiz_pages/cubit/sport_cubit.dart';
+import 'package:quiz_quest/app/features/quiz_pages/tv_quiz_pages/cubit/tv_cubit.dart';
 
 class MockQuizRepository extends Mock implements QuizRepository {}
 
@@ -14,121 +16,118 @@ class MockUserRepository extends Mock implements UserRepository {}
 void main() {
   late MockQuizRepository quizRepository;
   late MockUserRepository userRepository;
-  late MusicCubit sut;
+  late TVCubit sut;
 
   setUp(() {
     quizRepository = MockQuizRepository();
     userRepository = MockUserRepository();
-    sut = MusicCubit(quizRepository, userRepository);
+    sut = TVCubit(quizRepository, userRepository);
   });
 
-  final musicModel = MusicQuizModel([
-    Results4('Music', 'Question1', 'Answer1', ['Answer1, Answer2, Answer3'])
+  final TVModel = TVQuizModel([
+    Results8('TV', 'Question1', 'Answer1', ['Answer1, Answer2, Answer3'])
   ]);
 
-  group('getMusicCategories', () {
-    group('getEasyMusicCategory', () {
+  group('getTVCategories', () {
+    group('getEasyTVCategory', () {
       group('success', () {
         setUp(() {
-          when(() => quizRepository.getEasyMusicData())
-              .thenAnswer((_) async => musicModel);
+          when(() => quizRepository.getEasyTVData())
+              .thenAnswer((_) async => TVModel);
         });
-        blocTest<MusicCubit, MusicState>(
-          'should emit Status.loading then Status.success with MusicModel',
+        blocTest<TVCubit, TVState>(
+          'should emit Status.loading then Status.success with TVModel',
           build: () => sut,
-          act: (cubit) => cubit.getEasyMusicCategory(),
+          act: (cubit) => cubit.getEasyTVCategory(),
           expect: () => [
-            MusicState(status: Status.loading),
-            MusicState(
-                status: Status.success, musicQuizModel: musicModel),
+            TVState(status: Status.loading),
+            TVState(status: Status.success, tvQuizModel: TVModel),
           ],
         );
       });
 
       group('failure', () {
         setUp(() {
-          when(() => quizRepository.getEasyMusicData())
+          when(() => quizRepository.getEasyTVData())
               .thenThrow(Exception('test-exception-error'));
         });
         blocTest(
           'should emit Status.error with errorMessage',
           build: () => sut,
-          act: (cubit) => cubit.getEasyMusicCategory(),
+          act: (cubit) => cubit.getEasyTVCategory(),
           expect: () => [
-            MusicState(status: Status.loading),
-            MusicState(
+            TVState(status: Status.loading),
+            TVState(
                 status: Status.error, error: 'Exception: test-exception-error'),
           ],
         );
       });
     });
 
-    group('getMediumMusicCategory', () {
+    group('getMediumTVCategory', () {
       group('success', () {
         setUp(() {
-          when(() => quizRepository.getMediumMusicData())
-              .thenAnswer((_) async => musicModel);
+          when(() => quizRepository.getMediumTVData())
+              .thenAnswer((_) async => TVModel);
         });
-        blocTest<MusicCubit, MusicState>(
-          'should emit Status.loading then Status.success with MusicModel',
+        blocTest<TVCubit, TVState>(
+          'should emit Status.loading then Status.success with TVModel',
           build: () => sut,
-          act: (cubit) => cubit.getMediumMusicCategory(),
+          act: (cubit) => cubit.getMediumTVCategory(),
           expect: () => [
-            MusicState(status: Status.loading),
-            MusicState(
-                status: Status.success, musicQuizModel: musicModel),
+            TVState(status: Status.loading),
+            TVState(status: Status.success, tvQuizModel: TVModel),
           ],
         );
       });
 
       group('failure', () {
         setUp(() {
-          when(() => quizRepository.getMediumMusicData())
+          when(() => quizRepository.getMediumTVData())
               .thenThrow(Exception('test-exception-error'));
         });
         blocTest(
           'should emit Status.error with errorMessage',
           build: () => sut,
-          act: (cubit) => cubit.getMediumMusicCategory(),
+          act: (cubit) => cubit.getMediumTVCategory(),
           expect: () => [
-            MusicState(status: Status.loading),
-            MusicState(
+            TVState(status: Status.loading),
+            TVState(
                 status: Status.error, error: 'Exception: test-exception-error'),
           ],
         );
       });
     });
 
-    group('getHardMusicCategory', () {
+    group('getHardTVCategory', () {
       group('success', () {
         setUp(() {
-          when(() => quizRepository.getHardMusicData())
-              .thenAnswer((_) async => musicModel);
+          when(() => quizRepository.getHardTVData())
+              .thenAnswer((_) async => TVModel);
         });
-        blocTest<MusicCubit, MusicState>(
-          'should emit Status.loading then Status.success with MusicModel',
+        blocTest<TVCubit, TVState>(
+          'should emit Status.loading then Status.success with TVModel',
           build: () => sut,
-          act: (cubit) => cubit.getHardMusicCategory(),
+          act: (cubit) => cubit.getHardTVCategory(),
           expect: () => [
-            MusicState(status: Status.loading),
-            MusicState(
-                status: Status.success, musicQuizModel: musicModel),
+            TVState(status: Status.loading),
+            TVState(status: Status.success, tvQuizModel: TVModel),
           ],
         );
       });
 
       group('failure', () {
         setUp(() {
-          when(() => quizRepository.getHardMusicData())
+          when(() => quizRepository.getHardTVData())
               .thenThrow(Exception('test-exception-error'));
         });
         blocTest(
           'should emit Status.error with errorMessage',
           build: () => sut,
-          act: (cubit) => cubit.getHardMusicCategory(),
+          act: (cubit) => cubit.getHardTVCategory(),
           expect: () => [
-            MusicState(status: Status.loading),
-            MusicState(
+            TVState(status: Status.loading),
+            TVState(
                 status: Status.error, error: 'Exception: test-exception-error'),
           ],
         );
@@ -136,19 +135,19 @@ void main() {
     });
   });
 
-  group('updateMusicPoints', () {
-    group('updateEasyMusicPoints', () {
+  group('updateTVPoints', () {
+    group('updateEasyTVPoints', () {
       group('success', () {
         setUp(() {
-          when(() => userRepository.updateEasyMusicPoints(0))
-              .thenAnswer((_) async => musicModel);
+          when(() => userRepository.updateEasyTVPoints(0))
+              .thenAnswer((_) async => TVModel);
         });
-        blocTest<MusicCubit, MusicState>(
-          'should emit Status.loading then Status.success with MusicModel',
+        blocTest<TVCubit, TVState>(
+          'should emit Status.loading then Status.success with TVModel',
           build: () => sut,
-          act: (cubit) => cubit.updateEasyMusicPoints(0),
+          act: (cubit) => cubit.updateEasyTVPoints(0),
           expect: () => [
-            MusicState(
+            TVState(
               status: Status.success,
             ),
           ],
@@ -157,33 +156,33 @@ void main() {
 
       group('failure', () {
         setUp(() {
-          when(() => userRepository.updateEasyMusicPoints(0))
+          when(() => userRepository.updateEasyTVPoints(0))
               .thenThrow(Exception('test-exception-error'));
         });
         blocTest(
           'should emit Status.error with errorMessage',
           build: () => sut,
-          act: (cubit) => cubit.updateEasyMusicPoints(0),
+          act: (cubit) => cubit.updateEasyTVPoints(0),
           expect: () => [
-            MusicState(
+            TVState(
                 status: Status.error, error: 'Exception: test-exception-error'),
           ],
         );
       });
     });
 
-    group('updateMediumMusicPoints', () {
+    group('updateMediumTVPoints', () {
       group('success', () {
         setUp(() {
-          when(() => userRepository.updateMediumMusicPoints(0))
-              .thenAnswer((_) async => musicModel);
+          when(() => userRepository.updateMediumTVPoints(0))
+              .thenAnswer((_) async => TVModel);
         });
-        blocTest<MusicCubit, MusicState>(
-          'should emit Status.loading then Status.success with MusicModel',
+        blocTest<TVCubit, TVState>(
+          'should emit Status.loading then Status.success with TVModel',
           build: () => sut,
-          act: (cubit) => cubit.updateMediumMusicPoints(0),
+          act: (cubit) => cubit.updateMediumTVPoints(0),
           expect: () => [
-            MusicState(
+            TVState(
               status: Status.success,
             ),
           ],
@@ -192,33 +191,33 @@ void main() {
 
       group('failure', () {
         setUp(() {
-          when(() => userRepository.updateMediumMusicPoints(0))
+          when(() => userRepository.updateMediumTVPoints(0))
               .thenThrow(Exception('test-exception-error'));
         });
         blocTest(
           'should emit Status.error with errorMessage',
           build: () => sut,
-          act: (cubit) => cubit.updateMediumMusicPoints(0),
+          act: (cubit) => cubit.updateMediumTVPoints(0),
           expect: () => [
-            MusicState(
+            TVState(
                 status: Status.error, error: 'Exception: test-exception-error'),
           ],
         );
       });
     });
 
-    group('updateHardMusicPoints', () {
+    group('updateHardTVPoints', () {
       group('success', () {
         setUp(() {
-          when(() => userRepository.updateHardMusicPoints(0))
-              .thenAnswer((_) async => musicModel);
+          when(() => userRepository.updateHardTVPoints(0))
+              .thenAnswer((_) async => TVModel);
         });
-        blocTest<MusicCubit, MusicState>(
-          'should emit Status.loading then Status.success with MusicModel',
+        blocTest<TVCubit, TVState>(
+          'should emit Status.loading then Status.success with TVModel',
           build: () => sut,
-          act: (cubit) => cubit.updateHardMusicPoints(0),
+          act: (cubit) => cubit.updateHardTVPoints(0),
           expect: () => [
-            MusicState(
+            TVState(
               status: Status.success,
             ),
           ],
@@ -227,15 +226,15 @@ void main() {
 
       group('failure', () {
         setUp(() {
-          when(() => userRepository.updateHardMusicPoints(0))
+          when(() => userRepository.updateHardTVPoints(0))
               .thenThrow(Exception('test-exception-error'));
         });
         blocTest(
           'should emit Status.error with errorMessage',
           build: () => sut,
-          act: (cubit) => cubit.updateHardMusicPoints(0),
+          act: (cubit) => cubit.updateHardTVPoints(0),
           expect: () => [
-            MusicState(
+            TVState(
                 status: Status.error, error: 'Exception: test-exception-error'),
           ],
         );

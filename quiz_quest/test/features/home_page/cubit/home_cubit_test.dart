@@ -172,7 +172,7 @@ void main() {
       });
 
       blocTest<HomeCubit, HomeState>(
-        '',
+        'should Stream getAchievements() method and later induce getPointsData() method',
         build: () => sut,
         act: (cubit) {
           cubit.getAchievements();
@@ -213,7 +213,367 @@ void main() {
         },
         expect: () => [
           const HomeState(status: Status.loading),
+          const HomeState(
+            status: Status.error,
+            errorMessage: 'Exception: test-exception-error',
+          ),
+        ],
+      );
+    });
+  });
+
+  group('changeFirstAchievement', () {
+    group('success', () {
+      int totalPoints = 0;
+      for (var element in pointsData) {
+        totalPoints += element['total']!;
+      }
+      setUp(() {
+        when(() => achievementRepository.changeFirstAchievement())
+            .thenAnswer((_) async => {});
+
+        when(() => userRepository.getPoints())
+            .thenAnswer((_) => Stream.value(pointsData));
+      });
+
+      blocTest<HomeCubit, HomeState>(
+        'should emit Status.succes with isSaved true',
+        build: () => sut,
+        act: (cubit) async {
+          await cubit.changeFirstAchievement();
+        },
+        expect: () => [
+          const HomeState(
+            status: Status.success,
+            isSaved: true,
+          ),
+          const HomeState(
+            status: Status.loading,
+            isSaved: true,
+          ),
           HomeState(
+            status: Status.success,
+            categoryPoints: pointsData,
+            totalPoints: totalPoints,
+            isSaved: true,
+          ),
+        ],
+      );
+    });
+
+    group('failure', () {
+      setUp(() {
+        when(() => achievementRepository.changeFirstAchievement())
+            .thenThrow(Exception('test-exception-error'));
+      });
+      blocTest<HomeCubit, HomeState>(
+        'should emit Status.error with errorMessage',
+        build: () => sut,
+        act: (cubit) {
+          cubit.changeFirstAchievement();
+        },
+        expect: () => [
+          const HomeState(
+            status: Status.error,
+            errorMessage: 'Exception: test-exception-error',
+          ),
+        ],
+      );
+    });
+  });
+
+  group('changeSecondAchievement', () {
+    group('success', () {
+      int totalPoints = 0;
+      for (var element in pointsData) {
+        totalPoints += element['total']!;
+      }
+      setUp(() {
+        when(() => achievementRepository.changeSecondAchievement())
+            .thenAnswer((_) async => {});
+
+        when(() => userRepository.getPoints())
+            .thenAnswer((_) => Stream.value(pointsData));
+      });
+
+      blocTest<HomeCubit, HomeState>(
+        'should emit Status.succes with isSaved true',
+        build: () => sut,
+        act: (cubit) async {
+          await cubit.changeSecondAchievement();
+        },
+        expect: () => [
+          const HomeState(
+            status: Status.success,
+            isSaved: true,
+          ),
+          const HomeState(
+            status: Status.loading,
+            isSaved: true,
+          ),
+          HomeState(
+            status: Status.success,
+            categoryPoints: pointsData,
+            totalPoints: totalPoints,
+            isSaved: true,
+          ),
+        ],
+      );
+    });
+
+    group('failure', () {
+      setUp(() {
+        when(() => achievementRepository.changeSecondAchievement())
+            .thenThrow(Exception('test-exception-error'));
+      });
+      blocTest<HomeCubit, HomeState>(
+        'should emit Status.error with errorMessage',
+        build: () => sut,
+        act: (cubit) {
+          cubit.changeSecondAchievement();
+        },
+        expect: () => [
+          const HomeState(
+            status: Status.error,
+            errorMessage: 'Exception: test-exception-error',
+          ),
+        ],
+      );
+    });
+  });
+
+  group('changeThirdAchievement', () {
+    group('success', () {
+      int totalPoints = 0;
+      for (var element in pointsData) {
+        totalPoints += element['total']!;
+      }
+      setUp(() {
+        when(() => achievementRepository.changeThirdAchievement())
+            .thenAnswer((_) async => {});
+
+        when(() => userRepository.getPoints())
+            .thenAnswer((_) => Stream.value(pointsData));
+      });
+
+      blocTest<HomeCubit, HomeState>(
+        'should emit Status.succes with isSaved true',
+        build: () => sut,
+        act: (cubit) async {
+          await cubit.changeThirdAchievement();
+        },
+        expect: () => [
+          const HomeState(
+            status: Status.success,
+            isSaved: true,
+          ),
+          const HomeState(
+            status: Status.loading,
+            isSaved: true,
+          ),
+          HomeState(
+            status: Status.success,
+            categoryPoints: pointsData,
+            totalPoints: totalPoints,
+            isSaved: true,
+          ),
+        ],
+      );
+    });
+
+    group('failure', () {
+      setUp(() {
+        when(() => achievementRepository.changeThirdAchievement())
+            .thenThrow(Exception('test-exception-error'));
+      });
+      blocTest<HomeCubit, HomeState>(
+        'should emit Status.error with errorMessage',
+        build: () => sut,
+        act: (cubit) {
+          cubit.changeThirdAchievement();
+        },
+        expect: () => [
+          const HomeState(
+            status: Status.error,
+            errorMessage: 'Exception: test-exception-error',
+          ),
+        ],
+      );
+    });
+  });
+
+  group('changeFourthAchievement', () {
+    group('success', () {
+      int totalPoints = 0;
+      for (var element in pointsData) {
+        totalPoints += element['total']!;
+      }
+      setUp(() {
+        when(() => achievementRepository.changeFourthAchievement())
+            .thenAnswer((_) async => {});
+
+        when(() => userRepository.getPoints())
+            .thenAnswer((_) => Stream.value(pointsData));
+      });
+
+      blocTest<HomeCubit, HomeState>(
+        'should emit Status.succes with isSaved true',
+        build: () => sut,
+        act: (cubit) async {
+          await cubit.changeFourthAchievement();
+        },
+        expect: () => [
+          const HomeState(
+            status: Status.success,
+            isSaved: true,
+          ),
+          const HomeState(
+            status: Status.loading,
+            isSaved: true,
+          ),
+          HomeState(
+            status: Status.success,
+            categoryPoints: pointsData,
+            totalPoints: totalPoints,
+            isSaved: true,
+          ),
+        ],
+      );
+    });
+
+    group('failure', () {
+      setUp(() {
+        when(() => achievementRepository.changeFourthAchievement())
+            .thenThrow(Exception('test-exception-error'));
+      });
+      blocTest<HomeCubit, HomeState>(
+        'should emit Status.error with errorMessage',
+        build: () => sut,
+        act: (cubit) {
+          cubit.changeFourthAchievement();
+        },
+        expect: () => [
+          const HomeState(
+            status: Status.error,
+            errorMessage: 'Exception: test-exception-error',
+          ),
+        ],
+      );
+    });
+  });
+
+  group('changeFifthAchievement', () {
+    group('success', () {
+      int totalPoints = 0;
+      for (var element in pointsData) {
+        totalPoints += element['total']!;
+      }
+      setUp(() {
+        when(() => achievementRepository.changeFifthAchievement())
+            .thenAnswer((_) async => {});
+
+        when(() => userRepository.getPoints())
+            .thenAnswer((_) => Stream.value(pointsData));
+      });
+
+      blocTest<HomeCubit, HomeState>(
+        'should emit Status.succes with isSaved true',
+        build: () => sut,
+        act: (cubit) async {
+          await cubit.changeFifthAchievement();
+        },
+        expect: () => [
+          const HomeState(
+            status: Status.success,
+            isSaved: true,
+          ),
+          const HomeState(
+            status: Status.loading,
+            isSaved: true,
+          ),
+          HomeState(
+            status: Status.success,
+            categoryPoints: pointsData,
+            totalPoints: totalPoints,
+            isSaved: true,
+          ),
+        ],
+      );
+    });
+
+    group('failure', () {
+      setUp(() {
+        when(() => achievementRepository.changeFifthAchievement())
+            .thenThrow(Exception('test-exception-error'));
+      });
+      blocTest<HomeCubit, HomeState>(
+        'should emit Status.error with errorMessage',
+        build: () => sut,
+        act: (cubit) {
+          cubit.changeFifthAchievement();
+        },
+        expect: () => [
+          const HomeState(
+            status: Status.error,
+            errorMessage: 'Exception: test-exception-error',
+          ),
+        ],
+      );
+    });
+  });
+
+  group('changeSixthAchievement', () {
+    group('success', () {
+      int totalPoints = 0;
+      for (var element in pointsData) {
+        totalPoints += element['total']!;
+      }
+      setUp(() {
+        when(() => achievementRepository.changeSixthAchievement())
+            .thenAnswer((_) async => {});
+
+        when(() => userRepository.getPoints())
+            .thenAnswer((_) => Stream.value(pointsData));
+      });
+
+      blocTest<HomeCubit, HomeState>(
+        'should emit Status.succes with isSaved true',
+        build: () => sut,
+        act: (cubit) async {
+          await cubit.changeSixthAchievement();
+        },
+        expect: () => [
+          const HomeState(
+            status: Status.success,
+            isSaved: true,
+          ),
+          const HomeState(
+            status: Status.loading,
+            isSaved: true,
+          ),
+          HomeState(
+            status: Status.success,
+            categoryPoints: pointsData,
+            totalPoints: totalPoints,
+            isSaved: true,
+          ),
+        ],
+      );
+    });
+
+    group('failure', () {
+      setUp(() {
+        when(() => achievementRepository.changeSixthAchievement())
+            .thenThrow(Exception('test-exception-error'));
+      });
+      blocTest<HomeCubit, HomeState>(
+        'should emit Status.error with errorMessage',
+        build: () => sut,
+        act: (cubit) {
+          cubit.changeSixthAchievement();
+        },
+        expect: () => [
+          const HomeState(
             status: Status.error,
             errorMessage: 'Exception: test-exception-error',
           ),

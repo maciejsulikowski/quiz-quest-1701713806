@@ -90,4 +90,155 @@ void main() {
       );
     });
   });
+
+  group('updateEasyFilmsRankingPoints', () {
+    group('succes', () {
+      setUp(() {
+        when(() => rankingRepository.updateEasyFilmsRankingPoints(0))
+            .thenAnswer(
+          (_) async => {},
+        );
+      });
+
+      blocTest(
+        'should call rankingRepository.updateEasyFilmsRankingPoints() method',
+        build: () => sut,
+        act: (cubit) => cubit.updateEasyFilmsRankingPoints(0),
+        expect: () => [
+          RankingState(status: Status.success),
+        ],
+      );
+    });
+
+    group('failure', () {
+      setUp(() {
+        when(() => rankingRepository.updateEasyFilmsRankingPoints(0))
+            .thenThrow(Exception('test-exception-error'));
+      });
+
+      blocTest(
+        'should call rankingRepository.updateEasyFilmsRankingPoints() method',
+        build: () => sut,
+        act: (cubit) => cubit.updateEasyFilmsRankingPoints(0),
+        expect: () => [
+          RankingState(status: Status.error, errorMessage: 'Exception: test-exception-error'),
+        ],
+      );
+    });
+  });
+
+
+  group('updateMediumFilmsRankingPoints', () {
+    group('succes', () {
+      setUp(() {
+        when(() => rankingRepository.updateMediumFilmsRankingPoints(0))
+            .thenAnswer(
+          (_) async => {},
+        );
+      });
+
+      blocTest(
+        'should call rankingRepository.updateMediumFilmsRankingPoints() method',
+        build: () => sut,
+        act: (cubit) => cubit.updateMediumFilmsRankingPoints(0),
+        expect: () => [
+          RankingState(status: Status.success),
+        ],
+      );
+    });
+
+    group('failure', () {
+      setUp(() {
+        when(() => rankingRepository.updateMediumFilmsRankingPoints(0))
+            .thenThrow(Exception('test-exception-error'));
+      });
+
+      blocTest(
+        'should call rankingRepository.updateMediumFilmsRankingPoints() method',
+        build: () => sut,
+        act: (cubit) => cubit.updateMediumFilmsRankingPoints(0),
+        expect: () => [
+          RankingState(
+              status: Status.error,
+              errorMessage: 'Exception: test-exception-error'),
+        ],
+      );
+    });
+  });
+
+  group('updateHardFilmsRankingPoints', () {
+    group('succes', () {
+      setUp(() {
+        when(() => rankingRepository.updateHardFilmsRankingPoints(0))
+            .thenAnswer(
+          (_) async => {},
+        );
+      });
+
+      blocTest(
+        'should call rankingRepository.updateHardFilmsRankingPoints() method',
+        build: () => sut,
+        act: (cubit) => cubit.updateHardFilmsRankingPoints(0),
+        expect: () => [
+          RankingState(status: Status.success),
+        ],
+      );
+    });
+
+    group('failure', () {
+      setUp(() {
+        when(() => rankingRepository.updateHardFilmsRankingPoints(0))
+            .thenThrow(Exception('test-exception-error'));
+      });
+
+      blocTest(
+        'should call rankingRepository.updateHardFilmsRankingPoints() method',
+        build: () => sut,
+        act: (cubit) => cubit.updateHardFilmsRankingPoints(0),
+        expect: () => [
+          RankingState(
+              status: Status.error,
+              errorMessage: 'Exception: test-exception-error'),
+        ],
+      );
+    });
+  });
+
+  group('updateMediumFilmsRankingPoints', () {
+    group('succes', () {
+      setUp(() {
+        when(() => rankingRepository.updateMediumFilmsRankingPoints(0))
+            .thenAnswer(
+          (_) async => {},
+        );
+      });
+
+      blocTest(
+        'should call rankingRepository.updateMediumFilmsRankingPoints() method',
+        build: () => sut,
+        act: (cubit) => cubit.updateMediumFilmsRankingPoints(0),
+        expect: () => [
+          RankingState(status: Status.success),
+        ],
+      );
+    });
+
+    group('failure', () {
+      setUp(() {
+        when(() => rankingRepository.updateMediumFilmsRankingPoints(0))
+            .thenThrow(Exception('test-exception-error'));
+      });
+
+      blocTest(
+        'should call rankingRepository.updateMediumFilmsRankingPoints() method',
+        build: () => sut,
+        act: (cubit) => cubit.updateMediumFilmsRankingPoints(0),
+        expect: () => [
+          RankingState(
+              status: Status.error,
+              errorMessage: 'Exception: test-exception-error'),
+        ],
+      );
+    });
+  });
 }

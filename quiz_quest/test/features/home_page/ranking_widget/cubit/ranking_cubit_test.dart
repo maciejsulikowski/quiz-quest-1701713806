@@ -659,4 +659,272 @@ void main() {
       );
     });
   });
+  group('updateEasyMusicRankingPoints', () {
+    group('succes', () {
+      setUp(() {
+        when(() => rankingRepository.updateEasyMusicRankingPoints(0))
+            .thenAnswer(
+          (_) async => {},
+        );
+      });
+
+      blocTest(
+        'should call rankingRepository.updateEasyMusicRankingPoints() method',
+        build: () => sut,
+        act: (cubit) => cubit.updateEasyMusicRankingPoints(0),
+        expect: () => [
+          RankingState(status: Status.success),
+        ],
+      );
+    });
+
+    group('failure', () {
+      setUp(() {
+        when(() => rankingRepository.updateEasyMusicRankingPoints(0))
+            .thenThrow(Exception('test-exception-error'));
+      });
+
+      blocTest(
+        'should call rankingRepository.updateEasyMusicRankingPoints() method',
+        build: () => sut,
+        act: (cubit) => cubit.updateEasyMusicRankingPoints(0),
+        expect: () => [
+          RankingState(
+              status: Status.error,
+              errorMessage: 'Exception: test-exception-error'),
+        ],
+      );
+    });
+  });
+
+  group('updateMediumMusicRankingPoints', () {
+    group('succes', () {
+      setUp(() {
+        when(() => rankingRepository.updateMediumMusicRankingPoints(0))
+            .thenAnswer(
+          (_) async => {},
+        );
+      });
+
+      blocTest(
+        'should call rankingRepository.updateMediumMusicRankingPoints() method',
+        build: () => sut,
+        act: (cubit) => cubit.updateMediumMusicRankingPoints(0),
+        expect: () => [
+          RankingState(status: Status.success),
+        ],
+      );
+    });
+
+    group('failure', () {
+      setUp(() {
+        when(() => rankingRepository.updateMediumMusicRankingPoints(0))
+            .thenThrow(Exception('test-exception-error'));
+      });
+
+      blocTest(
+        'should call rankingRepository.updateMediumMusicRankingPoints() method',
+        build: () => sut,
+        act: (cubit) => cubit.updateMediumMusicRankingPoints(0),
+        expect: () => [
+          RankingState(
+              status: Status.error,
+              errorMessage: 'Exception: test-exception-error'),
+        ],
+      );
+    });
+  });
+
+  group('updateHardMusicRankingPoints', () {
+    group('succes', () {
+      setUp(() {
+        when(() => rankingRepository.updateHardMusicRankingPoints(0))
+            .thenAnswer(
+          (_) async => {},
+        );
+      });
+
+      blocTest(
+        'should call rankingRepository.updateHardMusicRankingPoints() method',
+        build: () => sut,
+        act: (cubit) => cubit.updateHardMusicRankingPoints(0),
+        expect: () => [
+          RankingState(status: Status.success),
+        ],
+      );
+    });
+
+    group('failure', () {
+      setUp(() {
+        when(() => rankingRepository.updateHardMusicRankingPoints(0))
+            .thenThrow(Exception('test-exception-error'));
+      });
+
+      blocTest(
+        'should call rankingRepository.updateHardMusicRankingPoints() method',
+        build: () => sut,
+        act: (cubit) => cubit.updateHardMusicRankingPoints(0),
+        expect: () => [
+          RankingState(
+              status: Status.error,
+              errorMessage: 'Exception: test-exception-error'),
+        ],
+      );
+    });
+  });
+
+  group('updateEasyNatureRankingPoints', () {
+    group('succes', () {
+      setUp(() {
+        when(() => rankingRepository.updateEasyNatureRankingPoints(0))
+            .thenAnswer(
+          (_) async => {},
+        );
+      });
+
+      blocTest(
+        'should call rankingRepository.updateEasyNatureRankingPoints() method',
+        build: () => sut,
+        act: (cubit) => cubit.updateEasyNatureRankingPoints(0),
+        expect: () => [
+          RankingState(status: Status.success),
+        ],
+      );
+    });
+
+    group('failure', () {
+      setUp(() {
+        when(() => rankingRepository.updateEasyNatureRankingPoints(0))
+            .thenThrow(Exception('test-exception-error'));
+      });
+
+      blocTest(
+        'should call rankingRepository.updateEasyNatureRankingPoints() method',
+        build: () => sut,
+        act: (cubit) => cubit.updateEasyNatureRankingPoints(0),
+        expect: () => [
+          RankingState(
+              status: Status.error,
+              errorMessage: 'Exception: test-exception-error'),
+        ],
+      );
+    });
+  });
+
+  group('updateMediumNatureRankingPoints', () {
+    group('succes', () {
+      setUp(() {
+        when(() => rankingRepository.updateMediumNatureRankingPoints(0))
+            .thenAnswer(
+          (_) async => {},
+        );
+      });
+
+      blocTest(
+        'should call rankingRepository.updateMediumNatureRankingPoints() method',
+        build: () => sut,
+        act: (cubit) => cubit.updateMediumNatureRankingPoints(0),
+        expect: () => [
+          RankingState(status: Status.success),
+        ],
+      );
+    });
+
+    group('failure', () {
+      setUp(() {
+        when(() => rankingRepository.updateMediumNatureRankingPoints(0))
+            .thenThrow(Exception('test-exception-error'));
+      });
+
+      blocTest(
+        'should call rankingRepository.updateMediumNatureRankingPoints() method',
+        build: () => sut,
+        act: (cubit) => cubit.updateMediumNatureRankingPoints(0),
+        expect: () => [
+          RankingState(
+              status: Status.error,
+              errorMessage: 'Exception: test-exception-error'),
+        ],
+      );
+    });
+  });
+
+
+
+  group('updateHardNatureRankingPoints', () {
+    group('succes', () {
+      setUp(() {
+        when(() => rankingRepository.updateHardNatureRankingPoints(0))
+            .thenAnswer(
+          (_) async => {},
+        );
+      });
+
+      blocTest(
+        'should call rankingRepository.updateHardNatureRankingPoints() method',
+        build: () => sut,
+        act: (cubit) => cubit.updateHardNatureRankingPoints(0),
+        expect: () => [
+          RankingState(status: Status.success),
+        ],
+      );
+    });
+
+    group('failure', () {
+      setUp(() {
+        when(() => rankingRepository.updateHardNatureRankingPoints(0))
+            .thenThrow(Exception('test-exception-error'));
+      });
+
+      blocTest(
+        'should call rankingRepository.updateHardNatureRankingPoints() method',
+        build: () => sut,
+        act: (cubit) => cubit.updateHardNatureRankingPoints(0),
+        expect: () => [
+          RankingState(
+              status: Status.error,
+              errorMessage: 'Exception: test-exception-error'),
+        ],
+      );
+    });
+  });
+
+  group('updateMediumMusicRankingPoints', () {
+    group('succes', () {
+      setUp(() {
+        when(() => rankingRepository.updateMediumMusicRankingPoints(0))
+            .thenAnswer(
+          (_) async => {},
+        );
+      });
+
+      blocTest(
+        'should call rankingRepository.updateMediumMusicRankingPoints() method',
+        build: () => sut,
+        act: (cubit) => cubit.updateMediumMusicRankingPoints(0),
+        expect: () => [
+          RankingState(status: Status.success),
+        ],
+      );
+    });
+
+    group('failure', () {
+      setUp(() {
+        when(() => rankingRepository.updateMediumMusicRankingPoints(0))
+            .thenThrow(Exception('test-exception-error'));
+      });
+
+      blocTest(
+        'should call rankingRepository.updateMediumMusicRankingPoints() method',
+        build: () => sut,
+        act: (cubit) => cubit.updateMediumMusicRankingPoints(0),
+        expect: () => [
+          RankingState(
+              status: Status.error,
+              errorMessage: 'Exception: test-exception-error'),
+        ],
+      );
+    });
+  });
+
 }

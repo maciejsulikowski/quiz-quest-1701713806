@@ -433,4 +433,230 @@ void main() {
     });
   });
 
+  group('updateEasyGeographyRankingPoints', () {
+    group('succes', () {
+      setUp(() {
+        when(() => rankingRepository.updateEasyGeographyRankingPoints(0))
+            .thenAnswer(
+          (_) async => {},
+        );
+      });
+
+      blocTest(
+        'should call rankingRepository.updateEasyGeographyRankingPoints() method',
+        build: () => sut,
+        act: (cubit) => cubit.updateEasyGeographyRankingPoints(0),
+        expect: () => [
+          RankingState(status: Status.success),
+        ],
+      );
+    });
+
+    group('failure', () {
+      setUp(() {
+        when(() => rankingRepository.updateEasyGeographyRankingPoints(0))
+            .thenThrow(Exception('test-exception-error'));
+      });
+
+      blocTest(
+        'should call rankingRepository.updateEasyGeographyRankingPoints() method',
+        build: () => sut,
+        act: (cubit) => cubit.updateEasyGeographyRankingPoints(0),
+        expect: () => [
+          RankingState(
+              status: Status.error,
+              errorMessage: 'Exception: test-exception-error'),
+        ],
+      );
+    });
+  });
+
+  group('updateMediumGeographyRankingPoints', () {
+    group('succes', () {
+      setUp(() {
+        when(() => rankingRepository.updateMediumGeographyRankingPoints(0))
+            .thenAnswer(
+          (_) async => {},
+        );
+      });
+
+      blocTest(
+        'should call rankingRepository.updateMediumGeographyRankingPoints() method',
+        build: () => sut,
+        act: (cubit) => cubit.updateMediumGeographyRankingPoints(0),
+        expect: () => [
+          RankingState(status: Status.success),
+        ],
+      );
+    });
+
+    group('failure', () {
+      setUp(() {
+        when(() => rankingRepository.updateMediumGeographyRankingPoints(0))
+            .thenThrow(Exception('test-exception-error'));
+      });
+
+      blocTest(
+        'should call rankingRepository.updateMediumGeographyRankingPoints() method',
+        build: () => sut,
+        act: (cubit) => cubit.updateMediumGeographyRankingPoints(0),
+        expect: () => [
+          RankingState(
+              status: Status.error,
+              errorMessage: 'Exception: test-exception-error'),
+        ],
+      );
+    });
+  });
+
+  group('updateHardGeographyRankingPoints', () {
+    group('succes', () {
+      setUp(() {
+        when(() => rankingRepository.updateHardGeographyRankingPoints(0))
+            .thenAnswer(
+          (_) async => {},
+        );
+      });
+
+      blocTest(
+        'should call rankingRepository.updateHardGeographyRankingPoints() method',
+        build: () => sut,
+        act: (cubit) => cubit.updateHardGeographyRankingPoints(0),
+        expect: () => [
+          RankingState(status: Status.success),
+        ],
+      );
+    });
+
+    group('failure', () {
+      setUp(() {
+        when(() => rankingRepository.updateHardGeographyRankingPoints(0))
+            .thenThrow(Exception('test-exception-error'));
+      });
+
+      blocTest(
+        'should call rankingRepository.updateHardGeographyRankingPoints() method',
+        build: () => sut,
+        act: (cubit) => cubit.updateHardGeographyRankingPoints(0),
+        expect: () => [
+          RankingState(
+              status: Status.error,
+              errorMessage: 'Exception: test-exception-error'),
+        ],
+      );
+    });
+  });
+  group('updateEasyHistoryRankingPoints', () {
+    group('succes', () {
+      setUp(() {
+        when(() => rankingRepository.updateEasyHistoryRankingPoints(0))
+            .thenAnswer(
+          (_) async => {},
+        );
+      });
+
+      blocTest(
+        'should call rankingRepository.updateEasyHistoryRankingPoints() method',
+        build: () => sut,
+        act: (cubit) => cubit.updateEasyHistoryRankingPoints(0),
+        expect: () => [
+          RankingState(status: Status.success),
+        ],
+      );
+    });
+
+    group('failure', () {
+      setUp(() {
+        when(() => rankingRepository.updateEasyHistoryRankingPoints(0))
+            .thenThrow(Exception('test-exception-error'));
+      });
+
+      blocTest(
+        'should call rankingRepository.updateEasyHistoryRankingPoints() method',
+        build: () => sut,
+        act: (cubit) => cubit.updateEasyHistoryRankingPoints(0),
+        expect: () => [
+          RankingState(
+              status: Status.error,
+              errorMessage: 'Exception: test-exception-error'),
+        ],
+      );
+    });
+  });
+
+  group('updateMediumHistoryRankingPoints', () {
+    group('succes', () {
+      setUp(() {
+        when(() => rankingRepository.updateMediumHistoryRankingPoints(0))
+            .thenAnswer(
+          (_) async => {},
+        );
+      });
+
+      blocTest(
+        'should call rankingRepository.updateMediumHistoryRankingPoints() method',
+        build: () => sut,
+        act: (cubit) => cubit.updateMediumHistoryRankingPoints(0),
+        expect: () => [
+          RankingState(status: Status.success),
+        ],
+      );
+    });
+
+    group('failure', () {
+      setUp(() {
+        when(() => rankingRepository.updateMediumHistoryRankingPoints(0))
+            .thenThrow(Exception('test-exception-error'));
+      });
+
+      blocTest(
+        'should call rankingRepository.updateMediumHistoryRankingPoints() method',
+        build: () => sut,
+        act: (cubit) => cubit.updateMediumHistoryRankingPoints(0),
+        expect: () => [
+          RankingState(
+              status: Status.error,
+              errorMessage: 'Exception: test-exception-error'),
+        ],
+      );
+    });
+  });
+
+  group('updateHardHistoryRankingPoints', () {
+    group('succes', () {
+      setUp(() {
+        when(() => rankingRepository.updateHardHistoryRankingPoints(0))
+            .thenAnswer(
+          (_) async => {},
+        );
+      });
+
+      blocTest(
+        'should call rankingRepository.updateHardHistoryRankingPoints() method',
+        build: () => sut,
+        act: (cubit) => cubit.updateHardHistoryRankingPoints(0),
+        expect: () => [
+          RankingState(status: Status.success),
+        ],
+      );
+    });
+
+    group('failure', () {
+      setUp(() {
+        when(() => rankingRepository.updateHardHistoryRankingPoints(0))
+            .thenThrow(Exception('test-exception-error'));
+      });
+
+      blocTest(
+        'should call rankingRepository.updateHardHistoryRankingPoints() method',
+        build: () => sut,
+        act: (cubit) => cubit.updateHardHistoryRankingPoints(0),
+        expect: () => [
+          RankingState(
+              status: Status.error,
+              errorMessage: 'Exception: test-exception-error'),
+        ],
+      );
+    });
+  });
 }

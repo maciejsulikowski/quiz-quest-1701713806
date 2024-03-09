@@ -21,6 +21,15 @@ class RankingWidget extends StatefulWidget {
 }
 
 class RankingWidgetState extends State<RankingWidget> {
+  late ScrollController scrollController;
+  late int userIndex;
+
+  @override
+  void initState() {
+    scrollController = ScrollController();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -31,9 +40,13 @@ class RankingWidgetState extends State<RankingWidget> {
 
           if (modifiedList != null && modifiedList.isNotEmpty) {
             modifiedList.sort((a, b) => b.totalPoints.compareTo(a.totalPoints));
+            userIndex = modifiedList
+                .indexWhere((element) => element.userID == widget.user!.uid);
+            WidgetsBinding.instance!.addPostFrameCallback((_) {
+              scrollToUser();
+            });
           }
-          // state.rankingModel
-          //     ?.sort((a, b) => b.totalPoints.compareTo(a.totalPoints));
+
           return Scaffold(
             extendBodyBehindAppBar: true,
             appBar: AppBar(
@@ -65,6 +78,7 @@ class RankingWidgetState extends State<RankingWidget> {
                     const SizedBox(height: 30),
                     Expanded(
                       child: ListView.builder(
+                        controller: scrollController,
                         itemCount: state.rankingModel?.length ?? 0,
                         itemBuilder: (context, index) {
                           final userRecord = modifiedList?[index];
@@ -99,5 +113,21 @@ class RankingWidgetState extends State<RankingWidget> {
         },
       ),
     );
+  }
+
+  void scrollToUser() {
+    if (userIndex != -1) {
+      scrollController.animateTo(
+        userIndex * 100.0,
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeInOut,
+      );
+    }
+  }
+
+  @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
   }
 }

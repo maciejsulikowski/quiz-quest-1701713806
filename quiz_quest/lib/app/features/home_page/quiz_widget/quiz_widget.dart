@@ -69,7 +69,7 @@ class _QuizzWidgetState extends State<QuizzWidget> {
       child: BlocListener<HomeCubit, HomeState>(
         listener: (context, state) {
           var achievementModel = state.achievementModel;
-          // if (achievementModel != null && state.totalPoints != null) {
+
           var firstAchievement =
               state.achievementModel?.isFirstAchievementReady;
           var secondAchievement =

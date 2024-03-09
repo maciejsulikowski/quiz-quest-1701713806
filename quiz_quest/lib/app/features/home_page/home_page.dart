@@ -67,7 +67,7 @@ class _HomePageState extends State<HomePage> {
                   } else {
                     if (currentIndex == 0) {
                       return QuizzWidget(
-                        userName: state.userModel?.name ?? 'user',
+                        userName: state.userModel?.name ?? '',
                         user: widget.user,
                       );
                     }

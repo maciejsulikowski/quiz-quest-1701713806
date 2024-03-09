@@ -7,6 +7,7 @@ import 'package:quiz_quest/app/features/home_page/ranking_widget/cubit/ranking_c
 import 'package:quiz_quest/app/features/home_page/ranking_widget/user_records_widgets/first_user_record.dart';
 import 'package:quiz_quest/app/features/home_page/ranking_widget/user_records_widgets/second_user_record.dart';
 import 'package:quiz_quest/app/injection_container.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class RankingWidget extends StatefulWidget {
   const RankingWidget({
@@ -21,14 +22,8 @@ class RankingWidget extends StatefulWidget {
 }
 
 class RankingWidgetState extends State<RankingWidget> {
-  late ScrollController scrollController;
+  final ItemScrollController itemScrollController = ItemScrollController();
   late int userIndex;
-
-  @override
-  void initState() {
-    scrollController = ScrollController();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,8 +72,8 @@ class RankingWidgetState extends State<RankingWidget> {
                     ),
                     const SizedBox(height: 30),
                     Expanded(
-                      child: ListView.builder(
-                        controller: scrollController,
+                      child: ScrollablePositionedList.builder(
+                        itemScrollController: itemScrollController,
                         itemCount: state.rankingModel?.length ?? 0,
                         itemBuilder: (context, index) {
                           final userRecord = modifiedList?[index];
@@ -117,17 +112,11 @@ class RankingWidgetState extends State<RankingWidget> {
 
   void scrollToUser() {
     if (userIndex != -1) {
-      scrollController.animateTo(
-        userIndex * 100.0,
-        duration: const Duration(milliseconds: 500),
+      itemScrollController.scrollTo(
+        index: userIndex,
+        duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
       );
     }
-  }
-
-  @override
-  void dispose() {
-    scrollController.dispose();
-    super.dispose();
   }
 }

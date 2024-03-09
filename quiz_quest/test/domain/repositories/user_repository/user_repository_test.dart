@@ -77,6 +77,24 @@ void main() {
     });
   });
 
+  group('setEmptyPoints', () {
+    test('should call setEmptyAccount() method', () async {
+      when(() => firstDataSource.setEmptyAccount()).thenAnswer((_) async => {});
+
+      await sut.setEmptyAccount();
+
+      verify(() => firstDataSource.setEmptyAccount()).called(1);
+    });
+
+    test('should call setEmptyPoints() method', () async {
+      when(() => firstDataSource.setEmptyPoints()).thenAnswer((_) async => {});
+
+      await sut.setEmptyPoints();
+
+      verify(() => firstDataSource.setEmptyPoints()).called(1);
+    });
+  });
+
   group('games', () {
     test('should call updateEasyGamesPoints() method', () async {
       when(() => firstDataSource.updateEasyGamesPoints(0))
@@ -335,6 +353,71 @@ void main() {
       await sut.updateHardGeneralPoints(0);
 
       verify(() => firstDataSource.updateHardGeneralPoints(0)).called(1);
+    });
+  });
+
+  group('user', () {
+    test('should call updateRankigName() method', () async {
+      when(() => firstDataSource.updateRankingName(name: 'Maciek'))
+          .thenAnswer((_) async => {});
+
+      await sut.updateRankingName('Maciek');
+
+      verify(() => firstDataSource.updateRankingName(name: 'Maciek')).called(1);
+    });
+
+    test('should call updateName() method', () async {
+      when(() => firstDataSource.updateName(name: 'Maciek'))
+          .thenAnswer((_) async => {});
+
+      await sut.updateName('Maciek');
+
+      verify(() => firstDataSource.updateName(name: 'Maciek')).called(1);
+    });
+
+    test('should call updateSurname() method', () async {
+      when(() => firstDataSource.updateSurname(surname: 'Sulik'))
+          .thenAnswer((_) async => {});
+
+      await sut.updateSurname('Sulik');
+
+      verify(() => firstDataSource.updateSurname(surname: 'Sulik')).called(1);
+    });
+
+    test('should call updateGender() method', () async {
+      when(() => firstDataSource.updateGender(gender: 'Male'))
+          .thenAnswer((_) async => {});
+
+      await sut.updateGender('Male');
+
+      verify(() => firstDataSource.updateGender(gender: 'Male')).called(1);
+    });
+
+    test('should call updateImage() method', () async {
+      when(() => firstDataSource.updateImage(imageURL: 'image_url'))
+          .thenAnswer((_) async => {});
+
+      await sut.updateImage('image_url');
+
+      verify(() => firstDataSource.updateImage(imageURL: 'image_url'))
+          .called(1);
+    });
+
+    test('should call updateCategory() method', () async {
+      when(() => firstDataSource.updateCategory(category: 'Films'))
+          .thenAnswer((_) async => {});
+
+      await sut.updateCategory('Films');
+
+      verify(() => firstDataSource.updateCategory(category: 'Films')).called(1);
+    });
+
+    test('should call changeUserBool() method', () async {
+      when(() => firstDataSource.changeUserBool()).thenAnswer((_) async => {});
+
+      await sut.changeUserBool();
+
+      verify(() => firstDataSource.changeUserBool()).called(1);
     });
   });
 }

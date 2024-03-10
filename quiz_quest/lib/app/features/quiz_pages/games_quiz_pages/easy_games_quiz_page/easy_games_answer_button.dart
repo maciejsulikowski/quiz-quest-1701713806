@@ -82,7 +82,9 @@ class _EasyGamesAnswerButtonState extends State<EasyGamesAnswerButton> {
         .replaceAll('&amp;', '')
         .replaceAll('&rsquo;', '')
         .replaceAll('&eacute;', '')
-        .replaceAll('&iuml;', '');
+        .replaceAll('&iuml;', '')
+        .replaceAll('&eacute;', '')
+        .replaceAll('&sup2;', '');
 
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20),

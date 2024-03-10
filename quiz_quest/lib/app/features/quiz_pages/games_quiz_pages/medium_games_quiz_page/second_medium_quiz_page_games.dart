@@ -60,7 +60,6 @@ class QuizzPage extends StatelessWidget {
       ),
       child: ListView(
         children: [
-          
           Center(
             child: CircleAvatar(
               radius: 35,
@@ -72,7 +71,7 @@ class QuizzPage extends StatelessWidget {
           ),
           Center(
             child: Text(
-              'Your record in medium category: $mediumCategory',
+              'Your record in medium category: $mediumCategory💎',
               style: GoogleFonts.aBeeZee(
                 fontSize: 18,
                 color: Colors.white,

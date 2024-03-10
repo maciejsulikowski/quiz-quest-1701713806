@@ -382,8 +382,8 @@ class _HardQuestionGamesQuizPageState extends State<HardQuestionGamesQuizPage> {
                                               MainAxisAlignment.end,
                                           children: [
                                             Container(
-                                                margin:
-                                                    const EdgeInsets.only(bottom: 20),
+                                                margin: const EdgeInsets.only(
+                                                    bottom: 20),
                                                 color: Colors.black,
                                                 child: ElevatedButton(
                                                   onPressed: (isButtonClicked ||

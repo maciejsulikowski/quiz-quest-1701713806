@@ -7,9 +7,6 @@ import 'package:quiz_quest/app/features/quiz_pages/general_quiz_pages/cubit/gene
 import 'package:quiz_quest/app/features/quiz_pages/general_quiz_pages/medium_general_quiz_page/medium_general_lost_life_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/general_quiz_pages/medium_general_quiz_page/medium_question_quiz_page.dart';
 
-
-
-
 // ignore: must_be_immutable
 class MediumGeneralAnswerButton extends StatefulWidget {
   MediumGeneralAnswerButton({
@@ -60,7 +57,7 @@ class _MediumGeneralAnswerButtonState extends State<MediumGeneralAnswerButton> {
         context
             .read<GeneralCubit>()
             .updateMediumGeneralPoints(mediumGeneralGoodAnswers);
-            context
+        context
             .read<RankingCubit>()
             .updateMediumGeneralRankingPoints(mediumGeneralGoodAnswers);
         Navigator.of(context).push(
@@ -84,11 +81,19 @@ class _MediumGeneralAnswerButtonState extends State<MediumGeneralAnswerButton> {
         .replaceAll('&quot;', '')
         .replaceAll('&#039;', '')
         .replaceAll('&aacute;', '')
+        .replaceAll('&oacute;', '')
         .replaceAll('&ntilde;', '')
         .replaceAll('&amp;', '')
         .replaceAll('&rsquo;', '')
+        .replaceAll('&ldquo;', '')
+        .replaceAll('&rdquo;', '')
         .replaceAll('&lrm;', '')
-        .replaceAll('&Eacute;', '');
+        .replaceAll('&Eacute;', '')
+        .replaceAll('&shy;', '')
+        .replaceAll('&ouml;', '')
+        .replaceAll('&aring;', '')
+        .replaceAll('&auml;', '')
+        .replaceAll('&heelip;', '');
 
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20),

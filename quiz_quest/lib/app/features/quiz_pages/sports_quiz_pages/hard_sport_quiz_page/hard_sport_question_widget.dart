@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 class HardSportQuestionWidget extends StatelessWidget {
   const HardSportQuestionWidget({
     required this.question,
@@ -16,7 +17,9 @@ class HardSportQuestionWidget extends StatelessWidget {
         .replaceAll('&aacute;', '')
         .replaceAll('&ntilde;', '')
         .replaceAll('&amp;', '')
-        .replaceAll('&rsquo;', '');
+        .replaceAll('&rsquo;', '')
+        .replaceAll('&rdquo;', '')
+        .replaceAll('&ldquo;', '');
 
     return Center(
       child: Text(

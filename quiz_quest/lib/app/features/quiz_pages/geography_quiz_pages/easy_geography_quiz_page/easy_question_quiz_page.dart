@@ -266,178 +266,202 @@ class _EasyQuestionGeographyQuizPageState
                     if (geographyQuizModel != null)
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                        child: ListView.builder(
-                          itemCount: 1,
-                          shrinkWrap: true,
-                          itemBuilder: (context, _) {
-                            final questionNumber = currentIndex + 1;
-                            final questionNumbers =
-                                geographyQuizModel.results.length;
+                        child: SingleChildScrollView(
+                          physics: const ScrollPhysics(),
+                          child: Column(
+                            children: [
+                              ListView.builder(
+                                itemCount: 1,
+                                physics: const NeverScrollableScrollPhysics(),
+                                shrinkWrap: true,
+                                itemBuilder: (context, _) {
+                                  final questionNumber = currentIndex + 1;
+                                  final questionNumbers =
+                                      geographyQuizModel.results.length;
 
-                            return Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                EasyGeographyQuestionWidget(
-                                  question: geographyQuizModel
-                                      .results[currentIndex].question,
-                                ),
-                                const SizedBox(
-                                  height: 15,
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    Text(
-                                      'Bad: $easyGeographyBadAnswers',
-                                      style: GoogleFonts.aBeeZee(
-                                          fontSize: 20,
-                                          color: Colors.red,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text(
-                                      'Question: $questionNumber/$questionNumbers',
-                                      style: GoogleFonts.aBeeZee(
-                                          fontSize: 20,
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text(
-                                      'Good: $easyGeographyGoodAnswers',
-                                      style: GoogleFonts.aBeeZee(
-                                          fontSize: 20,
-                                          color: Colors.green,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 15,
-                                ),
-                                for (int index = 0;
-                                    index < currentAnswers.length;
-                                    index++) ...[
-                                  EasyGeographyAnswerButton(
-                                    isTimeUp: isTimeUp,
-                                    duration: duration,
-                                    isButtonDisabled: (value) {
-                                      setState(() {
-                                        isButtonDisabled = value;
-                                      });
-                                    },
-                                    isButtonClicked: (value) {
-                                      setState(() {
-                                        isButtonClicked = value;
-                                        if (value = currentAnswers[index] ==
-                                            geographyQuizModel
-                                                .results[currentIndex]
-                                                .correctAnswer) {
-                                          ringColor = Colors.green;
-                                        } else {
-                                          ringColor = Colors.red;
-                                        }
-                                      });
-                                    },
-                                    textcolor: answerColors[index],
-                                    colorFunction: (value, index) {
-                                      setState(() {
-                                        answerColors[index] = value;
-                                      });
-                                    },
-                                    isCorrectAnswer: currentAnswers[index] ==
-                                            geographyQuizModel
-                                                .results[currentIndex]
-                                                .correctAnswer
-                                        ? true
-                                        : false,
-                                    answer: currentAnswers[index],
-                                    controller: controller,
-                                    index: index,
-                                  ),
-                                  const SizedBox(
-                                    height: 10,
-                                  )
-                                ],
-                                const SizedBox(
-                                  height: 15,
-                                ),
-                                const SizedBox(
-                                  height: 30,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 20.0),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
+                                  return Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
                                     children: [
-                                      Container(
-                                          color: Colors.black,
-                                          child: ElevatedButton(
-                                            onPressed: (isButtonClicked ||
-                                                    isDurationEnded)
-                                                ? () {
-                                                    setState(() {
-                                                      if (currentIndex ==
+                                      EasyGeographyQuestionWidget(
+                                        question: geographyQuizModel
+                                            .results[currentIndex].question,
+                                      ),
+                                      const SizedBox(
+                                        height: 15,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: [
+                                          Text(
+                                            'Bad: $easyGeographyBadAnswers',
+                                            style: GoogleFonts.aBeeZee(
+                                                fontSize: 20,
+                                                color: Colors.red,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          const SizedBox(
+                                            width: 10,
+                                          ),
+                                          Text(
+                                            'Question: $questionNumber/$questionNumbers',
+                                            style: GoogleFonts.aBeeZee(
+                                                fontSize: 20,
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          const SizedBox(
+                                            width: 10,
+                                          ),
+                                          Text(
+                                            'Good: $easyGeographyGoodAnswers',
+                                            style: GoogleFonts.aBeeZee(
+                                                fontSize: 20,
+                                                color: Colors.green,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ],
+                                      ),
+                                      const SizedBox(
+                                        height: 15,
+                                      ),
+                                      for (int index = 0;
+                                          index < currentAnswers.length;
+                                          index++) ...[
+                                        EasyGeographyAnswerButton(
+                                          isTimeUp: isTimeUp,
+                                          duration: duration,
+                                          isButtonDisabled: (value) {
+                                            setState(() {
+                                              isButtonDisabled = value;
+                                            });
+                                          },
+                                          isButtonClicked: (value) {
+                                            setState(() {
+                                              isButtonClicked = value;
+                                              if (value =
+                                                  currentAnswers[index] ==
+                                                      geographyQuizModel
+                                                          .results[currentIndex]
+                                                          .correctAnswer) {
+                                                ringColor = Colors.green;
+                                              } else {
+                                                ringColor = Colors.red;
+                                              }
+                                            });
+                                          },
+                                          textcolor: answerColors[index],
+                                          colorFunction: (value, index) {
+                                            setState(() {
+                                              answerColors[index] = value;
+                                            });
+                                          },
+                                          isCorrectAnswer:
+                                              currentAnswers[index] ==
+                                                      geographyQuizModel
+                                                          .results[currentIndex]
+                                                          .correctAnswer
+                                                  ? true
+                                                  : false,
+                                          answer: currentAnswers[index],
+                                          controller: controller,
+                                          index: index,
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        )
+                                      ],
+                                      const SizedBox(
+                                        height: 15,
+                                      ),
+                                      const SizedBox(
+                                        height: 30,
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 20.0),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          children: [
+                                            Container(
+                                                margin: const EdgeInsets.only(
+                                                    bottom: 20),
+                                                color: Colors.black,
+                                                child: ElevatedButton(
+                                                  onPressed: (isButtonClicked ||
+                                                          isDurationEnded)
+                                                      ? () {
+                                                          setState(() {
+                                                            if (currentIndex ==
+                                                                geographyQuizModel
+                                                                        .results
+                                                                        .length -
+                                                                    1) {
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .push(
+                                                                MaterialPageRoute(
+                                                                  builder:
+                                                                      (context) =>
+                                                                          ResumeEasyGeographyQuizPageGames(
+                                                                    badAnswers:
+                                                                        easyGeographyBadAnswers,
+                                                                    goodAnswers:
+                                                                        easyGeographyGoodAnswers,
+                                                                  ),
+                                                                ),
+                                                              );
+                                                            } else if (isButtonClicked ||
+                                                                isDurationEnded) {
+                                                              currentIndex += 1;
+                                                              isButtonClicked =
+                                                                  false;
+                                                              isButtonDisabled =
+                                                                  false;
+                                                              answerGenerated =
+                                                                  false;
+                                                              ringColor =
+                                                                  Colors.white;
+                                                              isTimeUp = false;
+                                                              answerColors =
+                                                                  List.filled(
+                                                                currentAnswers
+                                                                    .length,
+                                                                Colors.white,
+                                                              );
+                                                            }
+                                                            isDurationEnded =
+                                                                false;
+                                                          });
+                                                          controller.start();
+                                                        }
+                                                      : null,
+                                                  style:
+                                                      ElevatedButton.styleFrom(
+                                                    foregroundColor:
+                                                        Colors.white,
+                                                    backgroundColor:
+                                                        Colors.black,
+                                                  ),
+                                                  child: Text(currentIndex ==
                                                           geographyQuizModel
                                                                   .results
                                                                   .length -
-                                                              1) {
-                                                        Navigator.of(context)
-                                                            .push(
-                                                          MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                ResumeEasyGeographyQuizPageGames(
-                                                              badAnswers:
-                                                                  easyGeographyBadAnswers,
-                                                              goodAnswers:
-                                                                  easyGeographyGoodAnswers,
-                                                            ),
-                                                          ),
-                                                        );
-                                                      } else if (isButtonClicked ||
-                                                          isDurationEnded) {
-                                                        currentIndex += 1;
-                                                        isButtonClicked = false;
-                                                        isButtonDisabled =
-                                                            false;
-                                                        answerGenerated = false;
-                                                        ringColor =
-                                                            Colors.white;
-                                                        isTimeUp = false;
-                                                        answerColors =
-                                                            List.filled(
-                                                          currentAnswers.length,
-                                                          Colors.white,
-                                                        );
-                                                      }
-                                                      isDurationEnded = false;
-                                                    });
-                                                    controller.start();
-                                                  }
-                                                : null,
-                                            style: ElevatedButton.styleFrom(
-                                              foregroundColor: Colors.white,
-                                              backgroundColor: Colors.black,
-                                            ),
-                                            child: Text(currentIndex ==
-                                                    geographyQuizModel
-                                                            .results.length -
-                                                        1
-                                                ? 'Show your results'
-                                                : 'Next Question ➔'),
-                                          )),
+                                                              1
+                                                      ? 'Show your results'
+                                                      : 'Next Question ➔'),
+                                                )),
+                                          ],
+                                        ),
+                                      )
                                     ],
-                                  ),
-                                )
-                              ],
-                            );
-                          },
+                                  );
+                                },
+                              ),
+                            ],
+                          ),
                         ),
                       )
                   ],

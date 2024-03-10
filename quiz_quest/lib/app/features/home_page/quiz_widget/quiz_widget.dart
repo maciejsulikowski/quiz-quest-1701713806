@@ -13,6 +13,7 @@ import 'package:quiz_quest/app/features/home_page/quiz_widget/quiz_widgets/lets_
 import 'package:quiz_quest/app/features/home_page/quiz_widget/quiz_widgets/second_row_achievement_widget.dart';
 import 'package:quiz_quest/app/features/home_page/quiz_widget/quiz_widgets/total_points_widget.dart';
 import 'package:quiz_quest/app/features/user_page/achievements/cubit/achievements_cubit.dart';
+import 'package:quiz_quest/app/features/user_page/cubit/user_cubit.dart';
 
 import 'package:quiz_quest/app/injection_container.dart';
 import 'package:super_tooltip/super_tooltip.dart';
@@ -62,14 +63,21 @@ class _QuizzWidgetState extends State<QuizzWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getIt<HomeCubit>()
-        ..getAchievements()
-        ..getPointsData(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => getIt<HomeCubit>()
+            ..getAchievements()
+            ..getPointsData(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<UserCubit>()..start(),
+        ),
+      ],
       child: BlocListener<HomeCubit, HomeState>(
         listener: (context, state) {
           var achievementModel = state.achievementModel;
-          // if (achievementModel != null && state.totalPoints != null) {
+
           var firstAchievement =
               state.achievementModel?.isFirstAchievementReady;
           var secondAchievement =
@@ -82,10 +90,6 @@ class _QuizzWidgetState extends State<QuizzWidget> {
               state.achievementModel?.isFifthAchievementReady;
           var sixthAchievement =
               state.achievementModel?.isSixthAchievementReady;
-
-          if (achievementModel != null) print('Bool $firstAchievement');
-          final totalPoints = state.totalPoints;
-          print('punkty $totalPoints');
 
           if (firstAchievement == false && state.totalPoints >= 100) {
             ScaffoldMessenger.of(context).showSnackBar(
@@ -101,9 +105,11 @@ class _QuizzWidgetState extends State<QuizzWidget> {
                     children: [
                       Icon(Icons.error, color: Colors.white),
                       SizedBox(width: 8),
-                      Text(
-                        'First Achievement! Great and keep going!',
-                        style: TextStyle(color: Colors.white),
+                      Expanded(
+                        child: Text(
+                          'First Achievement! Great and keep going!',
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ),
                     ],
                   ),
@@ -126,9 +132,11 @@ class _QuizzWidgetState extends State<QuizzWidget> {
                       children: [
                         Icon(Icons.error, color: Colors.white),
                         SizedBox(width: 8),
-                        Text(
-                          'Another Achievement! Great and keep going!',
-                          style: TextStyle(color: Colors.white),
+                        Expanded(
+                          child: Text(
+                            'Another Achievement! Great and keep going!',
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
                       ],
                     ),
@@ -152,9 +160,11 @@ class _QuizzWidgetState extends State<QuizzWidget> {
                       children: [
                         Icon(Icons.error, color: Colors.white),
                         SizedBox(width: 8),
-                        Text(
-                          'Another Achievement! Great and keep going!',
-                          style: TextStyle(color: Colors.white),
+                        Expanded(
+                          child: Text(
+                            'Another Achievement! Great and keep going!',
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
                       ],
                     ),
@@ -178,9 +188,11 @@ class _QuizzWidgetState extends State<QuizzWidget> {
                       children: [
                         Icon(Icons.error, color: Colors.white),
                         SizedBox(width: 8),
-                        Text(
-                          'Another Achievement! Great and keep going!',
-                          style: TextStyle(color: Colors.white),
+                        Expanded(
+                          child: Text(
+                            'Another Achievement! Great and keep going!',
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
                       ],
                     ),
@@ -189,7 +201,7 @@ class _QuizzWidgetState extends State<QuizzWidget> {
               );
             }
             context.read<HomeCubit>().changeFourthAchievement();
-          } else if (fourthAchievement == false && state.totalPoints >= 5000) {
+          } else if (fifthAchievement == false && state.totalPoints >= 5000) {
             if (achievementModel != null) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
@@ -204,9 +216,11 @@ class _QuizzWidgetState extends State<QuizzWidget> {
                       children: [
                         Icon(Icons.error, color: Colors.white),
                         SizedBox(width: 8),
-                        Text(
-                          'Another Achievement! Great and keep going!',
-                          style: TextStyle(color: Colors.white),
+                        Expanded(
+                          child: Text(
+                            'Another Achievement! Great and keep going!',
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
                       ],
                     ),
@@ -230,9 +244,11 @@ class _QuizzWidgetState extends State<QuizzWidget> {
                       children: [
                         Icon(Icons.error, color: Colors.white),
                         SizedBox(width: 8),
-                        Text(
-                          'Another Achievement! Great and keep going!',
-                          style: TextStyle(color: Colors.white),
+                        Expanded(
+                          child: Text(
+                            'Another Achievement! Great and keep going!',
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
                       ],
                     ),

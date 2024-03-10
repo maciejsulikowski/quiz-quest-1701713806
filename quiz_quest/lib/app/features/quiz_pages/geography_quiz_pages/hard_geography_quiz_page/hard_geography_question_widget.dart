@@ -17,6 +17,7 @@ class HardGeographyQuestionWidget extends StatelessWidget {
         .replaceAll('&aacute;', '')
         .replaceAll('&ntilde;', '')
         .replaceAll('&amp;', '')
+        .replaceAll('&deg;', '')
         .replaceAll('&rsquo;', '');
 
     return Center(

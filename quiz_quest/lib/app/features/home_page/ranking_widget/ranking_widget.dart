@@ -7,6 +7,7 @@ import 'package:quiz_quest/app/features/home_page/ranking_widget/cubit/ranking_c
 import 'package:quiz_quest/app/features/home_page/ranking_widget/user_records_widgets/first_user_record.dart';
 import 'package:quiz_quest/app/features/home_page/ranking_widget/user_records_widgets/second_user_record.dart';
 import 'package:quiz_quest/app/injection_container.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class RankingWidget extends StatefulWidget {
   const RankingWidget({
@@ -21,6 +22,9 @@ class RankingWidget extends StatefulWidget {
 }
 
 class RankingWidgetState extends State<RankingWidget> {
+  final ItemScrollController itemScrollController = ItemScrollController();
+  late int userIndex;
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -31,9 +35,13 @@ class RankingWidgetState extends State<RankingWidget> {
 
           if (modifiedList != null && modifiedList.isNotEmpty) {
             modifiedList.sort((a, b) => b.totalPoints.compareTo(a.totalPoints));
+            userIndex = modifiedList
+                .indexWhere((element) => element.userID == widget.user!.uid);
+            WidgetsBinding.instance!.addPostFrameCallback((_) {
+              scrollToUser();
+            });
           }
-          // state.rankingModel
-          //     ?.sort((a, b) => b.totalPoints.compareTo(a.totalPoints));
+
           return Scaffold(
             extendBodyBehindAppBar: true,
             appBar: AppBar(
@@ -64,7 +72,8 @@ class RankingWidgetState extends State<RankingWidget> {
                     ),
                     const SizedBox(height: 30),
                     Expanded(
-                      child: ListView.builder(
+                      child: ScrollablePositionedList.builder(
+                        itemScrollController: itemScrollController,
                         itemCount: state.rankingModel?.length ?? 0,
                         itemBuilder: (context, index) {
                           final userRecord = modifiedList?[index];
@@ -99,5 +108,15 @@ class RankingWidgetState extends State<RankingWidget> {
         },
       ),
     );
+  }
+
+  void scrollToUser() {
+    if (userIndex != -1) {
+      itemScrollController.scrollTo(
+        index: userIndex,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
+    }
   }
 }

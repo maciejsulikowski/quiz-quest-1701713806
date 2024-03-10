@@ -18,7 +18,9 @@ class EasyGamesQuestionWidget extends StatelessWidget {
         .replaceAll('&ntilde;', '')
         .replaceAll('&amp;', '')
         .replaceAll('&rsquo;', '')
-        .replaceAll('&Uuml;', '');
+        .replaceAll('&Uuml;', '')
+        .replaceAll('&eacute;', '')
+        .replaceAll('&sup2;', '');
 
     return Center(
       child: Text(

@@ -6,6 +6,7 @@ import 'package:quiz_quest/app/features/home_page/ranking_widget/cubit/ranking_c
 import 'package:quiz_quest/app/features/quiz_pages/geography_quiz_pages/cubit/geography_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/geography_quiz_pages/hard_geography_quiz_page/hard_geography_lost_life_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/geography_quiz_pages/hard_geography_quiz_page/hard_question_quiz_page.dart';
+
 // ignore: must_be_immutable
 class HardGeographyAnswerButton extends StatefulWidget {
   HardGeographyAnswerButton({
@@ -56,7 +57,7 @@ class _HardGeographyAnswerButtonState extends State<HardGeographyAnswerButton> {
         context
             .read<GeographyCubit>()
             .updateHardGeographyPoints(hardGeographyGoodAnswers);
-            context
+        context
             .read<RankingCubit>()
             .updateHardGeographyRankingPoints(hardGeographyGoodAnswers);
         Navigator.of(context).push(
@@ -82,6 +83,7 @@ class _HardGeographyAnswerButtonState extends State<HardGeographyAnswerButton> {
         .replaceAll('&aacute;', '')
         .replaceAll('&ntilde;', '')
         .replaceAll('&amp;', '')
+        .replaceAll('&deg;', '')
         .replaceAll('&rsquo;', '');
 
     return Container(

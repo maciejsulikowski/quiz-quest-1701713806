@@ -83,7 +83,11 @@ class _MediumGamesAnswerButtonState extends State<MediumGamesAnswerButton> {
         .replaceAll('&aacute;', '')
         .replaceAll('&ntilde;', '')
         .replaceAll('&amp;', '')
-        .replaceAll('&rsquo;', '');
+        .replaceAll('&rsquo;', '')
+        .replaceAll('&eacute;', '')
+        .replaceAll('&iuml;', '')
+        .replaceAll('&eacute;', '')
+        .replaceAll('&sup2;', '');
 
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20),

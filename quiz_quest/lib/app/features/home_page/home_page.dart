@@ -27,59 +27,66 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => getIt<UserCubit>()..start(),
-      child: BlocBuilder<UserCubit, UserState>(
-        builder: (context, state) {
-          return Scaffold(
-            bottomNavigationBar:
-                state.userModel != null && state.userModel!.isUserNew == true
-                    ? null
-                    : CurvedNavigationBar(
-                        backgroundColor: Colors.indigo,
-                        onTap: (newIndex) {
+      child: BlocListener<UserCubit, UserState>(
+        listener: (context, state) {
+          if (state.isSaved == true) {
+            context.read<UserCubit>().start();
+          }
+        },
+        child: BlocBuilder<UserCubit, UserState>(
+          builder: (context, state) {
+            return Scaffold(
+              bottomNavigationBar:
+                  state.userModel != null && state.userModel!.isUserNew == true
+                      ? null
+                      : CurvedNavigationBar(
+                          backgroundColor: Colors.indigo,
+                          onTap: (newIndex) {
+                            setState(() {
+                              currentIndex = newIndex;
+                            });
+                          },
+                          items: const [
+                              CurvedNavigationBarItem(
+                                  child: Icon(
+                                    Icons.quiz,
+                                  ),
+                                  label: 'Quiz'),
+                              CurvedNavigationBarItem(
+                                child: Icon(Icons.person),
+                                label: 'My Account',
+                              ),
+                            ]),
+              body: SafeArea(
+                child: BlocBuilder<UserCubit, UserState>(
+                  builder: (context, state) {
+                    if (state.userModel != null &&
+                        state.userModel!.isUserNew == true) {
+                      return FirstPageAfterRegistration(
+                        isNewUser: state.userModel!.isUserNew,
+                        setUserOld: (value) {
                           setState(() {
-                            currentIndex = newIndex;
+                            state.userModel!.isUserNew == value;
                           });
                         },
-                        items: const [
-                            CurvedNavigationBarItem(
-                                child: Icon(
-                                  Icons.quiz,
-                                ),
-                                label: 'Quiz'),
-                            CurvedNavigationBarItem(
-                              child: Icon(Icons.person),
-                              label: 'My Account',
-                            ),
-                          ]),
-            body: SafeArea(
-              child: BlocBuilder<UserCubit, UserState>(
-                builder: (context, state) {
-                  if (state.userModel != null &&
-                      state.userModel!.isUserNew == true) {
-                    return FirstPageAfterRegistration(
-                      isNewUser: state.userModel!.isUserNew,
-                      setUserOld: (value) {
-                        setState(() {
-                          state.userModel!.isUserNew == value;
-                        });
-                      },
-                    );
-                  } else {
-                    if (currentIndex == 0) {
-                      return QuizzWidget(
-                        userName: state.userModel?.name ?? 'user',
+                      );
+                    } else {
+                      if (currentIndex == 0) {
+                        return QuizzWidget(
+                          userName: state.userModel?.name ?? 'user',
+                          user: widget.user,
+                        );
+                      }
+                      return UserAccount(
                         user: widget.user,
                       );
                     }
-                    return UserAccount(
-                      user: widget.user,
-                    );
-                  }
-                },
+                  },
+                ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }

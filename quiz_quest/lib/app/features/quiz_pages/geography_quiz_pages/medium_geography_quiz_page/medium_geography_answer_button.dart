@@ -82,8 +82,11 @@ class _MediumGeographyAnswerButtonState
         .replaceAll('&quot;', '')
         .replaceAll('&#039;', '')
         .replaceAll('&aacute;', '')
+        .replaceAll('&oacute;', '')
+        .replaceAll('&iacute;', '')
         .replaceAll('&ntilde;', '')
         .replaceAll('&amp;', '')
+        .replaceAll('&uuml;', '')
         .replaceAll('&rsquo;', '');
 
     return Container(

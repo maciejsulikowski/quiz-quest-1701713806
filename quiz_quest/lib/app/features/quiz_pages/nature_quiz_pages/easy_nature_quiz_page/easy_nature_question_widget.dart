@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 class EasyNatureQuestionWidget extends StatelessWidget {
   const EasyNatureQuestionWidget({
     required this.question,
@@ -16,6 +17,7 @@ class EasyNatureQuestionWidget extends StatelessWidget {
         .replaceAll('&aacute;', '')
         .replaceAll('&ntilde;', '')
         .replaceAll('&amp;', '')
+        .replaceAll('&ouml;', '')
         .replaceAll('&rsquo;', '');
 
     return Center(

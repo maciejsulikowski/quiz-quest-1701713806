@@ -6,6 +6,7 @@ import 'package:quiz_quest/app/features/home_page/ranking_widget/cubit/ranking_c
 import 'package:quiz_quest/app/features/quiz_pages/music_quiz_pages/cubit/music_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/music_quiz_pages/hard_music_quiz_page/hard_music_lost_life_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/music_quiz_pages/hard_music_quiz_page/hard_question_quiz_page.dart';
+
 // ignore: must_be_immutable
 class HardMusicAnswerButton extends StatefulWidget {
   HardMusicAnswerButton({
@@ -53,7 +54,9 @@ class _HardMusicAnswerButtonState extends State<HardMusicAnswerButton> {
       hardMusicBadAnswers += 1;
       if (hardMusicBadAnswers == 3) {
         context.read<MusicCubit>().updateHardMusicPoints(hardMusicGoodAnswers);
-        context.read<RankingCubit>().updateHardMusicRankingPoints(hardMusicGoodAnswers);
+        context
+            .read<RankingCubit>()
+            .updateHardMusicRankingPoints(hardMusicGoodAnswers);
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) =>
@@ -75,9 +78,13 @@ class _HardMusicAnswerButtonState extends State<HardMusicAnswerButton> {
         .replaceAll('&quot;', '')
         .replaceAll('&#039;', '')
         .replaceAll('&aacute;', '')
+        .replaceAll('&oacute;', '')
         .replaceAll('&ntilde;', '')
         .replaceAll('&amp;', '')
         .replaceAll('&rsquo;', '')
+        .replaceAll('&micro;', '')
+        .replaceAll('&Uuml;', '')
+        .replaceAll('&euml;', '')
         .replaceAll('&ocirc;', '');
 
     return Container(

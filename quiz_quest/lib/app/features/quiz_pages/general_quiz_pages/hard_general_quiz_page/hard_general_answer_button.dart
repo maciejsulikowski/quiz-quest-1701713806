@@ -7,7 +7,6 @@ import 'package:quiz_quest/app/features/quiz_pages/general_quiz_pages/cubit/gene
 import 'package:quiz_quest/app/features/quiz_pages/general_quiz_pages/hard_general_quiz_page/hard_general_lost_life_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/general_quiz_pages/hard_general_quiz_page/hard_question_quiz_page.dart';
 
-
 // ignore: must_be_immutable
 class HardGeneralAnswerButton extends StatefulWidget {
   HardGeneralAnswerButton({
@@ -58,7 +57,7 @@ class _HardGeneralAnswerButtonState extends State<HardGeneralAnswerButton> {
         context
             .read<GeneralCubit>()
             .updateHardGeneralPoints(hardGeneralGoodAnswers);
-            context
+        context
             .read<RankingCubit>()
             .updateHardGeneralRankingPoints(hardGeneralGoodAnswers);
         Navigator.of(context).push(
@@ -82,11 +81,14 @@ class _HardGeneralAnswerButtonState extends State<HardGeneralAnswerButton> {
         .replaceAll('&quot;', '')
         .replaceAll('&#039;', '')
         .replaceAll('&aacute;', '')
+        .replaceAll('&oacute;', '')
         .replaceAll('&ntilde;', '')
         .replaceAll('&amp;', '')
         .replaceAll('&rsquo;', '')
         .replaceAll('&lrm;', '')
-        .replaceAll('&Eacute;', '');
+        .replaceAll('&Eacute;', '')
+        .replaceAll('&shy;', '')
+        .replaceAll('&heelip;', '');
 
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20),

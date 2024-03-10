@@ -37,6 +37,7 @@ dependencies:
   retrofit: ^4.1.0
   get_it: ^7.6.7
   injectable: ^2.3.2
+  scrollable_positioned_list: ^0.3.8
   
 dev_dependencies:
   flutter_test:
@@ -49,6 +50,8 @@ dev_dependencies:
   freezed: ^2.4.5
   retrofit_generator: ^8.1.0
   injectable_generator: ^2.4.1
+  mocktail: ^1.0.3
+  bloc_test: ^9.1.6
 
 
 flutter:

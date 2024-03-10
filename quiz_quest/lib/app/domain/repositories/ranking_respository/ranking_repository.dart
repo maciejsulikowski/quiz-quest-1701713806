@@ -95,12 +95,6 @@ class RankingRepository {
 
 //films
 
-  Future<void> updateEasyFilmsRankingRankingPoints(
-      int easyFilmsRankingPoints) async {
-    return rankingDataSource
-        .updateEasyFilmRankingPoints(easyFilmsRankingPoints);
-  }
-
   Future<void> updateEasyFilmsRankingPoints(int easyFilmsRankingPoints) async {
     return rankingDataSource
         .updateEasyFilmRankingPoints(easyFilmsRankingPoints);

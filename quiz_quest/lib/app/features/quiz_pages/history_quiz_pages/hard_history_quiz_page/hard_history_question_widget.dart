@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 class HardHistoryQuestionWidget extends StatelessWidget {
   const HardHistoryQuestionWidget({
     required this.question,
@@ -14,9 +15,13 @@ class HardHistoryQuestionWidget extends StatelessWidget {
         .replaceAll('&quot;', '')
         .replaceAll('&#039;', '')
         .replaceAll('&aacute;', '')
+        .replaceAll('&eacute;', '')
         .replaceAll('&ntilde;', '')
         .replaceAll('&amp;', '')
-        .replaceAll('&rsquo;', '');
+        .replaceAll('&rsquo;', '')
+        .replaceAll('&atilde;', '')
+        .replaceAll('&ecirc;', '')
+        .replaceAll('&ocirc;', '');
 
     return Center(
       child: Text(

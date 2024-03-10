@@ -81,11 +81,14 @@ class _EasyGeneralAnswerButtonState extends State<EasyGeneralAnswerButton> {
         .replaceAll('&quot;', '')
         .replaceAll('&#039;', '')
         .replaceAll('&aacute;', '')
+        .replaceAll('&oacute;', '')
         .replaceAll('&ntilde;', '')
         .replaceAll('&amp;', '')
         .replaceAll('&rsquo;', '')
         .replaceAll('&lrm;', '')
-        .replaceAll('&Eacute;', '');
+        .replaceAll('&Eacute;', '')
+        .replaceAll('&shy;', '')
+        .replaceAll('&heelip;', '');
 
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20),

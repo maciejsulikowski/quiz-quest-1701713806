@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 class MediumMusicQuestionWidget extends StatelessWidget {
   const MediumMusicQuestionWidget({
     required this.question,
@@ -14,9 +15,14 @@ class MediumMusicQuestionWidget extends StatelessWidget {
         .replaceAll('&quot;', '')
         .replaceAll('&#039;', '')
         .replaceAll('&aacute;', '')
+        .replaceAll('&oacute;', '')
         .replaceAll('&ntilde;', '')
         .replaceAll('&amp;', '')
-        .replaceAll('&rsquo;', '');
+        .replaceAll('&rsquo;', '')
+        .replaceAll('&micro;', '')
+        .replaceAll('&Uuml;', '')
+        .replaceAll('&euml;', '')
+        .replaceAll('&ocirc;', '');
 
     return Center(
       child: Text(

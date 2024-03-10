@@ -6,6 +6,7 @@ import 'package:quiz_quest/app/features/home_page/ranking_widget/cubit/ranking_c
 import 'package:quiz_quest/app/features/quiz_pages/nature_quiz_pages/cubit/nature_cubit.dart';
 import 'package:quiz_quest/app/features/quiz_pages/nature_quiz_pages/medium_nature_quiz_page/medium_nature_lost_life_page.dart';
 import 'package:quiz_quest/app/features/quiz_pages/nature_quiz_pages/medium_nature_quiz_page/medium_question_quiz_page.dart';
+
 // ignore: must_be_immutable
 class MediumNatureAnswerButton extends StatefulWidget {
   MediumNatureAnswerButton({
@@ -56,7 +57,7 @@ class _MediumNatureAnswerButtonState extends State<MediumNatureAnswerButton> {
         context
             .read<NatureCubit>()
             .updateMediumNaturePoints(mediumNatureGoodAnswers);
-context
+        context
             .read<RankingCubit>()
             .updateMediumNatureRankingPoints(mediumNatureGoodAnswers);
         Navigator.of(context).push(
@@ -81,7 +82,9 @@ context
         .replaceAll('&#039;', '')
         .replaceAll('&aacute;', '')
         .replaceAll('&ntilde;', '')
+        .replaceAll('&ouml;', '')
         .replaceAll('&amp;', '')
+        .replaceAll('&uuml;', '')
         .replaceAll('&rsquo;', '')
         .replaceAll('&ocirc;', '');
 

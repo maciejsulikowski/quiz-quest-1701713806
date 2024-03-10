@@ -125,22 +125,6 @@ class UserRepository {
     });
   }
 
-  Stream<AchievementModel> getAchievementsModel() {
-    final data = achievementDataSource.getAchievementsData();
-
-    return data.map((doc) {
-      return AchievementModel(
-        userID: doc['user_id'],
-        isFirstAchievementReady: doc['is_first_achievement_ready'],
-        isSecondAchievementReady: doc['is_second_achievement_ready'],
-        isThirdAchievementReady: doc['is_third_achievement_ready'],
-        isFourthAchievementReady: doc['is_fourth_achievement_ready'],
-        isFifthAchievementReady: doc['is_fifth_achievement_ready'],
-        isSixthAchievementReady: doc['is_sixth_achievement_ready'],
-      );
-    });
-  }
-
   Future<void> setEmptyAccount() async {
     return userDataSource.setEmptyAccount();
   }

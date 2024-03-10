@@ -83,6 +83,8 @@ class _HardNatureAnswerButtonState extends State<HardNatureAnswerButton> {
         .replaceAll('&ntilde;', '')
         .replaceAll('&amp;', '')
         .replaceAll('&rsquo;', '')
+        .replaceAll('&deg;', '')
+        .replaceAll('&ndash;', '')
         .replaceAll('&ocirc;', '');
 
     return Container(

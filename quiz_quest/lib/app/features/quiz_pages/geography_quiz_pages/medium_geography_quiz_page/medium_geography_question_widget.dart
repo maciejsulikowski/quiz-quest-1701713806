@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 class MediumGeographyQuestionWidget extends StatelessWidget {
   const MediumGeographyQuestionWidget({
     required this.question,
@@ -14,7 +15,10 @@ class MediumGeographyQuestionWidget extends StatelessWidget {
         .replaceAll('&quot;', '')
         .replaceAll('&#039;', '')
         .replaceAll('&aacute;', '')
+        .replaceAll('&oacute;', '')
+        .replaceAll('&iacute;', '')
         .replaceAll('&ntilde;', '')
+        .replaceAll('&uuml;', '')
         .replaceAll('&amp;', '')
         .replaceAll('&rsquo;', '');
 

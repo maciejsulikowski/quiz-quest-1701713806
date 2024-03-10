@@ -82,7 +82,9 @@ class _MediumSportAnswerButtonState extends State<MediumSportAnswerButton> {
         .replaceAll('&#039;', '')
         .replaceAll('&aacute;', '')
         .replaceAll('&ntilde;', '')
+        .replaceAll('&eacute;', '')
         .replaceAll('&amp;', '')
+        .replaceAll('&ouml;', '')
         .replaceAll('&rsquo;', '')
         .replaceAll('&ocirc;', '');
 

@@ -81,6 +81,8 @@ class _HardSportAnswerButtonState extends State<HardSportAnswerButton> {
         .replaceAll('&ntilde;', '')
         .replaceAll('&amp;', '')
         .replaceAll('&rsquo;', '')
+        .replaceAll('&rdquo;', '')
+        .replaceAll('&ldquo;', '')
         .replaceAll('&ocirc;', '');
 
     return Container(

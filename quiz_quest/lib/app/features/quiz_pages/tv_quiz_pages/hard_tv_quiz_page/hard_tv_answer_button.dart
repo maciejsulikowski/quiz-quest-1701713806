@@ -78,6 +78,7 @@ class _HardTVAnswerButtonState extends State<HardTVAnswerButton> {
         .replaceAll('&quot;', '')
         .replaceAll('&#039;', '')
         .replaceAll('&aacute;', '')
+        .replaceAll('&iacute;', '')
         .replaceAll('&ntilde;', '')
         .replaceAll('&amp;', '')
         .replaceAll('&rsquo;', '')

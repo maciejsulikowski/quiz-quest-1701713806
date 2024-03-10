@@ -78,6 +78,7 @@ class _MediumTVAnswerButtonState extends State<MediumTVAnswerButton> {
         .replaceAll('&quot;', '')
         .replaceAll('&#039;', '')
         .replaceAll('&aacute;', '')
+         .replaceAll('&uacute;', '')
         .replaceAll('&ntilde;', '')
         .replaceAll('&amp;', '')
         .replaceAll('&rsquo;', '')

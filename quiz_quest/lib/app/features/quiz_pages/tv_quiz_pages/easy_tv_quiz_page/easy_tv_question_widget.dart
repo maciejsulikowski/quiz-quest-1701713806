@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 class EasyTVQuestionWidget extends StatelessWidget {
   const EasyTVQuestionWidget({
     required this.question,
@@ -14,6 +15,7 @@ class EasyTVQuestionWidget extends StatelessWidget {
         .replaceAll('&quot;', '')
         .replaceAll('&#039;', '')
         .replaceAll('&aacute;', '')
+        .replaceAll('&iacute;', '')
         .replaceAll('&ntilde;', '')
         .replaceAll('&amp;', '')
         .replaceAll('&rsquo;', '');

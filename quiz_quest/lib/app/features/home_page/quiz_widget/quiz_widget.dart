@@ -13,6 +13,7 @@ import 'package:quiz_quest/app/features/home_page/quiz_widget/quiz_widgets/lets_
 import 'package:quiz_quest/app/features/home_page/quiz_widget/quiz_widgets/second_row_achievement_widget.dart';
 import 'package:quiz_quest/app/features/home_page/quiz_widget/quiz_widgets/total_points_widget.dart';
 import 'package:quiz_quest/app/features/user_page/achievements/cubit/achievements_cubit.dart';
+import 'package:quiz_quest/app/features/user_page/cubit/user_cubit.dart';
 
 import 'package:quiz_quest/app/injection_container.dart';
 import 'package:super_tooltip/super_tooltip.dart';
@@ -62,10 +63,17 @@ class _QuizzWidgetState extends State<QuizzWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getIt<HomeCubit>()
-        ..getAchievements()
-        ..getPointsData(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => getIt<HomeCubit>()
+            ..getAchievements()
+            ..getPointsData(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<UserCubit>()..start(),
+        ),
+      ],
       child: BlocListener<HomeCubit, HomeState>(
         listener: (context, state) {
           var achievementModel = state.achievementModel;

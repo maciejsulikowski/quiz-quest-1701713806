@@ -33,21 +33,21 @@ With QuizQuest, learning is not only educational but also entertaining. Dive int
 ## Gif's
 
 <div gap: 50px;">
-  <img src="lifediary_gif_1.gif" width="20%" height="20%">
+  <img src="first_gif.gif" width="20%" height="20%">
   
-  <img src="lifediary_gif_2.gif" width="20%" height="20%">
+  <img src="second_gif.gif" width="20%" height="20%">
   
-  <img src="lifediary_gif_3.gif" width="20%" height="20%">
+  <img src="third_gif.gif" width="20%" height="20%">
 
 </div>
 
 <div gap: 50px;">
 
-  <img src="lifediary_gif_4.gif" width="20%" height="20%">
+  <img src="fourth_gif.gif" width="20%" height="20%">
   
-  <img src="lifediary_gif_5.gif" width="20%" height="20%">
+  <img src="fifth_gif.gif" width="20%" height="20%">
   
-  <img src="lifediary_gif_6.gif" width="20%" height="20%">
+  <img src="sixth_gif.gif" width="20%" height="20%">
   
 </div>
 

@@ -8,7 +8,7 @@ With QuizQuest, learning is not only educational but also entertaining. Dive int
 
 ## Test Coverage
 
-<img src="" width="100%" height="100%">
+<img src="testcoveragequiz.PNG" width="100%" height="100%">
 
 ## Demo Credentials
 

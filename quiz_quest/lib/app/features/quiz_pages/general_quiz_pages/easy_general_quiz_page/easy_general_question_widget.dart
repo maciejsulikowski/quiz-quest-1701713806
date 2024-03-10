@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
 class EasyGeneralQuestionWidget extends StatelessWidget {
   const EasyGeneralQuestionWidget({
     required this.question,
@@ -22,7 +21,9 @@ class EasyGeneralQuestionWidget extends StatelessWidget {
         .replaceAll('&rsquo;', '')
         .replaceAll('&rdquo;', '')
         .replaceAll('&ldquo;', '')
-        .replaceAll('&fairy;', '');
+        .replaceAll('&heelip;', '')
+        .replaceAll('&fairy;', '')
+        .replaceAll('&shy;', '');
 
     return Center(
       child: Text(

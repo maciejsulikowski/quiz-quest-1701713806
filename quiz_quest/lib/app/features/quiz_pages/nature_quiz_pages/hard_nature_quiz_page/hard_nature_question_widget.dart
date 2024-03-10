@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 class HardNatureQuestionWidget extends StatelessWidget {
   const HardNatureQuestionWidget({
     required this.question,
@@ -16,6 +17,8 @@ class HardNatureQuestionWidget extends StatelessWidget {
         .replaceAll('&aacute;', '')
         .replaceAll('&ntilde;', '')
         .replaceAll('&amp;', '')
+        .replaceAll('&deg;', '')
+        .replaceAll('&ndash;', '')
         .replaceAll('&rsquo;', '');
 
     return Center(

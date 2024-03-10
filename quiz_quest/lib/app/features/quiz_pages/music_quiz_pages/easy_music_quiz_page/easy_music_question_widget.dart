@@ -17,6 +17,7 @@ class EasyMusicQuestionWidget extends StatelessWidget {
         .replaceAll('&aacute;', '')
         .replaceAll('&oacute;', '')
         .replaceAll('&ntilde;', '')
+        .replaceAll('&Uuml;', '')
         .replaceAll('&amp;', '')
         .replaceAll('&rsquo;', '');
 

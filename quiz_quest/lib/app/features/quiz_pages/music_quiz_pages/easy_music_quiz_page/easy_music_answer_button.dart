@@ -78,6 +78,7 @@ class _EasyMusicAnswerButtonState extends State<EasyMusicAnswerButton> {
         .replaceAll('&ntilde;', '')
         .replaceAll('&amp;', '')
         .replaceAll('&rsquo;', '')
+        .replaceAll('&Uuml;', '')
         .replaceAll('&ocirc;', '');
 
     return Container(

@@ -80,9 +80,13 @@ class _MediumMusicAnswerButtonState extends State<MediumMusicAnswerButton> {
         .replaceAll('&quot;', '')
         .replaceAll('&#039;', '')
         .replaceAll('&aacute;', '')
+        .replaceAll('&oacute;', '')
         .replaceAll('&ntilde;', '')
         .replaceAll('&amp;', '')
         .replaceAll('&rsquo;', '')
+        .replaceAll('&micro;', '')
+        .replaceAll('&Uuml;', '')
+        .replaceAll('&euml;', '')
         .replaceAll('&ocirc;', '');
 
     return Container(

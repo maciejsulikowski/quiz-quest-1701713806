@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 class HardMusicQuestionWidget extends StatelessWidget {
   const HardMusicQuestionWidget({
     required this.question,
@@ -14,8 +15,12 @@ class HardMusicQuestionWidget extends StatelessWidget {
         .replaceAll('&quot;', '')
         .replaceAll('&#039;', '')
         .replaceAll('&aacute;', '')
+        .replaceAll('&oacute;', '')
         .replaceAll('&ntilde;', '')
+        .replaceAll('&micro;', '')
         .replaceAll('&amp;', '')
+        .replaceAll('&Uuml;', '')
+        .replaceAll('&euml;', '')
         .replaceAll('&rsquo;', '');
 
     return Center(

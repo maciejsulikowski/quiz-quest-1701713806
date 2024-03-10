@@ -81,9 +81,12 @@ class _HardHistoryAnswerButtonState extends State<HardHistoryAnswerButton> {
         .replaceAll('&quot;', '')
         .replaceAll('&#039;', '')
         .replaceAll('&aacute;', '')
+        .replaceAll('&eacute;', '')
         .replaceAll('&ntilde;', '')
         .replaceAll('&amp;', '')
         .replaceAll('&rsquo;', '')
+        .replaceAll('&ecirc;', '')
+        .replaceAll('&atilde;', '')
         .replaceAll('&ocirc;', '');
 
     return Container(

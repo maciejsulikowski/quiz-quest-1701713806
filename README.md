@@ -1,59 +1,54 @@
-# GenericTemplate
+# QuizQuest
 
-**[Insert a brief description of your application here. Describe its purpose, functionality, etc.]**
+QuizQuest is an engaging application designed to put your knowledge to the test across various categories. Whether you are passionate about history, science, sports, or anything else, QuizQuest has something for everyone.
 
-## 🌐 Demo
+Track your progress and climb the ranks on the leaderboard. Discover fascinating facts and expand your knowledge base while earning achievements along the way. Share your accomplishments with others and revel in the joy of learning.
 
-[Your Demo Link Here](http://replace-with-your-link.com)
+With QuizQuest, learning is not only educational but also entertaining. Dive into a world of trivia, challenge yourself, and embark on a journey of discovery.
 
-**Demo Credentials (If applicable):**
-- **Username:** ReplaceThisWithUsername
-- **Password:** ReplaceThisWithPassword
+## Test Coverage
 
-## 📖 About this Software
+<img src="" width="100%" height="100%">
 
-Provide a comprehensive explanation of your software here. Dive into its core functionalities, why you opted to create it, its target users, and its value proposition.
+## Demo Credentials
 
-### Features:
+**Login** : test1@gmail.com
 
-1. **Feature 1:** Brief description.
-2. **Feature 2:** Brief description.
-3. **...:** Continue listing out the core features of your application.
+**Password** : Test123
 
-## 🖼️ Screenshots
+## Features
 
-To give you a visual overview of the application, here are some screenshots:
+- **Gaining category knowledge in Quizzes**: Choose a category and gain knowledge through quizzes and have fun!
+  
+- **Ranking**: Follow your score on the leaderboard!
 
-### [Feature or Page Name]
-![Description of Image](http://link-to-your-image.com/image1.png)
+- **Points scoring**: Score points and be better every single day!
 
-### [Another Feature or Page Name]
-![Description of Image](http://link-to-your-image.com/image2.png)
+- **Achievements**: Get achievements and stand out!
 
-Add more screenshots as needed. Ensure to replace placeholders with appropriate links and descriptions.
+- **Personal Account**:  Create an account and add a photo to take full advantage of the app!
+ 
+- **Share Button**: Share your result with others!
 
-## ⚠️ Warning
+## Gif's
 
-**Changing the repository name is NOT allowed.** Renaming this repository can cause issues with the peer review feature integrated into this template. 
+<div gap: 50px;">
+  <img src="lifediary_gif_1.gif" width="20%" height="20%">
+  
+  <img src="lifediary_gif_2.gif" width="20%" height="20%">
+  
+  <img src="lifediary_gif_3.gif" width="20%" height="20%">
 
-If you're planning to present this project to potential employers or external parties:
+</div>
 
-1. Ensure that all functionalities work as expected.
-2. **Remove this warning section** to maintain a clean and professional look.
+<div gap: 50px;">
 
-## ✅ Best Practices to Follow
+  <img src="lifediary_gif_4.gif" width="20%" height="20%">
+  
+  <img src="lifediary_gif_5.gif" width="20%" height="20%">
+  
+  <img src="lifediary_gif_6.gif" width="20%" height="20%">
+  
+</div>
 
-To ensure high-quality projects, we recommend adhering to the following best practices:
-
-1. **Gitflow:** Always use pull requests (PRs) for introducing new features or changes. This helps in maintaining a clean commit history and enables peer reviews.
-2. **Commit Formatting:** Follow a commit convention such as Git convention or [Conventional Commits](https://www.conventionalcommits.org/). It makes the commit history readable and easy to understand.
-3. **Test Coverage:** Aim for a minimum test coverage of 80-90%. This ensures that the majority of your code is tested, reducing potential bugs and regressions.
-4. **Comprehensive README:** A well-documented README provides clarity about the project's purpose, usage, and maintenance.
-5. **Live Demo:** Always provide a live demo with login credentials (if applicable). It offers a hands-on experience of your application to users or potential employers.
-6. **Continuous Integration (CI):** Implement CI to automatically build and test your project. This ensures that your code is always in a deployable state.
-7. **Continuous Deployment (CD):** While CI is a must, having CD is a nice-to-have feature. It automates the deployment process, ensuring that the latest changes are instantly accessible to users.
-8. **Clean Code:** Avoid clutter or "junk" in your code. Ensure that your codebase is organized, commented when necessary, and follows established coding standards.
-
----
-
-Happy coding! 💻
+## Have fun with this app!

@@ -383,6 +383,8 @@ class _EasyQuestionQuizPageState extends State<EasyQuestionQuizPage> {
                                               MainAxisAlignment.end,
                                           children: [
                                             Container(
+                                                margin: const EdgeInsets.only(
+                                                    bottom: 20),
                                                 color: Colors.black,
                                                 child: ElevatedButton(
                                                   onPressed: (isButtonClicked ||

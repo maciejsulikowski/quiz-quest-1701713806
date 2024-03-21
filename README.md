@@ -51,4 +51,8 @@ With QuizQuest, learning is not only educational but also entertaining. Dive int
   
 </div>
 
+## You can download it here: 
+
+https://play.google.com/store/apps/details?id=com.maciejsulikowski.quiz_quest
+
 ## Have fun with this app!
